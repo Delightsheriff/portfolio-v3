@@ -2,7 +2,7 @@ import type React from "react";
 import type { Metadata } from "next";
 import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { PageTransition } from "@/components/page-transition";
+import { PageTransition } from "@/components/animations/page-transition";
 
 const inter = Inter({
   subsets: ["latin"],
