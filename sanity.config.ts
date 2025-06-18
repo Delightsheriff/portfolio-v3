@@ -13,6 +13,7 @@ export default defineConfig({
 
   projectId: EnvVariables.SANITY_PROJECT_ID,
   dataset: EnvVariables.SANITY_DATASET,
+  basePath: "/studio",
 
   plugins: [structureTool(), visionTool()],
 
