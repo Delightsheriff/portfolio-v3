@@ -1,9 +1,13 @@
+"use server";
+import { HomePage } from "@/components/home-page";
 import {
   getAbout,
   getExperiences,
   getFeaturedProjects,
   getHero,
 } from "@/sanity/sanity";
+
+// export const revalidate = 60; // Revalidate every 60 seconds
 
 export default async function Home() {
   const projects = await getFeaturedProjects(3);
@@ -19,10 +23,5 @@ export default async function Home() {
       </div>
     );
   }
-  return (
-    <div>
-      <h1>Welcome to My Portfolio</h1>
-      <p>This is a showcase of my work.</p>
-    </div>
-  );
+  return <HomePage projects={projects} about={about} hero={hero} />;
 }
