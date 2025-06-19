@@ -7,15 +7,16 @@ import Image from "next/image";
 import { CustomCursor } from "./animations/custom-cursor";
 import { ScrollReveal } from "./animations/scroll-reveal";
 import { MagneticButton } from "./animations/magnetic-button";
-import { Project } from "@/interface/sanity";
+import { About, Project } from "@/interface/sanity";
 import { urlFor } from "@/sanity/sanity";
 import GoBack from "./go-back";
 
 interface ProjectsPageProps {
   projects: Project[];
+  about: About;
 }
 
-export function ProjectsPage({ projects }: ProjectsPageProps) {
+export function ProjectsPage({ projects, about }: ProjectsPageProps) {
   return (
     <>
       <CustomCursor />
@@ -156,7 +157,7 @@ export function ProjectsPage({ projects }: ProjectsPageProps) {
                   interesting projects.
                 </p>
                 <MagneticButton
-                  href="mailto:hello@amadisheriff.dev?subject=Let's work together&body=Hi Amadi-Sheriff,%0D%0A%0D%0AI'd love to discuss a potential opportunity with you.%0D%0A%0D%0ABest regards,"
+                  href={`mailto:${about.email}?subject=Let's work together&body=Hi Amadi-Sheriff,%0D%0A%0D%0AI'd love to discuss a potential opportunity with you.%0D%0A%0D%0ABest regards,`}
                   variant="light"
                 >
                   Get In Touch
