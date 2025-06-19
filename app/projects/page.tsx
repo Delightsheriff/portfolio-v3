@@ -1,5 +1,5 @@
 import { ProjectsPage } from "@/components/projects-page";
-import { getProjects } from "@/sanity/sanity";
+import { getAbout, getProjects } from "@/sanity/sanity";
 
 export const revalidate = 60;
 
@@ -11,6 +11,7 @@ export const metadata = {
 
 export default async function Projects() {
   const projects = await getProjects();
+  const about = await getAbout();
 
-  return <ProjectsPage projects={projects} />;
+  return <ProjectsPage projects={projects} about={about} />;
 }

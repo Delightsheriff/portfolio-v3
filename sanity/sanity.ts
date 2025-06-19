@@ -1,9 +1,3 @@
-import {
-  fallbackAbout,
-  fallbackExperiences,
-  fallbackHero,
-  fallbackProjects,
-} from "@/fallbacks";
 import client from "./sanity.client";
 import imageUrlBuilder from "@sanity/image-url";
 
@@ -49,7 +43,6 @@ export function urlFor(source: any) {
 export async function getProjects() {
   if (!client) {
     console.log("Sanity client not configured, using fallback projects data");
-    return fallbackProjects;
   }
 
   try {
@@ -80,20 +73,19 @@ export async function getProjects() {
         }
       }
     `);
-    return projects.length > 0 ? projects : fallbackProjects;
+    return projects;
   } catch (error) {
     console.log(
       "Error fetching from Sanity, using fallback projects data:",
       error
     );
-    return fallbackProjects;
+    return;
   }
 }
 
 export async function getProject(slug: string) {
   if (!client) {
     console.log("Sanity client not configured, using fallback project data");
-    return fallbackProjects.find((p) => p.slug.current === slug);
   }
 
   try {
@@ -126,13 +118,12 @@ export async function getProject(slug: string) {
     `,
       { slug }
     );
-    return project || fallbackProjects.find((p) => p.slug.current === slug);
+    return project;
   } catch (error) {
     console.log(
       "Error fetching project from Sanity, using fallback data:",
       error
     );
-    return fallbackProjects.find((p) => p.slug.current === slug);
   }
 }
 
@@ -141,7 +132,6 @@ export async function getExperiences() {
     console.log(
       "Sanity client not configured, using fallback experiences data"
     );
-    return fallbackExperiences;
   }
 
   try {
@@ -161,20 +151,18 @@ export async function getExperiences() {
         current
       }
     `);
-    return experiences.length > 0 ? experiences : fallbackExperiences;
+    return experiences;
   } catch (error) {
     console.log(
       "Error fetching experiences from Sanity, using fallback data:",
       error
     );
-    return fallbackExperiences;
   }
 }
 
 export async function getAbout() {
   if (!client) {
     console.log("Sanity client not configured, using fallback about data");
-    return fallbackAbout;
   }
 
   try {
@@ -190,20 +178,19 @@ export async function getAbout() {
         socialLinks
       }
     `);
-    return about || fallbackAbout;
+    return about;
   } catch (error) {
     console.log(
       "Error fetching about from Sanity, using fallback data:",
       error
     );
-    return fallbackAbout;
   }
 }
 
 export async function getHero() {
   if (!client) {
     console.log("Sanity client not configured, using fallback hero data");
-    return fallbackHero;
+    return;
   }
 
   try {
@@ -218,10 +205,10 @@ export async function getHero() {
         location
       }
     `);
-    return hero || fallbackHero;
+    return hero;
   } catch (error) {
     console.log("Error fetching hero from Sanity, using fallback data:", error);
-    return fallbackHero;
+    return;
   }
 }
 

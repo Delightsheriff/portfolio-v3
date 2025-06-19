@@ -18,10 +18,13 @@ export default function Contact({ about }: { about: About }) {
                     Let&apos;s create something exceptional together.
                   </h2>
                   <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-                    I&apos;m currently open to new opportunities and interesting
-                    projects. Whether you&apos;re looking for a technical
-                    co-founder, senior engineer, or consultant, I&apos;d love to
-                    hear from you.
+                    I thrive on turning ambitious ideas into reality. I&apos;m
+                    currently seeking a full-time role with a forward-thinking
+                    team where I can take on significant ownership and
+                    contribute to building impactful, user-centric products. If
+                    you&apos;re building the future, whether at a high-growth
+                    startup or an established innovator, I&apos;d love to
+                    discuss how I can help.
                   </p>
 
                   <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

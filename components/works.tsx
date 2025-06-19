@@ -48,7 +48,7 @@ export default function Works({ projects }: { projects: Project[] }) {
                   View All Projects ({projects.length})
                 </MagneticButton>
                 <a
-                  href="https://github.com/amadisheriff"
+                  href="https://github.com/Delightsheriff"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-sm hover:text-[#FF471A] transition-colors group"
