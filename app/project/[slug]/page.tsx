@@ -7,9 +7,10 @@ export const revalidate = 60; // Revalidate every 60 seconds
 export default async function CaseStudy({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const project = await getProject(params.slug);
+  const { slug } = await params;
+  const project = await getProject(slug);
 
   if (!project) {
     notFound();
