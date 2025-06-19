@@ -1,6 +1,7 @@
 import { ResumePage } from "@/components/resume-page";
 import { getResume } from "@/sanity/sanity";
 import Loading from "../loading";
+import ClientOnly from "@/components/client-wrapper";
 
 export const metadata = {
   title: "Resume - Amadi-Sheriff Delight",
@@ -16,5 +17,9 @@ export default async function Resume() {
   if (!resumeData) {
     return <Loading />;
   }
-  return <ResumePage resumeData={resumeData} />;
+  return (
+    <ClientOnly>
+      <ResumePage resumeData={resumeData} />
+    </ClientOnly>
+  );
 }

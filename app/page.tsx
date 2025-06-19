@@ -1,4 +1,4 @@
-"use server";
+import ClientOnly from "@/components/client-wrapper";
 import { HomePage } from "@/components/home-page";
 import {
   getAbout,
@@ -22,11 +22,13 @@ export default async function Home() {
     );
   }
   return (
-    <HomePage
-      projects={projects}
-      about={about}
-      hero={hero}
-      experiences={experiences}
-    />
+    <ClientOnly>
+      <HomePage
+        projects={projects}
+        about={about}
+        hero={hero}
+        experiences={experiences}
+      />
+    </ClientOnly>
   );
 }
