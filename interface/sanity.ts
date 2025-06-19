@@ -87,7 +87,7 @@ export interface Resume {
   }[];
   professionalProfile: any[]; // Portable Text
   workExperience: Experience[];
-  technicalSkills: string[];
+  technicalSkills: any[];
   education: {
     degree: string;
     institution: string;
