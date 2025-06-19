@@ -25,9 +25,10 @@ export default function Experiences({
               </div>
               <div className="col-span-12 md:col-span-6 md:col-start-7">
                 <p className="text-gray-600 leading-relaxed">
-                  Over 5 years of experience building scalable applications,
-                  leading development teams, and delivering impactful solutions
-                  across fintech, e-commerce, and enterprise software.
+                  With four years in software engineering, my journey blends
+                  startup leadership with deep full-stack expertise. I
+                  specialize in turning product vision into high-performance,
+                  user-centric applications from ideation to execution.
                 </p>
               </div>
             </div>
@@ -35,7 +36,7 @@ export default function Experiences({
 
           <div className="space-y-12">
             {experiences.map((experience, index) => (
-              <ScrollReveal key={experience.id} delay={index * 0.1}>
+              <ScrollReveal key={experience._id} delay={index * 0.1}>
                 <div className="grid grid-cols-12 gap-4 md:gap-8 group">
                   {/* Timeline */}
                   <div className="col-span-12 md:col-span-3">
