@@ -212,12 +212,12 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <MagneticButton
-                    href="mailto:hello@amadisheriff.dev?subject=Let's work together&body=Hi Amadi-Sheriff,%0D%0A%0D%0AI'd love to discuss a potential opportunity with you.%0D%0A%0D%0ABest regards,"
+                    href={`mailto:${resumeData.email}?subject=Let's work together`}
                     variant="light"
                   >
                     Send Email
                   </MagneticButton>
-                  <MagneticButton href="/#contact" variant="outline">
+                  <MagneticButton href="/" variant="outline">
                     View Portfolio
                   </MagneticButton>
                 </div>
