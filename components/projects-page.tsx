@@ -37,14 +37,14 @@ export function ProjectsPage({ projects }: ProjectsPageProps) {
                   All Projects
                 </h1>
                 <p className="text-xl text-gray-600 leading-relaxed max-w-3xl">
-                  A comprehensive collection of my work spanning fintech,
-                  e-commerce, AI, and more. Each project represents a unique
-                  challenge solved through thoughtful engineering and design.
+                  A curated collection of projects that showcase my approach to
+                  solving complex technical challenges while maintaining
+                  exceptional user experience.
                 </p>
               </div>
               <div className="col-span-12 md:col-span-3 md:col-start-10 flex items-end">
                 <a
-                  href="https://github.com/amadisheriff"
+                  href="https://github.com/Delightsheriff"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-sm hover:text-[#FF471A] transition-colors group"

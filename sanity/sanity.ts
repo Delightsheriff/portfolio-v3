@@ -225,6 +225,42 @@ export async function getHero() {
   }
 }
 
+export async function getResume() {
+  if (!client) {
+    console.log("Sanity client not configured, using fallback resume data");
+  }
+
+  try {
+    // Here you fetch from Sanity when ready
+    const resume = await client.fetch(`
+      *[_type == "resumePage"][0] {
+        headline,
+        resumeFile {
+      asset->{
+        url
+      }
+    },
+        name,
+        email,
+        location,
+        websiteUrl,
+        socialLinks,
+        professionalProfile,
+        workExperience,
+        technicalSkills,
+        education,
+        certifications
+      }
+    `);
+    return resume;
+  } catch (error) {
+    console.log(
+      "Error fetching resume from Sanity, using fallback data:",
+      error
+    );
+  }
+}
+
 // Add new function for featured projects
 export async function getFeaturedProjects(limit = 3) {
   const projects = await getProjects();

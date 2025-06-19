@@ -6,14 +6,15 @@ import GoBack from "./go-back";
 import { CustomCursor } from "./animations/custom-cursor";
 import { ScrollReveal } from "./animations/scroll-reveal";
 import { MagneticButton } from "./animations/magnetic-button";
+import { Resume } from "@/interface/sanity";
 
-export function ResumePage() {
+export function ResumePage({ resumeData }: { resumeData: Resume }) {
   const handleDownload = () => {
-    // Here you would link to your actual resume PDF
-    const link = document.createElement("a");
-    link.href = "/resume.pdf"; // Make sure to add your resume.pdf to the public folder
-    link.download = "Amadi-Sheriff-Delight-Resume.pdf";
-    link.click();
+    // Ensure asset has a url property, otherwise handle gracefully
+    const url = (resumeData.resumeFile?.asset as { url?: string })?.url;
+    if (!url) return;
+
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -34,8 +35,7 @@ export function ResumePage() {
             >
               <h1 className="text-4xl md:text-6xl font-serif">Resume</h1>
               <p className="text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
-                Senior Software Engineer with 5+ years of experience building
-                scalable web applications and leading development teams.
+                {resumeData.headline}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
@@ -46,7 +46,7 @@ export function ResumePage() {
                   Download PDF
                 </button>
                 <a
-                  href="mailto:hello@amadisheriff.dev?subject=Let's work together&body=Hi Amadi-Sheriff,%0D%0A%0D%0AI'd love to discuss a potential opportunity with you.%0D%0A%0D%0ABest regards,"
+                  href={`mailto:${resumeData.email}?subject=Let's work together`}
                   className="inline-flex items-center gap-2 px-8 py-4 border-2 border-[#FF471A] text-[#FF471A] rounded-full hover:bg-[#FF471A] hover:text-white transition-colors"
                 >
                   <Mail className="w-4 h-4" />
@@ -63,39 +63,46 @@ export function ResumePage() {
             {/* Contact Info */}
             <ScrollReveal>
               <div className="text-center space-y-4">
-                <h2 className="text-2xl font-serif">Amadi-Sheriff Delight</h2>
+                <h2 className="text-2xl font-serif">{resumeData.name}</h2>
                 <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-600">
-                  <span>Lagos, Nigeria</span>
+                  <span>{resumeData.location}</span>
                   <a
-                    href="mailto:hello@amadisheriff.dev"
+                    href={`mailto:${resumeData.email}`}
                     className="hover:text-[#FF471A] transition-colors"
                   >
-                    hello@amadisheriff.dev
+                    {resumeData.email}
                   </a>
                   <a
-                    href="https://amadisheriff.dev"
+                    href={resumeData.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:text-[#FF471A] transition-colors"
                   >
-                    amadisheriff.dev
+                    {/* Remove protocol for cleaner look */}
+                    {resumeData.websiteUrl.replace(
+                      /^(https?:\/\/)?(www\.)?/,
+                      ""
+                    )}
                   </a>
                 </div>
                 <div className="flex justify-center gap-4">
-                  <a
-                    href="https://github.com/amadisheriff"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#FF471A] transition-colors"
-                  >
-                    <Github className="w-5 h-5" />
-                  </a>
-                  <a
-                    href="https://linkedin.com/in/amadisheriff"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#FF471A] transition-colors"
-                  >
-                    <Linkedin className="w-5 h-5" />
-                  </a>
+                  {resumeData.socialLinks.map((social) => (
+                    <a
+                      key={social.platform}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-[#FF471A] transition-colors"
+                    >
+                      {/* You'll need a component or function to render the correct icon */}
+                      {social.platform === "github" && (
+                        <Github className="w-5 h-5" />
+                      )}
+                      {social.platform === "linkedin" && (
+                        <Linkedin className="w-5 h-5" />
+                      )}
+                    </a>
+                  ))}
                 </div>
               </div>
             </ScrollReveal>
@@ -104,16 +111,10 @@ export function ResumePage() {
             <ScrollReveal>
               <div>
                 <h3 className="text-xl font-serif mb-4">
-                  Professional Summary
+                  Professional Profile
                 </h3>
                 <p className="text-gray-700 leading-relaxed">
-                  Passionate Senior Software Engineer with 5+ years of
-                  experience in full-stack development, specializing in React,
-                  Node.js, and cloud technologies. Proven track record of
-                  leading development teams, architecting scalable solutions,
-                  and delivering high-quality products that serve thousands of
-                  users. Strong advocate for clean code, user-centered design,
-                  and continuous learning.
+                  {resumeData.professionalProfile}
                 </p>
               </div>
             </ScrollReveal>
@@ -121,97 +122,26 @@ export function ResumePage() {
             {/* Experience */}
             <ScrollReveal>
               <div>
-                <h3 className="text-xl font-serif mb-6">
-                  Professional Experience
-                </h3>
+                <h3 className="text-xl font-serif mb-6">Work Experience</h3>
                 <div className="space-y-8">
-                  <div>
-                    <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
-                      <div>
-                        <h4 className="font-medium">
-                          Senior Software Engineer
-                        </h4>
-                        <p className="text-gray-600">TechCorp Solutions</p>
+                  {resumeData.workExperience.map((job, index) => (
+                    <div key={index}>
+                      <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
+                        <div>
+                          <h4 className="font-medium">{job.role}</h4>
+                          <p className="text-gray-600">{job.company}</p>
+                        </div>
+                        <span className="text-sm text-gray-500 font-mono">
+                          {job.period}
+                        </span>
                       </div>
-                      <span className="text-sm text-gray-500 font-mono">
-                        2022 - Present
-                      </span>
+                      <ul className="text-sm text-gray-700 space-y-2 ml-4 list-disc marker:text-[#FF471A]">
+                        {job.achievements.map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
+                      </ul>
                     </div>
-                    <ul className="text-sm text-gray-700 space-y-1 ml-4">
-                      <li>
-                        • Led development of fintech platform serving 50,000+
-                        users, reducing transaction processing time by 75%
-                      </li>
-                      <li>
-                        • Architected microservices infrastructure using
-                        Node.js, Docker, and AWS, improving system scalability
-                      </li>
-                      <li>
-                        • Mentored junior developers and established code review
-                        processes, improving team productivity by 40%
-                      </li>
-                      <li>
-                        • Implemented automated testing and CI/CD pipelines,
-                        reducing deployment time from hours to minutes
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
-                      <div>
-                        <h4 className="font-medium">Full Stack Developer</h4>
-                        <p className="text-gray-600">StartupXYZ</p>
-                      </div>
-                      <span className="text-sm text-gray-500 font-mono">
-                        2020 - 2022
-                      </span>
-                    </div>
-                    <ul className="text-sm text-gray-700 space-y-1 ml-4">
-                      <li>
-                        • Built responsive e-commerce platform using React and
-                        Next.js, achieving 300% increase in conversion rates
-                      </li>
-                      <li>
-                        • Developed RESTful APIs and integrated third-party
-                        services including Stripe and SendGrid
-                      </li>
-                      <li>
-                        • Optimized application performance, reducing page load
-                        times by 60%
-                      </li>
-                      <li>
-                        • Collaborated with design team to implement
-                        pixel-perfect UI components
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
-                      <div>
-                        <h4 className="font-medium">Frontend Developer</h4>
-                        <p className="text-gray-600">Digital Agency Pro</p>
-                      </div>
-                      <span className="text-sm text-gray-500 font-mono">
-                        2019 - 2020
-                      </span>
-                    </div>
-                    <ul className="text-sm text-gray-700 space-y-1 ml-4">
-                      <li>
-                        • Developed custom WordPress themes and React
-                        applications for 20+ client projects
-                      </li>
-                      <li>
-                        • Implemented responsive designs and ensured
-                        cross-browser compatibility
-                      </li>
-                      <li>
-                        • Collaborated with clients to gather requirements and
-                        provide technical consultation
-                      </li>
-                    </ul>
-                  </div>
+                  ))}
                 </div>
               </div>
             </ScrollReveal>
@@ -220,33 +150,15 @@ export function ResumePage() {
             <ScrollReveal>
               <div>
                 <h3 className="text-xl font-serif mb-6">Technical Skills</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="font-medium mb-2">Frontend</h4>
-                    <p className="text-sm text-gray-700">
-                      React, Next.js, TypeScript, JavaScript, HTML5, CSS3,
-                      Tailwind CSS, Sass
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2">Backend</h4>
-                    <p className="text-sm text-gray-700">
-                      Node.js, Express.js, Python, FastAPI, RESTful APIs,
-                      GraphQL
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2">Database</h4>
-                    <p className="text-sm text-gray-700">
-                      PostgreSQL, MongoDB, Redis, Prisma, Mongoose
-                    </p>
-                  </div>
-                  <div>
-                    <h4 className="font-medium mb-2">Cloud & DevOps</h4>
-                    <p className="text-sm text-gray-700">
-                      AWS, Docker, Vercel, Netlify, CI/CD, GitHub Actions
-                    </p>
-                  </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                  {resumeData.technicalSkills.map((skill, index) => (
+                    <div key={index}>
+                      <h4 className="font-medium mb-2">{skill.category}</h4>
+                      <p className="text-sm text-gray-700">
+                        {skill.skillsList}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </ScrollReveal>
@@ -255,23 +167,19 @@ export function ResumePage() {
             <ScrollReveal>
               <div>
                 <h3 className="text-xl font-serif mb-6">Education</h3>
-                <div>
-                  <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
-                    <div>
-                      <h4 className="font-medium">
-                        Bachelor of Science in Computer Science
-                      </h4>
-                      <p className="text-gray-600">University of Lagos</p>
+                {resumeData.education.map((edu, index) => (
+                  <div key={index}>
+                    <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
+                      <div>
+                        <h4 className="font-medium">{edu.degree}</h4>
+                        <p className="text-gray-600">{edu.institution}</p>
+                      </div>
+                      <span className="text-sm text-gray-500 font-mono">
+                        {edu.period}
+                      </span>
                     </div>
-                    <span className="text-sm text-gray-500 font-mono">
-                      2015 - 2019
-                    </span>
                   </div>
-                  <p className="text-sm text-gray-700">
-                    First Class Honours • Relevant Coursework: Data Structures,
-                    Algorithms, Software Engineering, Database Systems
-                  </p>
-                </div>
+                ))}
               </div>
             </ScrollReveal>
 
@@ -279,14 +187,10 @@ export function ResumePage() {
             <ScrollReveal>
               <div>
                 <h3 className="text-xl font-serif mb-6">Certifications</h3>
-                <div className="space-y-2 text-sm text-gray-700">
-                  <div>
-                    • AWS Certified Solutions Architect - Associate (2023)
-                  </div>
-                  <div>• Google Cloud Professional Cloud Architect (2022)</div>
-                  <div>
-                    • Meta React Developer Professional Certificate (2021)
-                  </div>
+                <div className="space-y-2 text-sm text-gray-700 list-disc ml-4 marker:text-[#FF471A]">
+                  {resumeData.certifications.map((cert, index) => (
+                    <div key={index}>• {cert}</div>
+                  ))}
                 </div>
               </div>
             </ScrollReveal>
