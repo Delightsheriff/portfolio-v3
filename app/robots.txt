@@ -1,0 +1,6 @@
+# app/robots.txt
+User-agent: *
+Allow: /
+Disallow: /private/ # Example: Disallow crawling of a private directory
+
+Sitemap: https://www.delightsheriff.tech/sitemap.xml
