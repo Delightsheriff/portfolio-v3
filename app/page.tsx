@@ -7,6 +7,8 @@ import {
   getHero,
 } from "@/sanity/sanity";
 
+export const revalidate = 60;
+
 export default async function Home() {
   const projects = await getFeaturedProjects(3);
   const experiences = await getExperiences();
