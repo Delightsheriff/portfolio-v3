@@ -73,3 +73,25 @@ export interface Experience {
   order: number;
   current: boolean;
 }
+
+export interface Resume {
+  headline: string;
+  resumeFile: SanityImage | null;
+  name: string;
+  email: string;
+  location: string;
+  websiteUrl: string;
+  socialLinks: {
+    platform: string;
+    url: string;
+  }[];
+  professionalProfile: any[]; // Portable Text
+  workExperience: Experience[];
+  technicalSkills: string[];
+  education: {
+    degree: string;
+    institution: string;
+    period: string;
+  }[];
+  certifications: string[];
+}

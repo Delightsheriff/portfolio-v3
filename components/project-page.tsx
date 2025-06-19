@@ -103,6 +103,7 @@ export function ProjectPage({ project }: ProjectPageProps) {
                 src={urlFor(project.mainImage).url() || "/placeholder.svg"}
                 alt={project.title}
                 fill
+                priority
                 className="object-cover"
               />
             </motion.div>
