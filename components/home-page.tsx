@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
 import {
   ArrowUpRight,
   Github,
@@ -10,7 +9,6 @@ import {
   Linkedin,
   MapPin,
 } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
 import { About, Hero, Project } from "@/interface/sanity";
 import { CustomCursor } from "./animations/custom-cursor";
@@ -18,6 +16,7 @@ import { MagneticButton } from "./animations/magnetic-button";
 import { ScrollReveal } from "./animations/scroll-reveal";
 import { ProjectCard } from "./project-card";
 import { urlFor } from "@/sanity/sanity";
+import Navbar from "./navbar";
 
 interface HomePageProps {
   projects: Project[];
@@ -29,7 +28,7 @@ interface HomePageProps {
 
 export function HomePage({ projects, about, hero }: HomePageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scrolled, setScrolled] = useState(false);
+  // const [scrolled, setScrolled] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -37,17 +36,6 @@ export function HomePage({ projects, about, hero }: HomePageProps) {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-
-  // Handle navigation blur on scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setScrolled(scrollPosition > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   // Split the headline into words
   const headlineWords = hero?.headline?.split(" ") || [];
@@ -122,57 +110,8 @@ export function HomePage({ projects, about, hero }: HomePageProps) {
         className="min-h-screen bg-[#FDFBF6] text-[#111111] overflow-hidden"
       >
         {/* Enhanced Navigation with Blur */}
-        <motion.nav
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className={`fixed top-0 left-0 right-0 z-50 p-6 md:p-8 transition-all duration-300 ${
-            scrolled
-              ? "bg-[#FDFBF6]/80 backdrop-blur-xl border-b border-gray-200/20 shadow-sm"
-              : "bg-transparent"
-          }`}
-        >
-          <div className="flex justify-between items-center max-w-7xl mx-auto">
-            <Link
-              href="/"
-              className="text-sm font-mono tracking-wider hover:text-[#FF471A] transition-colors"
-            >
-              DS
-            </Link>
-            <div className="flex gap-6 text-sm items-center">
-              <Link
-                href="#work"
-                className="hover:text-[#FF471A] transition-colors"
-              >
-                Work
-              </Link>
-              <Link
-                href="#experience"
-                className="hover:text-[#FF471A] transition-colors"
-              >
-                Experience
-              </Link>
-              <Link
-                href="#about"
-                className="hover:text-[#FF471A] transition-colors"
-              >
-                About
-              </Link>
-              <Link
-                href="#contact"
-                className="hover:text-[#FF471A] transition-colors"
-              >
-                Contact
-              </Link>
-              <Link
-                href="/resume"
-                className="px-4 py-2 bg-[#FF471A] text-white rounded-full hover:bg-[#e63d17] transition-colors text-xs"
-              >
-                Resume
-              </Link>
-            </div>
-          </div>
-        </motion.nav>
+
+        <Navbar />
 
         {/* Hero Section */}
         <section className="min-h-screen flex items-center justify-center relative px-6 md:px-8">
