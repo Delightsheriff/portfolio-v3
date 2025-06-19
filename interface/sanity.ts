@@ -61,7 +61,7 @@ export interface Hero {
 }
 
 export interface Experience {
-  id: string;
+  _id: string;
   company: string;
   role: string;
   period: string;

@@ -149,7 +149,7 @@ export const fallbackProjects = [
 
 export const fallbackExperiences = [
   {
-    _id: "exp1",
+    id: "exp1",
     company: "TechCorp Solutions",
     role: "Senior Software Engineer",
     period: "2022 - Present",
@@ -175,7 +175,7 @@ export const fallbackExperiences = [
     current: true,
   },
   {
-    _id: "exp2",
+    id: "exp2",
     company: "StartupXYZ",
     role: "Full Stack Developer",
     period: "2020 - 2022",
@@ -194,7 +194,7 @@ export const fallbackExperiences = [
     current: false,
   },
   {
-    _id: "exp3",
+    id: "exp3",
     company: "Digital Agency Pro",
     role: "Frontend Developer",
     period: "2019 - 2020",

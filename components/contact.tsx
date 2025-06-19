@@ -2,7 +2,8 @@ import React from "react";
 import { ScrollReveal } from "./animations/scroll-reveal";
 import { MagneticButton } from "./animations/magnetic-button";
 import { About } from "@/interface/sanity";
-import { Linkedin, Github, ExternalLink } from "lucide-react";
+import { Linkedin, Github } from "lucide-react";
+import { RiTwitterXFill } from "react-icons/ri";
 
 export default function Contact({ about }: { about: About }) {
   return (
@@ -32,9 +33,22 @@ export default function Contact({ about }: { about: About }) {
 
                     <div className="flex gap-4 items-center">
                       {about.socialLinks.map((link, index) => {
+                        if (link.platform === "twitter") {
+                          return (
+                            <a
+                              key={index}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-3 border border-gray-200 rounded-full hover:border-[#FF471A] hover:text-[#FF471A] transition-colors"
+                            >
+                              <RiTwitterXFill className="w-5 h-5" />
+                            </a>
+                          );
+                        }
+
                         let Icon = Linkedin;
                         if (link.platform === "github") Icon = Github;
-                        if (link.platform === "twitter") Icon = ExternalLink;
 
                         return (
                           <a
