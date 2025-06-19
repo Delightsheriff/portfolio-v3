@@ -23,5 +23,12 @@ export default async function Home() {
       </div>
     );
   }
-  return <HomePage projects={projects} about={about} hero={hero} />;
+  return (
+    <HomePage
+      projects={projects}
+      about={about}
+      hero={hero}
+      experiences={experiences}
+    />
+  );
 }

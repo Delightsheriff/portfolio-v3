@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import {
   ArrowUpRight,
@@ -10,23 +10,30 @@ import {
   MapPin,
 } from "lucide-react";
 import Image from "next/image";
-import { About, Hero, Project } from "@/interface/sanity";
+import { About, Experience, Hero, Project } from "@/interface/sanity";
 import { CustomCursor } from "./animations/custom-cursor";
 import { MagneticButton } from "./animations/magnetic-button";
 import { ScrollReveal } from "./animations/scroll-reveal";
 import { ProjectCard } from "./project-card";
 import { urlFor } from "@/sanity/sanity";
 import Navbar from "./navbar";
+import HeroSection from "./hero";
 
 interface HomePageProps {
   projects: Project[];
   about: About;
   hero: Hero;
+  experiences: Experience[];
 
   // urlFor: (source: any) => any;
 }
 
-export function HomePage({ projects, about, hero }: HomePageProps) {
+export function HomePage({
+  projects,
+  about,
+  hero,
+  experiences,
+}: HomePageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   // const [scrolled, setScrolled] = useState(false);
 
@@ -36,71 +43,6 @@ export function HomePage({ projects, about, hero }: HomePageProps) {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-
-  // Split the headline into words
-  const headlineWords = hero?.headline?.split(" ") || [];
-
-  // Experience data - this could also come from Sanity CMS
-  const experiences = [
-    {
-      id: "1",
-      company: "TechCorp Solutions",
-      role: "Senior Software Engineer",
-      period: "2022 - Present",
-      location: "Remote",
-      type: "Full-time",
-      description:
-        "Leading development of fintech platforms serving 50,000+ users. Architecting scalable microservices infrastructure and mentoring junior developers.",
-      achievements: [
-        "Reduced transaction processing time by 75%",
-        "Improved team productivity by 40% through code review processes",
-        "Led migration to microservices architecture",
-        "Implemented automated testing and CI/CD pipelines",
-      ],
-      technologies: [
-        "React",
-        "Node.js",
-        "TypeScript",
-        "AWS",
-        "Docker",
-        "PostgreSQL",
-      ],
-    },
-    {
-      id: "2",
-      company: "StartupXYZ",
-      role: "Full Stack Developer",
-      period: "2020 - 2022",
-      location: "Lagos, Nigeria",
-      type: "Full-time",
-      description:
-        "Built responsive e-commerce platforms and developed RESTful APIs. Collaborated with design teams to implement pixel-perfect UI components.",
-      achievements: [
-        "Achieved 300% increase in conversion rates",
-        "Reduced page load times by 60%",
-        "Integrated multiple third-party services",
-        "Delivered 15+ client projects on time",
-      ],
-      technologies: ["React", "Next.js", "Stripe", "MongoDB", "Express.js"],
-    },
-    {
-      id: "3",
-      company: "Digital Agency Pro",
-      role: "Frontend Developer",
-      period: "2019 - 2020",
-      location: "Lagos, Nigeria",
-      type: "Full-time",
-      description:
-        "Developed custom WordPress themes and React applications for diverse client projects. Ensured cross-browser compatibility and responsive designs.",
-      achievements: [
-        "Completed 20+ client projects successfully",
-        "Improved client satisfaction scores by 35%",
-        "Reduced development time by implementing reusable components",
-        "Mentored 2 junior developers",
-      ],
-      technologies: ["JavaScript", "WordPress", "React", "CSS3", "PHP"],
-    },
-  ];
 
   return (
     <>
@@ -114,71 +56,7 @@ export function HomePage({ projects, about, hero }: HomePageProps) {
         <Navbar />
 
         {/* Hero Section */}
-        <section className="min-h-screen flex items-center justify-center relative px-6 md:px-8">
-          <motion.div
-            style={{ y }}
-            className="max-w-7xl mx-auto grid grid-cols-12 gap-4 md:gap-8 w-full"
-          >
-            <div className="col-span-12 md:col-span-8 md:col-start-2">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 0.5 }}
-                className="space-y-8"
-              >
-                <div className="space-y-4">
-                  {headlineWords.map((word, index) => (
-                    <motion.span
-                      key={index}
-                      initial={{ opacity: 0, y: 50 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        duration: 0.8,
-                        delay: 0.8 + index * 0.1,
-                        ease: [0.25, 0.46, 0.45, 0.94],
-                      }}
-                      className="inline-block text-4xl md:text-6xl lg:text-7xl font-serif leading-[0.9] mr-4"
-                    >
-                      {word}
-                    </motion.span>
-                  ))}
-                </div>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 1.6 }}
-                  className="text-lg md:text-xl max-w-2xl text-gray-600 leading-relaxed"
-                >
-                  {hero?.subheadline}
-                </motion.p>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 1.8 }}
-                >
-                  <MagneticButton href={hero?.ctaLink || "#work"}>
-                    {hero?.ctaText || "View My Work"}
-                  </MagneticButton>
-                </motion.div>
-              </motion.div>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 1.2 }}
-              className="col-span-12 md:col-span-3 md:col-start-10 flex flex-col justify-end space-y-4 mt-12 md:mt-0"
-            >
-              <div className="text-xs font-mono text-gray-500 space-y-2">
-                <div>{hero?.status}</div>
-                <div>{hero?.location}</div>
-                <div>Open to remote opportunities</div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </section>
+        <HeroSection hero={hero} y={y} />
 
         {/* Featured Work Section */}
         <section id="work" className="py-20 md:py-32 px-6 md:px-8">

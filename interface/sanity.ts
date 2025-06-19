@@ -59,3 +59,17 @@ export interface Hero {
   status: string;
   location: string;
 }
+
+export interface Experience {
+  id: string;
+  company: string;
+  role: string;
+  period: string;
+  location: string;
+  type: "Full-time" | "Part-time" | "Contract" | "Freelance" | "Internship";
+  description: string;
+  achievements: string[];
+  technologies: string[];
+  order: number;
+  current: boolean;
+}
