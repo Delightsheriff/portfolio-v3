@@ -23,7 +23,7 @@ To get a local copy up and running, follow these simple steps.
 
 1.  **Clone the repo:**
     ```bash
-    git clone https://github.com/your_username/portfolio-v3.git
+    git clone https://github.com/Delightsheriff/portfolio-v3
     cd portfolio-v3
     ```
 2.  **Install NPM packages:**
