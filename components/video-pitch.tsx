@@ -109,13 +109,13 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
               </div>
 
               {/* Video Type Badge */}
-              {isShorts && (
+              {/* {isShorts && (
                 <div className="absolute top-4 left-4">
                   <span className="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">
                     SHORTS
                   </span>
                 </div>
-              )}
+              )} */}
 
               {/* Video Info Overlay */}
               <div className="absolute bottom-4 left-4 right-4">
@@ -130,14 +130,14 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
                   <div className="flex items-center gap-2 text-xs">
                     <Volume2 className="w-3 h-3" />
                     <span>{videoData?.duration || "2:15"}</span>
-                    <span>•</span>
+                    {/* <span>•</span>
                     <span>HD Quality</span>
                     {isShorts && (
                       <>
                         <span>•</span>
                         <span>Shorts</span>
                       </>
-                    )}
+                    )} */}
                   </div>
                 </div>
               </div>
@@ -185,11 +185,11 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
               <h3 className="font-medium text-gray-900">
                 {videoData?.title || "Personal Introduction"}
               </h3>
-              {isShorts && (
+              {/* {isShorts && (
                 <span className="bg-red-100 text-red-700 text-xs font-medium px-2 py-1 rounded-full">
                   Shorts
                 </span>
-              )}
+              )} */}
             </div>
             <p className="text-sm text-gray-600">
               {videoData?.description ||

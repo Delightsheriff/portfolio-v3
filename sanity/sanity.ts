@@ -251,7 +251,7 @@ export async function getResume() {
 // Add new function for featured projects
 export async function getFeaturedProjects(limit = 3) {
   const projects = await getProjects();
-  return projects.slice(0, limit);
+  return projects?.slice(0, limit);
 }
 
 export async function getVideoPitch() {
