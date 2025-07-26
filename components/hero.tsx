@@ -15,7 +15,7 @@ export default function HeroSection({
 
   return (
     <>
-      <section className="min-h-screen flex items-center justify-center relative px-6 md:px-8">
+      <section className="min-h-screen flex items-center justify-center relative px-6 md:px-8 mt-28">
         <motion.div
           style={{ y }}
           className="max-w-7xl mx-auto grid grid-cols-12 gap-4 md:gap-8 w-full"
