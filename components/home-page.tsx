@@ -2,7 +2,13 @@
 
 import { useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { About, Experience, Hero, Project } from "@/interface/sanity";
+import {
+  About,
+  Experience,
+  Hero,
+  Project,
+  VideoPitch,
+} from "@/interface/sanity";
 import { CustomCursor } from "./animations/custom-cursor";
 import Navbar from "./navbar";
 import HeroSection from "./hero";
@@ -10,12 +16,14 @@ import Works from "./works";
 import Experiences from "./experience";
 import AboutSection from "./about";
 import Contact from "./contact";
+import Video from "./video";
 
 interface HomePageProps {
   projects: Project[];
   about: About;
   hero: Hero;
   experiences: Experience[];
+  videoPitch: VideoPitch;
 }
 
 export function HomePage({
@@ -23,6 +31,7 @@ export function HomePage({
   about,
   hero,
   experiences,
+  videoPitch,
 }: HomePageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -45,6 +54,9 @@ export function HomePage({
 
         {/* Hero Section */}
         <HeroSection hero={hero} y={y} />
+
+        {/* Video Pitch Section */}
+        {videoPitch?.enabled && <Video {...videoPitch} />}
 
         {/* Featured Work Section */}
         <Works projects={projects} />

@@ -19,12 +19,30 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
   const [showVideo, setShowVideo] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Extract YouTube video ID from URL
+  // Enhanced YouTube ID extraction that handles all formats
   const getYouTubeId = (url: string) => {
-    const regExp =
-      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    return match && match[2].length === 11 ? match[2] : null;
+    if (!url) return null;
+
+    // Handle different YouTube URL formats
+    const patterns = [
+      // Regular YouTube URLs
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^#&?]*)/,
+      // YouTube Shorts
+      /youtube\.com\/shorts\/([^#&?]*)/,
+      // YouTube mobile URLs
+      /m\.youtube\.com\/watch\?v=([^#&?]*)/,
+      // YouTube playlist URLs
+      /youtube\.com\/watch\?.*v=([^#&?]*)/,
+    ];
+
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match && match[1] && match[1].length === 11) {
+        return match[1];
+      }
+    }
+
+    return null;
   };
 
   const videoId = videoData?.youtubeUrl
@@ -40,6 +58,9 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
     setIsLoading(false);
   };
 
+  // Check if it's a YouTube Shorts URL
+  const isShorts = videoData?.youtubeUrl?.includes("/shorts/");
+
   return (
     <div className="relative group">
       {/* Video Container */}
@@ -48,7 +69,7 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
         viewport={{ once: true }}
-        className="relative aspect-[16/10] bg-gray-900 rounded-lg overflow-hidden shadow-2xl"
+        className={`relative ${isShorts ? "aspect-[9/16] max-w-sm mx-auto" : "aspect-[16/10]"} bg-gray-900 rounded-lg overflow-hidden shadow-2xl`}
       >
         {!showVideo ? (
           <>
@@ -65,6 +86,8 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
                 <Image
                   src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
                   alt="Video thumbnail"
+                  width={1280}
+                  height={720}
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     // Fallback to medium quality thumbnail
@@ -85,6 +108,15 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
                 </motion.button>
               </div>
 
+              {/* Video Type Badge */}
+              {isShorts && (
+                <div className="absolute top-4 left-4">
+                  <span className="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">
+                    SHORTS
+                  </span>
+                </div>
+              )}
+
               {/* Video Info Overlay */}
               <div className="absolute bottom-4 left-4 right-4">
                 <div className="bg-black/60 backdrop-blur-sm rounded-lg p-4 text-white">
@@ -100,6 +132,12 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
                     <span>{videoData?.duration || "2:15"}</span>
                     <span>•</span>
                     <span>HD Quality</span>
+                    {isShorts && (
+                      <>
+                        <span>•</span>
+                        <span>Shorts</span>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -120,7 +158,7 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
             {/* YouTube Embed */}
             {videoId && (
               <iframe
-                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1${isShorts ? "&loop=1&playlist=" + videoId : ""}`}
                 title={videoData?.title || "Personal Introduction"}
                 className="w-full h-full"
                 frameBorder="0"
@@ -143,9 +181,16 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
       >
         <div className="flex items-center justify-between">
           <div className="space-y-1">
-            <h3 className="font-medium text-gray-900">
-              {videoData?.title || "Personal Introduction"}
-            </h3>
+            <div className="flex items-center gap-2">
+              <h3 className="font-medium text-gray-900">
+                {videoData?.title || "Personal Introduction"}
+              </h3>
+              {isShorts && (
+                <span className="bg-red-100 text-red-700 text-xs font-medium px-2 py-1 rounded-full">
+                  Shorts
+                </span>
+              )}
+            </div>
             <p className="text-sm text-gray-600">
               {videoData?.description ||
                 "A brief look into my approach to software engineering"}
@@ -191,7 +236,9 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
         {/* Call to Action */}
         <div className="pt-2 border-t border-gray-200">
           <p className="text-xs text-gray-500">
-            This video showcases my communication style and technical approach.
+            {isShorts
+              ? "This short video gives you a quick glimpse into my personality and approach."
+              : "This video showcases my communication style and technical approach."}
             {!showVideo && " Click play to get to know me better."}
           </p>
         </div>
