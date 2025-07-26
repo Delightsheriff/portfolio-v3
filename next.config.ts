@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
         port: "",
       },
       { hostname: "res.cloudinary.com" },
+      {
+        protocol: "https",
+        hostname: "img.youtube.com",
+        port: "",
+      },
     ],
   },
 };
