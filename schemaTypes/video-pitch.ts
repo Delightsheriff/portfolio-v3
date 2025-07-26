@@ -1,3 +1,4 @@
+import { Any } from "@sanity/client";
 import { defineField } from "sanity";
 
 const videoPitch = {
@@ -50,6 +51,21 @@ const videoPitch = {
       initialValue: true,
     }),
   ],
+  preview: {
+    select: {
+      title: "title",
+      subtitle: "youtubeUrl",
+      description: "description",
+    },
+    prepare(selection: Any) {
+      const { title, subtitle } = selection;
+      const isShorts = subtitle?.includes("/shorts/");
+      return {
+        title: title,
+        subtitle: `${isShorts ? "📱 Shorts" : "🎥 Video"} - ${subtitle}`,
+      };
+    },
+  },
 };
 
 export default videoPitch;

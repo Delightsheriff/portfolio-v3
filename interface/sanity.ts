@@ -95,3 +95,13 @@ export interface Resume {
   }[];
   certifications: string[];
 }
+
+export interface VideoPitch {
+  _id: string;
+  title: string;
+  description: string;
+  youtubeUrl: string;
+  duration: string;
+  topics: string[];
+  enabled: boolean;
+}
