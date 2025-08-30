@@ -137,7 +137,7 @@ export async function getExperiences() {
   try {
     // Here you fetch from Sanity when ready
     const experiences = await client.fetch(`
-      *[_type == "experience"] | order(order) {
+      *[_type == "experience" && visible == true] | order(order) {
         _id,
         company,
         role,
@@ -148,7 +148,8 @@ export async function getExperiences() {
         achievements,
         technologies,
         order,
-        current
+        current,
+        visible
       }
     `);
     return experiences;

@@ -75,6 +75,13 @@ const experience = {
       type: "boolean",
       description: "Check if this is your current position",
     }),
+    defineField({
+      name: "visible",
+      title: "Visible on Website",
+      type: "boolean",
+      description: "Toggle to show/hide this experience on the website",
+      initialValue: true,
+    }),
   ],
   orderings: [
     {
