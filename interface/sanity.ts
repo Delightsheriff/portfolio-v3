@@ -72,6 +72,7 @@ export interface Experience {
   technologies: string[];
   order: number;
   current: boolean;
+  visible: boolean;
 }
 
 export interface Resume {

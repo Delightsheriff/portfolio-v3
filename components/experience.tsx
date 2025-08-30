@@ -25,8 +25,8 @@ export default function Experiences({
               </div>
               <div className="col-span-12 md:col-span-6 md:col-start-7">
                 <p className="text-gray-600 leading-relaxed">
-                  With four years in software engineering, my journey blends
-                  startup leadership with deep full-stack expertise. I
+                  With extensive experience in software engineering, my journey
+                  blends startup leadership with deep full-stack expertise. I
                   specialize in turning product vision into high-performance,
                   user-centric applications from ideation to execution.
                 </p>
