@@ -127,6 +127,13 @@ const projects = {
         },
       ],
     }),
+    defineField({
+      name: "visible",
+      title: "Visible on Website",
+      type: "boolean",
+      description: "Toggle to show/hide this project on the website",
+      initialValue: true,
+    }),
   ],
 };
 

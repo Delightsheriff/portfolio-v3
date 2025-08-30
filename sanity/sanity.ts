@@ -48,7 +48,7 @@ export async function getProjects() {
   try {
     // Here you fetch from Sanity when ready
     const projects = await client.fetch(`
-      *[_type == "project"] | order(orderRank) {
+      *[_type == "project" && visible == true] | order(orderRank) {
         _id,
         title,
         slug,
@@ -67,7 +67,8 @@ export async function getProjects() {
         results,
         images,
         orderRank,
-        "nextProject": *[_type == "project" && ^.orderRank < orderRank] | order(orderRank) [0] {
+        visible,
+        "nextProject": *[_type == "project" && visible == true && ^.orderRank < orderRank] | order(orderRank) [0] {
           title,
           "slug": slug.current
         }
@@ -92,7 +93,7 @@ export async function getProject(slug: string) {
     // Here you fetch from Sanity when ready
     const project = await client.fetch(
       `
-      *[_type == "project" && slug.current == $slug][0] {
+      *[_type == "project" && visible == true && slug.current == $slug][0] {
         _id,
         title,
         slug,
@@ -110,7 +111,8 @@ export async function getProject(slug: string) {
         solution,
         results,
         images,
-        "nextProject": *[_type == "project" && ^.orderRank < orderRank] | order(orderRank) [0] {
+        visible,
+        "nextProject": *[_type == "project" && visible == true && ^.orderRank < orderRank] | order(orderRank) [0] {
           title,
           "slug": slug.current
         }
