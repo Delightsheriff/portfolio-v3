@@ -33,6 +33,7 @@ export interface Project {
     title: string;
     slug: string;
   };
+  visible: boolean;
 }
 
 export interface About {
