@@ -9,6 +9,7 @@ import { urlFor } from "@/sanity/sanity";
 import { ScrollReveal } from "./animations/scroll-reveal";
 import { MagneticButton } from "./animations/magnetic-button";
 import { Project } from "@/interface/sanity";
+import { ProjectBadge } from "./project-badge";
 
 interface ProjectPageProps {
   project: Project;
@@ -38,6 +39,12 @@ export function ProjectPage({ project }: ProjectPageProps) {
                 <p className="text-xl text-gray-600 leading-relaxed max-w-3xl">
                   {project.overview}
                 </p>
+
+                {project.projectType && (
+                  <div className="mt-6">
+                    <ProjectBadge projectType={project.projectType} size="md" />
+                  </div>
+                )}
 
                 <div className="flex flex-wrap gap-4 mt-6">
                   {project.githubUrl && (
