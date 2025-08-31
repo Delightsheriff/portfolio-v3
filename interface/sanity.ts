@@ -40,6 +40,7 @@ export interface Project {
     slug: string;
   };
   visible: boolean;
+  featured: boolean;
 }
 
 export interface About {
