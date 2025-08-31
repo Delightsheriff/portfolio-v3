@@ -16,6 +16,12 @@ export interface Project {
   };
   description: string;
   overview: string;
+  projectType?: {
+    category: string;
+    complexity: string;
+    features?: string[];
+    dataSource: string;
+  };
   client: string;
   role: string;
   duration: string;
