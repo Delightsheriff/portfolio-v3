@@ -229,6 +229,14 @@ const projects = {
       description: "Toggle to show/hide this project on the website",
       initialValue: true,
     }),
+    defineField({
+      name: "featured",
+      title: "Featured Project",
+      type: "boolean",
+      description:
+        "Toggle to mark this project as featured (will appear in featured projects section)",
+      initialValue: false,
+    }),
   ],
   preview: {
     select: {

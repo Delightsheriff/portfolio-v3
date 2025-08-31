@@ -69,6 +69,7 @@ export async function getProjects() {
         images,
         orderRank,
         visible,
+        featured,
         "nextProject": *[_type == "project" && visible == true && ^.orderRank < orderRank] | order(orderRank) [0] {
           title,
           "slug": slug.current
@@ -114,6 +115,7 @@ export async function getProject(slug: string) {
         results,
         images,
         visible,
+        featured,
         "nextProject": *[_type == "project" && visible == true && ^.orderRank < orderRank] | order(orderRank) [0] {
           title,
           "slug": slug.current
@@ -255,8 +257,49 @@ export async function getResume() {
 
 // Add new function for featured projects
 export async function getFeaturedProjects(limit = 3) {
-  const projects = await getProjects();
-  return projects?.slice(0, limit);
+  if (!client) {
+    console.log(
+      "Sanity client not configured, using fallback featured projects data"
+    );
+  }
+
+  try {
+    const featuredProjects = await client.fetch(
+      `
+      *[_type == "project" && visible == true && featured == true] | order(orderRank) [0...$limit] {
+        _id,
+        title,
+        slug,
+        description,
+        overview,
+        projectType,
+        client,
+        role,
+        duration,
+        year,
+        stack,
+        mainImage,
+        githubUrl,
+        liveUrl,
+        challenge,
+        solution,
+        results,
+        images,
+        orderRank,
+        visible,
+        featured
+      }
+    `,
+      { limit }
+    );
+    return featuredProjects;
+  } catch (error) {
+    console.log(
+      "Error fetching featured projects from Sanity, using fallback data:",
+      error
+    );
+    return [];
+  }
 }
 
 export async function getVideoPitch() {
