@@ -6,6 +6,7 @@ import { ArrowUpRight, Github, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Project } from "@/interface/sanity";
+import { ProjectBadge } from "./project-badge";
 
 interface ProjectCardProps {
   project: Project;
@@ -46,9 +47,17 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
             : "md:col-span-4 order-2 md:order-1"
         } space-y-4`}
       >
-        <div className="space-y-2">
-          <h3 className="text-2xl md:text-3xl font-serif">{project.title}</h3>
-          <p className="text-gray-600">{project.description}</p>
+        <div className="space-y-3">
+          <div className="space-y-2">
+            <h3 className="text-2xl md:text-3xl font-serif">{project.title}</h3>
+            <p className="text-gray-600">{project.description}</p>
+          </div>
+          {/* Project Badges */}
+          {project.projectType && (
+            <div className="flex flex-wrap gap-2">
+              <ProjectBadge projectType={project.projectType} size="sm" />
+            </div>
+          )}
         </div>
         <div className="flex flex-wrap gap-2 text-xs font-mono text-gray-500">
           {project.stack.map((tech, i) => (
