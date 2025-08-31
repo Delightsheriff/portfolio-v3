@@ -4,12 +4,15 @@ import { motion } from "framer-motion";
 import { Github, ExternalLink, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useState, useMemo } from "react";
 import { CustomCursor } from "./animations/custom-cursor";
 import { ScrollReveal } from "./animations/scroll-reveal";
 import { MagneticButton } from "./animations/magnetic-button";
 import { About, Project } from "@/interface/sanity";
 import { urlFor } from "@/sanity/sanity";
 import GoBack from "./go-back";
+import { ProjectFilter } from "./project-filter";
+import { EmptyProjectsState } from "./EmptyState";
 
 interface ProjectsPageProps {
   projects: Project[];
@@ -17,6 +20,21 @@ interface ProjectsPageProps {
 }
 
 export function ProjectsPage({ projects, about }: ProjectsPageProps) {
+  const [activeFilter, setActiveFilter] = useState("all");
+
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === "all") {
+      return projects;
+    }
+    return projects.filter(
+      (project) => project.projectType?.category === activeFilter
+    );
+  }, [projects, activeFilter]);
+
+  const handleFilterChange = (category: string) => {
+    setActiveFilter(category);
+  };
+
   return (
     <>
       <CustomCursor />
@@ -62,85 +80,101 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
         {/* Projects Grid */}
         <section className="py-12 px-6 md:px-8">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-              {projects.map((project, index) => (
-                <ScrollReveal key={project._id} delay={index * 0.1}>
-                  <div className="group">
-                    <Link
-                      href={`/project/${project.slug.current}`}
-                      className="block"
-                    >
-                      <div className="relative overflow-hidden bg-gray-100 aspect-[4/3] rounded-sm mb-6">
-                        <Image
-                          src={
-                            urlFor(project.mainImage).url() ||
-                            "/placeholder.svg?height=600&width=800"
-                          }
-                          alt={project.title}
-                          fill
-                          className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      </div>
-                    </Link>
+            {/* Project Filter */}
+            <ProjectFilter
+              onFilterChange={handleFilterChange}
+              totalProjects={projects.length}
+              filteredCount={filteredProjects.length}
+              activeCategory={activeFilter}
+            />
 
-                    <div className="space-y-4">
-                      <div className="space-y-2">
-                        <h3 className="text-xl md:text-2xl font-serif group-hover:text-[#FF471A] transition-colors">
-                          {project.title}
-                        </h3>
-                        <p className="text-gray-600 text-sm leading-relaxed">
-                          {project.description}
-                        </p>
-                      </div>
+            {/* Projects Grid */}
+            {filteredProjects.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                {filteredProjects.map((project, index) => (
+                  <ScrollReveal key={project._id} delay={index * 0.1}>
+                    <div className="group">
+                      <Link
+                        href={`/project/${project.slug.current}`}
+                        className="block"
+                      >
+                        <div className="relative overflow-hidden bg-gray-100 aspect-[4/3] rounded-sm mb-6">
+                          <Image
+                            src={
+                              urlFor(project.mainImage).url() ||
+                              "/placeholder.svg?height=600&width=800"
+                            }
+                            alt={project.title}
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        </div>
+                      </Link>
 
-                      <div className="flex flex-wrap gap-2 text-xs font-mono text-gray-500">
-                        {project.stack.slice(0, 4).map((tech, i) => (
-                          <span key={i}>{tech}</span>
-                        ))}
-                        {project.stack.length > 4 && (
-                          <span>+{project.stack.length - 4} more</span>
-                        )}
-                      </div>
+                      <div className="space-y-4">
+                        <div className="space-y-2">
+                          <h3 className="text-xl md:text-2xl font-serif group-hover:text-[#FF471A] transition-colors">
+                            {project.title}
+                          </h3>
+                          <p className="text-gray-600 text-sm leading-relaxed">
+                            {project.description}
+                          </p>
+                        </div>
 
-                      <div className="flex flex-wrap gap-4 text-sm">
-                        <Link
-                          href={`/project/${project.slug.current}`}
-                          className="inline-flex items-center gap-2 hover:text-[#FF471A] transition-colors group"
-                        >
-                          View Case Study
-                          <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                        </Link>
+                        <div className="flex flex-wrap gap-2 text-xs font-mono text-gray-500">
+                          {project.stack.slice(0, 4).map((tech, i) => (
+                            <span key={i}>{tech}</span>
+                          ))}
+                          {project.stack.length > 4 && (
+                            <span>+{project.stack.length - 4} more</span>
+                          )}
+                        </div>
 
-                        {project.githubUrl && (
-                          <a
-                            href={project.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 hover:text-[#FF471A] transition-colors"
+                        <div className="flex flex-wrap gap-4 text-sm">
+                          <Link
+                            href={`/project/${project.slug.current}`}
+                            className="inline-flex items-center gap-2 hover:text-[#FF471A] transition-colors group"
                           >
-                            <Github className="w-4 h-4" />
-                            <span>Code</span>
-                          </a>
-                        )}
+                            View Case Study
+                            <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                          </Link>
 
-                        {project.liveUrl && (
-                          <a
-                            href={project.liveUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 hover:text-[#FF471A] transition-colors"
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                            <span>Live</span>
-                          </a>
-                        )}
+                          {project.githubUrl && (
+                            <a
+                              href={project.githubUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 hover:text-[#FF471A] transition-colors"
+                            >
+                              <Github className="w-4 h-4" />
+                              <span>Code</span>
+                            </a>
+                          )}
+
+                          {project.liveUrl && (
+                            <a
+                              href={project.liveUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 hover:text-[#FF471A] transition-colors"
+                            >
+                              <ExternalLink className="w-4 h-4" />
+                              <span>Live</span>
+                            </a>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </ScrollReveal>
-              ))}
-            </div>
+                  </ScrollReveal>
+                ))}
+              </div>
+            ) : (
+              <EmptyProjectsState
+                category={activeFilter}
+                onClearFilter={() => setActiveFilter("all")}
+              />
+            )}
           </div>
         </section>
 
