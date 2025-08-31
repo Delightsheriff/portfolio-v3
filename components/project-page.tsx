@@ -10,6 +10,7 @@ import { ScrollReveal } from "./animations/scroll-reveal";
 import { MagneticButton } from "./animations/magnetic-button";
 import { Project } from "@/interface/sanity";
 import { ProjectBadge } from "./project-badge";
+import { KeyFeaturesBadge } from "./key-features-badge";
 
 interface ProjectPageProps {
   project: Project;
@@ -119,7 +120,7 @@ export function ProjectPage({ project }: ProjectPageProps) {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex flex-wrap gap-2 mb-16"
+              className="flex flex-wrap gap-2 mb-8"
             >
               {project.stack.map((tech, index) => (
                 <span
@@ -130,6 +131,25 @@ export function ProjectPage({ project }: ProjectPageProps) {
                 </span>
               ))}
             </motion.div>
+
+            {/* Key Features */}
+            {project.projectType?.features &&
+              project.projectType.features.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.8 }}
+                  className="mb-16"
+                >
+                  <h3 className="text-lg font-medium text-gray-700 mb-4">
+                    Key Features
+                  </h3>
+                  <KeyFeaturesBadge
+                    features={project.projectType.features}
+                    size="md"
+                  />
+                </motion.div>
+              )}
           </div>
         </section>
 
