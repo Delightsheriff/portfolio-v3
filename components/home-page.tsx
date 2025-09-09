@@ -24,6 +24,7 @@ interface HomePageProps {
   hero: Hero;
   experiences: Experience[];
   videoPitch: VideoPitch;
+  allProjects: Project[];
 }
 
 export function HomePage({
@@ -32,6 +33,7 @@ export function HomePage({
   hero,
   experiences,
   videoPitch,
+  allProjects,
 }: HomePageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -59,7 +61,7 @@ export function HomePage({
         {videoPitch?.enabled && <Video {...videoPitch} />}
 
         {/* Featured Work Section */}
-        <Works projects={projects} />
+        <Works projects={projects} allProjects={allProjects} />
 
         {/* Experience Section */}
         <Experiences experiences={experiences} />
