@@ -6,7 +6,13 @@ import { ArrowUpRight, Github } from "lucide-react";
 import { urlFor } from "@/sanity/sanity";
 import { Project } from "@/interface/sanity";
 
-export default function Works({ projects }: { projects: Project[] }) {
+export default function Works({
+  projects,
+  allProjects,
+}: {
+  projects: Project[];
+  allProjects: Project[];
+}) {
   return (
     <>
       <section id="work" className="py-20 md:py-32 px-6 md:px-8">
@@ -45,7 +51,7 @@ export default function Works({ projects }: { projects: Project[] }) {
             <div className="text-center mt-20">
               <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
                 <MagneticButton href="/projects" variant="outline">
-                  View All Projects ({projects.length})
+                  View All Projects ({allProjects.length})
                 </MagneticButton>
                 <a
                   href="https://github.com/Delightsheriff"

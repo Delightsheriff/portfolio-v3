@@ -5,20 +5,30 @@ import {
   getExperiences,
   getFeaturedProjects,
   getHero,
+  getProjects,
   getVideoPitch,
 } from "@/sanity/sanity";
 import Loading from "./loading";
 
 export default async function Home() {
-  const [projects, experiences, about, hero, videoPitch] = await Promise.all([
-    getFeaturedProjects(3),
-    getExperiences(),
-    getAbout(),
-    getHero(),
-    getVideoPitch(),
-  ]);
+  const [projects, experiences, about, hero, videoPitch, allProjects] =
+    await Promise.all([
+      getFeaturedProjects(3),
+      getExperiences(),
+      getAbout(),
+      getHero(),
+      getVideoPitch(),
+      getProjects(),
+    ]);
 
-  if (!projects || !experiences || !about || !hero || !videoPitch) {
+  if (
+    !projects ||
+    !experiences ||
+    !about ||
+    !hero ||
+    !videoPitch ||
+    !allProjects
+  ) {
     return <Loading />;
   }
   return (
@@ -29,6 +39,7 @@ export default async function Home() {
         hero={hero}
         experiences={experiences}
         videoPitch={videoPitch}
+        allProjects={allProjects}
       />
     </ClientOnly>
   );
