@@ -1,10 +1,9 @@
-import React from "react";
 import { ScrollReveal } from "./animations/scroll-reveal";
 import { ProjectCard } from "./project-card";
 import { MagneticButton } from "./animations/magnetic-button";
 import { ArrowUpRight, Github } from "lucide-react";
 import { urlFor } from "@/sanity/sanity";
-import { Project } from "@/interface/sanity";
+import type { Project } from "@/interface/sanity";
 
 export default function Works({
   projects,
@@ -25,7 +24,7 @@ export default function Works({
                 </h2>
               </div>
               <div className="col-span-12 md:col-span-6 md:col-start-7">
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   A curated collection of projects that showcase my approach to
                   solving complex technical challenges while maintaining
                   exceptional user experience.
@@ -57,7 +56,7 @@ export default function Works({
                   href="https://github.com/Delightsheriff"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm hover:text-[#FF471A] transition-colors group"
+                  className="inline-flex items-center gap-2 text-sm hover:text-primary transition-colors group"
                 >
                   <Github className="w-4 h-4" />
                   <span>View GitHub Profile</span>
