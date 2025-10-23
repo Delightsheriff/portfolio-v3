@@ -10,7 +10,7 @@ import {
   VideoPitch,
 } from "@/interface/sanity";
 import { CustomCursor } from "./animations/custom-cursor";
-import Navbar from "./navbar";
+import Navbar from "./nav/navbar";
 import HeroSection from "./hero";
 import Works from "./works";
 import Experiences from "./experience";
