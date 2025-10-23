@@ -2,7 +2,7 @@
 
 import { useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import {
+import type {
   About,
   Experience,
   Hero,
@@ -49,7 +49,7 @@ export function HomePage({
       <CustomCursor />
       <div
         ref={containerRef}
-        className="min-h-screen bg-[#FDFBF6] text-[#111111] overflow-hidden"
+        className="min-h-screen bg-background text-foreground overflow-hidden"
       >
         {/* Enhanced Navigation with Blur */}
         <Navbar />
@@ -73,8 +73,8 @@ export function HomePage({
         <Contact about={about} />
 
         {/* Footer */}
-        <footer className="py-8 px-6 md:px-8 border-t border-gray-200">
-          <div className="max-w-7xl mx-auto flex justify-between items-center text-sm text-gray-500">
+        <footer className="py-8 px-6 md:px-8 border-t border-border">
+          <div className="max-w-7xl mx-auto flex justify-between items-center text-sm text-muted-foreground">
             <div>© {new Date().getFullYear()} Amadi-Sheriff Delight</div>
             <div className="font-mono">Crafted with intention</div>
           </div>

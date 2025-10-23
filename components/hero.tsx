@@ -1,6 +1,7 @@
-import { Hero } from "@/interface/sanity";
-import React from "react";
-import { motion, MotionValue } from "framer-motion";
+"use client";
+
+import type { Hero } from "@/interface/sanity";
+import { motion, type MotionValue } from "framer-motion";
 import { MagneticButton } from "./animations/magnetic-button";
 
 export default function HeroSection({
@@ -49,7 +50,7 @@ export default function HeroSection({
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1.6 }}
-                className="text-lg md:text-xl max-w-2xl text-gray-600 leading-relaxed"
+                className="text-lg md:text-xl max-w-2xl text-muted-foreground leading-relaxed"
               >
                 {hero?.subheadline}
               </motion.p>
@@ -72,7 +73,7 @@ export default function HeroSection({
             transition={{ duration: 1, delay: 1.2 }}
             className="col-span-12 md:col-span-3 md:col-start-10 flex flex-col justify-end space-y-4 mt-12 md:mt-0"
           >
-            <div className="text-xs font-mono text-gray-500 space-y-2">
+            <div className="text-xs font-mono text-muted-foreground space-y-2">
               <div>{hero?.status}</div>
               <div>{hero?.location}</div>
               <div>Open to remote opportunities</div>

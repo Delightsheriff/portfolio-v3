@@ -1,7 +1,6 @@
-import React from "react";
 import { ScrollReveal } from "./animations/scroll-reveal";
 import { MagneticButton } from "./animations/magnetic-button";
-import { About } from "@/interface/sanity";
+import type { About } from "@/interface/sanity";
 import { Linkedin, Github } from "lucide-react";
 import { RiTwitterXFill } from "react-icons/ri";
 
@@ -17,7 +16,7 @@ export default function Contact({ about }: { about: About }) {
                   <h2 className="text-4xl md:text-6xl font-serif">
                     Let&apos;s create something exceptional together.
                   </h2>
-                  <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+                  <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
                     I thrive on turning ambitious ideas into reality. I&apos;m
                     currently seeking a full-time role with a forward-thinking
                     team where I can take on significant ownership and
@@ -43,7 +42,7 @@ export default function Contact({ about }: { about: About }) {
                               href={link.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="p-3 border border-gray-200 rounded-full hover:border-[#FF471A] hover:text-[#FF471A] transition-colors"
+                              className="p-3 border border-border rounded-full hover:border-primary hover:text-primary transition-colors"
                             >
                               <RiTwitterXFill className="w-5 h-5" />
                             </a>
@@ -59,7 +58,7 @@ export default function Contact({ about }: { about: About }) {
                             href={link.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-3 border border-gray-200 rounded-full hover:border-[#FF471A] hover:text-[#FF471A] transition-colors"
+                            className="p-3 border border-border rounded-full hover:border-primary hover:text-primary transition-colors"
                           >
                             <Icon className="w-5 h-5" />
                           </a>
@@ -68,27 +67,27 @@ export default function Contact({ about }: { about: About }) {
                     </div>
                   </div>
 
-                  <div className="pt-8 border-t border-gray-200">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-600">
+                  <div className="pt-8 border-t border-border">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-muted-foreground">
                       <div>
-                        <div className="font-mono text-gray-500 mb-2">
+                        <div className="font-mono text-muted-foreground mb-2">
                           Email
                         </div>
                         <a
                           href={`mailto:${about.email}`}
-                          className="hover:text-[#FF471A] transition-colors"
+                          className="hover:text-primary transition-colors"
                         >
                           {about.email}
                         </a>
                       </div>
                       <div>
-                        <div className="font-mono text-gray-500 mb-2">
+                        <div className="font-mono text-muted-foreground mb-2">
                           Response Time
                         </div>
                         <div>Usually within 24 hours</div>
                       </div>
                       <div>
-                        <div className="font-mono text-gray-500 mb-2">
+                        <div className="font-mono text-muted-foreground mb-2">
                           Availability
                         </div>
                         <div>Open to new opportunities</div>

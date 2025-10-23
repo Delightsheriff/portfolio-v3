@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Github, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { Project } from "@/interface/sanity";
+import type { Project } from "@/interface/sanity";
 import { ProjectBadge } from "./project-badge";
 
 interface ProjectCardProps {
@@ -29,7 +29,7 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
         className={`col-span-12 ${isEven ? "md:col-span-7" : "md:col-span-7 md:col-start-6 order-1 md:order-2"}`}
       >
         <Link href={`/project/${project.slug.current}`} className="group block">
-          <div className="relative overflow-hidden bg-gray-100 aspect-[4/3] rounded-sm">
+          <div className="relative overflow-hidden bg-muted aspect-[4/3] rounded-sm">
             <Image
               src={urlFor(project.mainImage).url() || "/placeholder.svg"}
               alt={project.title}
@@ -50,7 +50,7 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
         <div className="space-y-3">
           <div className="space-y-2">
             <h3 className="text-2xl md:text-3xl font-serif">{project.title}</h3>
-            <p className="text-gray-600">{project.description}</p>
+            <p className="text-muted-foreground">{project.description}</p>
           </div>
           {/* Project Badges */}
           {project.projectType && (
@@ -59,7 +59,7 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
             </div>
           )}
         </div>
-        <div className="flex flex-wrap gap-2 text-xs font-mono text-gray-500">
+        <div className="flex flex-wrap gap-2 text-xs font-mono text-muted-foreground">
           {project.stack.map((tech, i) => (
             <span key={i}>{tech}</span>
           ))}
@@ -67,7 +67,7 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
         <div className="flex flex-wrap gap-4">
           <Link
             href={`/project/${project.slug.current}`}
-            className="inline-flex items-center gap-2 text-sm hover:text-[#FF471A] transition-colors group"
+            className="inline-flex items-center gap-2 text-sm hover:text-primary transition-colors group"
           >
             View Case Study
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -78,7 +78,7 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm hover:text-[#FF471A] transition-colors group"
+              className="inline-flex items-center gap-2 text-sm hover:text-primary transition-colors group"
             >
               <Github className="w-4 h-4" />
               <span>GitHub</span>
@@ -90,7 +90,7 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm hover:text-[#FF471A] transition-colors group"
+              className="inline-flex items-center gap-2 text-sm hover:text-primary transition-colors group"
             >
               <ExternalLink className="w-4 h-4" />
               <span>Live Demo</span>
