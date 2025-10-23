@@ -1,5 +1,7 @@
 "use client";
 
+import type React from "react";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
@@ -30,11 +32,11 @@ function Tooltip({ content, isVisible, position }: TooltipProps) {
             transform: "translateX(-50%)",
           }}
         >
-          <div className="bg-gray-900 text-white text-xs px-3 py-2 rounded-lg shadow-lg border border-gray-700 max-w-xs">
+          <div className="bg-popover text-popover-foreground text-xs px-3 py-2 rounded-lg shadow-lg border border-border max-w-xs">
             <div className="relative">
               {content}
               {/* Arrow pointing down */}
-              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
+              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-popover"></div>
             </div>
           </div>
         </motion.div>
@@ -193,7 +195,7 @@ export function KeyFeaturesBadge({
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
-              className={`inline-flex items-center gap-1.5 ${sizeClasses[size]} font-medium rounded-full border bg-gray-100 text-gray-700 border-gray-200 cursor-help transition-all duration-200 hover:scale-105 hover:shadow-md hover:bg-gray-200`}
+              className={`inline-flex items-center gap-1.5 ${sizeClasses[size]} font-medium rounded-full border bg-muted text-muted-foreground border-border cursor-help transition-all duration-200 hover:scale-105 hover:shadow-md hover:bg-accent hover:text-accent-foreground`}
               onMouseEnter={(e) =>
                 handleMouseEnter(e, featureConfig.description)
               }
