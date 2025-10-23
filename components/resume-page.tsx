@@ -6,7 +6,7 @@ import GoBack from "./go-back";
 import { CustomCursor } from "./animations/custom-cursor";
 import { ScrollReveal } from "./animations/scroll-reveal";
 import { MagneticButton } from "./animations/magnetic-button";
-import { Resume } from "@/interface/sanity";
+import type { Resume } from "@/interface/sanity";
 
 export function ResumePage({ resumeData }: { resumeData: Resume }) {
   const handleDownload = () => {
@@ -20,7 +20,7 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
   return (
     <>
       <CustomCursor />
-      <div className="min-h-screen bg-[#FDFBF6] text-[#111111]">
+      <div className="min-h-screen bg-background text-foreground">
         {/* Enhanced Navigation with Blur */}
         <GoBack />
 
@@ -34,20 +34,20 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
               className="text-center space-y-8"
             >
               <h1 className="text-4xl md:text-6xl font-serif">Resume</h1>
-              <p className="text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
+              <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
                 {resumeData.headline}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button
                   onClick={handleDownload}
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-[#FF471A] text-white rounded-full hover:bg-[#e63d17] transition-colors"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-colors"
                 >
                   <Download className="w-4 h-4" />
                   Download PDF
                 </button>
                 <a
                   href={`mailto:${resumeData.email}?subject=Let's work together`}
-                  className="inline-flex items-center gap-2 px-8 py-4 border-2 border-[#FF471A] text-[#FF471A] rounded-full hover:bg-[#FF471A] hover:text-white transition-colors"
+                  className="inline-flex items-center gap-2 px-8 py-4 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-primary-foreground transition-colors"
                 >
                   <Mail className="w-4 h-4" />
                   Contact Me
@@ -64,11 +64,11 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
             <ScrollReveal>
               <div className="text-center space-y-4">
                 <h2 className="text-2xl font-serif">{resumeData.name}</h2>
-                <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-600">
+                <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
                   <span>{resumeData.location}</span>
                   <a
                     href={`mailto:${resumeData.email}`}
-                    className="hover:text-[#FF471A] transition-colors"
+                    className="hover:text-primary transition-colors"
                   >
                     {resumeData.email}
                   </a>
@@ -76,7 +76,7 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
                     href={resumeData.websiteUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-[#FF471A] transition-colors"
+                    className="hover:text-primary transition-colors"
                   >
                     {/* Remove protocol for cleaner look */}
                     {resumeData.websiteUrl.replace(
@@ -92,7 +92,7 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-[#FF471A] transition-colors"
+                      className="hover:text-primary transition-colors"
                     >
                       {/* You'll need a component or function to render the correct icon */}
                       {social.platform === "github" && (
@@ -113,7 +113,7 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
                 <h3 className="text-xl font-serif mb-4">
                   Professional Profile
                 </h3>
-                <p className="text-gray-700 leading-relaxed">
+                <p className="text-foreground leading-relaxed">
                   {resumeData.professionalProfile}
                 </p>
               </div>
@@ -129,13 +129,13 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
                       <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
                         <div>
                           <h4 className="font-medium">{job.role}</h4>
-                          <p className="text-gray-600">{job.company}</p>
+                          <p className="text-muted-foreground">{job.company}</p>
                         </div>
-                        <span className="text-sm text-gray-500 font-mono">
+                        <span className="text-sm text-muted-foreground font-mono">
                           {job.period}
                         </span>
                       </div>
-                      <ul className="text-sm text-gray-700 space-y-2 ml-4 list-disc marker:text-[#FF471A]">
+                      <ul className="text-sm text-foreground space-y-2 ml-4 list-disc marker:text-primary">
                         {job.achievements.map((item, i) => (
                           <li key={i}>{item}</li>
                         ))}
@@ -154,7 +154,7 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
                   {resumeData.technicalSkills.map((skill, index) => (
                     <div key={index}>
                       <h4 className="font-medium mb-2">{skill.category}</h4>
-                      <p className="text-sm text-gray-700">
+                      <p className="text-sm text-foreground">
                         {skill.skillsList}
                       </p>
                     </div>
@@ -172,9 +172,11 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
                     <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
                       <div>
                         <h4 className="font-medium">{edu.degree}</h4>
-                        <p className="text-gray-600">{edu.institution}</p>
+                        <p className="text-muted-foreground">
+                          {edu.institution}
+                        </p>
                       </div>
-                      <span className="text-sm text-gray-500 font-mono">
+                      <span className="text-sm text-muted-foreground font-mono">
                         {edu.period}
                       </span>
                     </div>
@@ -187,7 +189,7 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
             <ScrollReveal>
               <div>
                 <h3 className="text-xl font-serif mb-6">Certifications</h3>
-                <div className="space-y-2 text-sm text-gray-700 list-disc ml-4 marker:text-[#FF471A]">
+                <div className="space-y-2 text-sm text-foreground list-disc ml-4 marker:text-primary">
                   {resumeData.certifications.map((cert, index) => (
                     <div key={index}>• {cert}</div>
                   ))}
@@ -198,14 +200,14 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-6 md:px-8 bg-[#111111] text-[#FDFBF6]">
+        <section className="py-20 px-6 md:px-8 bg-card border-t border-border">
           <div className="max-w-4xl mx-auto text-center">
             <ScrollReveal>
               <div className="space-y-8">
                 <h2 className="text-3xl md:text-4xl font-serif">
                   Let&apos;s work together
                 </h2>
-                <p className="text-gray-300 max-w-2xl mx-auto">
+                <p className="text-muted-foreground max-w-2xl mx-auto">
                   I&apos;m currently open to new opportunities and interesting
                   projects. Let&apos;s discuss how I can help bring your ideas
                   to life.
@@ -227,8 +229,8 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
         </section>
 
         {/* Footer */}
-        <footer className="py-8 px-6 md:px-8 border-t border-gray-200">
-          <div className="max-w-7xl mx-auto flex justify-between items-center text-sm text-gray-500">
+        <footer className="py-8 px-6 md:px-8 border-t border-border">
+          <div className="max-w-7xl mx-auto flex justify-between items-center text-sm text-muted-foreground">
             <div>© {new Date().getFullYear()} Amadi-Sheriff Delight</div>
             <div className="font-mono">Crafted with intention</div>
           </div>

@@ -8,7 +8,7 @@ import { useState, useMemo } from "react";
 import { CustomCursor } from "./animations/custom-cursor";
 import { ScrollReveal } from "./animations/scroll-reveal";
 import { MagneticButton } from "./animations/magnetic-button";
-import { About, Project } from "@/interface/sanity";
+import type { About, Project } from "@/interface/sanity";
 import { urlFor } from "@/sanity/sanity";
 import GoBack from "./go-back";
 import { ProjectFilter } from "./project-filter";
@@ -38,7 +38,7 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
   return (
     <>
       <CustomCursor />
-      <div className="min-h-screen bg-[#FDFBF6] text-[#111111]">
+      <div className="min-h-screen bg-background text-foreground">
         {/* Go back button */}
         <GoBack />
 
@@ -55,7 +55,7 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
                 <h1 className="text-4xl md:text-6xl font-serif mb-6">
                   All Projects
                 </h1>
-                <p className="text-xl text-gray-600 leading-relaxed max-w-3xl">
+                <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl">
                   A curated collection of projects that showcase my approach to
                   solving complex technical challenges while maintaining
                   exceptional user experience.
@@ -66,7 +66,7 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
                   href="https://github.com/Delightsheriff"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm hover:text-[#FF471A] transition-colors group"
+                  className="inline-flex items-center gap-2 text-sm hover:text-primary transition-colors group"
                 >
                   <Github className="w-4 h-4" />
                   <span>View GitHub Profile</span>
@@ -98,11 +98,12 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
                         href={`/project/${project.slug.current}`}
                         className="block"
                       >
-                        <div className="relative overflow-hidden bg-gray-100 aspect-[4/3] rounded-sm mb-6">
+                        <div className="relative overflow-hidden bg-muted aspect-[4/3] rounded-sm mb-6">
                           <Image
                             src={
                               urlFor(project.mainImage).url() ||
-                              "/placeholder.svg?height=600&width=800"
+                              "/placeholder.svg?height=600&width=800" ||
+                              "/placeholder.svg"
                             }
                             alt={project.title}
                             fill
@@ -114,15 +115,15 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
 
                       <div className="space-y-4">
                         <div className="space-y-2">
-                          <h3 className="text-xl md:text-2xl font-serif group-hover:text-[#FF471A] transition-colors">
+                          <h3 className="text-xl md:text-2xl font-serif group-hover:text-primary transition-colors">
                             {project.title}
                           </h3>
-                          <p className="text-gray-600 text-sm leading-relaxed">
+                          <p className="text-muted-foreground text-sm leading-relaxed">
                             {project.description}
                           </p>
                         </div>
 
-                        <div className="flex flex-wrap gap-2 text-xs font-mono text-gray-500">
+                        <div className="flex flex-wrap gap-2 text-xs font-mono text-muted-foreground">
                           {project.stack.slice(0, 4).map((tech, i) => (
                             <span key={i}>{tech}</span>
                           ))}
@@ -134,7 +135,7 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
                         <div className="flex flex-wrap gap-4 text-sm">
                           <Link
                             href={`/project/${project.slug.current}`}
-                            className="inline-flex items-center gap-2 hover:text-[#FF471A] transition-colors group"
+                            className="inline-flex items-center gap-2 hover:text-primary transition-colors group"
                           >
                             View Case Study
                             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -145,7 +146,7 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
                               href={project.githubUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-2 hover:text-[#FF471A] transition-colors"
+                              className="inline-flex items-center gap-2 hover:text-primary transition-colors"
                             >
                               <Github className="w-4 h-4" />
                               <span>Code</span>
@@ -157,7 +158,7 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
                               href={project.liveUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-2 hover:text-[#FF471A] transition-colors"
+                              className="inline-flex items-center gap-2 hover:text-primary transition-colors"
                             >
                               <ExternalLink className="w-4 h-4" />
                               <span>Live</span>
@@ -179,14 +180,14 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-6 md:px-8 bg-[#111111] text-[#FDFBF6]">
+        <section className="py-20 px-6 md:px-8 bg-card border-t border-border">
           <div className="max-w-7xl mx-auto text-center">
             <ScrollReveal>
               <div className="space-y-8">
                 <h2 className="text-3xl md:text-4xl font-serif">
                   Interested in working together?
                 </h2>
-                <p className="text-gray-300 max-w-2xl mx-auto">
+                <p className="text-muted-foreground max-w-2xl mx-auto">
                   I&apos;m always open to discussing new opportunities and
                   interesting projects.
                 </p>
@@ -202,8 +203,8 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
         </section>
 
         {/* Footer */}
-        <footer className="py-8 px-6 md:px-8 border-t border-gray-200">
-          <div className="max-w-7xl mx-auto flex justify-between items-center text-sm text-gray-500">
+        <footer className="py-8 px-6 md:px-8 border-t border-border">
+          <div className="max-w-7xl mx-auto flex justify-between items-center text-sm text-muted-foreground">
             <div>© {new Date().getFullYear()} Amadi-Sheriff Delight</div>
             <div className="font-mono">Crafted with intention</div>
           </div>

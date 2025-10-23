@@ -41,8 +41,8 @@ export function ProjectFilter({
             onClick={() => handleCategoryChange(category.value)}
             className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
               activeCategory === category.value
-                ? "bg-[#FF471A] text-white shadow-lg"
-                : "bg-white text-gray-700 border border-gray-200 hover:border-[#FF471A] hover:text-[#FF471A]"
+                ? "bg-primary text-primary-foreground shadow-lg"
+                : "bg-card text-foreground border border-border hover:border-primary hover:text-primary"
             }`}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -50,7 +50,7 @@ export function ProjectFilter({
             <span>{category.icon}</span>
             <span>{category.label}</span>
             {category.value === "all" && (
-              <span className="ml-1 px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs">
+              <span className="ml-1 px-2 py-0.5 bg-muted text-muted-foreground rounded-full text-xs">
                 {totalProjects}
               </span>
             )}
@@ -59,7 +59,7 @@ export function ProjectFilter({
       </div>
 
       {/* Results Counter */}
-      <div className="text-center text-sm text-gray-600 mb-8">
+      <div className="text-center text-sm text-muted-foreground mb-8">
         {activeCategory === "all" ? (
           <span>Showing all {totalProjects} projects</span>
         ) : (
