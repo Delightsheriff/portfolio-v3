@@ -3,6 +3,7 @@
 
 import { useState, useMemo } from "react";
 import { BlogCard } from "./blog-card";
+import { BlogPagination } from "./blog-pagination";
 
 interface BlogListProps {
   posts: Array<{
@@ -21,8 +22,9 @@ interface BlogListProps {
 
 export function BlogList({ posts }: BlogListProps) {
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const POSTS_PER_PAGE = 5;
 
-  // Get all unique tags
   const allTags = useMemo(() => {
     const tags = new Set<string>();
     posts.forEach((post) => {
@@ -31,30 +33,54 @@ export function BlogList({ posts }: BlogListProps) {
     return Array.from(tags).sort();
   }, [posts]);
 
-  // Separate pinned and regular posts
   const pinnedPosts = useMemo(
-    () => posts.filter((post) => post.featured),
-    [posts]
-  );
-  const regularPosts = useMemo(
-    () => posts.filter((post) => !post.featured),
+    () =>
+      posts
+        .filter((post) => post.featured)
+        .sort(
+          (a, b) =>
+            new Date(b.publishedAt).getTime() -
+            new Date(a.publishedAt).getTime()
+        ),
     [posts]
   );
 
-  // Filter posts by selected tag
+  const regularPosts = useMemo(
+    () =>
+      posts
+        .filter((post) => !post.featured)
+        .sort(
+          (a, b) =>
+            new Date(b.publishedAt).getTime() -
+            new Date(a.publishedAt).getTime()
+        ),
+    [posts]
+  );
+
   const filteredPosts = useMemo(() => {
     if (!selectedTag) return regularPosts;
     return regularPosts.filter((post) => post.tags?.includes(selectedTag));
   }, [regularPosts, selectedTag]);
 
-  // Reset to page 1 when changing tags
-  const handleTagChange = (tag: string | null) => {
-    setSelectedTag(tag);
-  };
-
-  // Get count for each tag
   const getTagCount = (tag: string) => {
     return regularPosts.filter((post) => post.tags?.includes(tag)).length;
+  };
+
+  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
+  const paginatedPosts = useMemo(() => {
+    const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+    const endIndex = startIndex + POSTS_PER_PAGE;
+    return filteredPosts.slice(startIndex, endIndex);
+  }, [filteredPosts, currentPage]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleTagChange = (tag: string | null) => {
+    setSelectedTag(tag);
+    setCurrentPage(1);
   };
 
   if (posts.length === 0) {
@@ -139,10 +165,15 @@ export function BlogList({ posts }: BlogListProps) {
             </div>
           )}
           <div>
-            {filteredPosts.map((post) => (
+            {paginatedPosts.map((post) => (
               <BlogCard key={post._id} post={post} />
             ))}
           </div>
+          <BlogPagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center py-20 px-4">
