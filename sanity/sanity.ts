@@ -328,3 +328,73 @@ export async function getVideoPitch() {
     );
   }
 }
+
+export async function getBlogPosts() {
+  if (!client) {
+    console.log("Sanity client not configured, using fallback blog data");
+  }
+
+  try {
+    const posts = await client.fetch(`
+      *[_type == "blog"] | order(featured desc, publishedAt desc) {
+        _id,
+        title,
+        slug,
+        excerpt,
+        mainImage,
+        featuredImage,
+        tags,
+        publishedAt,
+        readTime,
+        featured
+      }
+    `);
+    return posts;
+  } catch (error) {
+    console.log(
+      "Error fetching blog posts from Sanity, using fallback data:",
+      error
+    );
+  }
+}
+
+export async function getBlogPost(slug: string) {
+  if (!client) {
+    console.log("Sanity client not configured, using fallback blog post data");
+  }
+
+  try {
+    const post = await client.fetch(
+      `
+      *[_type == "blog" && slug.current == $slug][0] {
+        _id,
+        title,
+        slug,
+        excerpt,
+        mainImage,
+        featuredImage,
+        content,
+        tags,
+        publishedAt,
+        readTime,
+        featured
+      }
+    `,
+      { slug }
+    );
+    return post;
+  } catch (error) {
+    console.log(
+      "Error fetching blog post from Sanity, using fallback data:",
+      error
+    );
+    return;
+  }
+}
+
+export async function getFeaturedBlogPosts(limit = 2) {
+  const posts = await getBlogPosts();
+  return (posts as Array<{ featured?: boolean }>)
+    .filter((post) => post.featured)
+    .slice(0, limit);
+}

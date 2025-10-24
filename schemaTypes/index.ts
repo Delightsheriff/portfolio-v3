@@ -1,4 +1,5 @@
 import about from "./about";
+import blog from "./blog";
 import experience from "./experience";
 import hero from "./hero";
 import projects from "./project";
@@ -12,4 +13,5 @@ export const schemaTypes = [
   about,
   resume,
   videoPitch,
+  blog,
 ];
