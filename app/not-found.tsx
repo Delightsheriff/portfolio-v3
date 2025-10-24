@@ -8,7 +8,7 @@ export default function NotFound() {
   return (
     <>
       <CustomCursor />
-      <div className="min-h-screen bg-[#FDFBF6] text-[#111111] flex items-center justify-center px-6 md:px-8">
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center px-6 md:px-8">
         <div className="max-w-2xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -17,7 +17,7 @@ export default function NotFound() {
             className="space-y-8"
           >
             <h1 className="text-6xl md:text-8xl font-serif">404</h1>
-            <p className="text-xl md:text-2xl text-gray-600">
+            <p className="text-xl md:text-2xl text-muted-foreground">
               The page you&apos;re looking for doesn&apos;t exist.
             </p>
             <div>
