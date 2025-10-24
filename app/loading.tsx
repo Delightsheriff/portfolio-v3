@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Loading() {
   return (
-    <div className="fixed inset-0 z-[9999] bg-[#111111] flex items-center justify-center">
+    <div className="fixed inset-0 z-[9999] bg-background flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -13,7 +13,7 @@ export default function Loading() {
         className="relative"
       >
         <motion.div
-          className="text-[#FDFBF6] font-serif text-4xl"
+          className="text-foreground font-serif text-4xl"
           animate={{
             scale: [1, 1.1, 1],
           }}

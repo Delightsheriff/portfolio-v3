@@ -11,6 +11,7 @@ const navLinks = [
   { href: "#experience", label: "Experience" },
   { href: "#about", label: "About" },
   { href: "/blog", label: "Blog" },
+  { href: "/resume", label: "Resume" },
 ];
 
 export default function Navbar() {
@@ -45,7 +46,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           <Link
             href="/"
-            className="text-sm font-mono tracking-wider text-foreground hover:text-primary transition-colors"
+            className="text-xl font-mono tracking-wider text-foreground hover:text-primary transition-colors"
           >
             DS
           </Link>
@@ -61,12 +62,7 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/resume"
-              className="px-4 py-2 bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-opacity text-xs"
-            >
-              Resume
-            </Link>
+
             <Link
               href="#contact"
               className="px-4 py-2 border border-border text-foreground rounded-full hover:bg-accent hover:text-accent-foreground transition-colors text-xs"
@@ -110,13 +106,7 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                href="/resume"
-                className="text-2xl text-foreground hover:text-primary transition-colors"
-                onClick={handleLinkClick}
-              >
-                Resume
-              </Link>
+
               <Link
                 href="#contact"
                 className="px-6 py-3 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-colors text-xl"
