@@ -18,9 +18,10 @@ interface BlogCardProps {
     readTime: number;
     featured?: boolean;
   };
+  showPinned?: boolean;
 }
 
-export function BlogCard({ post }: BlogCardProps) {
+export function BlogCard({ post, showPinned = false }: BlogCardProps) {
   const imageUrl =
     post.featuredImage ||
     (post.mainImage ? "/placeholder.svg?height=400&width=600" : null);
@@ -28,7 +29,7 @@ export function BlogCard({ post }: BlogCardProps) {
   return (
     <Link href={`/blog/${post.slug.current}`} className="group block">
       <article className="relative py-12 border-b border-border last:border-0 transition-all">
-        {post.featured && (
+        {showPinned && (
           <div className="inline-flex items-center gap-1.5 text-xs font-medium text-primary mb-4">
             <Pin className="w-3 h-3 fill-current" />
             Pinned Post

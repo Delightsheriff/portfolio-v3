@@ -45,15 +45,13 @@ export function BlogList({ posts }: BlogListProps) {
     [posts]
   );
 
+  // Pinned posts will appear both in pinned section and regular list
   const regularPosts = useMemo(
     () =>
-      posts
-        .filter((post) => !post.featured)
-        .sort(
-          (a, b) =>
-            new Date(b.publishedAt).getTime() -
-            new Date(a.publishedAt).getTime()
-        ),
+      posts.sort(
+        (a, b) =>
+          new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+      ),
     [posts]
   );
 
@@ -149,7 +147,7 @@ export function BlogList({ posts }: BlogListProps) {
       {pinnedPosts.length > 0 && !selectedTag && (
         <div>
           {pinnedPosts.map((post) => (
-            <BlogCard key={post._id} post={post} />
+            <BlogCard key={post._id} post={post} showPinned={true} />
           ))}
         </div>
       )}
@@ -166,7 +164,7 @@ export function BlogList({ posts }: BlogListProps) {
           )}
           <div>
             {paginatedPosts.map((post) => (
-              <BlogCard key={post._id} post={post} />
+              <BlogCard key={post._id} post={post} showPinned={false} />
             ))}
           </div>
           <BlogPagination
