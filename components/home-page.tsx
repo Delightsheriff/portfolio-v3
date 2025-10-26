@@ -17,6 +17,7 @@ import Experiences from "./experience";
 import AboutSection from "./about";
 import Contact from "./contact";
 import Video from "./video";
+import Footer from "./nav/footer";
 
 interface HomePageProps {
   projects: Project[];
@@ -73,12 +74,7 @@ export function HomePage({
         <Contact about={about} />
 
         {/* Footer */}
-        <footer className="py-8 px-6 md:px-8 border-t border-border">
-          <div className="max-w-7xl mx-auto flex justify-between items-center text-sm text-muted-foreground">
-            <div>© {new Date().getFullYear()} Amadi-Sheriff Delight</div>
-            <div className="font-mono">Crafted with intention</div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );
