@@ -7,6 +7,7 @@ import { CustomCursor } from "./animations/custom-cursor";
 import { ScrollReveal } from "./animations/scroll-reveal";
 import { MagneticButton } from "./animations/magnetic-button";
 import type { Resume } from "@/interface/sanity";
+import Footer from "./nav/footer";
 
 export function ResumePage({ resumeData }: { resumeData: Resume }) {
   const handleDownload = () => {
@@ -229,12 +230,7 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
         </section>
 
         {/* Footer */}
-        <footer className="py-8 px-6 md:px-8 border-t border-border">
-          <div className="max-w-7xl mx-auto flex justify-between items-center text-sm text-muted-foreground">
-            <div>© {new Date().getFullYear()} Amadi-Sheriff Delight</div>
-            <div className="font-mono">Crafted with intention</div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );

@@ -20,7 +20,7 @@ export default function Works({
             <div className="grid grid-cols-12 gap-4 md:gap-8 mb-16">
               <div className="col-span-12 md:col-span-4">
                 <h2 className="text-3xl md:text-4xl font-serif">
-                  Selected Work
+                  Selected Works
                 </h2>
               </div>
               <div className="col-span-12 md:col-span-6 md:col-start-7">

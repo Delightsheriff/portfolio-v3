@@ -11,6 +11,7 @@ import { MagneticButton } from "./animations/magnetic-button";
 import type { Project } from "@/interface/sanity";
 import { ProjectBadge } from "./project-badge";
 import { KeyFeaturesBadge } from "./key-features-badge";
+import Footer from "./nav/footer";
 
 interface ProjectPageProps {
   project: Project;
@@ -284,12 +285,7 @@ export function ProjectPage({ project }: ProjectPageProps) {
         )}
 
         {/* Footer */}
-        <footer className="py-8 px-6 md:px-8 border-t border-border">
-          <div className="max-w-7xl mx-auto flex justify-between items-center text-sm text-muted-foreground">
-            <div>© {new Date().getFullYear()} Amadi-Sheriff Delight</div>
-            <div className="font-mono">Crafted with intention</div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );
