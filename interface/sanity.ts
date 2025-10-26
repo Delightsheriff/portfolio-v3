@@ -114,3 +114,17 @@ export interface VideoPitch {
   topics: string[];
   enabled: boolean;
 }
+
+export interface BlogPost {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  excerpt: string;
+  featuredImage?: string;
+  mainImage?: SanityImage | null;
+  content: any[]; // Portable Text
+  tags: string[];
+  publishedAt: string;
+  readTime: number;
+  featured?: boolean;
+}

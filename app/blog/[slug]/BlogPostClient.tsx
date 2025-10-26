@@ -8,6 +8,7 @@ import { PortableText } from "@portabletext/react";
 import { useState, useEffect } from "react";
 import { ThemeToggle } from "@/components/nav/theme-toggle";
 import { customPortableTextComponents } from "@/components/blog/portable-text-components";
+import Footer from "@/components/nav/footer";
 
 interface BlogPostClientProps {
   post: {
@@ -172,13 +173,7 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
       )}
 
       {/* Footer */}
-      <footer className="border-t border-border py-12">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Amadi-Sheriff Delight
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

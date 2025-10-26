@@ -13,6 +13,7 @@ import { urlFor } from "@/sanity/sanity";
 import GoBack from "./go-back";
 import { ProjectFilter } from "./project-filter";
 import { EmptyProjectsState } from "./EmptyState";
+import Footer from "./nav/footer";
 
 interface ProjectsPageProps {
   projects: Project[];
@@ -203,12 +204,7 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
         </section>
 
         {/* Footer */}
-        <footer className="py-8 px-6 md:px-8 border-t border-border">
-          <div className="max-w-7xl mx-auto flex justify-between items-center text-sm text-muted-foreground">
-            <div>© {new Date().getFullYear()} Amadi-Sheriff Delight</div>
-            <div className="font-mono">Crafted with intention</div>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );
