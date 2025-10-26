@@ -27,7 +27,6 @@ const projects = {
       title: "Order Rank",
       type: "number",
       description: "Used to order projects (lower numbers appear first)",
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "description",
@@ -254,7 +253,6 @@ const projects = {
         mobile: "📱",
         backend: "🔧",
         ai: "🤖",
-        dataviz: "📊",
         devtool: "🛠️",
       };
       const complexityEmojis: Record<string, string> = {

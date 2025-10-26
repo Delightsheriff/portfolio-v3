@@ -23,7 +23,6 @@ export function ProjectFilter({
     { value: "mobile", label: "Mobile", icon: "📱" },
     { value: "backend", label: "Backend", icon: "🔧" },
     { value: "ai", label: "AI/ML", icon: "🤖" },
-    { value: "dataviz", label: "Data Viz", icon: "📊" },
     { value: "devtool", label: "Dev Tool", icon: "🛠️" },
   ];
 
