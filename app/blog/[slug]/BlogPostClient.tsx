@@ -3,12 +3,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Calendar, Clock, ArrowUp, Share } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, Share2, ArrowUp } from "lucide-react";
 import { PortableText } from "@portabletext/react";
 import { useState, useEffect } from "react";
 import { ThemeToggle } from "@/components/nav/theme-toggle";
+import { motion, AnimatePresence } from "framer-motion";
 import { customPortableTextComponents } from "@/components/blog/portable-text-components";
-import Footer from "@/components/nav/footer";
 
 interface BlogPostClientProps {
   post: {
@@ -66,7 +66,9 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
     }
   };
 
-  const imageUrl = post.featuredImage || post.mainImage;
+  const imageUrl =
+    post.featuredImage ||
+    (post.mainImage ? "/placeholder.svg?height=600&width=1200" : null);
 
   return (
     <div className="min-h-screen bg-background">
@@ -87,8 +89,7 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
                 className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                 aria-label="Share post"
               >
-                {/* <Share2 className="w-4 h-4" /> */}
-                <Share className="w-4 h-4" />
+                <Share2 className="w-4 h-4" />
               </button>
             )}
             <ThemeToggle />
@@ -99,7 +100,12 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
       {/* Article */}
       <article className="max-w-3xl mx-auto px-6 py-16">
         {/* Meta */}
-        <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-8"
+        >
           <time className="flex items-center gap-1.5">
             <Calendar className="w-4 h-4" />
             {new Date(post.publishedAt).toLocaleDateString("en-US", {
@@ -112,21 +118,36 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
             <Clock className="w-4 h-4" />
             {post.readTime} min read
           </span>
-        </div>
+        </motion.div>
 
         {/* Title */}
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-8 leading-tight text-foreground">
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-4xl md:text-5xl lg:text-6xl font-serif mb-8 leading-tight text-foreground"
+        >
           {post.title}
-        </h1>
+        </motion.h1>
 
         {/* Excerpt */}
-        <p className="text-xl text-muted-foreground leading-relaxed mb-12">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-xl text-muted-foreground leading-relaxed mb-12"
+        >
           {post.excerpt}
-        </p>
+        </motion.p>
 
         {/* Featured Image - Optional */}
         {imageUrl && (
-          <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden bg-muted mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="relative w-full aspect-[16/9] rounded-lg overflow-hidden bg-muted mb-16"
+          >
             <Image
               src={imageUrl || "/placeholder.svg"}
               alt={post.title}
@@ -134,19 +155,30 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
               className="object-cover"
               priority
             />
-          </div>
+          </motion.div>
         )}
 
         {/* Content */}
-        <div className="max-w-none">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="max-w-none"
+        >
           <PortableText
             value={post.content}
             components={customPortableTextComponents}
           />
-        </div>
+        </motion.div>
 
         {/* Tags */}
-        <footer className="mt-20 pt-12 border-t border-border">
+        <motion.footer
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mt-20 pt-12 border-t border-border"
+        >
           <div className="flex flex-wrap gap-3">
             {post.tags?.map((tag) => (
               <Link
@@ -158,22 +190,34 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
               </Link>
             ))}
           </div>
-        </footer>
+        </motion.footer>
       </article>
 
       {/* Scroll to top button */}
-      {showScrollTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-3 bg-primary text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-all z-50"
-          aria-label="Scroll to top"
-        >
-          <ArrowUp className="w-5 h-5" />
-        </button>
-      )}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.3 }}
+            onClick={scrollToTop}
+            className="fixed bottom-8 right-8 p-3 bg-primary text-primary-foreground rounded-full shadow-lg hover:shadow-xl transition-all z-50"
+            aria-label="Scroll to top"
+          >
+            <ArrowUp className="w-5 h-5" />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {/* Footer */}
-      <Footer />
+      <footer className="border-t border-border py-12">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Amadi-Sheriff Delight
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
