@@ -4,6 +4,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Calendar, Clock, Pin } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface BlogCardProps {
   post: {
@@ -28,7 +29,13 @@ export function BlogCard({ post, showPinned = false }: BlogCardProps) {
 
   return (
     <Link href={`/blog/${post.slug.current}`} className="group block">
-      <article className="relative py-12 border-b border-border last:border-0 transition-all">
+      <motion.article
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true, margin: "-50px" }}
+        className="relative py-12 border-b border-border last:border-0 transition-all"
+      >
         {showPinned && (
           <div className="inline-flex items-center gap-1.5 text-xs font-medium text-primary mb-4">
             <Pin className="w-3 h-3 fill-current" />
@@ -92,7 +99,7 @@ export function BlogCard({ post, showPinned = false }: BlogCardProps) {
             </div>
           )}
         </div>
-      </article>
+      </motion.article>
     </Link>
   );
 }
