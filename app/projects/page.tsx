@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       type: "website",
-      url: "https://www.delightsheriff.tech/projects",
+      url: "https://www.delightsheriff.com/projects",
       // IMPORTANT: Create a specific image for your projects page (1200x630px)
       images: [
         {
@@ -59,11 +59,11 @@ export default async function Projects() {
     name: "Software Engineering Projects by Amadi-Sheriff Delight",
     description:
       "A curated collection of my software engineering projects. Explore detailed case studies on building user-centric and scalable web applications.",
-    url: "https://www.delightsheriff.tech/projects",
+    url: "https://www.delightsheriff.com/projects",
     author: {
       "@type": "Person",
       name: "Amadi-Sheriff Delight",
-      url: "https://www.delightsheriff.tech",
+      url: "https://www.delightsheriff.com",
     },
     mainEntity: {
       "@type": "ItemList",
