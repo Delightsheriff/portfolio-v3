@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     title: "Amadi-Sheriff Delight | Software Engineer & Founder",
     description:
       "A software engineer and founder building high-quality, user-centric web applications.",
-    creator: "https://x.com/delightsheriff",
+    creator: "@delightsheriff",
     images: ["/og-image.png"],
   },
 
