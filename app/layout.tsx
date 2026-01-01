@@ -38,16 +38,16 @@ export const metadata: Metadata = {
     "typescript",
   ],
   authors: [
-    { name: "Amadi-Sheriff Delight", url: "https://www.delightsheriff.tech" },
+    { name: "Amadi-Sheriff Delight", url: "https://www.delightsheriff.com" },
   ],
   creator: "Amadi-Sheriff Delight",
-  metadataBase: new URL("https://www.delightsheriff.tech"),
+  metadataBase: new URL("https://www.delightsheriff.com"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
-    url: "https://www.delightsheriff.tech",
+    url: "https://www.delightsheriff.com",
     title: "Amadi-Sheriff Delight | Software Engineer & Founder",
     description:
       "Explore the portfolio of Amadi-Sheriff Delight, a software engineer specializing in building exceptional web applications.",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     title: "Amadi-Sheriff Delight | Software Engineer & Founder",
     description:
       "A software engineer and founder building high-quality, user-centric web applications.",
-    creator: "https://x.com/quietandstuff",
+    creator: "https://x.com/delightsheriff",
     images: ["/og-image.png"],
   },
 
@@ -88,11 +88,11 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Amadi-Sheriff Delight",
-    url: "https://www.delightsheriff.tech",
+    url: "https://www.delightsheriff.com",
     sameAs: [
       "https://github.com/delightsheriff",
       "https://www.linkedin.com/in/delightsheriff",
-      "https://x.com/quietandstuff", // Add your social links
+      "https://x.com/delightsheriff", // Add your social links
     ],
     jobTitle: "Software Engineer",
     alumniOf: {
@@ -102,6 +102,11 @@ export default function RootLayout({
     knowsAbout: [
       "Software Development",
       "Full-Stack Development",
+      "Web Development",
+      "Frontend Development",
+      "Backend Development",
+      "Website Development",
+      "Mobile App Development",
       "React",
       "Next.js",
       "TypeScript",

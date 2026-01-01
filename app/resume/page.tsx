@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       type: "profile", // "profile" is a perfect type for a resume page
-      url: "https://www.delightsheriff.tech/resume",
+      url: "https://www.delightsheriff.com/resume",
       // IMPORTANT: Create a specific image for your resume page (1200x630px)
       images: [
         {
@@ -58,13 +58,13 @@ export default async function Resume() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Amadi-Sheriff Delight",
-    url: "https://www.delightsheriff.tech/resume",
+    url: "https://www.delightsheriff.com/resume",
     jobTitle: "Software Engineer",
     // Links to your social profiles to help Google connect your entities
     sameAs: [
       "https://github.com/delightsheriff",
       "https://www.linkedin.com/in/delightsheriff",
-      "https://twitter.com/quietandstuff",
+      "https://x.com/delightsheriff",
     ],
     // Dynamically list your work experience
     worksFor: resumeData.workExperience.map((job) => ({

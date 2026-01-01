@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       type: "website",
-      url: "https://www.delightsheriff.tech/blog",
+      url: "https://www.delightsheriff.com/blog",
       // IMPORTANT: Create a specific image for your projects page (1200x630px)
       images: [
         {
