@@ -82,7 +82,7 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
                     {/* Remove protocol for cleaner look */}
                     {resumeData.websiteUrl.replace(
                       /^(https?:\/\/)?(www\.)?/,
-                      ""
+                      "",
                     )}
                   </a>
                 </div>
@@ -93,14 +93,14 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`Follow on ${social.platform === "github" ? "GitHub" : "LinkedIn"}`}
                       className="hover:text-primary transition-colors"
                     >
-                      {/* You'll need a component or function to render the correct icon */}
                       {social.platform === "github" && (
-                        <Github className="w-5 h-5" />
+                        <Github className="w-5 h-5" aria-hidden="true" />
                       )}
                       {social.platform === "linkedin" && (
-                        <Linkedin className="w-5 h-5" />
+                        <Linkedin className="w-5 h-5" aria-hidden="true" />
                       )}
                     </a>
                   ))}

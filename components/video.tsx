@@ -1,4 +1,4 @@
-" use client";
+"use client";
 import { VideoPitch } from "@/interface/sanity";
 import React from "react";
 import { ScrollReveal } from "./animations/scroll-reveal";
@@ -9,19 +9,19 @@ export default function Video(videoPitch: VideoPitch) {
   return (
     <>
       {/* Video Pitch Section */}
-      <section className="py-20 md:py-32 px-6 md:px-8 bg-gray-50">
+      <section className="py-20 md:py-32 px-6 md:px-8 bg-muted">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
             <div className="grid grid-cols-12 gap-4 md:gap-8 items-center">
               <div className="col-span-12 md:col-span-5 space-y-6">
                 <div className="space-y-4">
-                  <div className="text-sm font-mono text-gray-500 uppercase tracking-wider">
+                  <div className="text-sm font-mono text-muted-foreground uppercase tracking-wider">
                     Personal Message
                   </div>
                   <h2 className="text-3xl md:text-4xl font-serif">
                     Let me introduce myself
                   </h2>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed">
                     Beyond the code and technical achievements, I believe in the
                     power of human connection. Watch this brief introduction to
                     understand my approach, passion, and what drives me to
@@ -30,7 +30,7 @@ export default function Video(videoPitch: VideoPitch) {
                 </div>
 
                 <div className="space-y-4">
-                  <div className="flex items-center gap-4 text-sm text-gray-600">
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                       <span>{videoPitch?.duration || "1 min watch"}</span>

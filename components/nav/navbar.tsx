@@ -23,7 +23,7 @@ export default function Navbar() {
       setScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -37,7 +37,7 @@ export default function Navbar() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className={`fixed top-0 left-0 right-0 z-50 p-6 md:p-8 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 p-6 md:p-8 transition-[background-color,border-color,box-shadow] duration-300 ${
           scrolled
             ? "bg-background/95 backdrop-blur-md border-b border-border/50 shadow-sm"
             : "bg-transparent"
