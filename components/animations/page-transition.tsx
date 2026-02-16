@@ -26,13 +26,13 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
           initial={{ opacity: 1 }}
           animate={{ opacity: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="fixed inset-0 z-[9999] bg-[#111111] flex items-center justify-center"
+          className="fixed inset-0 z-[9999] bg-background flex items-center justify-center"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}
-            className="text-[#FDFBF6] font-serif text-4xl"
+            className="text-foreground font-serif text-4xl"
           >
             DS
           </motion.div>

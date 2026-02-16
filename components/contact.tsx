@@ -42,9 +42,13 @@ export default function Contact({ about }: { about: About }) {
                               href={link.url}
                               target="_blank"
                               rel="noopener noreferrer"
+                              aria-label="Follow on X (Twitter)"
                               className="p-3 border border-border rounded-full hover:border-primary hover:text-primary transition-colors"
                             >
-                              <RiTwitterXFill className="w-5 h-5" />
+                              <RiTwitterXFill
+                                className="w-5 h-5"
+                                aria-hidden="true"
+                              />
                             </a>
                           );
                         }
@@ -58,9 +62,10 @@ export default function Contact({ about }: { about: About }) {
                             href={link.url}
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label={`Follow on ${link.platform === "github" ? "GitHub" : "LinkedIn"}`}
                             className="p-3 border border-border rounded-full hover:border-primary hover:text-primary transition-colors"
                           >
-                            <Icon className="w-5 h-5" />
+                            <Icon className="w-5 h-5" aria-hidden="true" />
                           </a>
                         );
                       })}

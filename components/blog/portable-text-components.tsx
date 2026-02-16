@@ -66,11 +66,15 @@ export const customPortableTextComponents: PortableTextComponents = {
     ),
     image: ({ value }) => (
       <figure className="my-8">
-        <Image
-          src={value.asset?.url || "/placeholder.svg"}
-          alt={value.alt || "Blog post image"}
-          className="w-full rounded-lg border border-border"
-        />
+        <div className="relative w-full aspect-video">
+          <Image
+            src={value.asset?.url || "/placeholder.svg"}
+            alt={value.alt || "Blog post image"}
+            fill
+            sizes="(max-width: 768px) 100vw, 800px"
+            className="object-cover rounded-lg border border-border"
+          />
+        </div>
         {value.caption && (
           <figcaption className="mt-2 text-center text-sm text-muted-foreground">
             {value.caption}

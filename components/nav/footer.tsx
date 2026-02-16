@@ -5,7 +5,10 @@ export default function Footer() {
     <>
       <footer className="border-t border-border py-12">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <p className="text-sm text-muted-foreground">
+          <p
+            className="text-center text-sm text-muted-foreground"
+            suppressHydrationWarning
+          >
             © {new Date().getFullYear()} Amadi-Sheriff Delight
           </p>
         </div>

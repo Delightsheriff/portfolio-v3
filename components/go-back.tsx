@@ -14,7 +14,7 @@ export default function GoBack() {
       setScrolled(scrollPosition > 50);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   return (
@@ -23,7 +23,7 @@ export default function GoBack() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className={`fixed top-0 left-0 right-0 z-50 p-6 md:p-8 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 p-6 md:p-8 transition-[background-color,border-color,box-shadow] duration-300 ${
           scrolled
             ? "bg-background/80 backdrop-blur-xl border-b border-border shadow-sm"
             : "bg-transparent"
