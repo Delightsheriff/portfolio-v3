@@ -69,17 +69,17 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
         viewport={{ once: true }}
-        className={`relative ${isShorts ? "aspect-[9/16] max-w-sm mx-auto" : "aspect-[16/10]"} bg-gray-900 rounded-lg overflow-hidden shadow-2xl`}
+        className={`relative ${isShorts ? "aspect-[9/16] max-w-sm mx-auto" : "aspect-[16/10]"} bg-card rounded-lg overflow-hidden shadow-2xl`}
       >
         {!showVideo ? (
           <>
             {/* Video Thumbnail */}
             <div
-              className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center cursor-pointer group/thumb"
+              className="w-full h-full bg-gradient-to-br from-muted to-card flex items-center justify-center cursor-pointer group/thumb"
               onClick={handlePlayVideo}
             >
               {/* Custom Thumbnail Design */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#FF471A]/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent" />
 
               {/* YouTube Thumbnail (if available) */}
               {videoId && (
@@ -102,20 +102,15 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
                   onClick={handlePlayVideo}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
+                  aria-label="Play video"
                   className="w-20 h-20 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-2xl hover:bg-white transition-colors group"
                 >
-                  <Play className="w-8 h-8 text-gray-900 ml-1 group-hover:text-[#FF471A] transition-colors" />
+                  <Play
+                    className="w-8 h-8 text-foreground ml-1 group-hover:text-primary transition-colors"
+                    aria-hidden="true"
+                  />
                 </motion.button>
               </div>
-
-              {/* Video Type Badge */}
-              {/* {isShorts && (
-                <div className="absolute top-4 left-4">
-                  <span className="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">
-                    SHORTS
-                  </span>
-                </div>
-              )} */}
 
               {/* Video Info Overlay */}
               <div className="absolute bottom-4 left-4 right-4">
@@ -123,21 +118,13 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
                   <h3 className="font-medium mb-1">
                     {videoData?.title || "Personal Introduction"}
                   </h3>
-                  <p className="text-sm text-gray-300 mb-2">
+                  <p className="text-sm text-white/70 mb-2">
                     {videoData?.description ||
                       "A brief look into my approach to software engineering"}
                   </p>
                   <div className="flex items-center gap-2 text-xs">
-                    <Volume2 className="w-3 h-3" />
+                    <Volume2 className="w-3 h-3" aria-hidden="true" />
                     <span>{videoData?.duration || "2:15"}</span>
-                    {/* <span>•</span>
-                    <span>HD Quality</span>
-                    {isShorts && (
-                      <>
-                        <span>•</span>
-                        <span>Shorts</span>
-                      </>
-                    )} */}
                   </div>
                 </div>
               </div>
@@ -147,10 +134,10 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
           <>
             {/* Loading State */}
             {isLoading && (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-900 z-10">
+              <div className="absolute inset-0 flex items-center justify-center bg-card z-10">
                 <div className="flex flex-col items-center gap-4">
-                  <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  <p className="text-white text-sm">Loading video...</p>
+                  <div className="w-8 h-8 border-2 border-foreground border-t-transparent rounded-full animate-spin" />
+                  <p className="text-foreground text-sm">Loading video…</p>
                 </div>
               </div>
             )}
@@ -182,22 +169,17 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
         <div className="flex items-center justify-between">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <h3 className="font-medium text-gray-900">
+              <h3 className="font-medium text-foreground">
                 {videoData?.title || "Personal Introduction"}
               </h3>
-              {/* {isShorts && (
-                <span className="bg-red-100 text-red-700 text-xs font-medium px-2 py-1 rounded-full">
-                  Shorts
-                </span>
-              )} */}
             </div>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-muted-foreground">
               {videoData?.description ||
                 "A brief look into my approach to software engineering"}
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <div className="text-xs font-mono text-gray-500 bg-gray-100 px-2 py-1 rounded">
+            <div className="text-xs font-mono text-muted-foreground bg-muted px-2 py-1 rounded">
               {videoData?.duration || "2:15"}
             </div>
             {videoData?.youtubeUrl && (
@@ -205,9 +187,9 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
                 href={videoData.youtubeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs font-mono text-gray-500 bg-gray-100 px-2 py-1 rounded hover:bg-gray-200 transition-colors flex items-center gap-1"
+                className="text-xs font-mono text-muted-foreground bg-muted px-2 py-1 rounded hover:bg-accent transition-colors flex items-center gap-1"
               >
-                <ExternalLink className="w-3 h-3" />
+                <ExternalLink className="w-3 h-3" aria-hidden="true" />
                 YouTube
               </a>
             )}
@@ -226,7 +208,7 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
           ).map((topic, index) => (
             <span
               key={index}
-              className="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full font-mono"
+              className="text-xs px-2 py-1 bg-muted text-muted-foreground rounded-full font-mono"
             >
               {topic}
             </span>
@@ -234,8 +216,8 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
         </div>
 
         {/* Call to Action */}
-        <div className="pt-2 border-t border-gray-200">
-          <p className="text-xs text-gray-500">
+        <div className="pt-2 border-t border-border">
+          <p className="text-xs text-muted-foreground">
             {isShorts
               ? "This short video gives you a quick glimpse into my personality and approach."
               : "This video showcases my communication style and technical approach."}

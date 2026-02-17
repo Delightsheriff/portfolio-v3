@@ -40,9 +40,9 @@ export function BlogList({ posts }: BlogListProps) {
         .sort(
           (a, b) =>
             new Date(b.publishedAt).getTime() -
-            new Date(a.publishedAt).getTime()
+            new Date(a.publishedAt).getTime(),
         ),
-    [posts]
+    [posts],
   );
 
   // Pinned posts will appear both in pinned section and regular list
@@ -50,9 +50,9 @@ export function BlogList({ posts }: BlogListProps) {
     () =>
       posts.sort(
         (a, b) =>
-          new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+          new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
       ),
-    [posts]
+    [posts],
   );
 
   const filteredPosts = useMemo(() => {
@@ -157,7 +157,7 @@ export function BlogList({ posts }: BlogListProps) {
         <div>
           {!selectedTag && pinnedPosts.length > 0 && (
             <div className="mb-8">
-              <h2 className="text-xl font-mono text-muted-foreground">
+              <h2 className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
                 All Posts
               </h2>
             </div>
@@ -199,7 +199,7 @@ export function BlogList({ posts }: BlogListProps) {
           </p>
           <button
             onClick={() => handleTagChange(null)}
-            className="px-6 py-2.5 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity font-medium"
+            className="px-6 py-2.5 border border-foreground text-foreground rounded-full text-sm font-mono hover:bg-foreground hover:text-background transition-colors"
           >
             Clear filter
           </button>
