@@ -79,7 +79,7 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
               onClick={handlePlayVideo}
             >
               {/* Custom Thumbnail Design */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#FF471A]/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent" />
 
               {/* YouTube Thumbnail (if available) */}
               {videoId && (
@@ -112,15 +112,6 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
                 </motion.button>
               </div>
 
-              {/* Video Type Badge */}
-              {/* {isShorts && (
-                <div className="absolute top-4 left-4">
-                  <span className="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">
-                    SHORTS
-                  </span>
-                </div>
-              )} */}
-
               {/* Video Info Overlay */}
               <div className="absolute bottom-4 left-4 right-4">
                 <div className="bg-black/60 backdrop-blur-sm rounded-lg p-4 text-white">
@@ -134,14 +125,6 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
                   <div className="flex items-center gap-2 text-xs">
                     <Volume2 className="w-3 h-3" aria-hidden="true" />
                     <span>{videoData?.duration || "2:15"}</span>
-                    {/* <span>•</span>
-                    <span>HD Quality</span>
-                    {isShorts && (
-                      <>
-                        <span>•</span>
-                        <span>Shorts</span>
-                      </>
-                    )} */}
                   </div>
                 </div>
               </div>
@@ -189,11 +172,6 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
               <h3 className="font-medium text-foreground">
                 {videoData?.title || "Personal Introduction"}
               </h3>
-              {/* {isShorts && (
-                <span className="bg-red-100 text-red-700 text-xs font-medium px-2 py-1 rounded-full">
-                  Shorts
-                </span>
-              )} */}
             </div>
             <p className="text-sm text-muted-foreground">
               {videoData?.description ||
