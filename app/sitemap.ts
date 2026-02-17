@@ -1,66 +1,34 @@
 import { MetadataRoute } from "next";
-
 import { getBlogPosts, getProjects } from "@/sanity/sanity";
 
-// export default function sitemap(): MetadataRoute.Sitemap {
-//   return [
-//     {
-//       url: "https://www.delightsheriff.com/",
-//       lastModified: new Date(),
-//       changeFrequency: "monthly",
-//       priority: 1,
-//     },
-//     // Add other pages here, e.g., about, contact, or project pages
-//     {
-//       url: "https://www.delightsheriff.com/projects",
-//       lastModified: new Date(),
-//       changeFrequency: "monthly",
-//       priority: 0.8,
-//     },
-//     {
-//       url: "https://www.delightsheriff.com/resume",
-//       lastModified: new Date(),
-//       changeFrequency: "monthly",
-//       priority: 0.8,
-//     },
-//     {
-//       url: "https://www.delightsheriff.com/blog",
-//       lastModified: new Date(),
-//       changeFrequency: "monthly",
-//       priority: 0.8,
-//     },
-//   ];
-// }
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const routes = [
+  const routes: MetadataRoute.Sitemap = [
     {
       url: "https://www.delightsheriff.com/",
       lastModified: new Date(),
-      changeFrequency: "monthly" as const,
+      changeFrequency: "monthly",
       priority: 1,
     },
     {
       url: "https://www.delightsheriff.com/projects",
       lastModified: new Date(),
-      changeFrequency: "monthly" as const,
+      changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: "https://www.delightsheriff.com/resume",
       lastModified: new Date(),
-      changeFrequency: "monthly" as const,
+      changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: "https://www.delightsheriff.com/blog",
       lastModified: new Date(),
-      changeFrequency: "weekly" as const,
+      changeFrequency: "weekly",
       priority: 0.8,
     },
   ];
 
-  // Add dynamic project pages
   try {
     const projects = await getProjects();
     if (projects) {
@@ -68,7 +36,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         routes.push({
           url: `https://www.delightsheriff.com/project/${project.slug.current}`,
           lastModified: new Date(),
-          changeFrequency: "monthly" as const,
+          changeFrequency: "monthly",
           priority: 0.7,
         });
       });
@@ -77,7 +45,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error("Error fetching projects for sitemap:", error);
   }
 
-  // Add dynamic blog pages
   try {
     const posts = await getBlogPosts();
     if (posts) {
@@ -85,7 +52,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         routes.push({
           url: `https://www.delightsheriff.com/blog/${post.slug.current}`,
           lastModified: new Date(),
-          changeFrequency: "monthly" as const,
+          changeFrequency: "monthly",
           priority: 0.6,
         });
       });

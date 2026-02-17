@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Calendar, Clock, Pin } from "lucide-react";
+import { Pin } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface BlogCardProps {
@@ -34,12 +34,12 @@ export function BlogCard({ post, showPinned = false }: BlogCardProps) {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true, margin: "-50px" }}
-        className="relative py-12 border-b border-border last:border-0 transition-all"
+        className="relative py-12 border-b border-border last:border-0 transition-colors"
       >
         {showPinned && (
-          <div className="inline-flex items-center gap-1.5 text-xs font-medium text-primary mb-4">
+          <div className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-[0.15em] text-primary mb-4">
             <Pin className="w-3 h-3 fill-current" />
-            Pinned Post
+            Pinned
           </div>
         )}
 
@@ -48,19 +48,16 @@ export function BlogCard({ post, showPinned = false }: BlogCardProps) {
           <div
             className={`${imageUrl ? "md:col-span-8" : "md:col-span-12"} space-y-4`}
           >
-            <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-              <time className="flex items-center gap-1.5">
-                <Calendar className="w-4 h-4" />
+            <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+              <time>
                 {new Date(post.publishedAt).toLocaleDateString("en-US", {
                   month: "long",
                   day: "numeric",
                   year: "numeric",
                 })}
               </time>
-              <span className="flex items-center gap-1.5">
-                <Clock className="w-4 h-4" />
-                {post.readTime} min read
-              </span>
+              <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
+              <span>{post.readTime} min read</span>
             </div>
 
             <h2 className="text-2xl md:text-3xl font-serif leading-tight group-hover:text-primary transition-colors">
@@ -76,7 +73,7 @@ export function BlogCard({ post, showPinned = false }: BlogCardProps) {
                 {post.tags.slice(0, 4).map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs font-mono text-muted-foreground hover:text-primary transition-colors"
+                    className="text-xs font-mono text-muted-foreground"
                   >
                     #{tag}
                   </span>
@@ -88,7 +85,7 @@ export function BlogCard({ post, showPinned = false }: BlogCardProps) {
           {/* Optional Image */}
           {imageUrl && (
             <div className="md:col-span-4">
-              <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-muted">
+              <div className="relative aspect-[4/3] rounded-sm overflow-hidden bg-muted">
                 <Image
                   src={imageUrl || "/placeholder.svg"}
                   alt={post.title}

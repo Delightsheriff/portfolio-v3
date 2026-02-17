@@ -6,100 +6,104 @@ import { RiTwitterXFill } from "react-icons/ri";
 
 export default function Contact({ about }: { about: About }) {
   return (
-    <>
-      <section id="contact" className="py-20 md:py-32 px-6 md:px-8">
-        <div className="max-w-7xl mx-auto">
-          <ScrollReveal>
-            <div className="grid grid-cols-12 gap-4 md:gap-8">
-              <div className="col-span-12 md:col-span-8 md:col-start-3 text-center">
-                <div className="space-y-8">
-                  <h2 className="text-4xl md:text-6xl font-serif">
-                    Let&apos;s create something exceptional together.
-                  </h2>
-                  <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-                    I thrive on turning ambitious ideas into reality. I&apos;m
-                    currently seeking a full-time role with a forward-thinking
-                    team where I can take on significant ownership and
-                    contribute to building impactful, user-centric products. If
-                    you&apos;re building the future, whether at a high-growth
-                    startup or an established innovator, I&apos;d love to
-                    discuss how I can help.
-                  </p>
+    <section id="contact" className="py-24 md:py-36 px-6 md:px-8 bg-muted">
+      <div className="max-w-7xl mx-auto">
+        <ScrollReveal>
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="space-y-8">
+              <span className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
+                Get in Touch
+              </span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif leading-tight">
+                Let&apos;s create something exceptional together.
+              </h2>
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+                I&apos;m currently seeking a full-time role with a
+                forward-thinking team where I can take on significant ownership
+                and contribute to building impactful, user-centric products. If
+                you&apos;re building the future, I&apos;d love to discuss how I
+                can help.
+              </p>
 
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <MagneticButton
-                      href={`mailto:${about.email}?subject=Let's work together&body=Hi Amadi-Sheriff,%0D%0A%0D%0AI'd love to discuss a potential opportunity with you.%0D%0A%0D%0ABest regards,`}
-                    >
-                      Get In Touch
-                    </MagneticButton>
+              {/* CTA + Social */}
+              <div className="flex flex-col sm:flex-row gap-5 justify-center items-center pt-2">
+                <MagneticButton
+                  href={`mailto:${about.email}?subject=Let's work together&body=Hi Amadi-Sheriff,%0D%0A%0D%0AI'd love to discuss a potential opportunity with you.%0D%0A%0D%0ABest regards,`}
+                >
+                  Get In Touch
+                </MagneticButton>
 
-                    <div className="flex gap-4 items-center">
-                      {about.socialLinks.map((link, index) => {
-                        if (link.platform === "twitter") {
-                          return (
-                            <a
-                              key={index}
-                              href={link.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="p-3 border border-border rounded-full hover:border-primary hover:text-primary transition-colors"
-                            >
-                              <RiTwitterXFill className="w-5 h-5" />
-                            </a>
-                          );
-                        }
-
-                        let Icon = Linkedin;
-                        if (link.platform === "github") Icon = Github;
-
-                        return (
-                          <a
-                            key={index}
-                            href={link.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-3 border border-border rounded-full hover:border-primary hover:text-primary transition-colors"
-                          >
-                            <Icon className="w-5 h-5" />
-                          </a>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  <div className="pt-8 border-t border-border">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-muted-foreground">
-                      <div>
-                        <div className="font-mono text-muted-foreground mb-2">
-                          Email
-                        </div>
+                <div className="flex gap-3 items-center">
+                  {about.socialLinks.map((link, index) => {
+                    if (link.platform === "twitter") {
+                      return (
                         <a
-                          href={`mailto:${about.email}`}
-                          className="hover:text-primary transition-colors"
+                          key={index}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label="Follow on X (Twitter)"
+                          className="p-3 border border-border rounded-full hover:border-foreground hover:text-foreground transition-colors"
                         >
-                          {about.email}
+                          <RiTwitterXFill
+                            className="w-4 h-4"
+                            aria-hidden="true"
+                          />
                         </a>
-                      </div>
-                      <div>
-                        <div className="font-mono text-muted-foreground mb-2">
-                          Response Time
-                        </div>
-                        <div>Usually within 24 hours</div>
-                      </div>
-                      <div>
-                        <div className="font-mono text-muted-foreground mb-2">
-                          Availability
-                        </div>
-                        <div>Open to new opportunities</div>
-                      </div>
+                      );
+                    }
+
+                    let Icon = Linkedin;
+                    if (link.platform === "github") Icon = Github;
+
+                    return (
+                      <a
+                        key={index}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Follow on ${link.platform === "github" ? "GitHub" : "LinkedIn"}`}
+                        className="p-3 border border-border rounded-full hover:border-foreground hover:text-foreground transition-colors"
+                      >
+                        <Icon className="w-4 h-4" aria-hidden="true" />
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Contact Details */}
+              <div className="pt-10 border-t border-border">
+                <div className="flex flex-col md:flex-row justify-center gap-8 text-sm text-muted-foreground">
+                  <div>
+                    <div className="text-xs font-mono uppercase tracking-[0.15em] text-muted-foreground/60 mb-1">
+                      Email
                     </div>
+                    <a
+                      href={`mailto:${about.email}`}
+                      className="hover:text-foreground transition-colors"
+                    >
+                      {about.email}
+                    </a>
+                  </div>
+                  <div>
+                    <div className="text-xs font-mono uppercase tracking-[0.15em] text-muted-foreground/60 mb-1">
+                      Response Time
+                    </div>
+                    <div>Usually within 24 hours</div>
+                  </div>
+                  <div>
+                    <div className="text-xs font-mono uppercase tracking-[0.15em] text-muted-foreground/60 mb-1">
+                      Availability
+                    </div>
+                    <div>Open to new opportunities</div>
                   </div>
                 </div>
               </div>
             </div>
-          </ScrollReveal>
-        </div>
-      </section>
-    </>
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
   );
 }

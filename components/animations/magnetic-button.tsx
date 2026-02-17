@@ -39,10 +39,10 @@ export function MagneticButton({
   const baseClasses =
     "inline-flex items-center justify-center px-8 py-4 rounded-full font-medium transition-colors duration-200";
   const variantClasses = {
-    default: "bg-[#FF471A] text-white hover:bg-[#e63d17]",
-    light: "bg-[#FDFBF6] text-[#111111] hover:bg-gray-100",
+    default: "bg-primary text-primary-foreground hover:bg-primary/90",
+    light: "bg-background text-foreground hover:bg-muted",
     outline:
-      "border-2 border-[#FF471A] text-[#FF471A] hover:bg-[#FF471A] hover:text-white",
+      "border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground",
   };
 
   const disabledClasses = disabled ? "opacity-50 cursor-not-allowed" : "";

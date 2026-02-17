@@ -13,7 +13,7 @@ export default function Loading() {
         className="relative"
       >
         <motion.div
-          className="text-foreground font-serif text-4xl"
+          className="text-foreground font-mono font-semibold tracking-wider text-4xl"
           animate={{
             scale: [1, 1.1, 1],
           }}
@@ -23,7 +23,7 @@ export default function Loading() {
             repeatType: "loop",
           }}
         >
-          DS
+          DS.
         </motion.div>
       </motion.div>
     </div>

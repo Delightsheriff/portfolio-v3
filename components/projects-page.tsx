@@ -1,18 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, ExternalLink, ArrowUpRight } from "lucide-react";
+import { Github, ExternalLink, ArrowUpRight, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useMemo } from "react";
 import { CustomCursor } from "./animations/custom-cursor";
 import { ScrollReveal } from "./animations/scroll-reveal";
 import { MagneticButton } from "./animations/magnetic-button";
 import type { About, Project } from "@/interface/sanity";
 import { urlFor } from "@/sanity/sanity";
 import GoBack from "./go-back";
-import { ProjectFilter } from "./project-filter";
-import { EmptyProjectsState } from "./EmptyState";
 import Footer from "./nav/footer";
 
 interface ProjectsPageProps {
@@ -20,90 +17,100 @@ interface ProjectsPageProps {
   about: About;
 }
 
-export function ProjectsPage({ projects, about }: ProjectsPageProps) {
-  const [activeFilter, setActiveFilter] = useState("all");
-
-  const filteredProjects = useMemo(() => {
-    if (activeFilter === "all") {
-      return projects;
-    }
-    return projects.filter(
-      (project) => project.projectType?.category === activeFilter
-    );
-  }, [projects, activeFilter]);
-
-  const handleFilterChange = (category: string) => {
-    setActiveFilter(category);
+function getCategoryLabel(category: string): string {
+  const labels: Record<string, string> = {
+    fullstack: "Full-Stack",
+    frontend: "Frontend",
+    mobile: "Mobile App",
+    backend: "Backend",
+    static: "Static Site",
+    ai: "AI / ML",
+    dataviz: "Data Viz",
+    devtool: "Dev Tool",
   };
+  return labels[category] || category;
+}
 
+export function ProjectsPage({ projects, about }: ProjectsPageProps) {
   return (
     <>
       <CustomCursor />
       <div className="min-h-screen bg-background text-foreground">
-        {/* Go back button */}
         <GoBack />
 
         {/* Header */}
-        <section className="pt-24 pb-12 px-6 md:px-8">
+        <section className="pt-32 pb-16 px-6 md:px-8">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="grid grid-cols-12 gap-4 md:gap-8"
+              className="max-w-3xl"
             >
-              <div className="col-span-12 md:col-span-8">
-                <h1 className="text-4xl md:text-6xl font-serif mb-6">
-                  All Projects
-                </h1>
-                <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl">
-                  A curated collection of projects that showcase my approach to
-                  solving complex technical challenges while maintaining
-                  exceptional user experience.
-                </p>
-              </div>
-              <div className="col-span-12 md:col-span-3 md:col-start-10 flex items-end">
-                <a
-                  href="https://github.com/Delightsheriff"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm hover:text-primary transition-colors group"
-                >
-                  <Github className="w-4 h-4" />
-                  <span>View GitHub Profile</span>
-                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </a>
-              </div>
+              <span className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground mb-5 block">
+                Projects
+              </span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif leading-tight mb-6">
+                All Projects
+              </h1>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                A curated collection of projects that showcase my approach to
+                solving complex technical challenges while maintaining
+                exceptional user experience.
+              </p>
+              <a
+                href="https://github.com/Delightsheriff"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit GitHub profile"
+                className="group inline-flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Browse GitHub
+                <ArrowRight
+                  className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"
+                  aria-hidden="true"
+                />
+              </a>
             </motion.div>
           </div>
         </section>
 
         {/* Projects Grid */}
-        <section className="py-12 px-6 md:px-8">
+        <section className="pb-24 px-6 md:px-8">
           <div className="max-w-7xl mx-auto">
-            {/* Project Filter */}
-            <ProjectFilter
-              onFilterChange={handleFilterChange}
-              totalProjects={projects.length}
-              filteredCount={filteredProjects.length}
-              activeCategory={activeFilter}
-            />
-
-            {/* Projects Grid */}
-            {filteredProjects.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                {filteredProjects.map((project, index) => (
-                  <ScrollReveal key={project._id} delay={index * 0.1}>
-                    <div className="group">
-                      <Link
-                        href={`/project/${project.slug.current}`}
-                        className="block"
-                      >
-                        <div className="relative overflow-hidden bg-muted aspect-[4/3] rounded-sm mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 md:gap-x-12 md:gap-y-20">
+              {projects.map((project, index) => (
+                <ScrollReveal key={project._id} delay={index * 0.08}>
+                  <div className="group">
+                    {/* Image */}
+                    <Link
+                      href={`/project/${project.slug.current}`}
+                      className="block mb-5"
+                    >
+                      {project.projectType?.category === "mobile" ? (
+                        <div className="flex items-center justify-center py-8 bg-muted rounded-sm">
+                          <div className="relative w-[180px] md:w-[200px]">
+                            <div className="relative rounded-[2rem] border-[5px] border-foreground/80 bg-foreground/80 shadow-2xl overflow-hidden">
+                              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-4 bg-foreground/80 rounded-b-xl z-10" />
+                              <div className="relative aspect-[9/19.5] overflow-hidden rounded-[1.5rem] bg-background">
+                                <Image
+                                  src={
+                                    urlFor(project.mainImage).url() ||
+                                    "/placeholder.svg"
+                                  }
+                                  alt={project.title}
+                                  fill
+                                  className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="relative overflow-hidden bg-muted aspect-[4/3] rounded-sm">
                           <Image
                             src={
                               urlFor(project.mainImage).url() ||
-                              "/placeholder.svg?height=600&width=800" ||
                               "/placeholder.svg"
                             }
                             alt={project.title}
@@ -112,89 +119,99 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
                           />
                           <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         </div>
-                      </Link>
+                      )}
+                    </Link>
 
-                      <div className="space-y-4">
-                        <div className="space-y-2">
-                          <h3 className="text-xl md:text-2xl font-serif group-hover:text-primary transition-colors">
-                            {project.title}
-                          </h3>
-                          <p className="text-muted-foreground text-sm leading-relaxed">
-                            {project.description}
-                          </p>
-                        </div>
+                    {/* Content */}
+                    <div className="space-y-3">
+                      {/* Category */}
+                      {project.projectType && (
+                        <span className="text-xs font-mono uppercase tracking-[0.15em] text-muted-foreground">
+                          {getCategoryLabel(project.projectType.category)}
+                        </span>
+                      )}
 
-                        <div className="flex flex-wrap gap-2 text-xs font-mono text-muted-foreground">
-                          {project.stack.slice(0, 4).map((tech, i) => (
-                            <span key={i}>{tech}</span>
-                          ))}
-                          {project.stack.length > 4 && (
-                            <span>+{project.stack.length - 4} more</span>
-                          )}
-                        </div>
+                      <h3 className="text-xl md:text-2xl font-serif group-hover:text-primary transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">
+                        {project.description}
+                      </p>
 
-                        <div className="flex flex-wrap gap-4 text-sm">
-                          <Link
-                            href={`/project/${project.slug.current}`}
-                            className="inline-flex items-center gap-2 hover:text-primary transition-colors group"
+                      {/* Tech stack */}
+                      <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs font-mono text-muted-foreground/70">
+                        {project.stack.slice(0, 4).map((tech, i) => (
+                          <span key={i}>{tech}</span>
+                        ))}
+                        {project.stack.length > 4 && (
+                          <span>+{project.stack.length - 4} more</span>
+                        )}
+                      </div>
+
+                      {/* Links */}
+                      <div className="flex flex-wrap gap-5 pt-1">
+                        <Link
+                          href={`/project/${project.slug.current}`}
+                          className="inline-flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors group/link"
+                        >
+                          View Case Study
+                          <ArrowUpRight
+                            className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
+                            aria-hidden="true"
+                          />
+                        </Link>
+
+                        {project.githubUrl && (
+                          <a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`View ${project.title} source on GitHub`}
+                            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                           >
-                            View Case Study
-                            <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                          </Link>
+                            <Github className="w-4 h-4" aria-hidden="true" />
+                            Source
+                          </a>
+                        )}
 
-                          {project.githubUrl && (
-                            <a
-                              href={project.githubUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-2 hover:text-primary transition-colors"
-                            >
-                              <Github className="w-4 h-4" />
-                              <span>Code</span>
-                            </a>
-                          )}
-
-                          {project.liveUrl && (
-                            <a
-                              href={project.liveUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-2 hover:text-primary transition-colors"
-                            >
-                              <ExternalLink className="w-4 h-4" />
-                              <span>Live</span>
-                            </a>
-                          )}
-                        </div>
+                        {project.liveUrl && (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`View ${project.title} live demo`}
+                            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                          >
+                            <ExternalLink
+                              className="w-4 h-4"
+                              aria-hidden="true"
+                            />
+                            Live
+                          </a>
+                        )}
                       </div>
                     </div>
-                  </ScrollReveal>
-                ))}
-              </div>
-            ) : (
-              <EmptyProjectsState
-                category={activeFilter}
-                onClearFilter={() => setActiveFilter("all")}
-              />
-            )}
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-6 md:px-8 bg-card border-t border-border">
+        <section className="py-24 px-6 md:px-8 bg-muted">
           <div className="max-w-7xl mx-auto text-center">
             <ScrollReveal>
-              <div className="space-y-8">
-                <h2 className="text-3xl md:text-4xl font-serif">
+              <div className="space-y-6">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif">
                   Interested in working together?
                 </h2>
-                <p className="text-muted-foreground max-w-2xl mx-auto">
+                <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
                   I&apos;m always open to discussing new opportunities and
                   interesting projects.
                 </p>
                 <MagneticButton
                   href={`mailto:${about.email}?subject=Let's work together&body=Hi Amadi-Sheriff,%0D%0A%0D%0AI'd love to discuss a potential opportunity with you.%0D%0A%0D%0ABest regards,`}
-                  variant="light"
                 >
                   Get In Touch
                 </MagneticButton>
@@ -203,7 +220,6 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
           </div>
         </section>
 
-        {/* Footer */}
         <Footer />
       </div>
     </>

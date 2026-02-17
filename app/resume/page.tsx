@@ -77,7 +77,7 @@ export default async function Resume() {
       name: resumeData.education[0]?.institution,
     },
     // Dynamically list your skills
-    knowsAbout: resumeData.technicalSkills.map((skill) => skill.name),
+    knowsAbout: resumeData.technicalSkills.map((skill) => skill.category),
   };
 
   return (
