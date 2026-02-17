@@ -158,20 +158,46 @@ export function ProjectPage({ project }: ProjectPageProps) {
         {/* Hero Image */}
         <section className="px-6 md:px-8 pb-16">
           <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.4 }}
-              className="relative aspect-[16/10] bg-muted rounded-sm overflow-hidden"
-            >
-              <Image
-                src={urlFor(project.mainImage).url() || "/placeholder.svg"}
-                alt={project.title}
-                fill
-                priority
-                className="object-cover"
-              />
-            </motion.div>
+            {project.projectType?.category === "mobile" ? (
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.4 }}
+                className="flex items-center justify-center py-12 md:py-20 bg-muted rounded-sm"
+              >
+                <div className="relative w-[220px] md:w-[280px]">
+                  <div className="relative rounded-[2.5rem] border-[6px] border-foreground/80 bg-foreground/80 shadow-2xl overflow-hidden">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-foreground/80 rounded-b-2xl z-10" />
+                    <div className="relative aspect-[9/19.5] overflow-hidden rounded-[2rem] bg-background">
+                      <Image
+                        src={
+                          urlFor(project.mainImage).url() || "/placeholder.svg"
+                        }
+                        alt={project.title}
+                        fill
+                        priority
+                        className="object-cover object-top"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.4 }}
+                className="relative aspect-[16/10] bg-muted rounded-sm overflow-hidden"
+              >
+                <Image
+                  src={urlFor(project.mainImage).url() || "/placeholder.svg"}
+                  alt={project.title}
+                  fill
+                  priority
+                  className="object-cover"
+                />
+              </motion.div>
+            )}
 
             {/* Tech Stack & Features */}
             <motion.div

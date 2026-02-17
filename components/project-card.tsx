@@ -13,8 +13,47 @@ interface ProjectCardProps {
   urlFor: (source: any) => any;
 }
 
+function getCategoryLabel(category: string): string {
+  const labels: Record<string, string> = {
+    fullstack: "Full-Stack",
+    frontend: "Frontend",
+    mobile: "Mobile App",
+    backend: "Backend",
+    static: "Static Site",
+    ai: "AI / ML",
+    dataviz: "Data Viz",
+    devtool: "Dev Tool",
+  };
+  return labels[category] || category;
+}
+
+function PhoneMockup({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="flex items-center justify-center py-8 md:py-12 bg-muted rounded-sm">
+      <div className="relative w-[200px] md:w-[240px] group">
+        {/* Phone frame */}
+        <div className="relative rounded-[2rem] border-[6px] border-foreground/80 bg-foreground/80 shadow-2xl overflow-hidden">
+          {/* Notch */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-5 bg-foreground/80 rounded-b-2xl z-10" />
+
+          {/* Screen */}
+          <div className="relative aspect-[9/19.5] overflow-hidden rounded-[1.5rem] bg-background">
+            <Image
+              src={src}
+              alt={alt}
+              fill
+              className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
   const isEven = index % 2 === 0;
+  const isMobile = project.projectType?.category === "mobile";
 
   return (
     <motion.div
@@ -29,15 +68,22 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
         className={`col-span-12 ${isEven ? "md:col-span-7" : "md:col-span-7 md:col-start-6 order-1 md:order-2"}`}
       >
         <Link href={`/project/${project.slug.current}`} className="group block">
-          <div className="relative overflow-hidden bg-muted aspect-[4/3] rounded-sm">
-            <Image
+          {isMobile ? (
+            <PhoneMockup
               src={urlFor(project.mainImage).url() || "/placeholder.svg"}
               alt={project.title}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          </div>
+          ) : (
+            <div className="relative overflow-hidden bg-muted aspect-[4/3] rounded-sm">
+              <Image
+                src={urlFor(project.mainImage).url() || "/placeholder.svg"}
+                alt={project.title}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </div>
+          )}
         </Link>
       </div>
 
@@ -50,22 +96,10 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
         } space-y-5`}
       >
         <div className="space-y-3">
-          {/* Category label — clean text, no emoji */}
+          {/* Category label */}
           {project.projectType && (
             <span className="text-xs font-mono uppercase tracking-[0.15em] text-muted-foreground">
-              {project.projectType.category === "fullstack"
-                ? "Full-Stack"
-                : project.projectType.category === "frontend"
-                  ? "Frontend"
-                  : project.projectType.category === "mobile"
-                    ? "Mobile App"
-                    : project.projectType.category === "backend"
-                      ? "Backend"
-                      : project.projectType.category === "ai"
-                        ? "AI / ML"
-                        : project.projectType.category === "static"
-                          ? "Static Site"
-                          : project.projectType.category}
+              {getCategoryLabel(project.projectType.category)}
             </span>
           )}
           <h3 className="text-2xl md:text-3xl font-serif">{project.title}</h3>

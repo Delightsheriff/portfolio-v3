@@ -87,18 +87,39 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
                       href={`/project/${project.slug.current}`}
                       className="block mb-5"
                     >
-                      <div className="relative overflow-hidden bg-muted aspect-[4/3] rounded-sm">
-                        <Image
-                          src={
-                            urlFor(project.mainImage).url() ||
-                            "/placeholder.svg"
-                          }
-                          alt={project.title}
-                          fill
-                          className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      </div>
+                      {project.projectType?.category === "mobile" ? (
+                        <div className="flex items-center justify-center py-8 bg-muted rounded-sm">
+                          <div className="relative w-[180px] md:w-[200px]">
+                            <div className="relative rounded-[2rem] border-[5px] border-foreground/80 bg-foreground/80 shadow-2xl overflow-hidden">
+                              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-4 bg-foreground/80 rounded-b-xl z-10" />
+                              <div className="relative aspect-[9/19.5] overflow-hidden rounded-[1.5rem] bg-background">
+                                <Image
+                                  src={
+                                    urlFor(project.mainImage).url() ||
+                                    "/placeholder.svg"
+                                  }
+                                  alt={project.title}
+                                  fill
+                                  className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="relative overflow-hidden bg-muted aspect-[4/3] rounded-sm">
+                          <Image
+                            src={
+                              urlFor(project.mainImage).url() ||
+                              "/placeholder.svg"
+                            }
+                            alt={project.title}
+                            fill
+                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        </div>
+                      )}
                     </Link>
 
                     {/* Content */}
