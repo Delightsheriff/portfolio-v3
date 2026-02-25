@@ -186,6 +186,19 @@ const projects = {
       type: "url",
     }),
     defineField({
+      name: "iosUrl",
+      title: "iOS App Store URL",
+      type: "url",
+      description: "Link to the iOS App Store listing (mobile projects only)",
+    }),
+    defineField({
+      name: "androidUrl",
+      title: "Google Play Store URL",
+      type: "url",
+      description:
+        "Link to the Google Play Store listing (mobile projects only)",
+    }),
+    defineField({
       name: "challenge",
       title: "The Challenge",
       type: "text",

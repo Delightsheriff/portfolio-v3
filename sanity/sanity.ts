@@ -63,6 +63,8 @@ export async function getProjects() {
         mainImage,
         githubUrl,
         liveUrl,
+        iosUrl,
+        androidUrl,
         challenge,
         solution,
         results,
@@ -80,7 +82,7 @@ export async function getProjects() {
   } catch (error) {
     console.log(
       "Error fetching from Sanity, using fallback projects data:",
-      error
+      error,
     );
     return;
   }
@@ -110,6 +112,8 @@ export async function getProject(slug: string) {
         mainImage,
         githubUrl,
         liveUrl,
+        iosUrl,
+        androidUrl,
         challenge,
         solution,
         results,
@@ -122,13 +126,13 @@ export async function getProject(slug: string) {
         }
       }
     `,
-      { slug }
+      { slug },
     );
     return project;
   } catch (error) {
     console.log(
       "Error fetching project from Sanity, using fallback data:",
-      error
+      error,
     );
   }
 }
@@ -136,7 +140,7 @@ export async function getProject(slug: string) {
 export async function getExperiences() {
   if (!client) {
     console.log(
-      "Sanity client not configured, using fallback experiences data"
+      "Sanity client not configured, using fallback experiences data",
     );
   }
 
@@ -162,7 +166,7 @@ export async function getExperiences() {
   } catch (error) {
     console.log(
       "Error fetching experiences from Sanity, using fallback data:",
-      error
+      error,
     );
   }
 }
@@ -189,7 +193,7 @@ export async function getAbout() {
   } catch (error) {
     console.log(
       "Error fetching about from Sanity, using fallback data:",
-      error
+      error,
     );
   }
 }
@@ -250,7 +254,7 @@ export async function getResume() {
   } catch (error) {
     console.log(
       "Error fetching resume from Sanity, using fallback data:",
-      error
+      error,
     );
   }
 }
@@ -259,7 +263,7 @@ export async function getResume() {
 export async function getFeaturedProjects(limit = 3) {
   if (!client) {
     console.log(
-      "Sanity client not configured, using fallback featured projects data"
+      "Sanity client not configured, using fallback featured projects data",
     );
   }
 
@@ -281,7 +285,8 @@ export async function getFeaturedProjects(limit = 3) {
         mainImage,
         githubUrl,
         liveUrl,
-        challenge,
+        iosUrl,
+        androidUrl,
         solution,
         results,
         images,
@@ -290,13 +295,13 @@ export async function getFeaturedProjects(limit = 3) {
         featured
       }
     `,
-      { limit }
+      { limit },
     );
     return featuredProjects;
   } catch (error) {
     console.log(
       "Error fetching featured projects from Sanity, using fallback data:",
-      error
+      error,
     );
     return [];
   }
@@ -305,7 +310,7 @@ export async function getFeaturedProjects(limit = 3) {
 export async function getVideoPitch() {
   if (!client) {
     console.log(
-      "Sanity client not configured, using fallback video pitch data"
+      "Sanity client not configured, using fallback video pitch data",
     );
   }
 
@@ -324,7 +329,7 @@ export async function getVideoPitch() {
   } catch (error) {
     console.log(
       "Error fetching video pitch from Sanity, using fallback data:",
-      error
+      error,
     );
   }
 }
@@ -353,7 +358,7 @@ export async function getBlogPosts() {
   } catch (error) {
     console.log(
       "Error fetching blog posts from Sanity, using fallback data:",
-      error
+      error,
     );
   }
 }
@@ -380,13 +385,13 @@ export async function getBlogPost(slug: string) {
         featured
       }
     `,
-      { slug }
+      { slug },
     );
     return post;
   } catch (error) {
     console.log(
       "Error fetching blog post from Sanity, using fallback data:",
-      error
+      error,
     );
     return;
   }

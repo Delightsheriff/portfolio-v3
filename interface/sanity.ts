@@ -30,6 +30,8 @@ export interface Project {
   mainImage: SanityImage | null;
   githubUrl?: string;
   liveUrl?: string;
+  iosUrl?: string;
+  androidUrl?: string;
   challenge: string;
   solution: string;
   results: string[];
