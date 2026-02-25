@@ -282,23 +282,51 @@ export function ProjectPage({ project }: ProjectPageProps) {
                       {project.solution}
                     </p>
 
-                    {project.images && project.images.length > 0 && (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {project.images.slice(0, 2).map((image, index) => (
-                          <div
-                            key={index}
-                            className="relative aspect-[4/3] bg-muted rounded-sm overflow-hidden"
-                          >
-                            <Image
-                              src={urlFor(image).url() || "/placeholder.svg"}
-                              alt={`${project.title} - Image ${index + 1}`}
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    )}
+                    {project.images &&
+                      project.images.length > 0 &&
+                      (project.projectType?.category === "mobile" ? (
+                        <div className="grid grid-cols-2 gap-6">
+                          {project.images.slice(0, 2).map((image, index) => (
+                            <div
+                              key={index}
+                              className="flex items-center justify-center py-6 bg-muted rounded-sm"
+                            >
+                              <div className="relative w-[160px] md:w-[200px]">
+                                <div className="relative rounded-[2.5rem] border-[5px] border-foreground/80 bg-foreground/80 shadow-xl overflow-hidden">
+                                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-4 bg-foreground/80 rounded-b-2xl z-10" />
+                                  <div className="relative aspect-[9/19.5] overflow-hidden rounded-[2rem] bg-background">
+                                    <Image
+                                      src={
+                                        urlFor(image).url() ||
+                                        "/placeholder.svg"
+                                      }
+                                      alt={`${project.title} - Screen ${index + 1}`}
+                                      fill
+                                      className="object-cover object-top"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="grid grid-cols-1 gap-6">
+                          {project.images.slice(0, 2).map((image, index) => (
+                            <div
+                              key={index}
+                              className="relative aspect-[16/9] bg-muted rounded-sm overflow-hidden"
+                            >
+                              <Image
+                                src={urlFor(image).url() || "/placeholder.svg"}
+                                alt={`${project.title} - Image ${index + 1}`}
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      ))}
                   </div>
                 </div>
               </ScrollReveal>
@@ -333,19 +361,40 @@ export function ProjectPage({ project }: ProjectPageProps) {
                       ))}
                     </div>
 
-                    {project.images && project.images[2] && (
-                      <div className="relative aspect-[16/9] bg-muted rounded-sm overflow-hidden">
-                        <Image
-                          src={
-                            urlFor(project.images[2]).url() ||
-                            "/placeholder.svg"
-                          }
-                          alt={`${project.title} - Final Result`}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                    )}
+                    {project.images &&
+                      project.images[2] &&
+                      (project.projectType?.category === "mobile" ? (
+                        <div className="flex items-center justify-center py-6 bg-muted rounded-sm">
+                          <div className="relative w-[200px] md:w-[240px]">
+                            <div className="relative rounded-[2.5rem] border-[5px] border-foreground/80 bg-foreground/80 shadow-xl overflow-hidden">
+                              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-4 bg-foreground/80 rounded-b-2xl z-10" />
+                              <div className="relative aspect-[9/19.5] overflow-hidden rounded-[2rem] bg-background">
+                                <Image
+                                  src={
+                                    urlFor(project.images[2]).url() ||
+                                    "/placeholder.svg"
+                                  }
+                                  alt={`${project.title} - Final Result`}
+                                  fill
+                                  className="object-cover object-top"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="relative aspect-[16/9] bg-muted rounded-sm overflow-hidden">
+                          <Image
+                            src={
+                              urlFor(project.images[2]).url() ||
+                              "/placeholder.svg"
+                            }
+                            alt={`${project.title} - Final Result`}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      ))}
                   </div>
                 </div>
               </ScrollReveal>
