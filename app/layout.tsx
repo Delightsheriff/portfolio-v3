@@ -84,7 +84,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const jsonLd = {
+  const personJsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Amadi-Sheriff Delight",
@@ -92,7 +92,7 @@ export default function RootLayout({
     sameAs: [
       "https://github.com/delightsheriff",
       "https://www.linkedin.com/in/delightsheriff",
-      "https://x.com/delightsheriff", // Add your social links
+      "https://x.com/delightsheriff",
     ],
     jobTitle: "Software Engineer",
     alumniOf: {
@@ -113,16 +113,84 @@ export default function RootLayout({
       "Node.js",
     ],
   };
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What is the MERN stack?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "MERN stands for MongoDB, Express.js, React, and Node.js — a full-stack JavaScript solution for building modern web applications. (Source: https://developer.mozilla.org)",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How does Next.js improve performance?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Next.js provides server-side rendering and automatic code splitting, which can reduce Largest Contentful Paint (LCP) by up to 30% and improve Core Web Vitals. (Source: https://nextjs.org)",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What is TypeScript and why should I use it?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "TypeScript is a statically typed superset of JavaScript that catches errors at compile time rather than runtime. According to the Stack Overflow Developer Survey 2024, TypeScript is the 3rd most loved programming language with 69% developer satisfaction. (Source: https://survey.stackoverflow.co/2024)",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What are the benefits of React for frontend development?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "React enables component-based architecture, virtual DOM for efficient rendering, and unidirectional data flow. It powers over 19 million websites worldwide according to W3Techs. (Source: https://w3techs.com/technologies/details/js-react)",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How can server-side rendering improve SEO?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Server-side rendering delivers fully rendered HTML to search engine crawlers, ensuring proper indexing. Google AI recommends SSR for improved crawl efficiency and faster First Contentful Paint. (Source: https://developers.google.com/search/docs/crawling-indexing/javascript/seo-basics)",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What is the job outlook for software engineers?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "The U.S. Bureau of Labor Statistics projects software developer employment to grow 17% from 2023 to 2033, much faster than the average occupation. This represents approximately 124,400 new jobs. (Source: https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm)",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What makes a good full-stack developer?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "A proficient full-stack developer understands the complete web development lifecycle, from database design (SQL/NoSQL) to frontend UI/UX implementation. Key skills include JavaScript/TypeScript proficiency, API design, version control, and problem-solving abilities. (Source: https://roadmap.sh/full-stack)",
+        },
+      },
+    ],
+  };
   return (
     <html
       lang="en"
       className={`${inter.variable} ${playfair.variable} ${jetbrains.variable}`}
     >
       <body className="font-sans antialiased">
-        {/* Add the JSON-LD script */}
+        {/* Person JSON-LD */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+        {/* FAQ JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
         <ThemeProvider
           attribute="class"
