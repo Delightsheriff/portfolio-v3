@@ -80,11 +80,11 @@ export default function Works({
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Browse GitHub profile"
-              className="group inline-flex items-center gap-2 text-xs font-mono text-muted-foreground/60 hover:text-muted-foreground uppercase tracking-widest transition-colors"
+              className="group inline-flex items-center gap-2 px-5 py-2.5 border border-border rounded-full text-sm font-medium text-foreground hover:bg-foreground hover:text-background transition-all"
             >
               Open-source on GitHub
               <ArrowRight
-                className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"
+                className="w-4 h-4 transition-transform group-hover:translate-x-1"
                 aria-hidden="true"
               />
             </a>
