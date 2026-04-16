@@ -5,6 +5,9 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/animations/theme-provider";
 import { PageTransition } from "@/components/animations/page-transition";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
+
+const spaceGroteskHeading = Space_Grotesk({subsets:['latin'],variable:'--font-heading'});
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -18,11 +21,7 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-const jetbrains = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-});
+const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
 
 export const metadata: Metadata = {
   title: {
@@ -158,7 +157,7 @@ export default function RootLayout({
       lang="en"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
-      className={`${spaceGrotesk.variable} ${playfair.variable} ${jetbrains.variable}`}
+      className={cn(spaceGrotesk.variable, playfair.variable, jetbrainsMono.variable, spaceGroteskHeading.variable)}
     >
       <body className="font-sans antialiased">
         <script

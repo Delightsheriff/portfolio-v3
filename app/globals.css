@@ -47,15 +47,14 @@
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
-  --font-heading: var(--font-serif);
+  --font-heading: var(--font-heading);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 :root {
-  --radius: 0.45rem;
+  --radius: 0.625rem;
 
   /* Mist base (from preset) */
-  --background: oklch(0.99 0.002 197.1);
-  --foreground: oklch(0.148 0.004 228.8);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.148 0.004 228.8);
   --popover: oklch(1 0 0);
@@ -89,6 +88,8 @@
   /* Orange highlight — brand accent */
   --highlight: oklch(0.628 0.221 33.05);
   --highlight-foreground: oklch(0.99 0.002 197.1);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.148 0.004 228.8);
 }
 
 .dark {
