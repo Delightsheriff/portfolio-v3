@@ -1,7 +1,17 @@
 import { ScrollReveal } from "./animations/scroll-reveal";
 import type { Experience } from "@/interface/sanity";
-import { MapPin } from "lucide-react";
-import { MagneticButton } from "./animations/magnetic-button";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
+const TYPE_COLOR: Record<string, string> = {
+  "Full-time": "bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/20",
+  "Part-time": "bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20",
+  Contract: "bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20",
+  Freelance: "bg-purple-500/10 text-purple-700 dark:text-purple-400 border-purple-500/20",
+  Internship: "bg-pink-500/10 text-pink-700 dark:text-pink-400 border-pink-500/20",
+};
 
 export default function Experiences({
   experiences,
@@ -9,117 +19,134 @@ export default function Experiences({
   experiences: Experience[];
 }) {
   return (
-    <section id="experience" className="py-24 md:py-36 px-6 md:px-8 bg-muted">
+    <section
+      id="experience"
+      className="py-24 md:py-36 px-5 md:px-8 bg-muted/40"
+      aria-label="Work experience"
+    >
       <div className="max-w-7xl mx-auto">
+        {/* Header */}
         <ScrollReveal>
-          <div className="mb-16 md:mb-24 max-w-3xl">
-            <span className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground mb-5 block">
+          <div className="mb-16 md:mb-20 max-w-2xl">
+            <p className="text-xs font-mono uppercase tracking-[0.25em] text-muted-foreground mb-4">
               Experience
-            </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif leading-tight mb-6">
-              Professional Journey
-            </h2>
-            <p className="text-muted-foreground leading-relaxed text-lg">
-              Building products from ideation to execution — my journey blends
-              startup leadership with deep full-stack expertise.
             </p>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif leading-tight">
+              Professional journey
+            </h2>
           </div>
         </ScrollReveal>
 
         {/* Timeline */}
-        <div className="relative">
-          {/* Vertical timeline line */}
-          <div className="hidden md:block absolute left-[calc(25%-1px)] top-0 bottom-0 w-px bg-border" />
+        <div className="space-y-0">
+          {experiences.map((exp, index) => (
+            <ScrollReveal key={exp._id} delay={index * 0.08}>
+              <div className="group relative grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 md:gap-10 py-10 md:py-12">
+                {/* Left — date + meta */}
+                <aside className="md:pt-1 space-y-2">
+                  <p className="text-sm font-mono font-medium text-foreground">
+                    {exp.period}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {exp.type && (
+                      <span
+                        className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-mono border ${
+                          TYPE_COLOR[exp.type] ??
+                          "bg-muted text-muted-foreground"
+                        }`}
+                      >
+                        {exp.type}
+                      </span>
+                    )}
+                    {exp.current && (
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-mono bg-highlight/10 text-highlight border border-highlight/20">
+                        <span className="w-1.5 h-1.5 rounded-full bg-highlight animate-pulse" aria-hidden="true" />
+                        Current
+                      </span>
+                    )}
+                  </div>
+                  {exp.location && (
+                    <p className="text-xs text-muted-foreground/70 font-mono">
+                      {exp.location}
+                    </p>
+                  )}
+                </aside>
 
-          <div className="space-y-0">
-            {experiences.map((experience, index) => (
-              <ScrollReveal key={experience._id} delay={index * 0.1}>
-                <div className="relative grid grid-cols-12 gap-4 md:gap-8 group">
-                  {/* Timeline column */}
-                  <div className="col-span-12 md:col-span-3 md:pr-8">
-                    <div className="md:sticky md:top-32 md:py-10">
-                      {/* Timeline dot */}
-                      <div className="hidden md:block absolute right-0 top-10 w-3 h-3 rounded-full border-2 border-border bg-background group-hover:border-primary group-hover:bg-primary transition-colors duration-300 translate-x-[calc(50%+0.5px)]" />
+                {/* Right — content */}
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-xl md:text-2xl font-serif group-hover:text-highlight transition-colors duration-300">
+                      {exp.role}
+                    </h3>
+                    <p className="text-base text-muted-foreground font-medium mt-0.5">
+                      {exp.company}
+                    </p>
+                  </div>
 
-                      <div className="space-y-2">
-                        <div className="text-sm font-mono font-medium text-foreground">
-                          {experience.period}
-                        </div>
-                        <div className="flex items-center gap-2 text-xs text-muted-foreground/70">
-                          <MapPin
-                            className="w-3 h-3 flex-shrink-0"
+                  <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+                    {exp.description}
+                  </p>
+
+                  {/* Achievements */}
+                  {exp.achievements && exp.achievements.length > 0 && (
+                    <ul
+                      className="space-y-2 pt-1"
+                      aria-label="Key achievements"
+                    >
+                      {exp.achievements.map((a, i) => (
+                        <li
+                          key={i}
+                          className="flex items-start gap-2.5 text-sm text-foreground/85"
+                        >
+                          <span
+                            className="mt-[6px] w-1.5 h-1.5 rounded-full bg-highlight/60 flex-shrink-0 group-hover:bg-highlight transition-colors"
                             aria-hidden="true"
                           />
-                          <span>{experience.location}</span>
-                          <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
-                          <span>{experience.type}</span>
-                        </div>
-                      </div>
+                          {a}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {/* Tech badges */}
+                  {exp.technologies && exp.technologies.length > 0 && (
+                    <div
+                      className="flex flex-wrap gap-1.5 pt-1"
+                      aria-label="Technologies used"
+                    >
+                      {exp.technologies.map((t, i) => (
+                        <Badge
+                          key={i}
+                          variant="outline"
+                          className="text-xs font-mono px-2 py-0.5 text-muted-foreground border-border/50"
+                        >
+                          {t}
+                        </Badge>
+                      ))}
                     </div>
-                  </div>
-
-                  {/* Content card */}
-                  <div className="col-span-12 md:col-span-8 md:col-start-5 py-10 border-b border-border/50 last:border-0">
-                    <div className="space-y-5 md:pl-4">
-                      {/* Role + Company */}
-                      <div>
-                        <h3 className="text-xl md:text-2xl font-serif group-hover:text-primary transition-colors duration-300">
-                          {experience.role}
-                        </h3>
-                        <div className="text-base text-muted-foreground font-medium mt-1">
-                          {experience.company}
-                        </div>
-                      </div>
-
-                      <p className="text-muted-foreground leading-relaxed">
-                        {experience.description}
-                      </p>
-
-                      {/* Key Achievements */}
-                      <div className="space-y-3 pt-2">
-                        <h4 className="text-xs font-mono uppercase tracking-[0.15em] text-muted-foreground">
-                          Key Achievements
-                        </h4>
-                        <ul className="space-y-2.5">
-                          {experience.achievements.map((achievement, i) => (
-                            <li
-                              key={i}
-                              className="flex items-start gap-3 text-sm text-foreground/90"
-                            >
-                              <div className="w-1.5 h-1.5 bg-primary/60 rounded-full mt-1.5 flex-shrink-0 group-hover:bg-primary transition-colors duration-300" />
-                              <span className="leading-relaxed">
-                                {achievement}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* Technologies */}
-                      <div className="flex flex-wrap gap-2 pt-2">
-                        {experience.technologies.map((tech, i) => (
-                          <span
-                            key={i}
-                            className="px-3 py-1 bg-background border border-border/60 text-xs font-mono rounded-full text-muted-foreground"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                  )}
                 </div>
-              </ScrollReveal>
-            ))}
-          </div>
+              </div>
+              {index < experiences.length - 1 && (
+                <Separator className="opacity-30" />
+              )}
+            </ScrollReveal>
+          ))}
         </div>
 
-        {/* CTA */}
+        {/* Resume CTA */}
         <ScrollReveal>
-          <div className="text-center mt-20">
-            <MagneticButton href="/resume" variant="outline">
-              View Full Resume
-            </MagneticButton>
+          <div className="mt-14 flex justify-start">
+            <Link
+              href="/resume"
+              className="group inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors font-mono"
+            >
+              View full resume
+              <ArrowRight
+                className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                aria-hidden="true"
+              />
+            </Link>
           </div>
         </ScrollReveal>
       </div>

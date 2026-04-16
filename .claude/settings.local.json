@@ -18,7 +18,14 @@
       "Bash(node -e \"const p = require\\('./node_modules/@types/node/package.json'\\); console.log\\('@types/node:', p.version\\)\")",
       "Bash(npm run *)",
       "Bash(node -e \"const v = require\\('./node_modules/@sanity/vision/package.json'\\); console.log\\('vision exports:', Object.keys\\(v.exports || {}\\).join\\(', '\\)\\)\")",
-      "Bash(node -e \"const v = require\\('./node_modules/@sanity/code-input/package.json'\\); console.log\\('code-input exports:', Object.keys\\(v.exports || {}\\).join\\(', '\\)\\)\")"
+      "Bash(node -e \"const v = require\\('./node_modules/@sanity/code-input/package.json'\\); console.log\\('code-input exports:', Object.keys\\(v.exports || {}\\).join\\(', '\\)\\)\")",
+      "WebFetch(domain:ui.shadcn.com)",
+      "Bash(npx shadcn@latest info)",
+      "Bash(curl -s \"https://ui.shadcn.com/create?preset=b397Hr74d\")",
+      "Bash(npx shadcn@latest --help)",
+      "Bash(npx shadcn@latest apply --help)",
+      "Bash(npx shadcn@latest apply b397Hr74d --yes)",
+      "Bash(npx shadcn@latest add card badge separator avatar progress tooltip --yes)"
     ]
   }
 }

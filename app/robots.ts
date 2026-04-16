@@ -1,4 +1,4 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,9 +6,10 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/studio", "/api"],
+        disallow: ["/studio/", "/api/", "/blog/"],
       },
     ],
     sitemap: "https://www.delightsheriff.com/sitemap.xml",
+    host: "https://www.delightsheriff.com",
   };
 }
