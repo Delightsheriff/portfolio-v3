@@ -15,8 +15,10 @@ const TYPE_COLOR: Record<string, string> = {
 
 export default function Experiences({
   experiences,
+  resumeUrl,
 }: {
   experiences: Experience[];
+  resumeUrl?: string;
 }) {
   return (
     <section
@@ -135,20 +137,25 @@ export default function Experiences({
         </div>
 
         {/* Resume CTA */}
-        <ScrollReveal>
-          <div className="mt-14 flex justify-start">
-            <Link
-              href="/resume"
-              className="group inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors font-mono"
-            >
-              View full resume
-              <ArrowRight
-                className="w-4 h-4 transition-transform group-hover:translate-x-1"
-                aria-hidden="true"
-              />
-            </Link>
-          </div>
-        </ScrollReveal>
+        {resumeUrl && (
+          <ScrollReveal>
+            <div className="mt-14 flex justify-start">
+              <a
+                href={resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors font-mono"
+                aria-label="View full resume (opens in new tab)"
+              >
+                View full resume
+                <ArrowRight
+                  className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                  aria-hidden="true"
+                />
+              </a>
+            </div>
+          </ScrollReveal>
+        )}
       </div>
     </section>
   );

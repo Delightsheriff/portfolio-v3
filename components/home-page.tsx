@@ -57,7 +57,7 @@ export function HomePage({
           <HeroSection hero={hero} y={y} />
           {videoPitch?.enabled && <Video {...videoPitch} />}
           <Works projects={projects} allProjects={allProjects} />
-          <Experiences experiences={experiences} />
+          <Experiences experiences={experiences} resumeUrl={about.resumeUrl} />
           <AboutSection about={about} />
           <Contact about={about} />
         </main>
