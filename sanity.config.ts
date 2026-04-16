@@ -1,6 +1,8 @@
 import { defineConfig } from "sanity";
 import { schemaTypes } from "./schemaTypes";
 import { EnvVariables } from "./lib/env";
+import { visionTool } from "@sanity/vision";
+import { codeInput } from "@sanity/code-input";
 
 export default defineConfig({
   name: "default",
@@ -10,7 +12,10 @@ export default defineConfig({
   dataset: EnvVariables.SANITY_DATASET,
   basePath: "/studio",
 
-  plugins: [],
+  plugins: [
+    visionTool(),
+    codeInput(),
+  ],
 
   schema: {
     types: schemaTypes,

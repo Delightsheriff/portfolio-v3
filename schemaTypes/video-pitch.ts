@@ -1,4 +1,3 @@
-import { Any } from "@sanity/client";
 import { defineField } from "sanity";
 
 const videoPitch = {
@@ -57,7 +56,8 @@ const videoPitch = {
       subtitle: "youtubeUrl",
       description: "description",
     },
-    prepare(selection: Any) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    prepare(selection: any) {
       const { title, subtitle } = selection;
       const isShorts = subtitle?.includes("/shorts/");
       return {

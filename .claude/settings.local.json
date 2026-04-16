@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"const p = require\\('./node_modules/next/package.json'\\); console.log\\('Next.js:', p.version\\)\")",
+      "Bash(node -e \"const p = require\\('./node_modules/sanity/package.json'\\); console.log\\('Sanity:', p.version\\)\")",
+      "Bash(node -e \"const p = require\\('./node_modules/tailwindcss/package.json'\\); console.log\\('Tailwind:', p.version\\)\")",
+      "Bash(node -e \"const p = require\\('./node_modules/@sanity/client/package.json'\\); console.log\\('@sanity/client:', p.version\\)\")",
+      "Bash(npm show *)",
+      "Bash(node -e \"const p = require\\('./node_modules/react/package.json'\\); console.log\\('React installed:', p.version\\)\")",
+      "WebFetch(domain:www.sanity.io)",
+      "WebFetch(domain:github.com)",
+      "Bash(node -e \"const p = require\\('./node_modules/eslint/package.json'\\); console.log\\('ESLint:', p.version\\)\")",
+      "Bash(npm install *)",
+      "Bash(cat /tmp/npm_install_progress.txt)",
+      "Bash(node -e \"const p = require\\('./node_modules/next/package.json'\\); console.log\\('Next.js installed:', p.version\\)\")",
+      "Bash(node -e ' *)",
+      "Bash(npx tsc *)",
+      "Bash(node -e \"const p = require\\('./node_modules/@types/node/package.json'\\); console.log\\('@types/node:', p.version\\)\")",
+      "Bash(npm run *)",
+      "Bash(node -e \"const v = require\\('./node_modules/@sanity/vision/package.json'\\); console.log\\('vision exports:', Object.keys\\(v.exports || {}\\).join\\(', '\\)\\)\")",
+      "Bash(node -e \"const v = require\\('./node_modules/@sanity/code-input/package.json'\\); console.log\\('code-input exports:', Object.keys\\(v.exports || {}\\).join\\(', '\\)\\)\")"
+    ]
+  }
+}
