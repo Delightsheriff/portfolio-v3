@@ -1,4 +1,3 @@
-import { Any } from "@sanity/client";
 import { defineField } from "sanity";
 
 const projects = {
@@ -257,7 +256,8 @@ const projects = {
       complexity: "projectType.complexity",
       media: "mainImage",
     },
-    prepare(selection: Any) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    prepare(selection: any) {
       const { title, subtitle, complexity } = selection;
       const categoryEmojis: Record<string, string> = {
         fullstack: "🚀",
