@@ -118,16 +118,5 @@ export interface VideoPitch {
   enabled: boolean;
 }
 
-export interface BlogPost {
-  _id: string;
-  title: string;
-  slug: { current: string };
-  excerpt: string;
-  featuredImage?: string;
-  mainImage?: SanityImage | null;
-  content: any[]; // Portable Text
-  tags: string[];
-  publishedAt: string;
-  readTime: number;
-  featured?: boolean;
-}
+// BlogPost interface preserved for when blog is re-enabled.
+// export interface BlogPost { ... }
