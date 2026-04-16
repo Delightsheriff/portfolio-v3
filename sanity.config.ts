@@ -1,4 +1,5 @@
 import { defineConfig } from "sanity";
+import { structureTool } from "sanity/structure";
 import { schemaTypes } from "./schemaTypes";
 import { EnvVariables } from "./lib/env";
 import { visionTool } from "@sanity/vision";
@@ -13,6 +14,7 @@ export default defineConfig({
   basePath: "/studio",
 
   plugins: [
+    structureTool(),
     visionTool(),
     codeInput(),
   ],
