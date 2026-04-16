@@ -1,9 +1,10 @@
 import { ScrollReveal } from "./animations/scroll-reveal";
 import { ProjectCard } from "./project-card";
-import { MagneticButton } from "./animations/magnetic-button";
 import { ArrowRight } from "lucide-react";
 import { urlFor } from "@/sanity/sanity";
 import type { Project } from "@/interface/sanity";
+import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 
 export default function Works({
   projects,
@@ -13,53 +14,77 @@ export default function Works({
   allProjects: Project[];
 }) {
   return (
-    <section id="work" className="py-24 md:py-36 px-6 md:px-8">
+    <section id="work" className="py-24 md:py-36 px-5 md:px-8" aria-label="Selected work">
       <div className="max-w-7xl mx-auto">
+        {/* Section header */}
         <ScrollReveal>
-          <div className="mb-16 md:mb-24 max-w-3xl">
-            <span className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground mb-5 block">
-              Selected Works
-            </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif leading-tight mb-6">
-              Projects that define my craft
-            </h2>
-            <p className="text-muted-foreground leading-relaxed text-lg">
-              A curated collection of projects that showcase my approach to
-              solving complex technical challenges while maintaining exceptional
-              user experience.
-            </p>
+          <div className="flex items-end justify-between mb-16 md:mb-24">
+            <div className="max-w-xl">
+              <p className="text-xs font-mono uppercase tracking-[0.25em] text-muted-foreground mb-4">
+                Selected Works
+              </p>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif leading-tight">
+                Projects that define my craft
+              </h2>
+            </div>
+            <Link
+              href="/projects"
+              aria-label={`View all ${allProjects.length} projects`}
+              className="hidden md:inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group shrink-0"
+            >
+              All projects ({allProjects.length})
+              <ArrowRight
+                className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                aria-hidden="true"
+              />
+            </Link>
           </div>
         </ScrollReveal>
 
-        {/* Project Grid */}
-        <div className="space-y-20 md:space-y-32">
+        {/* Projects */}
+        <div className="space-y-0">
           {projects.slice(0, 3).map((project, index) => (
-            <ProjectCard
-              key={project._id}
-              project={project}
-              index={index}
-              urlFor={urlFor}
-            />
+            <ScrollReveal key={project._id} delay={0.05 * index}>
+              <div className="py-16 md:py-24 first:pt-0">
+                <ProjectCard
+                  project={project}
+                  index={index}
+                  urlFor={urlFor}
+                />
+                {index < projects.length - 1 && (
+                  <Separator className="mt-16 md:mt-24 opacity-50" />
+                )}
+              </div>
+            </ScrollReveal>
           ))}
         </div>
 
-        {/* View All Projects */}
+        {/* Mobile — see all link */}
         <ScrollReveal>
-          <div className="mt-20 md:mt-28 flex flex-col sm:flex-row gap-6 items-center justify-center">
-            <MagneticButton href="/projects" variant="outline">
-              View All Projects ({allProjects.length})
-            </MagneticButton>
+          <div className="mt-12 flex flex-col sm:flex-row gap-4 items-center justify-center md:hidden">
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border text-sm hover:bg-muted transition-colors"
+            >
+              All Projects ({allProjects.length})
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </Link>
+          </div>
+        </ScrollReveal>
 
+        {/* GitHub CTA */}
+        <ScrollReveal>
+          <div className="mt-16 text-center">
             <a
               href="https://github.com/Delightsheriff"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Visit GitHub profile"
-              className="group inline-flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="Browse GitHub profile"
+              className="group inline-flex items-center gap-2 px-5 py-2.5 border border-border rounded-full text-sm font-medium text-foreground hover:bg-foreground hover:text-background transition-all"
             >
-              Browse GitHub
+              Open-source on GitHub
               <ArrowRight
-                className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"
+                className="w-4 h-4 transition-transform group-hover:translate-x-1"
                 aria-hidden="true"
               />
             </a>

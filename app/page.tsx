@@ -1,4 +1,3 @@
-import ClientOnly from "@/components/client-wrapper";
 import { HomePage } from "@/components/home-page";
 import {
   getAbout,
@@ -9,6 +8,12 @@ import {
   getVideoPitch,
 } from "@/sanity/sanity";
 import Loading from "./loading";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: { url: "https://www.delightsheriff.com" },
+};
 
 export default async function Home() {
   const [projects, experiences, about, hero, videoPitch, allProjects] =
@@ -21,26 +26,18 @@ export default async function Home() {
       getProjects(),
     ]);
 
-  if (
-    !projects ||
-    !experiences ||
-    !about ||
-    !hero ||
-    !videoPitch ||
-    !allProjects
-  ) {
+  if (!projects || !experiences || !about || !hero || !allProjects) {
     return <Loading />;
   }
+
   return (
-    <ClientOnly>
-      <HomePage
-        projects={projects}
-        about={about}
-        hero={hero}
-        experiences={experiences}
-        videoPitch={videoPitch}
-        allProjects={allProjects}
-      />
-    </ClientOnly>
+    <HomePage
+      projects={projects}
+      about={about}
+      hero={hero}
+      experiences={experiences}
+      videoPitch={videoPitch}
+      allProjects={allProjects}
+    />
   );
 }
