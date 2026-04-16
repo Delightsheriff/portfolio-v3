@@ -1,50 +1,90 @@
-import React from "react";
 import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
+
+const footerLinks = [
+  { href: "#work", label: "Work" },
+  { href: "#experience", label: "Experience" },
+  { href: "#about", label: "About" },
+  { href: "#contact", label: "Contact" },
+  { href: "/projects", label: "All Projects" },
+];
+
+const socialLinks = [
+  { href: "https://github.com/Delightsheriff", label: "GitHub" },
+  { href: "https://www.linkedin.com/in/delightsheriff", label: "LinkedIn" },
+  { href: "https://x.com/delightsheriff", label: "X / Twitter" },
+];
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border">
-      <div className="max-w-7xl mx-auto px-6 md:px-8 py-10">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          {/* Logo + Copyright */}
-          <div className="flex items-center gap-3 text-sm text-muted-foreground">
+    <footer className="px-5 md:px-8 pb-10" role="contentinfo">
+      <div className="max-w-7xl mx-auto">
+        <Separator className="mb-10 opacity-40" />
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+          {/* Brand */}
+          <div className="space-y-2">
             <Link
               href="/"
-              className="font-mono font-semibold tracking-wider text-foreground hover:text-primary transition-colors"
+              className="text-base font-mono font-bold tracking-widest hover:text-highlight transition-colors"
+              aria-label="Delight Sheriff — home"
             >
               DS.
             </Link>
-            <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
-            <span suppressHydrationWarning>© {new Date().getFullYear()}</span>
+            <p className="text-xs text-muted-foreground leading-relaxed max-w-xs">
+              Software Engineer &amp; Mobile Developer building high-quality, user-centric products.
+            </p>
           </div>
 
-          {/* Nav links */}
-          <nav className="flex items-center gap-6 text-xs font-mono text-muted-foreground">
-            <Link
-              href="#work"
-              className="hover:text-foreground transition-colors"
-            >
-              Work
-            </Link>
-            <Link
-              href="#about"
-              className="hover:text-foreground transition-colors"
-            >
-              About
-            </Link>
-            <Link
-              href="/blog"
-              className="hover:text-foreground transition-colors"
-            >
-              Blog
-            </Link>
-            <Link
-              href="/resume"
-              className="hover:text-foreground transition-colors"
-            >
-              Resume
-            </Link>
+          {/* Nav */}
+          <nav aria-label="Footer navigation">
+            <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground/60 mb-3">
+              Navigation
+            </p>
+            <ul className="space-y-2">
+              {footerLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </nav>
+
+          {/* Social */}
+          <nav aria-label="Social media links">
+            <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground/60 mb-3">
+              Connect
+            </p>
+            <ul className="space-y-2">
+              {socialLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${link.label} profile`}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+
+        {/* Bottom bar */}
+        <Separator className="mb-6 opacity-30" />
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground/50 font-mono">
+          <span suppressHydrationWarning>
+            © {new Date().getFullYear()} Amadi-Sheriff Delight
+          </span>
+          <span>Designed &amp; built with Next.js, Sanity, Tailwind</span>
         </div>
       </div>
     </footer>
