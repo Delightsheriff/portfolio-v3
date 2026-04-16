@@ -3,6 +3,7 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/sanity";
 import type { About } from "@/interface/sanity";
 import { Badge } from "@/components/ui/badge";
+import { ArrowUpRight, FileText } from "lucide-react";
 
 export default function AboutSection({ about }: { about: About }) {
   return (
@@ -70,6 +71,26 @@ export default function AboutSection({ about }: { about: About }) {
                       </div>
                     ))}
                   </div>
+                </div>
+              )}
+
+              {/* Resume CTA */}
+              {about.resumeUrl && (
+                <div className="flex flex-wrap gap-3 pt-2">
+                  <a
+                    href={about.resumeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="View full resume (opens in new tab)"
+                    className="group inline-flex items-center gap-2 px-5 py-2.5 bg-foreground text-background rounded-full text-sm font-medium hover:bg-highlight transition-colors"
+                  >
+                    <FileText className="w-4 h-4" aria-hidden="true" />
+                    View Resume
+                    <ArrowUpRight
+                      className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      aria-hidden="true"
+                    />
+                  </a>
                 </div>
               )}
             </div>

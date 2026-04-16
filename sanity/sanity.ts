@@ -186,6 +186,7 @@ export async function getAbout() {
         manifesto,
         skills,
         profileImage,
+        resumeUrl,
         email,
         socialLinks
       }

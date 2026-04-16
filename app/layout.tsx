@@ -99,6 +99,28 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Delight Sheriff — Software Engineer",
+    url: "https://www.delightsheriff.com",
+    description:
+      "Portfolio of Amadi-Sheriff Delight, Software Engineer specializing in web and mobile development.",
+    author: {
+      "@type": "Person",
+      name: "Amadi-Sheriff Delight",
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate:
+          "https://www.delightsheriff.com/projects?q={search_term_string}",
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+
   const personJsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -139,6 +161,10 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${playfair.variable} ${jetbrains.variable}`}
     >
       <body className="font-sans antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}

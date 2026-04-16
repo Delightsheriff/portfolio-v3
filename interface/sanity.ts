@@ -54,6 +54,7 @@ export interface About {
     items: string[];
   }[];
   profileImage: SanityImage | null;
+  resumeUrl?: string;
   email: string;
   socialLinks: {
     platform: string;

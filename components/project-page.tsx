@@ -52,22 +52,92 @@ function PhoneMockup({
   src,
   alt,
   size = "md",
+  animate = false,
 }: {
   src: string;
   alt: string;
   size?: "sm" | "md" | "lg";
+  animate?: boolean;
 }) {
-  const widths = { sm: "w-[160px] sm:w-[180px]", md: "w-[200px] sm:w-[240px]", lg: "w-[220px] sm:w-[280px]" };
-  return (
+  const widths = {
+    sm: "w-[155px] sm:w-[175px]",
+    md: "w-[195px] sm:w-[230px]",
+    lg: "w-[210px] sm:w-[270px]",
+  };
+
+  const inner = (
     <div className={`relative ${widths[size]} mx-auto`}>
-      <div className="relative rounded-[2.5rem] border-[6px] border-foreground/80 bg-foreground/80 shadow-2xl overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-4 bg-foreground/80 rounded-b-2xl z-10" />
-        <div className="relative aspect-[9/19.5] overflow-hidden rounded-[2rem] bg-background">
-          <Image src={src} alt={alt} fill className="object-cover object-top" />
+      {/* Outer glow */}
+      <div className="absolute -inset-3 rounded-[3rem] bg-gradient-to-b from-foreground/5 to-transparent blur-xl pointer-events-none" />
+
+      {/* Phone shell */}
+      <div
+        className="relative rounded-[2.6rem] bg-foreground/90 overflow-hidden"
+        style={{
+          boxShadow:
+            "0 0 0 1px rgba(255,255,255,0.06) inset, 0 32px 64px -16px rgba(0,0,0,0.5), 0 8px 24px -4px rgba(0,0,0,0.3), 0 2px 6px rgba(0,0,0,0.2)",
+        }}
+      >
+        {/* Side buttons */}
+        <div className="absolute -left-[3px] top-[28%] w-[3px] h-8 bg-foreground/60 rounded-l-sm" aria-hidden="true" />
+        <div className="absolute -left-[3px] top-[40%] w-[3px] h-12 bg-foreground/60 rounded-l-sm" aria-hidden="true" />
+        <div className="absolute -right-[3px] top-[32%] w-[3px] h-14 bg-foreground/60 rounded-r-sm" aria-hidden="true" />
+
+        {/* Screen border */}
+        <div className="m-[5px] rounded-[2.2rem] overflow-hidden bg-background relative">
+          {/* Dynamic island / notch */}
+          <div className="absolute top-2 left-1/2 -translate-x-1/2 w-[30%] h-[18px] bg-foreground/90 rounded-full z-20 flex items-center justify-center gap-1.5" aria-hidden="true">
+            <div className="w-2 h-2 rounded-full bg-foreground/40" />
+            <div className="w-1 h-1 rounded-full bg-foreground/20" />
+          </div>
+
+          {/* Screen content */}
+          <div className="relative aspect-[9/19.5]">
+            <Image
+              src={src}
+              alt={alt}
+              fill
+              className="object-cover object-top"
+              sizes="270px"
+            />
+            {/* Screen shine */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%)",
+              }}
+              aria-hidden="true"
+            />
+          </div>
         </div>
       </div>
+
+      {/* Ground shadow */}
+      <div
+        className="absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full blur-xl opacity-40"
+        style={{
+          width: "70%",
+          height: "16px",
+          background: "radial-gradient(ellipse, rgba(0,0,0,0.6) 0%, transparent 70%)",
+        }}
+        aria-hidden="true"
+      />
     </div>
   );
+
+  if (animate) {
+    return (
+      <motion.div
+        animate={{ y: [0, -8, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      >
+        {inner}
+      </motion.div>
+    );
+  }
+
+  return inner;
 }
 
 export function ProjectPage({ project }: ProjectPageProps) {
@@ -234,12 +304,22 @@ export function ProjectPage({ project }: ProjectPageProps) {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                className="flex items-center justify-center py-14 md:py-20 bg-muted rounded-2xl"
+                className="flex items-center justify-center py-16 md:py-24 rounded-2xl overflow-hidden relative"
+                style={{
+                  background:
+                    "radial-gradient(ellipse at 50% 30%, hsl(var(--muted) / 0.9) 0%, hsl(var(--muted)) 70%)",
+                }}
               >
+                {/* Decorative rings */}
+                <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-foreground/[0.03]" />
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full border border-foreground/[0.05]" />
+                </div>
                 <PhoneMockup
                   src={project.mainImage ? urlFor(project.mainImage).url() : "/placeholder.svg"}
                   alt={`${project.title} app screenshot`}
                   size="lg"
+                  animate
                 />
               </motion.div>
             ) : (
@@ -338,7 +418,11 @@ export function ProjectPage({ project }: ProjectPageProps) {
                         <div className="grid grid-cols-2 gap-4 sm:gap-6">
                           {project.images.slice(0, 2).map((image, i) =>
                             image ? (
-                              <div key={i} className="flex items-center justify-center py-8 bg-muted rounded-xl">
+                              <div
+                                key={i}
+                                className="flex items-center justify-center py-10 rounded-xl overflow-hidden"
+                                style={{ background: "radial-gradient(ellipse at 50% 30%, hsl(var(--muted) / 0.9) 0%, hsl(var(--muted)) 70%)" }}
+                              >
                                 <PhoneMockup
                                   src={urlFor(image).url()}
                                   alt={`${project.title} — Screen ${i + 1}`}
@@ -392,7 +476,10 @@ export function ProjectPage({ project }: ProjectPageProps) {
 
                     {project.images?.[2] && (
                       isMobile ? (
-                        <div className="flex items-center justify-center py-10 bg-muted rounded-xl">
+                        <div
+                          className="flex items-center justify-center py-12 rounded-xl overflow-hidden"
+                          style={{ background: "radial-gradient(ellipse at 50% 30%, hsl(var(--muted) / 0.9) 0%, hsl(var(--muted)) 70%)" }}
+                        >
                           <PhoneMockup
                             src={urlFor(project.images[2]).url()}
                             alt={`${project.title} — Final Result`}

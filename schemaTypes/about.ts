@@ -52,6 +52,12 @@ const about = {
       },
     },
     {
+      name: "resumeUrl",
+      title: "Resume URL",
+      type: "url",
+      description: "Link to your resume (Google Doc, PDF, etc.)",
+    },
+    {
       name: "email",
       title: "Email",
       type: "string",

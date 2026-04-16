@@ -25,7 +25,11 @@
       "Bash(npx shadcn@latest --help)",
       "Bash(npx shadcn@latest apply --help)",
       "Bash(npx shadcn@latest apply b397Hr74d --yes)",
-      "Bash(npx shadcn@latest add card badge separator avatar progress tooltip --yes)"
+      "Bash(npx shadcn@latest add card badge separator avatar progress tooltip --yes)",
+      "Bash(cat .env .env.development .env.production)",
+      "Bash(grep -r \"SANITY_TOKEN\\\\|SANITY_API\\\\|SANITY_WRITE\" . --include=\"*.env*\" --include=\"*.local\" -l)",
+      "Read(//c/Users/delig/AppData/Roaming/sanity/**)",
+      "Read(//c/Users/delig/**)"
     ]
   }
 }
