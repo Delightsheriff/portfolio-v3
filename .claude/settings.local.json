@@ -32,7 +32,13 @@
       "Read(//c/Users/delig/**)",
       "Bash(node scripts/update-sanity.mjs)",
       "Bash(rm scripts/update-sanity.mjs)",
-      "Bash(rmdir scripts *)"
+      "Bash(rmdir scripts *)",
+      "Bash(npx eslint *)",
+      "Bash(rm -rf components/blog)",
+      "Bash(rm \"app/blog/[slug]/BlogPostClient.tsx\")",
+      "Bash(rm components/animations/magnetic-button.tsx)",
+      "Bash(npx shadcn@latest theme get b6UmjyivI3)",
+      "Bash(npx shadcn@latest apply --preset b6UmjyivI3 -y)"
     ]
   }
 }
