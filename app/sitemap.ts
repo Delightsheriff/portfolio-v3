@@ -1,64 +1,44 @@
-import { MetadataRoute } from "next";
-import { getBlogPosts, getProjects } from "@/sanity/sanity";
+import type { MetadataRoute } from "next";
+import { getProjects } from "@/sanity/sanity";
+
+const BASE_URL = "https://www.delightsheriff.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const routes: MetadataRoute.Sitemap = [
     {
-      url: "https://www.delightsheriff.com/",
+      url: `${BASE_URL}/`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,
     },
     {
-      url: "https://www.delightsheriff.com/projects",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: "https://www.delightsheriff.com/resume",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: "https://www.delightsheriff.com/blog",
+      url: `${BASE_URL}/projects`,
       lastModified: new Date(),
       changeFrequency: "weekly",
-      priority: 0.8,
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/resume`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
     },
   ];
 
   try {
     const projects = await getProjects();
     if (projects) {
-      projects.forEach((project: { slug: { current: string } }) => {
+      for (const project of projects as Array<{ slug: { current: string }; _updatedAt?: string }>) {
         routes.push({
-          url: `https://www.delightsheriff.com/project/${project.slug.current}`,
-          lastModified: new Date(),
+          url: `${BASE_URL}/project/${project.slug.current}`,
+          lastModified: project._updatedAt ? new Date(project._updatedAt) : new Date(),
           changeFrequency: "monthly",
-          priority: 0.7,
+          priority: 0.8,
         });
-      });
+      }
     }
   } catch (error) {
-    console.error("Error fetching projects for sitemap:", error);
-  }
-
-  try {
-    const posts = await getBlogPosts();
-    if (posts) {
-      posts.forEach((post: { slug: { current: string } }) => {
-        routes.push({
-          url: `https://www.delightsheriff.com/blog/${post.slug.current}`,
-          lastModified: new Date(),
-          changeFrequency: "monthly",
-          priority: 0.6,
-        });
-      });
-    }
-  } catch (error) {
-    console.error("Error fetching blog posts for sitemap:", error);
+    console.error("Sitemap: error fetching projects:", error);
   }
 
   return routes;

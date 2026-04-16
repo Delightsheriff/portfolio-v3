@@ -43,7 +43,7 @@ export function HomePage({
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
 
   return (
     <>
@@ -52,28 +52,15 @@ export function HomePage({
         ref={containerRef}
         className="min-h-screen bg-background text-foreground overflow-hidden"
       >
-        {/* Enhanced Navigation with Blur */}
         <Navbar />
-
-        {/* Hero Section */}
-        <HeroSection hero={hero} y={y} />
-
-        {/* Video Pitch Section */}
-        {videoPitch?.enabled && <Video {...videoPitch} />}
-
-        {/* Featured Work Section */}
-        <Works projects={projects} allProjects={allProjects} />
-
-        {/* Experience Section */}
-        <Experiences experiences={experiences} />
-
-        {/* About Section */}
-        <AboutSection about={about} />
-
-        {/* Contact Section - Simplified with Direct Email */}
-        <Contact about={about} />
-
-        {/* Footer */}
+        <main id="main-content">
+          <HeroSection hero={hero} y={y} />
+          {videoPitch?.enabled && <Video {...videoPitch} />}
+          <Works projects={projects} allProjects={allProjects} />
+          <Experiences experiences={experiences} resumeUrl={about.resumeUrl} />
+          <AboutSection about={about} />
+          <Contact about={about} />
+        </main>
         <Footer />
       </div>
     </>

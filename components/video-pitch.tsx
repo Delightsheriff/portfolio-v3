@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Play, ExternalLink, Volume2 } from "lucide-react";
+import { Play, ExternalLink, Clock } from "lucide-react";
 import Image from "next/image";
+import { Badge } from "@/components/ui/badge";
 
 interface VideoPitchProps {
   videoData?: {
@@ -15,215 +16,152 @@ interface VideoPitchProps {
   };
 }
 
+function getYouTubeId(url: string): string | null {
+  if (!url) return null;
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^#&?]*)/,
+    /youtube\.com\/shorts\/([^#&?]*)/,
+    /m\.youtube\.com\/watch\?v=([^#&?]*)/,
+    /youtube\.com\/watch\?.*v=([^#&?]*)/,
+  ];
+  for (const p of patterns) {
+    const m = url.match(p);
+    if (m?.[1]?.length === 11) return m[1];
+  }
+  return null;
+}
+
 export function VideoPitch({ videoData }: VideoPitchProps) {
-  const [showVideo, setShowVideo] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [playing, setPlaying] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
-  // Enhanced YouTube ID extraction that handles all formats
-  const getYouTubeId = (url: string) => {
-    if (!url) return null;
-
-    // Handle different YouTube URL formats
-    const patterns = [
-      // Regular YouTube URLs
-      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^#&?]*)/,
-      // YouTube Shorts
-      /youtube\.com\/shorts\/([^#&?]*)/,
-      // YouTube mobile URLs
-      /m\.youtube\.com\/watch\?v=([^#&?]*)/,
-      // YouTube playlist URLs
-      /youtube\.com\/watch\?.*v=([^#&?]*)/,
-    ];
-
-    for (const pattern of patterns) {
-      const match = url.match(pattern);
-      if (match && match[1] && match[1].length === 11) {
-        return match[1];
-      }
-    }
-
-    return null;
-  };
-
-  const videoId = videoData?.youtubeUrl
-    ? getYouTubeId(videoData.youtubeUrl)
-    : null;
-
-  const handlePlayVideo = () => {
-    setIsLoading(true);
-    setShowVideo(true);
-  };
-
-  const handleIframeLoad = () => {
-    setIsLoading(false);
-  };
-
-  // Check if it's a YouTube Shorts URL
+  const videoId = videoData?.youtubeUrl ? getYouTubeId(videoData.youtubeUrl) : null;
   const isShorts = videoData?.youtubeUrl?.includes("/shorts/");
 
   return (
-    <div className="relative group">
-      {/* Video Container */}
+    <div className="relative" aria-label="Video introduction">
+      {/* Video container */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
+        initial={{ opacity: 0, scale: 0.96 }}
         whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         viewport={{ once: true }}
-        className={`relative ${isShorts ? "aspect-[9/16] max-w-sm mx-auto" : "aspect-[16/10]"} bg-card rounded-lg overflow-hidden shadow-2xl`}
+        className={`relative ${
+          isShorts ? "aspect-[9/16] max-w-[280px] mx-auto" : "aspect-video"
+        } rounded-xl overflow-hidden bg-muted shadow-2xl ring-1 ring-border/30`}
       >
-        {!showVideo ? (
-          <>
-            {/* Video Thumbnail */}
-            <div
-              className="w-full h-full bg-gradient-to-br from-muted to-card flex items-center justify-center cursor-pointer group/thumb"
-              onClick={handlePlayVideo}
-            >
-              {/* Custom Thumbnail Design */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent" />
-
-              {/* YouTube Thumbnail (if available) */}
-              {videoId && (
-                <Image
-                  src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
-                  alt="Video thumbnail"
-                  width={1280}
-                  height={720}
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    // Fallback to medium quality thumbnail
-                    e.currentTarget.src = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
-                  }}
-                />
-              )}
-
-              {/* Play Button Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm group-hover/thumb:bg-black/40 transition-colors">
-                <motion.button
-                  onClick={handlePlayVideo}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  aria-label="Play video"
-                  className="w-20 h-20 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-2xl hover:bg-white transition-colors group"
-                >
-                  <Play
-                    className="w-8 h-8 text-foreground ml-1 group-hover:text-primary transition-colors"
-                    aria-hidden="true"
-                  />
-                </motion.button>
-              </div>
-
-              {/* Video Info Overlay */}
-              <div className="absolute bottom-4 left-4 right-4">
-                <div className="bg-black/60 backdrop-blur-sm rounded-lg p-4 text-white">
-                  <h3 className="font-medium mb-1">
-                    {videoData?.title || "Personal Introduction"}
-                  </h3>
-                  <p className="text-sm text-white/70 mb-2">
-                    {videoData?.description ||
-                      "A brief look into my approach to software engineering"}
-                  </p>
-                  <div className="flex items-center gap-2 text-xs">
-                    <Volume2 className="w-3 h-3" aria-hidden="true" />
-                    <span>{videoData?.duration || "2:15"}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-        ) : (
-          <>
-            {/* Loading State */}
-            {isLoading && (
-              <div className="absolute inset-0 flex items-center justify-center bg-card z-10">
-                <div className="flex flex-col items-center gap-4">
-                  <div className="w-8 h-8 border-2 border-foreground border-t-transparent rounded-full animate-spin" />
-                  <p className="text-foreground text-sm">Loading video…</p>
-                </div>
-              </div>
+        {!playing ? (
+          <button
+            onClick={() => setPlaying(true)}
+            className="group absolute inset-0 w-full flex items-end"
+            aria-label="Play introduction video"
+          >
+            {/* Thumbnail */}
+            {videoId && (
+              <Image
+                src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+                alt="Video thumbnail"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                onError={(e) => {
+                  e.currentTarget.src = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+                }}
+              />
             )}
 
-            {/* YouTube Embed */}
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/10 to-transparent" aria-hidden="true" />
+
+            {/* Play button */}
+            <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+              <motion.div
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-16 h-16 md:w-20 md:h-20 bg-background/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-xl ring-1 ring-border/30 group-hover:ring-highlight/40 group-hover:bg-background transition-all"
+              >
+                <Play
+                  className="w-7 h-7 text-foreground ml-1 group-hover:text-highlight transition-colors"
+                  aria-hidden="true"
+                />
+              </motion.div>
+            </div>
+
+            {/* Duration badge */}
+            <div className="absolute top-3 right-3" aria-hidden="true">
+              <span className="flex items-center gap-1.5 px-2.5 py-1 bg-background/80 backdrop-blur-sm rounded-full text-xs font-mono text-muted-foreground ring-1 ring-border/30">
+                <Clock className="w-3 h-3" />
+                {videoData?.duration ?? "—"}
+              </span>
+            </div>
+          </button>
+        ) : (
+          <>
+            {!loaded && (
+              <div className="absolute inset-0 flex items-center justify-center bg-card z-10" aria-live="polite">
+                <div
+                  className="w-8 h-8 border-2 border-foreground/30 border-t-foreground rounded-full animate-spin"
+                  role="status"
+                  aria-label="Loading video"
+                />
+              </div>
+            )}
             {videoId && (
               <iframe
-                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1${isShorts ? "&loop=1&playlist=" + videoId : ""}`}
-                title={videoData?.title || "Personal Introduction"}
+                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1${
+                  isShorts ? `&loop=1&playlist=${videoId}` : ""
+                }`}
+                title={videoData?.title ?? "Personal introduction video"}
                 className="w-full h-full"
-                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-                onLoad={handleIframeLoad}
+                onLoad={() => setLoaded(true)}
               />
             )}
           </>
         )}
       </motion.div>
 
-      {/* Video Info */}
+      {/* Below-video meta */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
         viewport={{ once: true }}
-        className="mt-6 space-y-4"
+        className="mt-5 space-y-3"
       >
-        <div className="flex items-center justify-between">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2">
-              <h3 className="font-medium text-foreground">
-                {videoData?.title || "Personal Introduction"}
-              </h3>
-            </div>
-            <p className="text-sm text-muted-foreground">
-              {videoData?.description ||
-                "A brief look into my approach to software engineering"}
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="text-xs font-mono text-muted-foreground bg-muted px-2 py-1 rounded">
-              {videoData?.duration || "2:15"}
-            </div>
-            {videoData?.youtubeUrl && (
-              <a
-                href={videoData.youtubeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs font-mono text-muted-foreground bg-muted px-2 py-1 rounded hover:bg-accent transition-colors flex items-center gap-1"
-              >
-                <ExternalLink className="w-3 h-3" aria-hidden="true" />
-                YouTube
-              </a>
-            )}
-          </div>
-        </div>
-
-        {/* Video Topics */}
-        <div className="flex flex-wrap gap-2">
-          {(
-            videoData?.topics || [
-              "My Philosophy",
-              "Technical Approach",
-              "Team Collaboration",
-              "Problem Solving",
-            ]
-          ).map((topic, index) => (
-            <span
-              key={index}
-              className="text-xs px-2 py-1 bg-muted text-muted-foreground rounded-full font-mono"
-            >
-              {topic}
-            </span>
-          ))}
-        </div>
-
-        {/* Call to Action */}
-        <div className="pt-2 border-t border-border">
-          <p className="text-xs text-muted-foreground">
-            {isShorts
-              ? "This short video gives you a quick glimpse into my personality and approach."
-              : "This video showcases my communication style and technical approach."}
-            {!showVideo && " Click play to get to know me better."}
+        <div className="flex items-start justify-between gap-3">
+          <p className="text-sm text-muted-foreground leading-snug max-w-sm">
+            {videoData?.description ?? "A brief look into my approach to software engineering."}
           </p>
+          {videoData?.youtubeUrl && (
+            <a
+              href={videoData.youtubeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Watch on YouTube"
+              className="shrink-0 text-xs font-mono text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
+            >
+              <ExternalLink className="w-3 h-3" aria-hidden="true" />
+              YouTube
+            </a>
+          )}
         </div>
+
+        {/* Topics */}
+        {videoData?.topics && videoData.topics.length > 0 && (
+          <div className="flex flex-wrap gap-1.5" aria-label="Topics covered">
+            {videoData.topics.map((topic, i) => (
+              <Badge
+                key={i}
+                variant="secondary"
+                className="text-xs font-mono"
+              >
+                {topic}
+              </Badge>
+            ))}
+          </div>
+        )}
       </motion.div>
     </div>
   );
