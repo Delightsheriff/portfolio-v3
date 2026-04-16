@@ -3,19 +3,25 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import { cn } from "@/lib/utils";
 
-const navLinks = [
-  { href: "#work", label: "Work" },
-  { href: "#experience", label: "Experience" },
-  { href: "#about", label: "About" },
+const NAV_LINKS = [
+  { hash: "#work", label: "Work" },
+  { hash: "#experience", label: "Experience" },
+  { hash: "#about", label: "About" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  // On sub-pages, hash links must include the path so the browser navigates home first
+  const href = (hash: string) => (isHome ? hash : `/${hash}`);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -52,10 +58,10 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-1" role="list">
-            {navLinks.map((link) => (
+            {NAV_LINKS.map((link) => (
               <Link
-                key={link.href}
-                href={link.href}
+                key={link.hash}
+                href={href(link.hash)}
                 role="listitem"
                 className="px-3.5 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/60 rounded-md transition-all"
               >
@@ -66,7 +72,7 @@ export default function Navbar() {
             <div className="w-px h-4 bg-border mx-2" aria-hidden="true" />
 
             <Link
-              href="#contact"
+              href={href("#contact")}
               className="px-4 py-1.5 text-xs font-mono uppercase tracking-widest rounded-full border border-foreground/20 text-muted-foreground hover:border-foreground hover:text-foreground transition-all"
             >
               Hire me
@@ -112,16 +118,16 @@ export default function Navbar() {
             className="fixed inset-0 bg-background/97 backdrop-blur-xl z-40 md:hidden flex flex-col justify-center px-8"
           >
             <nav className="space-y-1" aria-label="Mobile navigation links">
-              {[...navLinks, { href: "#contact", label: "Contact" }].map(
+              {[...NAV_LINKS.map(l => ({ hash: l.hash, label: l.label })), { hash: "#contact", label: "Contact" }].map(
                 (link, index) => (
                   <motion.div
-                    key={link.href}
+                    key={link.hash}
                     initial={{ opacity: 0, x: -16 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.25, delay: index * 0.05 }}
                   >
                     <Link
-                      href={link.href}
+                      href={href(link.hash)}
                       onClick={() => setMobileMenuOpen(false)}
                       className="flex items-center py-4 text-3xl font-serif text-foreground hover:text-highlight transition-colors border-b border-border/30"
                     >

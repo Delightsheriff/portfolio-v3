@@ -21,6 +21,7 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
     <>
       <div className="min-h-screen bg-background text-foreground">
         <GoBack />
+        <main id="main-content">
 
         {/* Header */}
         <section className="pt-28 pb-8 px-5 md:px-8">
@@ -264,6 +265,7 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
           </div>
         </section>
 
+        </main>
         <Footer />
       </div>
     </>
