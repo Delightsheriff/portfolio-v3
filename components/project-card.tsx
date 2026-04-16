@@ -50,7 +50,9 @@ function PhoneMockup({ src, alt }: { src: string; alt: string }) {
 export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
   const isEven = index % 2 === 0;
   const isMobile = project.projectType?.category === "mobile";
-  const imageUrl = urlFor(project.mainImage).url();
+  const imageUrl = project.mainImage
+    ? urlFor(project.mainImage).url()
+    : "/placeholder.svg";
 
   return (
     <motion.article

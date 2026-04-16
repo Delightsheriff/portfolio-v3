@@ -50,6 +50,7 @@ export async function getProjects() {
     const projects = await client.fetch(`
       *[_type == "project" && visible == true] | order(orderRank) {
         _id,
+        _updatedAt,
         title,
         slug,
         description,
