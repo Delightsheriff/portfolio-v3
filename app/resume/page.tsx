@@ -1,95 +1,63 @@
 import { ResumePage } from "@/components/resume-page";
 import { getResume } from "@/sanity/sanity";
 import Loading from "../loading";
-import ClientOnly from "@/components/client-wrapper";
 import type { Metadata } from "next";
-import { Resume as ResumeI } from "@/interface/sanity";
+import type { Resume } from "@/interface/sanity";
 
-// --- Step 1: Convert static metadata to a dynamic generateMetadata function ---
 export async function generateMetadata(): Promise<Metadata> {
-  const title = "Resume - Amadi-Sheriff Delight";
+  const title = "Resume — Amadi-Sheriff Delight";
   const description =
-    "View and download the professional resume of Amadi-Sheriff Delight, detailing my experience in software engineering, full-stack development, and product building.";
+    "Professional resume of Amadi-Sheriff Delight — Software Engineer & Mobile Developer with expertise in React, Next.js, React Native, and Node.js.";
 
   return {
     title,
     description,
-    // --- CANONICAL URL ---
-    alternates: {
-      canonical: "/resume",
-    },
-
-    // --- OPEN GRAPH & TWITTER CARDS (FOR SOCIAL SHARING) ---
+    alternates: { canonical: "/resume" },
     openGraph: {
       title,
       description,
-      type: "profile", // "profile" is a perfect type for a resume page
+      type: "profile",
       url: "https://www.delightsheriff.com/resume",
-      // IMPORTANT: Create a specific image for your resume page (1200x630px)
-      images: [
-        {
-          url: "/og-image.png", // Place this in your /public folder
-          width: 1200,
-          height: 630,
-          alt: "The professional resume of Amadi-Sheriff Delight",
-        },
-      ],
+      images: [{ url: "/og-image.png", width: 1200, height: 630, alt: title }],
     },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: ["/og-image.png"],
-    },
+    twitter: { card: "summary_large_image", title, description, images: ["/og-image.png"] },
   };
 }
 
-// --- Step 2: Add dynamic JSON-LD structured data to your Page Component ---
+export default async function ResumePage_() {
+  const resumeData: Resume = await getResume();
 
-export default async function Resume() {
-  const resumeData: ResumeI = await getResume();
+  if (!resumeData) return <Loading />;
 
-  if (!resumeData) {
-    return <Loading />;
-  }
-
-  // Create a rich JSON-LD schema based on your resume data
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Amadi-Sheriff Delight",
-    url: "https://www.delightsheriff.com/resume",
-    jobTitle: "Software Engineer",
-    // Links to your social profiles to help Google connect your entities
+    url: "https://www.delightsheriff.com",
+    jobTitle: "Software Engineer & Mobile Developer",
     sameAs: [
       "https://github.com/delightsheriff",
       "https://www.linkedin.com/in/delightsheriff",
       "https://x.com/delightsheriff",
     ],
-    // Dynamically list your work experience
-    worksFor: resumeData.workExperience.map((job) => ({
+    worksFor: resumeData.workExperience?.map((job) => ({
       "@type": "Organization",
       name: job.company,
     })),
-    // Dynamically list your education
     alumniOf: {
       "@type": "CollegeOrUniversity",
-      name: resumeData.education[0]?.institution,
+      name: resumeData.education?.[0]?.institution,
     },
-    // Dynamically list your skills
-    knowsAbout: resumeData.technicalSkills.map((skill) => skill.category),
+    knowsAbout: resumeData.technicalSkills?.map((s) => s.category),
   };
 
   return (
     <>
-      {/* This script injects the rich structured data for Google */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <ClientOnly>
-        <ResumePage resumeData={resumeData} />
-      </ClientOnly>
+      <ResumePage resumeData={resumeData} />
     </>
   );
 }

@@ -1,4 +1,3 @@
-import ClientOnly from "@/components/client-wrapper";
 import { HomePage } from "@/components/home-page";
 import {
   getAbout,
@@ -27,26 +26,18 @@ export default async function Home() {
       getProjects(),
     ]);
 
-  if (
-    !projects ||
-    !experiences ||
-    !about ||
-    !hero ||
-    !videoPitch ||
-    !allProjects
-  ) {
+  if (!projects || !experiences || !about || !hero || !allProjects) {
     return <Loading />;
   }
+
   return (
-    <ClientOnly>
-      <HomePage
-        projects={projects}
-        about={about}
-        hero={hero}
-        experiences={experiences}
-        videoPitch={videoPitch}
-        allProjects={allProjects}
-      />
-    </ClientOnly>
+    <HomePage
+      projects={projects}
+      about={about}
+      hero={hero}
+      experiences={experiences}
+      videoPitch={videoPitch}
+      allProjects={allProjects}
+    />
   );
 }
