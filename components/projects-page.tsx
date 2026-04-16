@@ -33,6 +33,7 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
 
+      <main id="main-content">
       {/* Header */}
       <section className="pt-32 pb-16 px-5 md:px-8" aria-label="Projects header">
         <div className="max-w-7xl mx-auto">
@@ -283,6 +284,7 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
         </div>
       </section>
 
+      </main>
       <Footer />
     </div>
   );

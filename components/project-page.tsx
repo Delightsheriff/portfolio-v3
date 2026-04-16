@@ -78,6 +78,7 @@ export function ProjectPage({ project }: ProjectPageProps) {
       <div className="min-h-screen bg-background text-foreground">
         <GoBack />
 
+        <main id="main-content">
         {/* Hero Section */}
         <section className="pt-28 pb-10 px-5 md:px-8">
           <div className="max-w-7xl mx-auto">
@@ -444,6 +445,7 @@ export function ProjectPage({ project }: ProjectPageProps) {
           </section>
         )}
 
+        </main>
         <Footer />
       </div>
     </>
