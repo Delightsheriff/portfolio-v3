@@ -93,22 +93,17 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
                       className="block mb-4"
                     >
                       {isMobile ? (
-                        <div className="flex items-center justify-center py-10 sm:py-8 bg-muted/60 rounded-xl">
-                          <div className="relative w-[160px] sm:w-[140px] md:w-[155px]">
-                            <div className="relative rounded-[2rem] border-[5px] border-foreground/80 bg-foreground/80 shadow-xl overflow-hidden">
-                              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-3.5 bg-foreground/80 rounded-b-xl z-10" />
-                              <div className="relative aspect-[9/19.5] overflow-hidden rounded-[1.5rem] bg-background">
-                                <Image
-                                  src={imageUrl}
-                                  alt={`${project.title} app screenshot`}
-                                  fill
-                                  sizes="(max-width: 640px) 160px, 155px"
-                                  className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                                />
-                              </div>
+                        <div className="rounded-[1.75rem] bg-gradient-to-b from-muted/80 via-muted/60 to-transparent px-5 py-7 sm:px-6">
+                          <div className="mx-auto max-w-[220px]">
+                            <div className="relative aspect-[9/19.5] overflow-hidden rounded-[1.75rem] border border-border/40 bg-background shadow-[0_28px_60px_-28px_rgba(0,0,0,0.55)]">
+                              <Image
+                                src={imageUrl}
+                                alt={`${project.title} app screenshot`}
+                                fill
+                                sizes="(max-width: 640px) 220px, 220px"
+                                className="object-contain transition-transform duration-700 group-hover:scale-[1.02]"
+                              />
                             </div>
-                            {/* Shadow beneath phone */}
-                            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-16 h-1 bg-foreground/20 rounded-full blur-sm" />
                           </div>
                         </div>
                       ) : (
