@@ -6,6 +6,11 @@ import { usePathname } from "next/navigation";
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const isStudioRoute = pathname.startsWith("/studio");
+
+  if (isStudioRoute) {
+    return <>{children}</>;
+  }
 
   return (
     <AnimatePresence mode="wait">

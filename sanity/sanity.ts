@@ -2,41 +2,67 @@ import client from "./sanity.client";
 import { createImageUrlBuilder } from "@sanity/image-url";
 
 const builder = client ? createImageUrlBuilder(client) : null;
+const PROJECT_ORDER = "_createdAt desc";
+const PLACEHOLDER_IMAGE_URL = "/placeholder.svg?height=600&width=800";
+const PROJECT_FIELDS = `
+  _id,
+  _createdAt,
+  _updatedAt,
+  title,
+  slug,
+  description,
+  overview,
+  projectType,
+  client,
+  role,
+  duration,
+  year,
+  stack,
+  mainImage,
+  githubUrl,
+  liveUrl,
+  iosUrl,
+  androidUrl,
+  challenge,
+  solution,
+  results,
+  images,
+  visible,
+  featured
+`;
+
+function createPlaceholderImageBuilder() {
+  return {
+    width: () => createPlaceholderImageBuilder(),
+    height: () => createPlaceholderImageBuilder(),
+    fit: () => createPlaceholderImageBuilder(),
+    url: () => PLACEHOLDER_IMAGE_URL,
+  };
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function urlFor(source: any) {
-  // Handle null or undefined sources
   if (!source) {
-    return {
-      url: () => "/placeholder.svg?height=600&width=800",
-    };
+    return createPlaceholderImageBuilder();
   }
 
-  // Handle placeholder strings or invalid references
   if (
     typeof source === "string" ||
-    (source.asset && source.asset._ref === "placeholder")
+    !source.asset?._ref ||
+    source.asset._ref === "placeholder"
   ) {
-    return {
-      url: () => "/placeholder.svg?height=600&width=800",
-    };
+    return createPlaceholderImageBuilder();
   }
 
-  // If no Sanity client, return placeholder
   if (!builder) {
-    return {
-      url: () => "/placeholder.svg?height=600&width=800",
-    };
+    return createPlaceholderImageBuilder();
   }
 
-  // Return proper Sanity image URL
   try {
     return builder.image(source);
   } catch (error) {
     console.log("Error building image URL, using placeholder:", error);
-    return {
-      url: () => "/placeholder.svg?height=600&width=800",
-    };
+    return createPlaceholderImageBuilder();
   }
 }
 
@@ -46,34 +72,10 @@ export async function getProjects() {
   }
 
   try {
-    // Here you fetch from Sanity when ready
     const projects = await client.fetch(`
-      *[_type == "project" && visible == true] | order(orderRank) {
-        _id,
-        _updatedAt,
-        title,
-        slug,
-        description,
-        overview,
-        projectType,
-        client,
-        role,
-        duration,
-        year,
-        stack,
-        mainImage,
-        githubUrl,
-        liveUrl,
-        iosUrl,
-        androidUrl,
-        challenge,
-        solution,
-        results,
-        images,
-        orderRank,
-        visible,
-        featured,
-        "nextProject": *[_type == "project" && visible == true && ^.orderRank < orderRank] | order(orderRank) [0] {
+      *[_type == "project" && visible == true] | order(${PROJECT_ORDER}) {
+        ${PROJECT_FIELDS},
+        "nextProject": *[_type == "project" && visible == true && _id != ^._id && _createdAt < ^._createdAt] | order(${PROJECT_ORDER}) [0] {
           title,
           "slug": slug.current
         }
@@ -95,33 +97,11 @@ export async function getProject(slug: string) {
   }
 
   try {
-    // Here you fetch from Sanity when ready
     const project = await client.fetch(
       `
       *[_type == "project" && visible == true && slug.current == $slug][0] {
-        _id,
-        title,
-        slug,
-        description,
-        overview,
-        projectType,
-        client,
-        role,
-        duration,
-        year,
-        stack,
-        mainImage,
-        githubUrl,
-        liveUrl,
-        iosUrl,
-        androidUrl,
-        challenge,
-        solution,
-        results,
-        images,
-        visible,
-        featured,
-        "nextProject": *[_type == "project" && visible == true && ^.orderRank < orderRank] | order(orderRank) [0] {
+        ${PROJECT_FIELDS},
+        "nextProject": *[_type == "project" && visible == true && _id != ^._id && _createdAt < ^._createdAt] | order(${PROJECT_ORDER}) [0] {
           title,
           "slug": slug.current
         }
@@ -272,29 +252,8 @@ export async function getFeaturedProjects(limit = 3) {
   try {
     const featuredProjects = await client.fetch(
       `
-      *[_type == "project" && visible == true && featured == true] | order(orderRank) [0...$limit] {
-        _id,
-        title,
-        slug,
-        description,
-        overview,
-        projectType,
-        client,
-        role,
-        duration,
-        year,
-        stack,
-        mainImage,
-        githubUrl,
-        liveUrl,
-        iosUrl,
-        androidUrl,
-        solution,
-        results,
-        images,
-        orderRank,
-        visible,
-        featured
+      *[_type == "project" && visible == true && featured == true] | order(${PROJECT_ORDER}) [0...$limit] {
+        ${PROJECT_FIELDS}
       }
     `,
       { limit },

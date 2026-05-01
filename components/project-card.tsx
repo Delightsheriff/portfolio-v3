@@ -25,28 +25,6 @@ const CATEGORY_LABELS: Record<string, string> = {
   devtool: "Dev Tool",
 };
 
-function PhoneMockup({ src, alt }: { src: string; alt: string }) {
-  return (
-    <div className="flex items-center justify-center py-10 md:py-14 bg-muted/60 rounded-lg">
-      <div className="relative w-[180px] md:w-[220px] group">
-        <div className="relative rounded-[2.2rem] border-[7px] border-foreground/85 bg-foreground/85 shadow-2xl overflow-hidden">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-4 bg-foreground/85 rounded-b-xl z-10" />
-          <div className="relative aspect-[9/19.5] overflow-hidden rounded-[1.6rem] bg-background">
-            <Image
-              src={src}
-              alt={alt}
-              fill
-              sizes="220px"
-              className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
-            />
-          </div>
-        </div>
-        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-16 h-1 bg-foreground/20 rounded-full blur-sm" />
-      </div>
-    </div>
-  );
-}
-
 export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
   const isEven = index % 2 === 0;
   const isMobile = project.projectType?.category === "mobile";
@@ -76,7 +54,19 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
           className="block"
         >
           {isMobile ? (
-            <PhoneMockup src={imageUrl} alt={project.title} />
+            <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-muted/80 via-muted/60 to-transparent px-6 py-8 md:px-10 md:py-12">
+              <div className="mx-auto max-w-[280px] md:max-w-[360px]">
+                <div className="relative aspect-[9/19.5] overflow-hidden rounded-[2rem] border border-border/40 bg-background shadow-[0_32px_80px_-32px_rgba(0,0,0,0.55)]">
+                  <Image
+                    src={imageUrl}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 280px, 360px"
+                    className="object-contain transition-transform duration-700 group-hover:scale-[1.02]"
+                  />
+                </div>
+              </div>
+            </div>
           ) : (
             <div className="relative overflow-hidden rounded-lg aspect-[4/3] bg-muted/60">
               <Image

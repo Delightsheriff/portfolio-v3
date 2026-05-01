@@ -23,9 +23,11 @@ const projects = {
     }),
     defineField({
       name: "orderRank",
-      title: "Order Rank",
+      title: "Legacy Order Rank",
       type: "number",
-      description: "Used to order projects (lower numbers appear first)",
+      description:
+        "Deprecated. Project ordering is now automatic based on publish time.",
+      hidden: true,
     }),
     defineField({
       name: "description",
@@ -245,7 +247,7 @@ const projects = {
       title: "Featured Project",
       type: "boolean",
       description:
-        "Toggle to mark this project as featured (will appear in featured projects section)",
+        "Toggle to include this project in the featured section. Featured projects are automatically sorted by newest first.",
       initialValue: false,
     }),
   ],

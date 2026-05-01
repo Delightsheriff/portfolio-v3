@@ -10,6 +10,8 @@ export interface SanityImage {
 
 export interface Project {
   _id: string;
+  _createdAt?: string;
+  _updatedAt?: string;
   title: string;
   slug: {
     current: string;
@@ -36,7 +38,6 @@ export interface Project {
   solution: string;
   results: string[];
   images: (SanityImage | null)[];
-  orderRank?: number;
   nextProject?: {
     title: string;
     slug: string;
