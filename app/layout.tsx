@@ -1,13 +1,65 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Space_Grotesk, Playfair_Display, JetBrains_Mono } from "next/font/google";
+import {
+  Space_Grotesk,
+  Playfair_Display,
+  JetBrains_Mono,
+} from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/animations/theme-provider";
 import { PageTransition } from "@/components/animations/page-transition";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
-const spaceGroteskHeading = Space_Grotesk({subsets:['latin'],variable:'--font-heading'});
+const SITE_URL = "https://www.delightsheriff.com";
+const PERSON_NAME = "Amadi-Sheriff Delight";
+const PERSON_DISPLAY_NAME = "Delight Sheriff";
+const PERSON_NAME_VARIANTS = [
+  "Amadi-Sheriff Delight",
+  "Delight Sheriff",
+  "Delight Amadi-Sheriff",
+  "Amadi Sheriff Delight",
+  "Sheriff Delight",
+  "Sheriff Amadi",
+  "Amadi Delight",
+];
+const SEO_KEYWORDS = [
+  "Amadi-Sheriff Delight",
+  "Delight Sheriff",
+  "Delight Amadi-Sheriff",
+  "Amadi Sheriff Delight",
+  "Sheriff Delight",
+  "Sheriff Amadi",
+  "Amadi Delight",
+  "software engineer",
+  "full stack developer",
+  "full-stack developer",
+  "full stack engineer",
+  "mobile developer",
+  "mobile app developer",
+  "web developer",
+  "frontend developer",
+  "front-end developer",
+  "backend developer",
+  "back-end developer",
+  "MERN stack developer",
+  "React developer",
+  "React Native developer",
+  "Next.js developer",
+  "Node.js developer",
+  "TypeScript developer",
+  "JavaScript developer",
+  "API developer",
+  "portfolio website",
+  "Nigeria software engineer",
+  "Port Harcourt software engineer",
+  "remote software engineer",
+];
+
+const spaceGroteskHeading = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-heading",
+});
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -21,58 +73,51 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+});
 
 export const metadata: Metadata = {
   title: {
-    default: "Delight Sheriff — Software Engineer",
+    default:
+      "Delight Sheriff (Amadi-Sheriff Delight) | Software Engineer, Mobile Developer, Web Developer",
     template: "%s | Delight Sheriff",
   },
   description:
-    "Software Engineer & Mobile Developer crafting high-performance, user-centric web and mobile applications. MERN stack, Next.js, React Native specialist.",
-  keywords: [
-    "software engineer",
-    "mobile developer",
-    "web developer",
-    "fullstack developer",
-    "frontend developer",
-    "react native",
-    "next.js",
-    "typescript",
-    "MERN stack",
-    "Delight Sheriff",
-    "Amadi-Sheriff Delight",
-  ],
-  authors: [
-    { name: "Amadi-Sheriff Delight", url: "https://www.delightsheriff.com" },
-  ],
-  creator: "Amadi-Sheriff Delight",
-  metadataBase: new URL("https://www.delightsheriff.com"),
+    "Amadi-Sheriff Delight, also known as Delight Sheriff, is a software engineer, mobile developer, web developer, frontend developer, backend developer, and full-stack developer building high-performance digital products with React, Next.js, React Native, Node.js, TypeScript, and the MERN stack.",
+  keywords: SEO_KEYWORDS,
+  authors: [{ name: PERSON_NAME, url: SITE_URL }],
+  creator: PERSON_NAME,
+  publisher: PERSON_NAME,
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
-    url: "https://www.delightsheriff.com",
-    title: "Delight Sheriff — Software Engineer & Mobile Developer",
+    url: SITE_URL,
+    title:
+      "Delight Sheriff (Amadi-Sheriff Delight) | Software Engineer, Mobile Developer, Web Developer",
     description:
-      "Crafting high-performance web and mobile applications. Available for full-time roles and select freelance projects.",
+      "Portfolio of Amadi-Sheriff Delight, also known as Delight Sheriff: software engineer, mobile developer, web developer, frontend developer, backend developer, and full-stack product builder.",
     siteName: "Delight Sheriff Portfolio",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Delight Sheriff — Software Engineer & Mobile Developer",
+        alt: "Delight Sheriff (Amadi-Sheriff Delight) - Software Engineer, Mobile Developer, Web Developer",
       },
     ],
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Delight Sheriff — Software Engineer & Mobile Developer",
+    title:
+      "Delight Sheriff (Amadi-Sheriff Delight) | Software Engineer, Mobile Developer, Web Developer",
     description:
-      "Crafting high-performance web and mobile applications. Available for full-time roles.",
+      "Software engineer, mobile developer, web developer, frontend developer, backend developer, and full-stack builder creating high-performance digital products.",
     creator: "@delightsheriff",
     images: ["/og-image.png"],
   },
@@ -101,20 +146,21 @@ export default function RootLayout({
   const websiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Delight Sheriff — Software Engineer",
-    url: "https://www.delightsheriff.com",
+    name: "Delight Sheriff - Software Engineer Portfolio",
+    alternateName: PERSON_NAME_VARIANTS,
+    url: SITE_URL,
     description:
-      "Portfolio of Amadi-Sheriff Delight, Software Engineer specializing in web and mobile development.",
+      "Portfolio of Amadi-Sheriff Delight, also known as Delight Sheriff, a software engineer, mobile developer, web developer, frontend developer, backend developer, and full-stack developer.",
+    keywords: SEO_KEYWORDS.join(", "),
     author: {
       "@type": "Person",
-      name: "Amadi-Sheriff Delight",
+      name: PERSON_NAME,
     },
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate:
-          "https://www.delightsheriff.com/projects?q={search_term_string}",
+        urlTemplate: `${SITE_URL}/projects?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },
@@ -123,17 +169,41 @@ export default function RootLayout({
   const personJsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Amadi-Sheriff Delight",
-    alternateName: "Delight Sheriff",
-    url: "https://www.delightsheriff.com",
+    "@id": `${SITE_URL}#person`,
+    name: PERSON_NAME,
+    givenName: "Delight",
+    familyName: "Amadi-Sheriff",
+    additionalName: "Sheriff",
+    alternateName: PERSON_NAME_VARIANTS,
+    url: SITE_URL,
+    mainEntityOfPage: SITE_URL,
+    image: `${SITE_URL}/og-image.png`,
     sameAs: [
       "https://github.com/delightsheriff",
       "https://www.linkedin.com/in/delightsheriff",
       "https://x.com/delightsheriff",
     ],
-    jobTitle: "Software Engineer",
+    jobTitle: [
+      "Software Engineer",
+      "Mobile Developer",
+      "Web Developer",
+      "Frontend Developer",
+      "Backend Developer",
+      "Full-Stack Developer",
+    ],
     description:
-      "Software Engineer specializing in web and mobile development using React, Next.js, React Native, and Node.js.",
+      "Amadi-Sheriff Delight, also known as Delight Sheriff, is a software engineer, mobile developer, web developer, frontend developer, backend developer, and full-stack developer specializing in React, Next.js, React Native, Node.js, TypeScript, and scalable digital products.",
+    knowsLanguage: ["English"],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Port Harcourt",
+      addressCountry: "Nigeria",
+    },
+    worksFor: {
+      "@type": "Organization",
+      name: PERSON_DISPLAY_NAME,
+      url: SITE_URL,
+    },
     alumniOf: {
       "@type": "CollegeOrUniversity",
       name: "University of Port Harcourt, Nigeria",
@@ -141,37 +211,68 @@ export default function RootLayout({
     knowsAbout: [
       "Software Engineering",
       "Full-Stack Development",
-      "Mobile App Development",
+      "Frontend Development",
+      "Backend Development",
       "Web Development",
+      "Mobile App Development",
+      "API Development",
       "React",
       "React Native",
       "Next.js",
       "TypeScript",
       "Node.js",
       "MERN Stack",
+      "MongoDB",
+      "PostgreSQL",
+      "Sanity CMS",
     ],
   };
+
+  const profilePageJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": `${SITE_URL}#profile`,
+    url: SITE_URL,
+    name: `${PERSON_NAME} - Software Engineer Profile`,
+    description:
+      "Professional profile and portfolio of Amadi-Sheriff Delight, also known as Delight Sheriff.",
+    mainEntity: {
+      "@id": `${SITE_URL}#person`,
+    },
+  };
+
+  const personJsonLdString = JSON.stringify(personJsonLd);
+  const websiteJsonLdString = JSON.stringify(websiteJsonLd);
+  const profilePageJsonLdString = JSON.stringify(profilePageJsonLd);
 
   return (
     <html
       lang="en"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
-      className={cn(spaceGrotesk.variable, playfair.variable, jetbrainsMono.variable, spaceGroteskHeading.variable)}
+      className={cn(
+        spaceGrotesk.variable,
+        playfair.variable,
+        jetbrainsMono.variable,
+        spaceGroteskHeading.variable,
+      )}
     >
       <body className="font-sans antialiased">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: websiteJsonLdString }}
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: personJsonLdString }}
         />
-        {/* Skip to main content — keyboard/screen-reader accessibility */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: profilePageJsonLdString }}
+        />
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-background focus:text-foreground focus:border focus:border-border focus:rounded-lg focus:text-sm focus:font-medium focus:shadow-lg"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[9999] focus:rounded-lg focus:border focus:border-border focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-foreground focus:shadow-lg"
         >
           Skip to main content
         </a>
