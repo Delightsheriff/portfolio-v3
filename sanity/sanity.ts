@@ -202,7 +202,8 @@ export async function getHero() {
         ctaLink,
         status,
         location,
-        stackPills
+        stackPills,
+        openToWork
       }
     `);
     return hero;
