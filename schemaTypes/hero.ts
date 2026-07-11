@@ -41,6 +41,13 @@ const hero = {
       type: "string",
       description: 'e.g., "Based in Lagos, Nigeria"',
     }),
+    defineField({
+      name: "stackPills",
+      title: "Stack Pills",
+      type: "array",
+      of: [{ type: "string" }],
+      description: "Short tech labels shown as pills in the hero, e.g. TypeScript, React Native, Node.js",
+    }),
   ],
 };
 

@@ -200,9 +200,22 @@ const projects = {
         "Link to the Google Play Store listing (mobile projects only)",
     }),
     defineField({
+      name: "metrics",
+      title: "Key Metrics",
+      type: "array",
+      of: [{ type: "string" }],
+      description: "Short quantified outcomes shown on project cards, e.g. 'Shipped to iOS & Android', 'Paystack integrated'",
+    }),
+    defineField({
       name: "challenge",
       title: "The Challenge",
       type: "text",
+    }),
+    defineField({
+      name: "architecture",
+      title: "The Architecture",
+      type: "text",
+      description: "Explain the architecture decisions: why you chose your stack, how data flows, key design patterns",
     }),
     defineField({
       name: "solution",

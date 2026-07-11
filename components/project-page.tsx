@@ -111,7 +111,7 @@ export function ProjectPage({ project }: ProjectPageProps) {
                   )}
                 </div>
 
-                <h1 className="mb-5 text-4xl font-serif leading-tight sm:text-5xl lg:text-6xl">
+                <h1 className="mb-5 text-4xl font-heading font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
                   {project.title}
                 </h1>
                 <p className="mb-8 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
@@ -368,7 +368,7 @@ export function ProjectPage({ project }: ProjectPageProps) {
                       <span className="mb-2 block text-xs uppercase tracking-[0.15em] text-muted-foreground/60 font-mono">
                         01
                       </span>
-                      <h2 className="text-2xl font-serif md:text-3xl">
+                      <h2 className="text-2xl font-heading font-bold md:text-3xl tracking-tight">
                         The Challenge
                       </h2>
                     </div>
@@ -381,14 +381,34 @@ export function ProjectPage({ project }: ProjectPageProps) {
                 </ScrollReveal>
               )}
 
-              {project.solution && (
+              {project.architecture && (
                 <ScrollReveal>
                   <div className="grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-8">
                     <div className="md:col-span-3">
                       <span className="mb-2 block text-xs uppercase tracking-[0.15em] text-muted-foreground/60 font-mono">
                         02
                       </span>
-                      <h2 className="text-2xl font-serif md:text-3xl">
+                      <h2 className="text-2xl font-heading font-bold md:text-3xl tracking-tight">
+                        The Architecture
+                      </h2>
+                    </div>
+                    <div className="md:col-span-8 md:col-start-5">
+                      <p className="text-base leading-relaxed text-foreground/90 md:text-lg">
+                        {project.architecture}
+                      </p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              )}
+
+              {project.solution && (
+                <ScrollReveal>
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-8">
+                    <div className="md:col-span-3">
+                      <span className="mb-2 block text-xs uppercase tracking-[0.15em] text-muted-foreground/60 font-mono">
+                        {project.architecture ? "03" : "02"}
+                      </span>
+                      <h2 className="text-2xl font-heading font-bold md:text-3xl tracking-tight">
                         The Solution
                       </h2>
                     </div>
@@ -435,9 +455,9 @@ export function ProjectPage({ project }: ProjectPageProps) {
                   <div className="grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-8">
                     <div className="md:col-span-3">
                       <span className="mb-2 block text-xs uppercase tracking-[0.15em] text-muted-foreground/60 font-mono">
-                        03
+                        {project.architecture ? "04" : "03"}
                       </span>
-                      <h2 className="text-2xl font-serif md:text-3xl">
+                      <h2 className="text-2xl font-heading font-bold md:text-3xl tracking-tight">
                         The Results
                       </h2>
                     </div>

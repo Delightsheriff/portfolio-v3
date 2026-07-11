@@ -17,6 +17,7 @@ import Experiences from "./experience";
 import AboutSection from "./about";
 import Contact from "./contact";
 import Video from "./video";
+import StatsStrip from "./stats-strip";
 import Footer from "./nav/footer";
 
 interface HomePageProps {
@@ -55,6 +56,7 @@ export function HomePage({
         <Navbar />
         <main id="main-content">
           <HeroSection hero={hero} y={y} />
+          <StatsStrip />
           {videoPitch?.enabled && <Video {...videoPitch} />}
           <Works projects={projects} allProjects={allProjects} />
           <Experiences experiences={experiences} resumeUrl={about.resumeUrl} />

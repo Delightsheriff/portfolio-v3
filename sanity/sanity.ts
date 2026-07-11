@@ -23,7 +23,9 @@ const PROJECT_FIELDS = `
   liveUrl,
   iosUrl,
   androidUrl,
+  metrics,
   challenge,
+  architecture,
   solution,
   results,
   images,
@@ -195,7 +197,8 @@ export async function getHero() {
         ctaText,
         ctaLink,
         status,
-        location
+        location,
+        stackPills
       }
     `);
     return hero;
@@ -292,6 +295,24 @@ export async function getVideoPitch() {
       "Error fetching video pitch from Sanity, using fallback data:",
       error,
     );
+  }
+}
+
+export async function getUses() {
+  if (!client) return null;
+  try {
+    const uses = await client.fetch(`
+      *[_type == "uses"][0] {
+        title,
+        description,
+        categories,
+        updatedLabel
+      }
+    `);
+    return uses;
+  } catch (error) {
+    console.log("Error fetching uses from Sanity:", error);
+    return null;
   }
 }
 

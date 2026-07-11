@@ -34,7 +34,9 @@ export interface Project {
   liveUrl?: string;
   iosUrl?: string;
   androidUrl?: string;
+  metrics?: string[];
   challenge: string;
+  architecture?: string;
   solution: string;
   results: string[];
   images: (SanityImage | null)[];
@@ -70,6 +72,7 @@ export interface Hero {
   ctaLink: string;
   status: string;
   location: string;
+  stackPills?: string[];
 }
 
 export interface Experience {
@@ -117,6 +120,24 @@ export interface VideoPitch {
   duration: string;
   topics: string[];
   enabled: boolean;
+}
+
+export interface UsesItem {
+  name: string;
+  description?: string;
+  url?: string;
+}
+
+export interface UsesCategory {
+  name: string;
+  items: UsesItem[];
+}
+
+export interface Uses {
+  title: string;
+  description?: string;
+  categories: UsesCategory[];
+  updatedLabel?: string;
 }
 
 // BlogPost interface preserved for when blog is re-enabled.

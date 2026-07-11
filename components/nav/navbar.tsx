@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { hash: "#work", label: "Work" },
   { hash: "#experience", label: "Experience" },
   { hash: "#about", label: "About" },
+  { hash: "/uses", label: "Uses" },
 ];
 
 export default function Navbar() {
@@ -20,8 +21,10 @@ export default function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
 
-  // On sub-pages, hash links must include the path so the browser navigates home first
-  const href = (hash: string) => (isHome ? hash : `/${hash}`);
+  const href = (hash: string) => {
+    if (hash.startsWith("/")) return hash;
+    return isHome ? hash : `/${hash}`;
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -38,7 +41,7 @@ export default function Navbar() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           scrolled
-            ? "bg-background/80 backdrop-blur-xl border-b border-border/60 shadow-sm"
+            ? "bg-background/85 backdrop-blur-xl border-b border-border shadow-[0_1px_0_0_oklch(1_0_0_/_6%)]"
             : "bg-transparent"
         )}
         role="banner"
@@ -51,19 +54,19 @@ export default function Navbar() {
           <Link
             href="/"
             aria-label="Delight Sheriff — home"
-            className="text-base font-mono font-bold tracking-widest hover:text-highlight transition-colors"
+            className="text-sm font-heading font-bold tracking-[0.18em] uppercase hover:text-highlight transition-colors"
           >
             DS.
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-1" role="list">
+          <div className="hidden md:flex items-center gap-0.5" role="list">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.hash}
                 href={href(link.hash)}
                 role="listitem"
-                className="px-3.5 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted/60 rounded-md transition-all"
+                className="px-3.5 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-md"
               >
                 {link.label}
               </Link>
@@ -73,7 +76,7 @@ export default function Navbar() {
 
             <Link
               href={href("#contact")}
-              className="px-4 py-1.5 text-xs font-mono uppercase tracking-widest rounded-full border border-foreground/20 text-muted-foreground hover:border-foreground hover:text-foreground transition-all"
+              className="px-4 py-1.5 text-xs font-mono uppercase tracking-widest rounded-full border border-highlight/40 text-highlight hover:bg-highlight hover:text-highlight-foreground transition-all"
             >
               Hire me
             </Link>
@@ -115,10 +118,10 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-background/97 backdrop-blur-xl z-40 md:hidden flex flex-col justify-center px-8"
+            className="fixed inset-0 bg-background/98 backdrop-blur-xl z-40 md:hidden flex flex-col justify-center px-8"
           >
             <nav className="space-y-1" aria-label="Mobile navigation links">
-              {[...NAV_LINKS.map(l => ({ hash: l.hash, label: l.label })), { hash: "#contact", label: "Contact" }].map(
+              {[...NAV_LINKS, { hash: "#contact", label: "Contact" }].map(
                 (link, index) => (
                   <motion.div
                     key={link.hash}
@@ -129,7 +132,7 @@ export default function Navbar() {
                     <Link
                       href={href(link.hash)}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center py-4 text-3xl font-serif text-foreground hover:text-highlight transition-colors border-b border-border/30"
+                      className="flex items-center py-4 text-3xl font-heading font-semibold text-foreground hover:text-highlight transition-colors border-b border-border/30"
                     >
                       {link.label}
                     </Link>
@@ -138,14 +141,17 @@ export default function Navbar() {
               )}
             </nav>
 
-            <motion.p
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.3 }}
-              className="mt-12 text-xs font-mono text-muted-foreground uppercase tracking-widest"
+              className="mt-12 flex items-center gap-2"
             >
-              Available for work
-            </motion.p>
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />
+              <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
+                Open to remote roles
+              </p>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

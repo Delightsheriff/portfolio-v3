@@ -14,16 +14,16 @@ export default function Works({
   allProjects: Project[];
 }) {
   return (
-    <section id="work" className="py-24 md:py-36 px-5 md:px-8" aria-label="Selected work">
+    <section id="work" className="py-20 md:py-28 px-5 md:px-8" aria-label="Selected work">
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
         <ScrollReveal>
-          <div className="flex items-end justify-between mb-16 md:mb-24">
+          <div className="flex items-end justify-between mb-14 md:mb-20">
             <div className="max-w-xl">
-              <p className="text-xs font-mono uppercase tracking-[0.25em] text-muted-foreground mb-4">
+              <p className="text-xs font-mono uppercase tracking-[0.25em] text-muted-foreground/60 mb-3">
                 Selected Works
               </p>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif leading-tight">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight tracking-tight">
                 Projects that define my craft
               </h2>
             </div>
@@ -45,14 +45,14 @@ export default function Works({
         <div className="space-y-0">
           {projects.slice(0, 3).map((project, index) => (
             <ScrollReveal key={project._id} delay={0.05 * index}>
-              <div className="py-16 md:py-24 first:pt-0">
+              <div className="py-12 md:py-16 first:pt-0">
                 <ProjectCard
                   project={project}
                   index={index}
                   urlFor={urlFor}
                 />
                 {index < projects.length - 1 && (
-                  <Separator className="mt-16 md:mt-24 opacity-50" />
+                  <Separator className="mt-12 md:mt-16 opacity-20" />
                 )}
               </div>
             </ScrollReveal>
@@ -61,10 +61,10 @@ export default function Works({
 
         {/* Mobile — see all link */}
         <ScrollReveal>
-          <div className="mt-12 flex flex-col sm:flex-row gap-4 items-center justify-center md:hidden">
+          <div className="mt-10 flex md:hidden justify-center">
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border text-sm hover:bg-muted transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border/50 text-sm hover:bg-muted/40 transition-colors"
             >
               All Projects ({allProjects.length})
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -74,13 +74,13 @@ export default function Works({
 
         {/* GitHub CTA */}
         <ScrollReveal>
-          <div className="mt-16 text-center">
+          <div className="mt-14 text-center">
             <a
               href="https://github.com/Delightsheriff"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Browse GitHub profile"
-              className="group inline-flex items-center gap-2 px-5 py-2.5 border border-border rounded-full text-sm font-medium text-foreground hover:bg-foreground hover:text-background transition-all"
+              className="group inline-flex items-center gap-2 px-5 py-2.5 border border-border/40 rounded-full text-sm font-medium text-muted-foreground hover:border-foreground hover:text-foreground transition-all"
             >
               Open-source on GitHub
               <ArrowRight
