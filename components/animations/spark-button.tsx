@@ -45,10 +45,12 @@ interface SparkLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 }
 
 export function SparkLink({ children, onClick, ...props }: SparkLinkProps) {
-  const { addSpark } = useClickSparks();
+  const sparkContext = useContext(ClickSparkContext);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    addSpark(e.clientX, e.clientY);
+    if (sparkContext?.addSpark) {
+      sparkContext.addSpark(e.clientX, e.clientY);
+    }
     onClick?.(e);
   };
 

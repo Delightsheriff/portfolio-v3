@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
+import { SparkNextLink } from "@/components/animations/spark-next-link";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -51,35 +52,35 @@ export default function Navbar() {
           aria-label="Main navigation"
         >
           {/* Logo */}
-          <Link
+          <SparkNextLink
             href="/"
             aria-label="Delight Sheriff — home"
             className="text-sm font-heading font-bold tracking-[0.18em] uppercase hover:text-highlight transition-colors"
           >
             DS.
-          </Link>
+          </SparkNextLink>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-0.5" role="list">
             {NAV_LINKS.map((link) => (
-              <Link
+              <SparkNextLink
                 key={link.hash}
                 href={href(link.hash)}
                 role="listitem"
                 className="px-3.5 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-md"
               >
                 {link.label}
-              </Link>
+              </SparkNextLink>
             ))}
 
             <div className="w-px h-4 bg-border mx-2" aria-hidden="true" />
 
-            <Link
+            <SparkNextLink
               href={href("#contact")}
               className="px-4 py-1.5 text-xs font-mono uppercase tracking-widest rounded-full border border-highlight/40 text-highlight hover:bg-highlight hover:text-highlight-foreground transition-all"
             >
               Hire me
-            </Link>
+            </SparkNextLink>
 
             <div className="ml-2">
               <ThemeToggle />
@@ -129,13 +130,13 @@ export default function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.25, delay: index * 0.05 }}
                   >
-                    <Link
+                    <SparkNextLink
                       href={href(link.hash)}
                       onClick={() => setMobileMenuOpen(false)}
                       className="flex items-center py-4 text-3xl font-heading font-semibold text-foreground hover:text-highlight transition-colors border-b border-border/30"
                     >
                       {link.label}
-                    </Link>
+                    </SparkNextLink>
                   </motion.div>
                 )
               )}
