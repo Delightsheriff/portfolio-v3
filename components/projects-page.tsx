@@ -3,7 +3,6 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import type { Profile, Project, ProjectGroup } from "@/interface/sanity";
-import { urlFor } from "@/sanity/sanity";
 import Footer from "./nav/footer";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -12,12 +11,22 @@ import { ProjectFilter } from "./project-filter";
 import { ProjectsHeader } from "./projects-header";
 import { ProjectsCta } from "./projects-cta";
 import { ProjectGridCard } from "./project-grid-card";
-import { ProjectGroupCard } from "./project-group-card";
+import { ProjectGroupGridCard } from "./project-group-grid-card";
+
+type GridItem =
+  | { kind: "project"; data: Project }
+  | { kind: "group"; data: ProjectGroup };
 
 interface ProjectsPageProps {
   projects: Project[];
   profile: Profile;
   groups: ProjectGroup[];
+}
+
+function sortYear(a: string | undefined, b: string | undefined) {
+  const ya = parseInt(a ?? "0", 10);
+  const yb = parseInt(b ?? "0", 10);
+  return yb - ya;
 }
 
 export function ProjectsPage({ projects, profile, groups }: ProjectsPageProps) {
@@ -36,13 +45,20 @@ export function ProjectsPage({ projects, profile, groups }: ProjectsPageProps) {
     setFilteredGroups(groups);
   };
 
-  const standalones = useMemo(() => {
+  const gridItems = useMemo(() => {
     const groupedIds = new Set(
       filteredGroups.flatMap((g) => g.parts.map((p) => p.project?._id).filter(Boolean)),
     );
-    return filteredProjects.filter(
-      (p) => !groupedIds.has(p._id) || p.spotlight,
-    );
+    const standalones: GridItem[] = filteredProjects
+      .filter((p) => !groupedIds.has(p._id) || p.spotlight)
+      .map((p) => ({ kind: "project", data: p }));
+    const groupItems: GridItem[] = filteredGroups.map((g) => ({ kind: "group", data: g }));
+
+    return [...standalones, ...groupItems].sort((a, b) => {
+      const yearA = a.kind === "project" ? a.data.year : a.data.year || a.data.parts[0]?.project?.year;
+      const yearB = b.kind === "project" ? b.data.year : b.data.year || b.data.parts[0]?.project?.year;
+      return sortYear(yearA, yearB);
+    });
   }, [filteredProjects, filteredGroups]);
 
   return (
@@ -63,32 +79,23 @@ export function ProjectsPage({ projects, profile, groups }: ProjectsPageProps) {
               onFilterChange={(filtered, filteredGroups) => handleFilterChange(filtered, filteredGroups)}
             />
 
-            {filteredGroups.length > 0 && (
-              <div className="mb-16 space-y-12">
-                <h2 className="text-xs font-mono uppercase tracking-[0.25em] text-muted-foreground/60">
-                  Project Groups
-                </h2>
-                {filteredGroups.map((group, index) => (
-                  <ProjectGroupCard
-                    key={group._id}
-                    group={group}
-                    index={index}
-                    urlFor={urlFor}
-                  />
-                ))}
-                <Separator className="opacity-20" />
-              </div>
-            )}
-
-            {standalones.length > 0 ? (
+            {gridItems.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-                {standalones.map((project, index) => (
-                  <ProjectGridCard
-                    key={project._id}
-                    project={project}
-                    index={index}
-                  />
-                ))}
+                {gridItems.map((item, index) =>
+                  item.kind === "group" ? (
+                    <ProjectGroupGridCard
+                      key={item.data._id}
+                      group={item.data}
+                      index={index}
+                    />
+                  ) : (
+                    <ProjectGridCard
+                      key={item.data._id}
+                      project={item.data}
+                      index={index}
+                    />
+                  ),
+                )}
               </div>
             ) : (
               <div className="py-24 text-center">
