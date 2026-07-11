@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight, FileText } from "lucide-react";
+import { BlogContent } from "./blog-content";
 
 export default function AboutSection({ profile }: { profile: Profile }) {
   return (
@@ -54,12 +55,10 @@ export default function AboutSection({ profile }: { profile: Profile }) {
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight tracking-tight">
                   {profile.title || "Building with purpose."}
                 </h2>
-                <div className="space-y-4 text-muted-foreground leading-relaxed">
-                  {(profile.manifesto || []).map((block, index) => (
-                    <p key={index}>
-                      {block.children?.[0]?.text || ""}
-                    </p>
-                  ))}
+                <div className="text-muted-foreground leading-relaxed">
+                  {profile.manifesto && profile.manifesto.length > 0 ? (
+                    <BlogContent content={profile.manifesto} />
+                  ) : null}
                 </div>
               </div>
 

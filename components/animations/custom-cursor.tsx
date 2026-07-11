@@ -99,13 +99,6 @@ export function CustomCursor() {
           mass: 0.1,
         }}
       />
-      <style jsx global>{`
-        @media (min-width: 1024px) and (pointer: fine) {
-          * {
-            cursor: none !important;
-          }
-        }
-      `}</style>
     </>
   );
 }

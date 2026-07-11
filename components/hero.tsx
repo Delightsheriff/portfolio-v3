@@ -4,7 +4,6 @@ import type { Profile } from "@/interface/sanity";
 import { motion, type MotionValue } from "framer-motion";
 import { ArrowRight, ArrowDownRight } from "lucide-react";
 import Link from "next/link";
-import { SparkLink } from "./animations/spark-button";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -155,7 +154,7 @@ export default function HeroSection({
           transition={{ duration: 0.5, delay: 1.3 }}
           className="flex flex-wrap items-center gap-4 mb-16"
         >
-          <SparkLink
+          <a
             href={profile?.ctaLink ?? "#work"}
             className={cn(
               buttonVariants({ variant: "default", size: "lg" }),
@@ -167,7 +166,7 @@ export default function HeroSection({
               className="w-4 h-4 transition-transform group-hover:translate-x-1"
               aria-hidden="true"
             />
-          </SparkLink>
+          </a>
 
           <a
             href="#contact"

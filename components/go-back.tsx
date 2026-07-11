@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
-import { SparkNextLink } from "./animations/spark-next-link";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "./nav/theme-toggle";
 
@@ -29,21 +29,21 @@ export default function GoBack() {
       }`}
     >
       <div className="flex justify-between items-center max-w-7xl mx-auto px-6 md:px-8 py-5">
-        <SparkNextLink
+        <Link
           href="/"
           className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Back
-        </SparkNextLink>
+        </Link>
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <SparkNextLink
+          <Link
             href="/"
             className="text-sm font-heading font-bold tracking-[0.18em] uppercase hover:text-highlight transition-colors"
           >
             DS.
-          </SparkNextLink>
+          </Link>
         </div>
       </div>
     </motion.nav>

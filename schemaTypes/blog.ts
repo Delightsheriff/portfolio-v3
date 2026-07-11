@@ -125,6 +125,13 @@ export default defineType({
       },
     },
     {
+      name: "author",
+      title: "Author",
+      type: "string",
+      description: "Leave blank to default to 'Delight Sheriff'",
+      initialValue: "Delight Sheriff",
+    },
+    {
       name: "publishedAt",
       title: "Published At",
       type: "datetime",

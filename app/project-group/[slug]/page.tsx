@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getProjectGroup } from "@/sanity/sanity";
+import { client, getProjectGroup } from "@/sanity/sanity";
 import { ProjectGroupDetail } from "@/components/project-group-detail";
 import Navbar from "@/components/nav/navbar";
 import Footer from "@/components/nav/footer";
@@ -18,6 +18,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${group.title} — Project Group`,
     description: group.description,
   };
+}
+
+export async function generateStaticParams() {
+  if (!client) return [];
+  const slugs = await client.fetch(
+    `*[_type == "projectGroup" && visible == true]{"slug": slug.current}`,
+  );
+  return slugs.map((s: { slug: string }) => ({ slug: s.slug }));
 }
 
 export default async function ProjectGroupPage({ params }: Props) {

@@ -37,6 +37,8 @@ const PROJECT_FIELDS = `
   visible
 `;
 
+export { client };
+
 function createPlaceholderImageBuilder() {
   return {
     width: () => createPlaceholderImageBuilder(),

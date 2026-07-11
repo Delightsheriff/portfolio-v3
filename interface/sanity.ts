@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import type { PortableTextBlock } from "@portabletext/react";
 export interface SanityImage {
   _type: "image";
   asset: {
@@ -61,8 +62,8 @@ export interface Profile {
   location: string;
   stackPills?: string[];
   title: string;
-  bio: any[];
-  manifesto: any[];
+  bio: PortableTextBlock[];
+  manifesto: PortableTextBlock[];
   skills: {
     category: string;
     items: string[];

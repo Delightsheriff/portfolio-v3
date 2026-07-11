@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/studio/", "/api/", "/blog/"],
+        disallow: ["/studio/", "/api/"],
       },
     ],
     sitemap: "https://delightsheriff.com/sitemap.xml",

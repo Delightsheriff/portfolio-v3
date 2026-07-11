@@ -1,9 +1,9 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { SparkNextLink } from "@/components/animations/spark-next-link";
-import { SparkLink } from "@/components/animations/spark-button";
+import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
+import type { Profile } from "@/interface/sanity";
 
 const footerLinks = [
   { hash: "#work", label: "Work" },
@@ -15,7 +15,7 @@ const footerLinks = [
   { hash: "/uses", label: "Uses" },
 ];
 
-export default function Footer() {
+export default function Footer({ profile }: { profile?: Profile }) {
   const pathname = usePathname();
   const isHome = pathname === "/";
 
@@ -31,13 +31,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           {/* Brand */}
           <div className="space-y-3">
-            <SparkNextLink
+            <Link
               href="/"
               className="text-sm font-heading font-bold tracking-[0.18em] uppercase hover:text-highlight transition-colors"
               aria-label="Delight Sheriff home"
             >
               DS.
-            </SparkNextLink>
+            </Link>
             <p className="text-xs text-muted-foreground leading-relaxed max-w-xs">
               Software Engineer building production-grade products across the TypeScript ecosystem: web, backend, and mobile.
             </p>
@@ -52,12 +52,12 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {footerLinks.map((link) => (
                 <li key={link.hash}>
-                  <SparkNextLink
+                  <Link
                     href={href(link.hash)}
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {link.label}
-                  </SparkNextLink>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -70,17 +70,17 @@ export default function Footer() {
         <div className="mb-6 space-y-4">
           <Separator className="opacity-20" />
           <div className="flex flex-wrap items-center gap-3">
-            <SparkLink
+            <a
               href="https://github.com/Delightsheriff"
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs font-mono uppercase tracking-widest text-foreground hover:text-highlight transition-colors"
             >
               View GitHub
-            </SparkLink>
+            </a>
             <span className="text-muted-foreground/30">·</span>
             <a
-              href="mailto:delightsheriff@gmail.com"
+              href={`mailto:${profile?.email || "delightsheriff@gmail.com"}`}
               className="text-xs font-mono uppercase tracking-widest text-foreground hover:text-highlight transition-colors"
             >
               Email Me
