@@ -138,6 +138,13 @@ export default defineType({
       type: "array",
       of: [{ type: "string" }],
     }),
+    defineField({
+      name: "visible",
+      title: "Show on Site",
+      type: "boolean",
+      description: "Toggle to show/hide the resume page",
+      initialValue: true,
+    }),
   ],
   preview: {
     prepare() {

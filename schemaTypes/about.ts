@@ -91,6 +91,13 @@ const about = {
         },
       ],
     },
+    {
+      name: "visible",
+      title: "Show on Site",
+      type: "boolean",
+      description: "Toggle to show/hide the about section",
+      initialValue: true,
+    },
   ],
 };
 

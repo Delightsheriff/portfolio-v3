@@ -48,6 +48,13 @@ const hero = {
       of: [{ type: "string" }],
       description: "Short tech labels shown as pills in the hero, e.g. TypeScript, React Native, Node.js",
     }),
+    defineField({
+      name: "visible",
+      title: "Show on Site",
+      type: "boolean",
+      description: "Toggle to show/hide the hero section",
+      initialValue: true,
+    }),
   ],
 };
 
