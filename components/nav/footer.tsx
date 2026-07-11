@@ -2,7 +2,6 @@ import Link from "next/link";
 import { SparkNextLink } from "@/components/animations/spark-next-link";
 import { SparkLink } from "@/components/animations/spark-button";
 import { Separator } from "@/components/ui/separator";
-import { getAbout } from "@/sanity/sanity";
 
 const footerLinks = [
   { href: "#work", label: "Work" },
@@ -14,8 +13,7 @@ const footerLinks = [
   { href: "/uses", label: "Uses" },
 ];
 
-export default async function Footer() {
-  const about = await getAbout();
+export default function Footer() {
   return (
     <footer className="px-5 md:px-8 pb-10 pt-2" role="contentinfo">
       <div className="max-w-7xl mx-auto">
@@ -81,18 +79,7 @@ export default async function Footer() {
             >
               Email Me
             </a>
-            <span className="text-muted-foreground/30">·</span>
-            {about?.resumeUrl && (
-              <a
-                href={about.resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs font-mono uppercase tracking-widest text-foreground hover:text-highlight transition-colors"
-                aria-label="Download resume (opens in new tab)"
-              >
-                Download Resume
-              </a>
-            )}
+
           </div>
         </div>
 
