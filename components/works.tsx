@@ -52,7 +52,7 @@ export default function Works({
   allProjects: Project[];
   groups?: ProjectGroup[];
 }) {
-  const featured = buildWorksList(projects, groups).slice(0, 4);
+  const featured = buildWorksList(projects, groups).slice(0, 3);
 
   return (
     <section

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default async function Home() {
   const [projects, experiences, profile, allProjects, groups] =
     await Promise.all([
-      getFeaturedProjects(3),
+      getFeaturedProjects(10),
       getExperiences(),
       getProfile(),
       getProjects(),
