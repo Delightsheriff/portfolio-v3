@@ -2,7 +2,7 @@
 
 import React, { useContext, ReactNode } from 'react';
 
-interface ClickSparkContextType {
+export interface ClickSparkContextType {
   addSpark: (x: number, y: number) => void;
 }
 
