@@ -92,7 +92,7 @@ export async function getProjects() {
       "Error fetching from Sanity, using fallback projects data:",
       error,
     );
-    return;
+    return [];
   }
 }
 
@@ -182,6 +182,7 @@ export async function getAbout() {
       "Error fetching about from Sanity, using fallback data:",
       error,
     );
+    return {};
   }
 }
 
@@ -207,7 +208,7 @@ export async function getHero() {
     return hero;
   } catch (error) {
     console.log("Error fetching hero from Sanity, using fallback data:", error);
-    return;
+    return {};
   }
 }
 
