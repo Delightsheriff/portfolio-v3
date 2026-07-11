@@ -44,7 +44,7 @@ export default function HeroSection({
         }}
       />
 
-      {/* Faint vertical lines — editorial feel */}
+      {/* Faint vertical lines for editorial feel */}
       <div
         className="absolute inset-0 -z-10 opacity-[0.025]"
         aria-hidden="true"
@@ -74,7 +74,7 @@ export default function HeroSection({
           </span>
         </motion.div>
 
-        {/* Name line — small, above headline */}
+        {/* Name line: small, above headline */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -84,7 +84,7 @@ export default function HeroSection({
           Delight Sheriff (Amadi-Sheriff Delight)
         </motion.p>
 
-        {/* Headline — staggered word reveal, Syne display */}
+        {/* Headline: staggered word reveal in Syne display */}
         <h1 className="mb-6 leading-[0.92]" aria-label={hero?.headline}>
           {words.map((word, i) => (
             <motion.span

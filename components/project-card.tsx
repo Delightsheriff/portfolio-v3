@@ -238,7 +238,7 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
               Live
             </SparkLink>
           )}
-          {/* API docs — backend projects */}
+          {/* API docs for backend projects */}
           {project.apiDocsUrl && (
             <SparkLink
               href={project.apiDocsUrl}

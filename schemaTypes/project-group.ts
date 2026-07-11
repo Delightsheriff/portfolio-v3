@@ -5,7 +5,7 @@ const projectGroup = {
   title: "Project Group",
   type: "document",
   description:
-    "Group related projects together — e.g. a mobile app and its backend, or a frontend and its API.",
+    "Group related projects together, e.g. a mobile app and its backend, or a frontend and its API.",
   fields: [
     defineField({
       name: "title",

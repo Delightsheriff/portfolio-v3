@@ -198,7 +198,7 @@ const projects = {
           },
         },
       ],
-      description: "For monorepos or multi-repo projects — add individual service/package repo links",
+      description: "For monorepos or multi-repo projects: add individual service/package repo links",
     }),
     defineField({
       name: "liveUrl",
@@ -209,13 +209,13 @@ const projects = {
       name: "apiDocsUrl",
       title: "API Docs URL",
       type: "url",
-      description: "Swagger / Postman / Scalar API documentation link — great for backend projects",
+      description: "Swagger, Postman, or Scalar API documentation link. Great for backend projects.",
     }),
     defineField({
       name: "demoVideoUrl",
       title: "Demo Video URL",
       type: "url",
-      description: "YouTube or direct video URL — used for mobile/backend projects where a live link is not available",
+      description: "YouTube or direct video URL for mobile and backend projects where a live link is not available.",
     }),
     defineField({
       name: "iosUrl",

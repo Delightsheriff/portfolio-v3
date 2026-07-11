@@ -30,12 +30,12 @@ export default function Footer() {
             <SparkNextLink
               href="/"
               className="text-sm font-heading font-bold tracking-[0.18em] uppercase hover:text-highlight transition-colors"
-              aria-label="Delight Sheriff — home"
+              aria-label="Delight Sheriff home"
             >
               DS.
             </SparkNextLink>
             <p className="text-xs text-muted-foreground leading-relaxed max-w-xs">
-              Software Engineer building production-grade products across the TypeScript ecosystem — web, backend, and mobile.
+              Software Engineer building production-grade products across the TypeScript ecosystem: web, backend, and mobile.
             </p>
             <div className="flex items-center gap-2 pt-1">
               <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />

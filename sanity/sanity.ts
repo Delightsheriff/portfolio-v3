@@ -348,5 +348,5 @@ export async function getUses() {
   }
 }
 
-// Blog functions removed — blog is disabled (content preserved in Sanity).
+// Blog functions removed: blog is disabled (content preserved in Sanity).
 // To re-enable, restore these queries and the app/blog routes.
