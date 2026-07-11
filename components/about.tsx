@@ -3,6 +3,8 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/sanity";
 import type { About } from "@/interface/sanity";
 import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { ArrowUpRight, FileText } from "lucide-react";
 
 export default function AboutSection({ about }: { about: About }) {
@@ -98,7 +100,10 @@ export default function AboutSection({ about }: { about: About }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="View full resume (opens in new tab)"
-                    className="group inline-flex items-center gap-2 px-5 py-2.5 bg-foreground text-background rounded-full text-sm font-medium hover:bg-highlight hover:text-highlight-foreground transition-colors"
+                    className={cn(
+                      buttonVariants({ variant: "default" }),
+                      "rounded-full px-5 py-2.5",
+                    )}
                   >
                     <FileText className="w-4 h-4" aria-hidden="true" />
                     View Resume
