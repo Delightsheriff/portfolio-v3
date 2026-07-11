@@ -3,20 +3,7 @@
 import React, { useContext, ReactNode } from 'react';
 import Link from 'next/link';
 import type { LinkProps } from 'next/link';
-
-interface ClickSparkContextType {
-  addSpark: (x: number, y: number) => void;
-}
-
-export const ClickSparkContext = React.createContext<ClickSparkContextType | null>(null);
-
-export function useClickSparks() {
-  const context = useContext(ClickSparkContext);
-  if (!context) {
-    throw new Error('useClickSparks must be used within ClickSparkProvider');
-  }
-  return context;
-}
+import { ClickSparkContext } from './spark-button';
 
 interface SparkNextLinkProps extends LinkProps {
   children: ReactNode;
