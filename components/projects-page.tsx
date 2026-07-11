@@ -23,9 +23,16 @@ interface ProjectsPageProps {
 export function ProjectsPage({ projects, profile, groups }: ProjectsPageProps) {
   const [filteredProjects, setFilteredProjects] = useState<Project[]>(projects);
   const [filteredGroups, setFilteredGroups] = useState<ProjectGroup[]>(groups);
+  const [filterVersion, setFilterVersion] = useState(0);
 
   const handleFilterChange = (filtered: Project[], groups: ProjectGroup[]) => {
     setFilteredProjects(filtered);
+    setFilteredGroups(groups);
+  };
+
+  const handleClearFilters = () => {
+    setFilterVersion((v) => v + 1);
+    setFilteredProjects(projects);
     setFilteredGroups(groups);
   };
 
@@ -50,6 +57,7 @@ export function ProjectsPage({ projects, profile, groups }: ProjectsPageProps) {
         <section className="py-16 px-5 md:px-8 pb-24" aria-label="Projects list">
           <div className="max-w-7xl mx-auto">
             <ProjectFilter
+              key={filterVersion}
               projects={projects}
               groups={groups}
               onFilterChange={(filtered, filteredGroups) => handleFilterChange(filtered, filteredGroups)}
@@ -96,7 +104,7 @@ export function ProjectsPage({ projects, profile, groups }: ProjectsPageProps) {
                     Try adjusting your tech stack or project type filters, or check back later for new projects
                   </p>
                   <Button
-                    onClick={() => handleFilterChange(projects, groups)}
+                    onClick={handleClearFilters}
                     variant="ghost"
                     className="mt-6 uppercase tracking-widest font-mono text-sm"
                   >
