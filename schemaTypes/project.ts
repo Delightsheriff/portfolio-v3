@@ -230,11 +230,14 @@ const projects = {
       description: "Link to the Google Play Store listing (mobile projects only)",
     }),
     defineField({
-      name: "metrics",
-      title: "Key Metrics",
-      type: "array",
-      of: [{ type: "string" }],
-      description: "Short quantified outcomes shown on project cards, e.g. 'Shipped to iOS & Android', 'Paystack integrated'",
+      name: "impactMetric",
+      title: "Impact Metric",
+      type: "object",
+      fields: [
+        { name: "value", title: "Value", type: "string", description: 'e.g. "40%", "10K", "99.9%"' },
+        { name: "label", title: "Label", type: "string", description: 'e.g. "faster API", "active users", "uptime"' },
+      ],
+      description: "One bold, quantified outcome highlighted on the project card",
     }),
     defineField({
       name: "challenge",

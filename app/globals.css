@@ -198,6 +198,15 @@ html {
   animation: count-up 0.5s ease-out forwards;
 }
 
+/* Glow pulse for CTAs */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 15px oklch(0.628 0.221 33.05 / 0.3), inset 0 0 20px oklch(0.628 0.221 33.05 / 0.1); }
+  50% { box-shadow: 0 0 30px oklch(0.628 0.221 33.05 / 0.6), inset 0 0 30px oklch(0.628 0.221 33.05 / 0.2); }
+}
+.animate-glow-pulse {
+  animation: glow-pulse 2.5s ease-in-out infinite;
+}
+
 /* Prevent widow/orphan text in headings */
 h1, h2, h3, h4 {
   text-wrap: balance;
