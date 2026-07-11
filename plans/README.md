@@ -8,11 +8,11 @@ honor its STOP conditions, and update your row when done.
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
-| 001 | Fix `useMemo` side-effect in ProjectFilter | P1 | S | — | TODO |
-| 002 | Consolidate duplicate ClickSparkContext definitions | P1 | S | — | TODO |
-| 003 | Add missing `openToWork` field to hero GROQ query | P1 | S | — | TODO |
-| 004 | Enable Sanity CDN in production | P1 | S | — | TODO |
-| 005 | Add runtime validation for required environment variables | P2 | S | — | TODO |
+| 001 | Fix `useMemo` side-effect in ProjectFilter | P1 | S | — | DONE |
+| 002 | Consolidate duplicate ClickSparkContext definitions | P1 | S | — | DONE |
+| 003 | Add missing `openToWork` field to hero GROQ query | P1 | S | — | DONE |
+| 004 | Enable Sanity CDN in production | P1 | S | — | DONE |
+| 005 | Add runtime validation for required environment variables | P2 | S | — | DONE |
 
 ## Dependency notes
 
