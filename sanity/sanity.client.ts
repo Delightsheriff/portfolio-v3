@@ -7,7 +7,7 @@ const config: ClientConfig = {
   projectId,
   dataset,
   apiVersion: "2024-12-16",
-  useCdn: false,
+  useCdn: process.env.NODE_ENV === "production",
 };
 
 const client = createClient(config);
