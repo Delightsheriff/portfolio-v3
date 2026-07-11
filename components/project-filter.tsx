@@ -3,6 +3,8 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import type { Project, ProjectGroup } from "@/interface/sanity";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 interface ProjectFilterProps {
   projects: Project[];
@@ -108,12 +110,13 @@ export function ProjectFilter({
             Filter by tech
           </label>
           {isActive && (
-            <button
+            <Button
               onClick={clearFilters}
-              className="text-xs font-mono text-highlight hover:text-highlight/80 transition-colors"
+              variant="link"
+              className="text-xs font-mono h-auto p-0"
             >
               Clear filters
-            </button>
+            </Button>
           )}
         </div>
         <div className="flex flex-wrap gap-2">
@@ -123,11 +126,12 @@ export function ProjectFilter({
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => toggleTech(tech)}
-              className={`px-3 py-1.5 rounded-full text-xs font-mono uppercase tracking-widest transition-all border ${
+              className={cn(
+                "px-3 py-1.5 rounded-full text-xs font-mono uppercase tracking-widest transition-all border",
                 selectedTechs.includes(tech)
                   ? "bg-highlight text-highlight-foreground border-highlight"
-                  : "border-border/40 text-muted-foreground hover:border-highlight/30 hover:text-foreground"
-              }`}
+                  : "border-border/40 text-muted-foreground hover:border-highlight/30 hover:text-foreground",
+              )}
             >
               {tech}
             </motion.button>
@@ -147,11 +151,12 @@ export function ProjectFilter({
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => toggleType(type)}
-              className={`px-3 py-1.5 rounded-full text-xs font-mono uppercase tracking-widest transition-all border ${
+              className={cn(
+                "px-3 py-1.5 rounded-full text-xs font-mono uppercase tracking-widest transition-all border",
                 selectedTypes.includes(type)
                   ? "bg-highlight text-highlight-foreground border-highlight"
-                  : "border-border/40 text-muted-foreground hover:border-highlight/30 hover:text-foreground"
-              }`}
+                  : "border-border/40 text-muted-foreground hover:border-highlight/30 hover:text-foreground",
+              )}
             >
               {type}
             </motion.button>
