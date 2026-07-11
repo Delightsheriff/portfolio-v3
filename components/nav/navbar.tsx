@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import { SparkNextLink } from "@/components/animations/spark-next-link";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -78,7 +79,10 @@ export default function Navbar() {
 
             <SparkNextLink
               href={href("#contact")}
-              className="px-4 py-1.5 text-xs font-mono uppercase tracking-widest rounded-full border border-highlight/40 text-highlight hover:bg-highlight hover:text-highlight-foreground transition-all"
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "rounded-full px-4 py-1.5 text-xs font-mono uppercase tracking-widest h-auto border-highlight/40 text-highlight hover:bg-highlight hover:text-highlight-foreground",
+              )}
             >
               Hire me
             </SparkNextLink>
@@ -91,19 +95,20 @@ export default function Navbar() {
           {/* Mobile controls */}
           <div className="flex items-center gap-2 md:hidden">
             <ThemeToggle />
-            <button
+            <Button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-nav"
-              className="p-2 rounded-md text-foreground hover:text-highlight transition-colors"
+              variant="ghost"
+              size="icon"
             >
               {mobileMenuOpen ? (
                 <X size={20} aria-hidden="true" />
               ) : (
                 <Menu size={20} aria-hidden="true" />
               )}
-            </button>
+            </Button>
           </div>
         </nav>
       </motion.header>
