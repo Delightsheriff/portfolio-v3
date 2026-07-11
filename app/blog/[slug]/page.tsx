@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { motion } from "framer-motion";
 import { getBlogBySlug, getAllBlogs } from "@/sanity/sanity";
 import GoBack from "@/components/go-back";
 import Footer from "@/components/nav/footer";
 import { PortableText, type PortableTextBlock } from "@portabletext/react";
 import Image from "next/image";
 import { urlFor } from "@/sanity/sanity";
+import { BlogPostHeader, BlogPostBody } from "@/components/blog-post-layout";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -54,12 +54,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <GoBack />
       <main className="min-h-screen bg-background">
         <article className="max-w-3xl mx-auto px-6 md:px-8 py-20 md:py-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6 mb-12"
-          >
+          <BlogPostHeader>
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl font-heading font-bold text-foreground">
                 {post.title}
@@ -80,16 +75,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 {post.excerpt}
               </p>
             )}
-          </motion.div>
+          </BlogPostHeader>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="prose prose-invert max-w-none"
-          >
+          <BlogPostBody>
             {post.body && <PortableText value={post.body as PortableTextBlock[]} />}
-          </motion.div>
+          </BlogPostBody>
         </article>
 
         <Footer />
