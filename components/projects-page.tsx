@@ -51,7 +51,7 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
               A complete archive of projects spanning web applications, mobile
-              apps, and APIs — each one solving a real problem with care for
+              apps, and APIs. Each one solving a real problem with care for
               user experience.
             </p>
             <a

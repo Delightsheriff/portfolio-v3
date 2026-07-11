@@ -180,11 +180,42 @@ const projects = {
       name: "githubUrl",
       title: "GitHub URL",
       type: "url",
+      description: "Primary / monorepo root GitHub URL",
+    }),
+    defineField({
+      name: "repoUrls",
+      title: "Additional Repo URLs",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "label", title: "Label", type: "string", description: 'e.g. "Backend", "Mobile App", "Admin Panel"' },
+            { name: "url", title: "URL", type: "url" },
+          ],
+          preview: {
+            select: { title: "label", subtitle: "url" },
+          },
+        },
+      ],
+      description: "For monorepos or multi-repo projects: add individual service/package repo links",
     }),
     defineField({
       name: "liveUrl",
-      title: "Live Demo URL",
+      title: "Live Demo / Web URL",
       type: "url",
+    }),
+    defineField({
+      name: "apiDocsUrl",
+      title: "API Docs URL",
+      type: "url",
+      description: "Swagger, Postman, or Scalar API documentation link. Great for backend projects.",
+    }),
+    defineField({
+      name: "demoVideoUrl",
+      title: "Demo Video URL",
+      type: "url",
+      description: "YouTube or direct video URL for mobile and backend projects where a live link is not available.",
     }),
     defineField({
       name: "iosUrl",
@@ -196,13 +227,28 @@ const projects = {
       name: "androidUrl",
       title: "Google Play Store URL",
       type: "url",
-      description:
-        "Link to the Google Play Store listing (mobile projects only)",
+      description: "Link to the Google Play Store listing (mobile projects only)",
+    }),
+    defineField({
+      name: "impactMetric",
+      title: "Impact Metric",
+      type: "object",
+      fields: [
+        { name: "value", title: "Value", type: "string", description: 'e.g. "40%", "10K", "99.9%"' },
+        { name: "label", title: "Label", type: "string", description: 'e.g. "faster API", "active users", "uptime"' },
+      ],
+      description: "One bold, quantified outcome highlighted on the project card",
     }),
     defineField({
       name: "challenge",
       title: "The Challenge",
       type: "text",
+    }),
+    defineField({
+      name: "architecture",
+      title: "The Architecture",
+      type: "text",
+      description: "Explain the architecture decisions: why you chose your stack, how data flows, key design patterns",
     }),
     defineField({
       name: "solution",

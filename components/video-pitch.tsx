@@ -91,7 +91,7 @@ export function VideoPitch({ videoData }: VideoPitchProps) {
             <div className="absolute top-3 right-3" aria-hidden="true">
               <span className="flex items-center gap-1.5 px-2.5 py-1 bg-background/80 backdrop-blur-sm rounded-full text-xs font-mono text-muted-foreground ring-1 ring-border/30">
                 <Clock className="w-3 h-3" />
-                {videoData?.duration ?? "—"}
+                {videoData?.duration ?? "-"}
               </span>
             </div>
           </button>

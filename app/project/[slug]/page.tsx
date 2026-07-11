@@ -16,7 +16,7 @@ export async function generateMetadata({
 
   if (!project) return { title: "Project Not Found" };
 
-  const title = `${project.title} — Case Study`;
+  const title = `${project.title}: Case Study`;
   // Use overview (longer) if description is short
   const description =
     project.overview?.slice(0, 160) ?? project.description ?? "";
@@ -43,7 +43,7 @@ export async function generateMetadata({
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: `${project.title} — project by Delight Sheriff`,
+          alt: `${project.title}: project by Delight Sheriff`,
         },
       ],
     },
@@ -69,7 +69,7 @@ export default async function CaseStudy({
   const isMobile = project.projectType?.category === "mobile";
   const projectUrl = `https://www.delightsheriff.com/project/${slug}`;
 
-  // BreadcrumbList — helps Google show breadcrumbs in SERPs
+  // BreadcrumbList: helps Google show breadcrumbs in SERPs
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -95,7 +95,7 @@ export default async function CaseStudy({
     ],
   };
 
-  // Main entity — SoftwareApplication for mobile apps, CreativeWork for others
+  // Main entity: SoftwareApplication for mobile apps, CreativeWork for others
   const mainJsonLd = isMobile
     ? {
         "@context": "https://schema.org",

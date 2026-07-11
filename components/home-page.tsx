@@ -7,6 +7,7 @@ import type {
   Experience,
   Hero,
   Project,
+  ProjectGroup,
   VideoPitch,
 } from "@/interface/sanity";
 import { CustomCursor } from "./animations/custom-cursor";
@@ -17,6 +18,7 @@ import Experiences from "./experience";
 import AboutSection from "./about";
 import Contact from "./contact";
 import Video from "./video";
+import StatsStrip from "./stats-strip";
 import Footer from "./nav/footer";
 
 interface HomePageProps {
@@ -26,6 +28,7 @@ interface HomePageProps {
   experiences: Experience[];
   videoPitch: VideoPitch;
   allProjects: Project[];
+  groups: ProjectGroup[];
 }
 
 export function HomePage({
@@ -35,6 +38,7 @@ export function HomePage({
   experiences,
   videoPitch,
   allProjects,
+  groups,
 }: HomePageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -55,8 +59,9 @@ export function HomePage({
         <Navbar />
         <main id="main-content">
           <HeroSection hero={hero} y={y} />
+          <StatsStrip />
           {videoPitch?.enabled && <Video {...videoPitch} />}
-          <Works projects={projects} allProjects={allProjects} />
+          <Works projects={projects} allProjects={allProjects} groups={groups} />
           <Experiences experiences={experiences} resumeUrl={about.resumeUrl} />
           <AboutSection about={about} />
           <Contact about={about} />
