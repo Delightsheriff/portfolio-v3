@@ -1,6 +1,6 @@
 "use client";
 
-import type { Hero } from "@/interface/sanity";
+import type { Profile } from "@/interface/sanity";
 import { motion, type MotionValue } from "framer-motion";
 import { ArrowRight, ArrowDownRight } from "lucide-react";
 import Link from "next/link";
@@ -20,15 +20,15 @@ const DEFAULT_STACK = [
 const STAGGER = 0.06;
 
 export default function HeroSection({
-  hero,
+  profile,
   y,
 }: {
-  hero: Hero;
+  profile: Profile;
   y: MotionValue<string>;
 }) {
-  const words = hero?.headline?.split(" ") ?? ["Software", "Developer"];
-  const pills = hero?.stackPills && hero.stackPills.length > 0
-    ? hero.stackPills
+  const words = profile?.headline?.split(" ") ?? ["Software", "Developer"];
+  const pills = profile?.stackPills && profile.stackPills.length > 0
+    ? profile.stackPills
     : DEFAULT_STACK;
 
   return (
@@ -36,7 +36,6 @@ export default function HeroSection({
       className="relative min-h-svh flex flex-col justify-center px-5 md:px-8 overflow-hidden"
       aria-label="Introduction"
     >
-      {/* Subtle dot-grid background */}
       <div
         className="absolute inset-0 -z-10 opacity-[0.04]"
         aria-hidden="true"
@@ -46,7 +45,6 @@ export default function HeroSection({
         }}
       />
 
-      {/* Faint vertical lines for editorial feel */}
       <div
         className="absolute inset-0 -z-10 opacity-[0.025]"
         aria-hidden="true"
@@ -60,7 +58,6 @@ export default function HeroSection({
         style={{ y }}
         className="max-w-7xl mx-auto w-full pt-32 pb-20 md:pt-40 md:pb-28"
       >
-        {/* Status + Open to Work badges */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -73,20 +70,11 @@ export default function HeroSection({
               aria-hidden="true"
             />
             <span className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
-              {hero?.status ?? "Available for work"}
+              {profile?.status ?? "Available for work"}
             </span>
           </div>
-          {hero?.openToWork && (
-            <div className="px-3 py-1 rounded-full border border-highlight/30 bg-highlight/5 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-highlight" aria-hidden="true" />
-              <span className="text-xs font-mono uppercase tracking-[0.2em] text-highlight">
-                Open to opportunities
-              </span>
-            </div>
-          )}
         </motion.div>
 
-        {/* Name line: small, above headline */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -96,8 +84,7 @@ export default function HeroSection({
           Delight Sheriff (Amadi-Sheriff Delight)
         </motion.p>
 
-        {/* Headline: staggered word reveal in Syne display */}
-        <h1 className="mb-6 leading-[0.92]" aria-label={hero?.headline}>
+        <h1 className="mb-6 leading-[0.92]" aria-label={profile?.headline}>
           {words.map((word, i) => (
             <motion.span
               key={i}
@@ -119,7 +106,6 @@ export default function HeroSection({
           ))}
         </h1>
 
-        {/* Horizontal rule */}
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
@@ -128,17 +114,15 @@ export default function HeroSection({
           aria-hidden="true"
         />
 
-        {/* Subheadline */}
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.0 }}
           className="text-base md:text-lg max-w-2xl text-muted-foreground leading-relaxed mb-10"
         >
-          {hero?.subheadline}
+          {profile?.subheadline}
         </motion.p>
 
-        {/* Stack pills */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -156,7 +140,6 @@ export default function HeroSection({
           ))}
         </motion.div>
 
-        {/* CTA row */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -164,13 +147,13 @@ export default function HeroSection({
           className="flex flex-wrap items-center gap-4 mb-16"
         >
           <SparkLink
-            href={hero?.ctaLink ?? "#work"}
+            href={profile?.ctaLink ?? "#work"}
             className={cn(
               buttonVariants({ variant: "default", size: "lg" }),
               "rounded-full px-6 py-3 text-sm",
             )}
           >
-            {hero?.ctaText ?? "View My Work"}
+            {profile?.ctaText ?? "View My Work"}
             <ArrowRight
               className="w-4 h-4 transition-transform group-hover:translate-x-1"
               aria-hidden="true"
@@ -189,7 +172,6 @@ export default function HeroSection({
           </a>
         </motion.div>
 
-        {/* Meta row */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -197,15 +179,14 @@ export default function HeroSection({
           className="flex flex-wrap items-center gap-3 text-xs font-mono text-muted-foreground/50"
           aria-label="Location and expertise"
         >
-          {hero?.location && <span>{hero.location}</span>}
-          {hero?.location && (
+          {profile?.location && <span>{profile.location}</span>}
+          {profile?.location && (
             <span className="w-1 h-1 rounded-full bg-muted-foreground/30" aria-hidden="true" />
           )}
           <span>Full-stack &amp; Mobile</span>
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

@@ -131,7 +131,6 @@ export async function getExperiences() {
   }
 
   try {
-    // Here you fetch from Sanity when ready
     const experiences = await client.fetch(`
       *[_type == "experience" && visible == true] | order(order) {
         _id,
@@ -157,45 +156,14 @@ export async function getExperiences() {
   }
 }
 
-export async function getAbout() {
+export async function getProfile() {
   if (!client) {
-    console.log("Sanity client not configured, using fallback about data");
+    console.log("Sanity client not configured, using fallback profile data");
   }
 
   try {
-    // Here you fetch from Sanity when ready
-    const about = await client.fetch(`
-      *[_type == "about"][0] {
-        title,
-        bio,
-        manifesto,
-        skills,
-        profileImage,
-        resumeUrl,
-        email,
-        socialLinks
-      }
-    `);
-    return about;
-  } catch (error) {
-    console.log(
-      "Error fetching about from Sanity, using fallback data:",
-      error,
-    );
-    return {};
-  }
-}
-
-export async function getHero() {
-  if (!client) {
-    console.log("Sanity client not configured, using fallback hero data");
-    return;
-  }
-
-  try {
-    // Here you fetch from Sanity when ready
-    const hero = await client.fetch(`
-      *[_type == "hero"][0] {
+    const profile = await client.fetch(`
+      *[_type == "profile"][0] {
         headline,
         subheadline,
         ctaText,
@@ -203,17 +171,29 @@ export async function getHero() {
         status,
         location,
         stackPills,
-        openToWork
+        openToWork,
+        heroVisible,
+        title,
+        bio,
+        manifesto,
+        skills,
+        profileImage,
+        resumeUrl,
+        email,
+        socialLinks,
+        aboutVisible
       }
     `);
-    return hero;
+    return profile;
   } catch (error) {
-    console.log("Error fetching hero from Sanity, using fallback data:", error);
+    console.log(
+      "Error fetching profile from Sanity, using fallback data:",
+      error,
+    );
     return {};
   }
 }
 
-// Add new function for featured projects
 export async function getFeaturedProjects(limit = 3) {
   if (!client) {
     console.log(
@@ -287,7 +267,6 @@ export async function getUses() {
   }
 }
 
-// Blog queries: re-enabled for blog page
 export async function getAllBlogs() {
   try {
     const blogs = await client.fetch(

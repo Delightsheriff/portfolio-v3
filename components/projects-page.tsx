@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import type { About, Project } from "@/interface/sanity";
+import type { Profile, Project } from "@/interface/sanity";
 import Footer from "./nav/footer";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -14,10 +14,10 @@ import { ProjectGridCard } from "./project-grid-card";
 
 interface ProjectsPageProps {
   projects: Project[];
-  about: About;
+  profile: Profile;
 }
 
-export function ProjectsPage({ projects, about }: ProjectsPageProps) {
+export function ProjectsPage({ projects, profile }: ProjectsPageProps) {
   const [filteredProjects, setFilteredProjects] = useState<Project[]>(projects);
 
   const handleFilterChange = (filtered: Project[]) => {
@@ -77,7 +77,7 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
           </div>
         </section>
 
-        <ProjectsCta about={about} />
+        <ProjectsCta profile={profile} />
       </main>
 
       <Footer />

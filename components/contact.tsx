@@ -1,5 +1,5 @@
 import { ScrollReveal } from "./animations/scroll-reveal";
-import type { About } from "@/interface/sanity";
+import type { Profile } from "@/interface/sanity";
 import { Linkedin, Github, Mail, ArrowUpRight } from "lucide-react";
 import { RiTwitterXFill } from "react-icons/ri";
 import { Separator } from "@/components/ui/separator";
@@ -12,7 +12,7 @@ const PLATFORM_ICONS: Record<string, React.FC<{ className?: string; "aria-hidden
   linkedin: Linkedin,
 };
 
-export default function Contact({ about }: { about: About }) {
+export default function Contact({ profile }: { profile: Profile }) {
   return (
     <section
       id="contact"
@@ -41,15 +41,15 @@ export default function Contact({ about }: { about: About }) {
 
             {/* Primary CTA */}
             <a
-              href={`mailto:${about.email}?subject=Let's%20work%20together`}
+              href={`mailto:${profile.email}?subject=Let's%20work%20together`}
               className={cn(
                 buttonVariants({ variant: "default" }),
                 "rounded-full px-8 py-4 text-base mb-10 h-auto",
               )}
-              aria-label={`Send email to ${about.email}`}
+              aria-label={`Send email to ${profile.email}`}
             >
               <Mail className="w-4 h-4" aria-hidden="true" />
-              {about.email}
+              {profile.email}
               <ArrowUpRight
                 className="w-4 h-4 opacity-60 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 aria-hidden="true"
@@ -61,9 +61,9 @@ export default function Contact({ about }: { about: About }) {
             {/* Social + meta row */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
               {/* Social links */}
-              {about.socialLinks && about.socialLinks.length > 0 && (
+              {profile.socialLinks && profile.socialLinks.length > 0 && (
                 <div className="flex items-center gap-2" aria-label="Social media profiles">
-                  {about.socialLinks.map((link, i) => {
+                  {profile.socialLinks.map((link, i) => {
                     const Icon = PLATFORM_ICONS[link.platform] ?? Linkedin;
                     const labels: Record<string, string> = {
                       twitter: "X (Twitter)",

@@ -51,10 +51,19 @@ export interface Project {
   featured: boolean;
 }
 
-export interface About {
+export interface Profile {
+  headline: string;
+  subheadline: string;
+  ctaText: string;
+  ctaLink: string;
+  status: string;
+  location: string;
+  stackPills?: string[];
+  openToWork?: boolean;
+  heroVisible?: boolean;
   title: string;
-  bio: any[]; // Portable Text
-  manifesto: any[]; // Portable Text
+  bio: any[];
+  manifesto: any[];
   skills: {
     category: string;
     items: string[];
@@ -66,18 +75,7 @@ export interface About {
     platform: string;
     url: string;
   }[];
-}
-
-export interface Hero {
-  headline: string;
-  subheadline: string;
-  ctaText: string;
-  ctaLink: string;
-  status: string;
-  location: string;
-  stackPills?: string[];
-  openToWork?: boolean;
-  visible?: boolean;
+  aboutVisible?: boolean;
 }
 
 export interface Experience {
@@ -129,4 +127,3 @@ export interface Uses {
   categories: UsesCategory[];
   updatedLabel?: string;
 }
-

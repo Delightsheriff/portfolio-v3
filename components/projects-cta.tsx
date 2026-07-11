@@ -4,13 +4,13 @@ import { ArrowUpRight } from "lucide-react";
 import { ScrollReveal } from "./animations/scroll-reveal";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import type { About } from "@/interface/sanity";
+import type { Profile } from "@/interface/sanity";
 
 interface ProjectsCtaProps {
-  about: About;
+  profile: Profile;
 }
 
-export function ProjectsCta({ about }: ProjectsCtaProps) {
+export function ProjectsCta({ profile }: ProjectsCtaProps) {
   return (
     <section className="py-20 px-5 md:px-8 bg-muted/40" aria-label="Contact CTA">
       <div className="max-w-3xl mx-auto text-center space-y-5">
@@ -22,7 +22,7 @@ export function ProjectsCta({ about }: ProjectsCtaProps) {
             I&apos;m open to full-time roles and select freelance projects.
           </p>
           <a
-            href={`mailto:${about.email}?subject=Let's%20work%20together`}
+            href={`mailto:${profile.email}?subject=Let's%20work%20together`}
             className={cn(
               buttonVariants({ variant: "default" }),
               "rounded-full px-7 py-3 h-auto",

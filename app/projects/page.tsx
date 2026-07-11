@@ -1,6 +1,6 @@
 import { ProjectsPage } from "@/components/projects-page";
 import { Project } from "@/interface/sanity";
-import { getAbout, getProjects } from "@/sanity/sanity";
+import { getProfile, getProjects } from "@/sanity/sanity";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -50,7 +50,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Projects() {
   const projects: Project[] = await getProjects();
-  const about = await getAbout();
+  const profile = await getProfile();
 
   // Create the JSON-LD schema for this specific page
   const jsonLd = {
@@ -87,7 +87,7 @@ export default async function Projects() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <ProjectsPage projects={projects} about={about} />
+      <ProjectsPage projects={projects} profile={profile} />
     </>
   );
 }

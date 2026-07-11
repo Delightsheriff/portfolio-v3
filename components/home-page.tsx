@@ -3,9 +3,8 @@
 import { useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import type {
-  About,
   Experience,
-  Hero,
+  Profile,
   Project,
   ProjectGroup,
 } from "@/interface/sanity";
@@ -21,8 +20,7 @@ import Footer from "./nav/footer";
 
 interface HomePageProps {
   projects: Project[];
-  about: About;
-  hero: Hero;
+  profile: Profile;
   experiences: Experience[];
   allProjects: Project[];
   groups: ProjectGroup[];
@@ -30,8 +28,7 @@ interface HomePageProps {
 
 export function HomePage({
   projects,
-  about,
-  hero,
+  profile,
   experiences,
   allProjects,
   groups,
@@ -54,12 +51,12 @@ export function HomePage({
       >
         <Navbar />
         <main id="main-content">
-          <HeroSection hero={hero} y={y} />
+          <HeroSection profile={profile} y={y} />
           <StatsStrip />
           <Works projects={projects} allProjects={allProjects} groups={groups} />
           <Experiences experiences={experiences} />
-          <AboutSection about={about} />
-          <Contact about={about} />
+          <AboutSection profile={profile} />
+          <Contact profile={profile} />
         </main>
         <Footer />
       </div>

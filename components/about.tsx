@@ -1,13 +1,13 @@
 import { ScrollReveal } from "./animations/scroll-reveal";
 import Image from "next/image";
 import { urlFor } from "@/sanity/sanity";
-import type { About } from "@/interface/sanity";
+import type { Profile } from "@/interface/sanity";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight, FileText } from "lucide-react";
 
-export default function AboutSection({ about }: { about: About }) {
+export default function AboutSection({ profile }: { profile: Profile }) {
   return (
     <section id="about" className="py-20 md:py-28 px-5 md:px-8" aria-label="About me">
       <div className="max-w-7xl mx-auto">
@@ -16,10 +16,10 @@ export default function AboutSection({ about }: { about: About }) {
 
             {/* Photo */}
             <div className="md:col-span-4">
-              <div className="relative aspect-[3/4] bg-card/60 rounded-2xl overflow-hidden max-w-xs mx-auto md:mx-0 border border-border/30">
-                {about.profileImage ? (
+              <div className="relative aspect-3/4 bg-card/60 rounded-2xl overflow-hidden max-w-xs mx-auto md:mx-0 border border-border/30">
+                {profile.profileImage ? (
                   <Image
-                    src={urlFor(about.profileImage).url()}
+                    src={urlFor(profile.profileImage).url()}
                     alt="Amadi-Sheriff Delight portrait"
                     fill
                     sizes="(max-width: 768px) 300px, 33vw"
@@ -30,13 +30,13 @@ export default function AboutSection({ about }: { about: About }) {
                   <div className="absolute inset-0 bg-muted/40" />
                 )}
                 {/* Overlay at bottom */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" aria-hidden="true" />
+                <div className="absolute inset-0 bg-linear-to-t from-background/40 via-transparent to-transparent" aria-hidden="true" />
               </div>
 
               {/* Quick-facts below photo on desktop */}
               <div className="mt-5 space-y-2.5 hidden md:block">
                 <div className="flex items-center gap-2.5 text-sm text-muted-foreground">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse flex-shrink-0" aria-hidden="true" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shrink-0" aria-hidden="true" />
                   Open to remote roles
                 </div>
                 <div className="text-sm text-muted-foreground font-mono">
@@ -52,10 +52,10 @@ export default function AboutSection({ about }: { about: About }) {
                   About
                 </p>
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight tracking-tight">
-                  {about.title || "Building with purpose."}
+                  {profile.title || "Building with purpose."}
                 </h2>
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
-                  {(about.manifesto || []).map((block, index) => (
+                  {(profile.manifesto || []).map((block, index) => (
                     <p key={index}>
                       {block.children?.[0]?.text || ""}
                     </p>
@@ -64,13 +64,13 @@ export default function AboutSection({ about }: { about: About }) {
               </div>
 
               {/* Skills grid */}
-              {about.skills && about.skills.length > 0 && (
+              {profile.skills && profile.skills.length > 0 && (
                 <div className="space-y-5">
                   <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground/60">
                     Core Expertise
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {about.skills.map((group, i) => (
+                    {profile.skills.map((group, i) => (
                       <div key={i} className="space-y-2">
                         <p className="text-sm font-heading font-semibold text-foreground/90">
                           {group.category}
@@ -94,9 +94,9 @@ export default function AboutSection({ about }: { about: About }) {
 
               {/* Resume CTA + mobile quick facts */}
               <div className="flex flex-wrap items-center gap-4 pt-1">
-                {about.resumeUrl && (
+                {profile.resumeUrl && (
                   <a
-                    href={about.resumeUrl}
+                    href={profile.resumeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="View full resume (opens in new tab)"
@@ -116,7 +116,7 @@ export default function AboutSection({ about }: { about: About }) {
 
                 {/* Mobile availability */}
                 <div className="flex items-center gap-2 md:hidden text-sm text-muted-foreground">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse flex-shrink-0" aria-hidden="true" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shrink-0" aria-hidden="true" />
                   Open to remote roles
                 </div>
               </div>
