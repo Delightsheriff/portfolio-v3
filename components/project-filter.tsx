@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import type { Project, ProjectGroup } from "@/interface/sanity";
 import { Button } from "@/components/ui/button";
@@ -38,7 +38,7 @@ export function ProjectFilter({
   const [selectedTypes, setSelectedTypes] = useState<ProjectType[]>([]);
 
   // Filter projects based on selections
-  useMemo(() => {
+  useEffect(() => {
     let filtered = projects;
 
     if (selectedTechs.length > 0) {
