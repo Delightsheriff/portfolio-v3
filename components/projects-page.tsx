@@ -91,8 +91,9 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
             onFilterChange={(filtered) => handleFilterChange(filtered)}
           />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            {filteredProjects.map((project, index) => {
+          {filteredProjects.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+              {filteredProjects.map((project, index) => {
               const isMobile = project.projectType?.category === "mobile";
               const imageUrl = project.mainImage
                 ? urlFor(project.mainImage).url()
@@ -268,7 +269,29 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
                 </ScrollReveal>
               );
             })}
-          </div>
+            </div>
+          ) : (
+            <div className="py-24 text-center">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <p className="text-lg text-muted-foreground mb-3">
+                  No projects found with these filters
+                </p>
+                <p className="text-sm text-muted-foreground/70 max-w-md mx-auto">
+                  Try adjusting your tech stack or project type filters, or check back later for new projects
+                </p>
+                <button
+                  onClick={() => handleFilterChange(projects)}
+                  className="mt-6 px-4 py-2 text-sm font-mono uppercase tracking-widest text-foreground hover:text-highlight transition-colors"
+                >
+                  Clear Filters
+                </button>
+              </motion.div>
+            </div>
+          )}
         </div>
       </section>
 
