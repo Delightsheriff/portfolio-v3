@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export default function NotFound() {
   return (
@@ -25,7 +27,10 @@ export default function NotFound() {
           </p>
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background rounded-full text-sm font-medium hover:bg-highlight transition-colors"
+            className={cn(
+              buttonVariants({ variant: "default" }),
+              "rounded-full px-6 py-3 h-auto",
+            )}
             aria-label="Return to home page"
           >
             <ArrowLeft className="w-4 h-4" aria-hidden="true" />
