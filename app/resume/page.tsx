@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       type: "profile",
-      url: "https://www.delightsheriff.com/resume",
+      url: "https://delightsheriff.com/resume",
       images: [{ url: "/og-image.png", width: 1200, height: 630, alt: title }],
     },
     twitter: { card: "summary_large_image", title, description, images: ["/og-image.png"] },
@@ -33,7 +33,7 @@ export default async function ResumePage_() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Amadi-Sheriff Delight",
-    url: "https://www.delightsheriff.com",
+    url: "https://delightsheriff.com",
     jobTitle: "Software Engineer & Mobile Developer",
     sameAs: [
       "https://github.com/delightsheriff",

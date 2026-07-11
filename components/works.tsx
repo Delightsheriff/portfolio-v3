@@ -85,33 +85,44 @@ export default function Works({
         </ScrollReveal>
 
         {/* Work items */}
-        <div className="space-y-0">
-          {featured.map((item, index) => (
-            <ScrollReveal
-              key={item.kind === "project" ? item.data._id : item.data._id}
-              delay={0.05 * index}
-            >
-              <div className="py-12 md:py-16 first:pt-0">
-                {item.kind === "group" ? (
-                  <ProjectGroupCard
-                    group={item.data}
-                    index={index}
-                    urlFor={urlFor}
-                  />
-                ) : (
-                  <ProjectCard
-                    project={item.data}
-                    index={index}
-                    urlFor={urlFor}
-                  />
-                )}
-                {index < featured.length - 1 && (
-                  <Separator className="mt-12 md:mt-16 opacity-20" />
-                )}
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
+        {featured.length > 0 ? (
+          <div className="space-y-0">
+            {featured.map((item, index) => (
+              <ScrollReveal
+                key={item.kind === "project" ? item.data._id : item.data._id}
+                delay={0.05 * index}
+              >
+                <div className="py-12 md:py-16 first:pt-0">
+                  {item.kind === "group" ? (
+                    <ProjectGroupCard
+                      group={item.data}
+                      index={index}
+                      urlFor={urlFor}
+                    />
+                  ) : (
+                    <ProjectCard
+                      project={item.data}
+                      index={index}
+                      urlFor={urlFor}
+                    />
+                  )}
+                  {index < featured.length - 1 && (
+                    <Separator className="mt-12 md:mt-16 opacity-20" />
+                  )}
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        ) : (
+          <ScrollReveal>
+            <div className="py-24 text-center">
+              <p className="text-muted-foreground mb-4">Featured projects coming soon</p>
+              <p className="text-sm text-muted-foreground/70">
+                Check back later for updates on my latest work
+              </p>
+            </div>
+          </ScrollReveal>
+        )}
 
         {/* Mobile: see all */}
         <ScrollReveal>

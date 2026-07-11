@@ -55,6 +55,13 @@ const hero = {
       description: "Toggle to show/hide the hero section",
       initialValue: true,
     }),
+    defineField({
+      name: "openToWork",
+      title: "Open to Opportunities",
+      type: "boolean",
+      description: "Show 'Open to opportunities' badge in hero",
+      initialValue: true,
+    }),
   ],
 };
 
