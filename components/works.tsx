@@ -1,20 +1,63 @@
 import { ScrollReveal } from "./animations/scroll-reveal";
 import { ProjectCard } from "./project-card";
+import { ProjectGroupCard } from "./project-group-card";
 import { ArrowRight } from "lucide-react";
 import { urlFor } from "@/sanity/sanity";
-import type { Project } from "@/interface/sanity";
+import type { Project, ProjectGroup } from "@/interface/sanity";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
+
+type WorkItem =
+  | { kind: "project"; data: Project; sortDate: string }
+  | { kind: "group"; data: ProjectGroup; sortDate: string };
+
+function buildWorksList(
+  projects: Project[],
+  groups: ProjectGroup[],
+): WorkItem[] {
+  // Collect project IDs that are already inside a group so we don't
+  // render them again as standalone cards.
+  const groupedIds = new Set(
+    groups.flatMap((g) => g.parts.map((p) => p.project?._id).filter(Boolean)),
+  );
+
+  const standalones: WorkItem[] = projects
+    .filter((p) => !groupedIds.has(p._id))
+    .map((p) => ({
+      kind: "project",
+      data: p,
+      sortDate: p._createdAt ?? "",
+    }));
+
+  const groupItems: WorkItem[] = groups.map((g) => ({
+    kind: "group",
+    data: g,
+    // Use the lead project's date for ordering, fall back to empty string
+    sortDate: g.parts[0]?.project?._createdAt ?? "",
+  }));
+
+  return [...standalones, ...groupItems].sort((a, b) =>
+    b.sortDate.localeCompare(a.sortDate),
+  );
+}
 
 export default function Works({
   projects,
   allProjects,
+  groups = [],
 }: {
   projects: Project[];
   allProjects: Project[];
+  groups?: ProjectGroup[];
 }) {
+  const featured = buildWorksList(projects, groups).slice(0, 4);
+
   return (
-    <section id="work" className="py-20 md:py-28 px-5 md:px-8" aria-label="Selected work">
+    <section
+      id="work"
+      className="py-20 md:py-28 px-5 md:px-8"
+      aria-label="Selected work"
+    >
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
         <ScrollReveal>
@@ -41,17 +84,28 @@ export default function Works({
           </div>
         </ScrollReveal>
 
-        {/* Projects */}
+        {/* Work items */}
         <div className="space-y-0">
-          {projects.slice(0, 3).map((project, index) => (
-            <ScrollReveal key={project._id} delay={0.05 * index}>
+          {featured.map((item, index) => (
+            <ScrollReveal
+              key={item.kind === "project" ? item.data._id : item.data._id}
+              delay={0.05 * index}
+            >
               <div className="py-12 md:py-16 first:pt-0">
-                <ProjectCard
-                  project={project}
-                  index={index}
-                  urlFor={urlFor}
-                />
-                {index < projects.length - 1 && (
+                {item.kind === "group" ? (
+                  <ProjectGroupCard
+                    group={item.data}
+                    index={index}
+                    urlFor={urlFor}
+                  />
+                ) : (
+                  <ProjectCard
+                    project={item.data}
+                    index={index}
+                    urlFor={urlFor}
+                  />
+                )}
+                {index < featured.length - 1 && (
                   <Separator className="mt-12 md:mt-16 opacity-20" />
                 )}
               </div>
@@ -59,7 +113,7 @@ export default function Works({
           ))}
         </div>
 
-        {/* Mobile — see all link */}
+        {/* Mobile — see all */}
         <ScrollReveal>
           <div className="mt-10 flex md:hidden justify-center">
             <Link

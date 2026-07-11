@@ -2,6 +2,7 @@ import { HomePage } from "@/components/home-page";
 import {
   getAbout,
   getExperiences,
+  getFeaturedProjectGroups,
   getFeaturedProjects,
   getHero,
   getProjects,
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const [projects, experiences, about, hero, videoPitch, allProjects] =
+  const [projects, experiences, about, hero, videoPitch, allProjects, groups] =
     await Promise.all([
       getFeaturedProjects(3),
       getExperiences(),
@@ -24,6 +25,7 @@ export default async function Home() {
       getHero(),
       getVideoPitch(),
       getProjects(),
+      getFeaturedProjectGroups(),
     ]);
 
   if (!projects || !experiences || !about || !hero || !allProjects) {
@@ -38,6 +40,7 @@ export default async function Home() {
       experiences={experiences}
       videoPitch={videoPitch}
       allProjects={allProjects}
+      groups={groups ?? []}
     />
   );
 }

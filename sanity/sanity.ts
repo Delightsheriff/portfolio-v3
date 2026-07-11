@@ -301,6 +301,35 @@ export async function getVideoPitch() {
   }
 }
 
+export async function getFeaturedProjectGroups() {
+  if (!client) return [];
+  try {
+    const groups = await client.fetch(`
+      *[_type == "projectGroup" && visible == true && featured == true]
+        | order(coalesce(order, 9999) asc, _createdAt desc) {
+          _id,
+          title,
+          slug,
+          description,
+          year,
+          featured,
+          visible,
+          order,
+          parts[] {
+            label,
+            project-> {
+              ${PROJECT_FIELDS}
+            }
+          }
+        }
+    `);
+    return groups ?? [];
+  } catch (error) {
+    console.log("Error fetching project groups:", error);
+    return [];
+  }
+}
+
 export async function getUses() {
   if (!client) return null;
   try {
