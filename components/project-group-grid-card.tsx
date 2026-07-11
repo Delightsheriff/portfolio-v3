@@ -26,8 +26,8 @@ export function ProjectGroupGridCard({ group, index }: ProjectGroupGridCardProps
     <ScrollReveal key={group._id} delay={index * 0.05}>
       <article className="group flex flex-col h-full">
         <Link
-          href={leadProject?.slug?.current ? `/project/${leadProject.slug.current}` : "#"}
-          aria-label={`View ${group.title} case study`}
+          href={group.slug?.current ? `/project-group/${group.slug.current}` : "#"}
+          aria-label={`View ${group.title} project group`}
           className="block mb-4 relative"
         >
           {isMobile ? (
@@ -73,7 +73,7 @@ export function ProjectGroupGridCard({ group, index }: ProjectGroupGridCardProps
           </div>
 
           <h2 className="text-lg md:text-xl font-serif leading-snug group-hover:text-highlight transition-colors">
-            <Link href={leadProject?.slug?.current ? `/project/${leadProject.slug.current}` : "#"}>
+            <Link href={group.slug?.current ? `/project-group/${group.slug.current}` : "#"}>
               {group.title}
             </Link>
           </h2>
@@ -101,10 +101,10 @@ export function ProjectGroupGridCard({ group, index }: ProjectGroupGridCardProps
 
           <div className="flex flex-wrap gap-4 pt-1">
             <Link
-              href={leadProject?.slug?.current ? `/project/${leadProject.slug.current}` : "#"}
+              href={group.slug?.current ? `/project-group/${group.slug.current}` : "#"}
               className="inline-flex items-center gap-1.5 text-sm font-medium hover:text-highlight transition-colors group/link"
             >
-              View Projects
+              Group Details
               <ArrowUpRight
                 className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
                 aria-hidden="true"

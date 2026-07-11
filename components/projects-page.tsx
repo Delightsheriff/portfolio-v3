@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import type { Profile, Project, ProjectGroup } from "@/interface/sanity";
 import Footer from "./nav/footer";
@@ -34,10 +34,10 @@ export function ProjectsPage({ projects, profile, groups }: ProjectsPageProps) {
   const [filteredGroups, setFilteredGroups] = useState<ProjectGroup[]>(groups);
   const [filterVersion, setFilterVersion] = useState(0);
 
-  const handleFilterChange = (filtered: Project[], groups: ProjectGroup[]) => {
+  const handleFilterChange = useCallback((filtered: Project[], groups: ProjectGroup[]) => {
     setFilteredProjects(filtered);
     setFilteredGroups(groups);
-  };
+  }, []);
 
   const handleClearFilters = () => {
     setFilterVersion((v) => v + 1);
@@ -76,7 +76,7 @@ export function ProjectsPage({ projects, profile, groups }: ProjectsPageProps) {
               key={filterVersion}
               projects={projects}
               groups={groups}
-              onFilterChange={(filtered, filteredGroups) => handleFilterChange(filtered, filteredGroups)}
+              onFilterChange={handleFilterChange}
             />
 
             {gridItems.length > 0 ? (
