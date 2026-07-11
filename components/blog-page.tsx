@@ -5,7 +5,8 @@ import Link from "next/link";
 import { ArrowRight, PenTool } from "lucide-react";
 import GoBack from "./go-back";
 import Footer from "./nav/footer";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 interface BlogPost {
   _id: string;
@@ -78,16 +79,13 @@ export function BlogPage({ posts }: { posts: BlogPost[] }) {
                 transition={{ delay: 0.4, duration: 0.5 }}
                 className="pt-8"
               >
-                <Button
-                  variant="default"
-                  className="rounded-full px-6 py-3 h-auto"
-                  asChild
+                <Link
+                  href="/"
+                  className={cn(buttonVariants({ variant: "default" }), "rounded-full px-6 py-3 h-auto")}
                 >
-                  <Link href="/">
-                    Back to Home
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </Button>
+                  Back to Home
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
               </motion.div>
             </motion.div>
           </div>

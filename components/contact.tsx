@@ -3,7 +3,7 @@ import type { Profile } from "@/interface/sanity";
 import { Linkedin, Github, Mail, ArrowUpRight } from "lucide-react";
 import { RiTwitterXFill } from "react-icons/ri";
 import { Separator } from "@/components/ui/separator";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const PLATFORM_ICONS: Record<string, React.FC<{ className?: string; "aria-hidden"?: boolean | "true" | "false" }>> = {
@@ -71,21 +71,16 @@ export default function Contact({ profile }: { profile: Profile }) {
                       linkedin: "LinkedIn",
                     };
                     return (
-                      <Button
+                      <a
                         key={i}
-                        variant="outline"
-                        size="icon"
-                        asChild
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${labels[link.platform] ?? link.platform} profile`}
+                        className={cn(buttonVariants({ variant: "outline", size: "icon" }))}
                       >
-                        <a
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={`${labels[link.platform] ?? link.platform} profile`}
-                        >
-                          <Icon className="w-4 h-4" aria-hidden={true} />
-                        </a>
-                      </Button>
+                        <Icon className="w-4 h-4" aria-hidden={true} />
+                      </a>
                     );
                   })}
                 </div>
