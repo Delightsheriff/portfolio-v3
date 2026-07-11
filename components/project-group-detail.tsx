@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ProjectGroupLinks } from "./project-group-links";
 import { CATEGORY_LABELS } from "@/lib/constants";
+import { BackButton } from "./back-button";
 
 export function ProjectGroupDetail({ group }: { group: ProjectGroup }) {
   const [activePartIndex, setActivePartIndex] = useState(0);
@@ -29,12 +30,11 @@ export function ProjectGroupDetail({ group }: { group: ProjectGroup }) {
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
     >
       {/* Back link */}
-      <Link
-        href="/projects"
+      <BackButton
         className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors font-mono mb-10"
       >
         &larr; All Projects
-      </Link>
+      </BackButton>
 
       {/* Header */}
       <div className="max-w-3xl mb-12">

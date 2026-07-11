@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "./nav/theme-toggle";
+import { BackButton } from "./back-button";
 
 export default function GoBack() {
   const [scrolled, setScrolled] = useState(false);
@@ -29,13 +30,12 @@ export default function GoBack() {
       }`}
     >
       <div className="flex justify-between items-center max-w-7xl mx-auto px-6 md:px-8 py-5">
-        <Link
-          href="/"
+        <BackButton
           className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Back
-        </Link>
+        </BackButton>
         <div className="flex items-center gap-3">
           <ThemeToggle />
           <Link
