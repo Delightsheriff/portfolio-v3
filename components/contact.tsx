@@ -3,6 +3,8 @@ import type { About } from "@/interface/sanity";
 import { Linkedin, Github, Mail, ArrowUpRight } from "lucide-react";
 import { RiTwitterXFill } from "react-icons/ri";
 import { Separator } from "@/components/ui/separator";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const PLATFORM_ICONS: Record<string, React.FC<{ className?: string; "aria-hidden"?: boolean | "true" | "false" }>> = {
   twitter: RiTwitterXFill,
@@ -40,13 +42,16 @@ export default function Contact({ about }: { about: About }) {
             {/* Primary CTA */}
             <a
               href={`mailto:${about.email}?subject=Let's%20work%20together`}
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-foreground text-background font-medium rounded-full hover:bg-highlight hover:text-highlight-foreground transition-all duration-300 text-base mb-10"
+              className={cn(
+                buttonVariants({ variant: "default" }),
+                "rounded-full px-8 py-4 text-base mb-10 h-auto",
+              )}
               aria-label={`Send email to ${about.email}`}
             >
               <Mail className="w-4 h-4" aria-hidden="true" />
               {about.email}
               <ArrowUpRight
-                className="w-4 h-4 opacity-60 group-hover:opacity-100 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                className="w-4 h-4 opacity-60 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 aria-hidden="true"
               />
             </a>
@@ -66,16 +71,21 @@ export default function Contact({ about }: { about: About }) {
                       linkedin: "LinkedIn",
                     };
                     return (
-                      <a
+                      <Button
                         key={i}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${labels[link.platform] ?? link.platform} profile`}
-                        className="p-2.5 rounded-full border border-border/40 text-muted-foreground hover:border-highlight hover:text-highlight transition-all"
+                        variant="outline"
+                        size="icon"
+                        asChild
                       >
-                        <Icon className="w-4 h-4" aria-hidden={true} />
-                      </a>
+                        <a
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${labels[link.platform] ?? link.platform} profile`}
+                        >
+                          <Icon className="w-4 h-4" aria-hidden={true} />
+                        </a>
+                      </Button>
                     );
                   })}
                 </div>
