@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { hash: "#work", label: "Work" },
   { hash: "#experience", label: "Experience" },
   { hash: "#about", label: "About" },
+  { hash: "/blog", label: "Blog" },
   { hash: "/uses", label: "Uses" },
 ];
 
