@@ -8,7 +8,6 @@ import type {
   Hero,
   Project,
   ProjectGroup,
-  VideoPitch,
 } from "@/interface/sanity";
 import { CustomCursor } from "./animations/custom-cursor";
 import Navbar from "./nav/navbar";
@@ -17,7 +16,6 @@ import Works from "./works";
 import Experiences from "./experience";
 import AboutSection from "./about";
 import Contact from "./contact";
-import Video from "./video";
 import StatsStrip from "./stats-strip";
 import Footer from "./nav/footer";
 
@@ -26,7 +24,6 @@ interface HomePageProps {
   about: About;
   hero: Hero;
   experiences: Experience[];
-  videoPitch: VideoPitch;
   allProjects: Project[];
   groups: ProjectGroup[];
 }
@@ -36,7 +33,6 @@ export function HomePage({
   about,
   hero,
   experiences,
-  videoPitch,
   allProjects,
   groups,
 }: HomePageProps) {
@@ -60,7 +56,6 @@ export function HomePage({
         <main id="main-content">
           <HeroSection hero={hero} y={y} />
           <StatsStrip />
-          {videoPitch?.enabled && <Video {...videoPitch} />}
           <Works projects={projects} allProjects={allProjects} groups={groups} />
           <Experiences experiences={experiences} />
           <AboutSection about={about} />

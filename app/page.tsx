@@ -6,7 +6,6 @@ import {
   getFeaturedProjects,
   getHero,
   getProjects,
-  getVideoPitch,
 } from "@/sanity/sanity";
 import Loading from "./loading";
 import type { Metadata } from "next";
@@ -17,13 +16,12 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const [projects, experiences, about, hero, videoPitch, allProjects, groups] =
+  const [projects, experiences, about, hero, allProjects, groups] =
     await Promise.all([
       getFeaturedProjects(3),
       getExperiences(),
       getAbout(),
       getHero(),
-      getVideoPitch(),
       getProjects(),
       getFeaturedProjectGroups(),
     ]);
@@ -38,7 +36,6 @@ export default async function Home() {
       about={about}
       hero={hero}
       experiences={experiences}
-      videoPitch={videoPitch}
       allProjects={allProjects}
       groups={groups ?? []}
     />

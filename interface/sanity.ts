@@ -95,16 +95,6 @@ export interface Experience {
   visible: boolean;
 }
 
-export interface VideoPitch {
-  _id: string;
-  title: string;
-  description: string;
-  youtubeUrl: string;
-  duration: string;
-  topics: string[];
-  enabled: boolean;
-}
-
 export interface ProjectGroupPart {
   label: string;
   project: Project;

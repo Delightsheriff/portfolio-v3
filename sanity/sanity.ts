@@ -240,33 +240,6 @@ export async function getFeaturedProjects(limit = 3) {
   }
 }
 
-export async function getVideoPitch() {
-  if (!client) {
-    console.log(
-      "Sanity client not configured, using fallback video pitch data",
-    );
-  }
-
-  try {
-    const videoPitch = await client.fetch(`
-      *[_type == "videoPitch"][0] {
-        title,
-        description,
-        youtubeUrl,
-        duration,
-        topics,
-        enabled
-      }
-    `);
-    return videoPitch;
-  } catch (error) {
-    console.log(
-      "Error fetching video pitch from Sanity, using fallback data:",
-      error,
-    );
-  }
-}
-
 export async function getFeaturedProjectGroups() {
   if (!client) return [];
   try {

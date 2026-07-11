@@ -3,7 +3,6 @@ import blog from "./blog";
 import experience from "./experience";
 import hero from "./hero";
 import projects from "./project";
-import videoPitch from "./video-pitch";
 import uses from "./uses";
 import projectGroup from "./project-group";
 
@@ -13,7 +12,6 @@ export const schemaTypes = [
   hero,
   experience,
   about,
-  videoPitch,
   blog,
   uses,
 ];
