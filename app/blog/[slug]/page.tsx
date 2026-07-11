@@ -3,10 +3,8 @@ import { notFound } from "next/navigation";
 import { getBlogBySlug, getAllBlogs } from "@/sanity/sanity";
 import GoBack from "@/components/go-back";
 import Footer from "@/components/nav/footer";
-import { PortableText, type PortableTextBlock } from "@portabletext/react";
-import Image from "next/image";
-import { urlFor } from "@/sanity/sanity";
 import { BlogPostHeader, BlogPostBody } from "@/components/blog-post-layout";
+import { BlogContent } from "@/components/blog-content";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -78,7 +76,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </BlogPostHeader>
 
           <BlogPostBody>
-            {post.body && <PortableText value={post.body as PortableTextBlock[]} />}
+            {post.content && <BlogContent content={post.content} />}
           </BlogPostBody>
         </article>
 

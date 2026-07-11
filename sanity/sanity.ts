@@ -380,7 +380,7 @@ export async function getBlogBySlug(slug: string) {
         title,
         "slug": slug.current,
         excerpt,
-        body,
+        content,
         publishedAt,
         featured,
         author
