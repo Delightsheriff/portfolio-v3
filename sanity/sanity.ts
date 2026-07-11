@@ -33,7 +33,8 @@ const PROJECT_FIELDS = `
   results,
   images,
   featured,
-  spotlight
+  spotlight,
+  visible
 `;
 
 function createPlaceholderImageBuilder() {
@@ -78,7 +79,7 @@ export async function getProjects() {
 
   try {
     const projects = await client.fetch(`
-      *[_type == "project"] | order(${PROJECT_ORDER}) {
+      *[_type == "project" && visible == true] | order(${PROJECT_ORDER}) {
         ${PROJECT_FIELDS},
         "nextProject": *[_type == "project" && _id != ^._id && _createdAt < ^._createdAt] | order(${PROJECT_ORDER}) [0] {
           title,
@@ -104,7 +105,7 @@ export async function getProject(slug: string) {
   try {
     const project = await client.fetch(
       `
-      *[_type == "project" && slug.current == $slug][0] {
+      *[_type == "project" && slug.current == $slug && visible == true][0] {
         ${PROJECT_FIELDS},
         "nextProject": *[_type == "project" && _id != ^._id && _createdAt < ^._createdAt] | order(${PROJECT_ORDER}) [0] {
           title,
@@ -202,7 +203,7 @@ export async function getFeaturedProjects(limit = 3) {
   try {
     const featuredProjects = await client.fetch(
       `
-      *[_type == "project" && featured == true] | order(${PROJECT_ORDER}) [0...$limit] {
+      *[_type == "project" && featured == true && visible == true] | order(${PROJECT_ORDER}) [0...$limit] {
         ${PROJECT_FIELDS}
       }
     `,
@@ -222,7 +223,7 @@ export async function getFeaturedProjectGroups() {
   if (!client) return [];
   try {
     const groups = await client.fetch(`
-      *[_type == "projectGroup" && featured == true]
+      *[_type == "projectGroup" && featured == true && visible == true]
         | order(coalesce(order, 9999) asc, _createdAt desc) {
           _id,
           title,
@@ -250,7 +251,7 @@ export async function getProjectGroup(slug: string) {
   if (!client) return null;
   try {
     const group = await client.fetch(
-      `*[_type == "projectGroup" && slug.current == $slug][0] {
+      `      *[_type == "projectGroup" && slug.current == $slug && visible == true][0] {
         _id,
         title,
         slug,
@@ -296,15 +297,16 @@ export async function getUses() {
 export async function getAllBlogs() {
   try {
     const blogs = await client.fetch(
-      `      *[_type == "blog"] | order(publishedAt desc) {
+      `      *[_type == "blog" && visible == true] | order(publishedAt desc) {
         _id,
         title,
         "slug": slug.current,
         excerpt,
-        body,
+        content,
         publishedAt,
         featured,
-        author
+        author,
+        visible
       }`
     );
     return blogs;
@@ -317,7 +319,7 @@ export async function getAllBlogs() {
 export async function getBlogBySlug(slug: string) {
   try {
     const blog = await client.fetch(
-      `*[_type == "blog" && slug.current == $slug][0] {
+      `      *[_type == "blog" && slug.current == $slug && visible == true][0] {
         _id,
         title,
         "slug": slug.current,

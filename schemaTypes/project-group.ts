@@ -88,6 +88,13 @@ const projectGroup = {
       type: "number",
       description: "Lower numbers appear first. Leave blank to sort by date.",
     }),
+    defineField({
+      name: "visible",
+      title: "Visible",
+      type: "boolean",
+      description: "When unchecked, this group is hidden from all public-facing pages.",
+      initialValue: true,
+    }),
   ],
   preview: {
     select: {

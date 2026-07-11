@@ -15,6 +15,7 @@ interface BlogPost {
   publishedAt: string;
   featured: boolean;
   author?: string;
+  visible?: boolean;
 }
 
 export function BlogPage({ posts }: { posts: BlogPost[] }) {

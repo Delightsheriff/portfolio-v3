@@ -49,6 +49,7 @@ export interface Project {
   };
   featured: boolean;
   spotlight?: boolean;
+  visible?: boolean;
 }
 
 export interface Profile {
@@ -103,6 +104,7 @@ export interface ProjectGroup {
   year?: string;
   featured: boolean;
   order?: number;
+  visible?: boolean;
 }
 
 export interface UsesItem {

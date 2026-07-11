@@ -144,6 +144,13 @@ export default defineType({
       description: "Pin this post to the top of the blog",
       initialValue: false,
     },
+    {
+      name: "visible",
+      title: "Visible",
+      type: "boolean",
+      description: "When unchecked, this post is hidden from all public-facing pages.",
+      initialValue: true,
+    },
   ],
   preview: {
     select: {

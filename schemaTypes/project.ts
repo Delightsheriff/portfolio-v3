@@ -297,6 +297,13 @@ const projects = {
         "When this project belongs to a group, show it as a standalone card too on the /projects page.",
       initialValue: false,
     }),
+    defineField({
+      name: "visible",
+      title: "Visible",
+      type: "boolean",
+      description: "When unchecked, this project is hidden from all public-facing pages.",
+      initialValue: true,
+    }),
   ],
   preview: {
     select: {
