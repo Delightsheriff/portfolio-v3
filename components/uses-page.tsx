@@ -1,7 +1,6 @@
 import { ScrollReveal } from "./animations/scroll-reveal";
 import type { Uses } from "@/interface/sanity";
 import { ArrowUpRight } from "lucide-react";
-import Navbar from "./nav/navbar";
 import Footer from "./nav/footer";
 import GoBack from "./go-back";
 
@@ -62,7 +61,6 @@ export function UsesPage({ uses }: UsesPageProps) {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Navbar />
       <GoBack />
       <main id="main-content" className="pt-28 pb-20 px-5 md:px-8">
         <div className="max-w-3xl mx-auto">
