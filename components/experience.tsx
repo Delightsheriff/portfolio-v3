@@ -60,7 +60,7 @@ export default function Experiences({
           {experiences.map((exp, index) => (
             <ScrollReveal key={exp._id} delay={index * 0.07}>
               <div className="group relative grid grid-cols-1 md:grid-cols-[180px_1fr] gap-4 md:gap-10 py-10 md:py-12">
-                {/* Left — date + meta */}
+                {/* Left: date and meta */}
                 <aside className="md:pt-1 space-y-2 shrink-0">
                   <p className="text-sm font-mono font-medium text-foreground/80">
                     {exp.period}
@@ -89,7 +89,7 @@ export default function Experiences({
                   )}
                 </aside>
 
-                {/* Right — content */}
+                {/* Right: content */}
                 <div className="space-y-4 min-w-0">
                   <div>
                     <h3 className="text-xl md:text-2xl font-heading font-bold tracking-tight group-hover:text-highlight transition-colors duration-300">

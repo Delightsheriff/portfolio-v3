@@ -167,9 +167,9 @@ export function ProjectGroupCard({
       viewport={{ once: true, margin: "-80px" }}
       aria-label={`Project group: ${group.title}`}
     >
-      {/* Main layout — mirrors ProjectCard alternating pattern */}
+      {/* Main layout: mirrors ProjectCard alternating pattern */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center group/card">
-        {/* Image panel — switches to active part image */}
+        {/* Image panel: switches to active part image */}
         <div
           className={`${
             isEven
@@ -335,7 +335,7 @@ export function ProjectGroupCard({
         </div>
       </div>
 
-      {/* Parts summary strip — visible on all parts at a glance */}
+      {/* Parts summary strip: visible on all parts at a glance */}
       {group.parts.length > 1 && (
         <div
           className="mt-8 rounded-xl border border-border/30 bg-card/30 divide-y divide-border/20 overflow-hidden"

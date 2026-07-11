@@ -54,7 +54,7 @@ export default function Navbar() {
           {/* Logo */}
           <SparkNextLink
             href="/"
-            aria-label="Delight Sheriff — home"
+            aria-label="Delight Sheriff home"
             className="text-sm font-heading font-bold tracking-[0.18em] uppercase hover:text-highlight transition-colors"
           >
             DS.

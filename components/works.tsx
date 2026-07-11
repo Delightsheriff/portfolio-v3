@@ -113,7 +113,7 @@ export default function Works({
           ))}
         </div>
 
-        {/* Mobile — see all */}
+        {/* Mobile: see all */}
         <ScrollReveal>
           <div className="mt-10 flex md:hidden justify-center">
             <Link

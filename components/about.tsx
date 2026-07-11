@@ -18,7 +18,7 @@ export default function AboutSection({ about }: { about: About }) {
                 {about.profileImage ? (
                   <Image
                     src={urlFor(about.profileImage).url()}
-                    alt="Amadi-Sheriff Delight — portrait"
+                    alt="Amadi-Sheriff Delight portrait"
                     fill
                     sizes="(max-width: 768px) 300px, 33vw"
                     className="object-cover"

@@ -18,13 +18,13 @@ const FALLBACK_CATEGORIES: UsesCategory[] = [
       { name: "Claude Code", description: "Agentic coding assistant. My go-to for complex refactors and architecture decisions.", url: "https://claude.ai/code" },
       { name: "OpenCode", description: "Open-source AI coding agent that runs in the terminal.", url: "https://opencode.ai" },
       { name: "Antigravity", description: "AI-powered developer assistant for fast iteration.", url: "https://antigravity.dev" },
-      { name: "Codex", description: "OpenAI Codex — useful for boilerplate generation and API exploration.", url: "https://openai.com/codex" },
+      { name: "Codex", description: "OpenAI Codex: useful for boilerplate generation and API exploration.", url: "https://openai.com/codex" },
     ],
   },
   {
     name: "Languages & Runtimes",
     items: [
-      { name: "TypeScript", description: "Everything. Web, backend, mobile — all TypeScript.", url: "https://www.typescriptlang.org" },
+      { name: "TypeScript", description: "Everything: web, backend, mobile. All TypeScript.", url: "https://www.typescriptlang.org" },
       { name: "Node.js", description: "Runtime for backend services and APIs.", url: "https://nodejs.org" },
     ],
   },
@@ -32,7 +32,7 @@ const FALLBACK_CATEGORIES: UsesCategory[] = [
     name: "Frontend & Mobile",
     items: [
       { name: "Next.js", description: "Primary framework for web applications.", url: "https://nextjs.org" },
-      { name: "React Native", description: "Cross-platform mobile — iOS and Android from one codebase.", url: "https://reactnative.dev" },
+      { name: "React Native", description: "Cross-platform mobile: iOS and Android from one codebase.", url: "https://reactnative.dev" },
       { name: "Tailwind CSS", description: "Utility-first CSS. The only way to write styles at speed.", url: "https://tailwindcss.com" },
     ],
   },
@@ -49,7 +49,7 @@ const FALLBACK_CATEGORIES: UsesCategory[] = [
   {
     name: "Services & Platforms",
     items: [
-      { name: "Supabase", description: "Auth + Postgres — removes a lot of backend boilerplate.", url: "https://supabase.com" },
+      { name: "Supabase", description: "Auth and Postgres: removes a lot of backend boilerplate.", url: "https://supabase.com" },
       { name: "Sanity", description: "Headless CMS. Powers this portfolio.", url: "https://sanity.io" },
       { name: "GitHub Actions", description: "CI/CD pipelines for automated testing and deployment.", url: "https://github.com/features/actions" },
     ],
