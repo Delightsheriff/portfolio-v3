@@ -10,6 +10,8 @@ import { ScrollReveal } from "./animations/scroll-reveal";
 import { AnimatedCounter } from "./animations/animated-counter";
 import { SparkLink } from "./animations/spark-button";
 import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import type { Project } from "@/interface/sanity";
 import Footer from "./nav/footer";
@@ -129,7 +131,10 @@ export function ProjectPage({ project }: ProjectPageProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`Download ${project.title} on the App Store`}
-                          className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-highlight"
+                          className={cn(
+                            buttonVariants({ variant: "default" }),
+                            "rounded-full px-5 py-2.5 h-auto",
+                          )}
                         >
                           <svg
                             className="h-4 w-4"
@@ -148,7 +153,10 @@ export function ProjectPage({ project }: ProjectPageProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`Get ${project.title} on Google Play`}
-                          className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-highlight"
+                          className={cn(
+                            buttonVariants({ variant: "default" }),
+                            "rounded-full px-5 py-2.5 h-auto",
+                          )}
                         >
                           <svg
                             className="h-4 w-4"
@@ -167,7 +175,10 @@ export function ProjectPage({ project }: ProjectPageProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`Visit ${project.title} website`}
-                          className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors hover:border-foreground"
+                          className={cn(
+                            buttonVariants({ variant: "outline" }),
+                            "rounded-full px-5 py-2.5 h-auto",
+                          )}
                         >
                           <ExternalLink className="h-4 w-4" aria-hidden="true" />
                           Website
@@ -179,7 +190,10 @@ export function ProjectPage({ project }: ProjectPageProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`View ${project.title} source on GitHub`}
-                          className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors hover:border-foreground"
+                          className={cn(
+                            buttonVariants({ variant: "outline" }),
+                            "rounded-full px-5 py-2.5 h-auto",
+                          )}
                         >
                           <Github className="h-4 w-4" aria-hidden="true" />
                           Source
@@ -191,7 +205,10 @@ export function ProjectPage({ project }: ProjectPageProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`${project.title} demo video`}
-                          className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors hover:border-foreground"
+                          className={cn(
+                            buttonVariants({ variant: "outline" }),
+                            "rounded-full px-5 py-2.5 h-auto",
+                          )}
                         >
                           <Play className="h-4 w-4" aria-hidden="true" />
                           Watch Demo
@@ -204,7 +221,10 @@ export function ProjectPage({ project }: ProjectPageProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`${repo.label} repository`}
-                          className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors hover:border-foreground"
+                          className={cn(
+                            buttonVariants({ variant: "outline" }),
+                            "rounded-full px-5 py-2.5 h-auto",
+                          )}
                         >
                           <GitBranch className="h-4 w-4" aria-hidden="true" />
                           {repo.label}
@@ -219,7 +239,10 @@ export function ProjectPage({ project }: ProjectPageProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`View ${project.title} live demo`}
-                          className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-highlight"
+                          className={cn(
+                            buttonVariants({ variant: "default" }),
+                            "rounded-full px-5 py-2.5 h-auto",
+                          )}
                         >
                           <ExternalLink className="h-4 w-4" aria-hidden="true" />
                           Live Demo
@@ -231,7 +254,10 @@ export function ProjectPage({ project }: ProjectPageProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`${project.title} API documentation`}
-                          className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-highlight"
+                          className={cn(
+                            buttonVariants({ variant: "default" }),
+                            "rounded-full px-5 py-2.5 h-auto",
+                          )}
                         >
                           <FileText className="h-4 w-4" aria-hidden="true" />
                           API Docs
@@ -243,7 +269,10 @@ export function ProjectPage({ project }: ProjectPageProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`${project.title} demo video`}
-                          className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-highlight"
+                          className={cn(
+                            buttonVariants({ variant: "default" }),
+                            "rounded-full px-5 py-2.5 h-auto",
+                          )}
                         >
                           <Play className="h-4 w-4" aria-hidden="true" />
                           Watch Demo
@@ -255,7 +284,10 @@ export function ProjectPage({ project }: ProjectPageProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`View ${project.title} source on GitHub`}
-                          className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors hover:border-foreground"
+                          className={cn(
+                            buttonVariants({ variant: "outline" }),
+                            "rounded-full px-5 py-2.5 h-auto",
+                          )}
                         >
                           <Github className="h-4 w-4" aria-hidden="true" />
                           Source
@@ -268,7 +300,10 @@ export function ProjectPage({ project }: ProjectPageProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`${repo.label} repository`}
-                          className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors hover:border-foreground"
+                          className={cn(
+                            buttonVariants({ variant: "outline" }),
+                            "rounded-full px-5 py-2.5 h-auto",
+                          )}
                         >
                           <GitBranch className="h-4 w-4" aria-hidden="true" />
                           {repo.label}
@@ -600,7 +635,10 @@ export function ProjectPage({ project }: ProjectPageProps) {
                     </div>
                     <Link
                       href={`/project/${project.nextProject.slug}`}
-                      className="group inline-flex flex-shrink-0 items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium transition-all hover:border-foreground hover:bg-foreground hover:text-background"
+                      className={cn(
+                        buttonVariants({ variant: "outline" }),
+                        "rounded-full px-6 py-3 h-auto group",
+                      )}
                       aria-label={`View next project: ${project.nextProject.title}`}
                     >
                       View Project
