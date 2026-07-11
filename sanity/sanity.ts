@@ -20,10 +20,15 @@ const PROJECT_FIELDS = `
   stack,
   mainImage,
   githubUrl,
+  repoUrls,
   liveUrl,
+  apiDocsUrl,
+  demoVideoUrl,
   iosUrl,
   androidUrl,
+  impactMetric,
   challenge,
+  architecture,
   solution,
   results,
   images,
@@ -87,7 +92,7 @@ export async function getProjects() {
       "Error fetching from Sanity, using fallback projects data:",
       error,
     );
-    return;
+    return [];
   }
 }
 
@@ -177,6 +182,7 @@ export async function getAbout() {
       "Error fetching about from Sanity, using fallback data:",
       error,
     );
+    return {};
   }
 }
 
@@ -195,13 +201,14 @@ export async function getHero() {
         ctaText,
         ctaLink,
         status,
-        location
+        location,
+        stackPills
       }
     `);
     return hero;
   } catch (error) {
     console.log("Error fetching hero from Sanity, using fallback data:", error);
-    return;
+    return {};
   }
 }
 
@@ -295,5 +302,93 @@ export async function getVideoPitch() {
   }
 }
 
-// Blog functions removed — blog is disabled (content preserved in Sanity).
-// To re-enable, restore these queries and the app/blog routes.
+export async function getFeaturedProjectGroups() {
+  if (!client) return [];
+  try {
+    const groups = await client.fetch(`
+      *[_type == "projectGroup" && visible == true && featured == true]
+        | order(coalesce(order, 9999) asc, _createdAt desc) {
+          _id,
+          title,
+          slug,
+          description,
+          year,
+          featured,
+          visible,
+          order,
+          parts[] {
+            label,
+            project-> {
+              ${PROJECT_FIELDS}
+            }
+          }
+        }
+    `);
+    return groups ?? [];
+  } catch (error) {
+    console.log("Error fetching project groups:", error);
+    return [];
+  }
+}
+
+export async function getUses() {
+  if (!client) return null;
+  try {
+    const uses = await client.fetch(`
+      *[_type == "uses"][0] {
+        title,
+        description,
+        categories,
+        updatedLabel
+      }
+    `);
+    return uses;
+  } catch (error) {
+    console.log("Error fetching uses from Sanity:", error);
+    return null;
+  }
+}
+
+// Blog queries: re-enabled for blog page
+export async function getAllBlogs() {
+  try {
+    const blogs = await client.fetch(
+      `*[_type == "blog" && visible == true] | order(publishedAt desc) {
+        _id,
+        title,
+        "slug": slug.current,
+        excerpt,
+        body,
+        publishedAt,
+        featured,
+        author
+      }`
+    );
+    return blogs;
+  } catch (error) {
+    console.log("Error fetching blogs from Sanity:", error);
+    return [];
+  }
+}
+
+export async function getBlogBySlug(slug: string) {
+  try {
+    const blog = await client.fetch(
+      `*[_type == "blog" && slug.current == $slug][0] {
+        _id,
+        title,
+        "slug": slug.current,
+        excerpt,
+        body,
+        publishedAt,
+        featured,
+        author
+      }`,
+      { slug }
+    );
+    return blog;
+  } catch (error) {
+    console.log("Error fetching blog from Sanity:", error);
+    return null;
+  }
+}

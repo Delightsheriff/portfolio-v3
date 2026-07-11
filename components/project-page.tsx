@@ -1,12 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, ExternalLink, ArrowRight } from "lucide-react";
+import { Github, ExternalLink, ArrowRight, FileText, Play, GitBranch } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import GoBack from "./go-back";
 import { urlFor } from "@/sanity/sanity";
 import { ScrollReveal } from "./animations/scroll-reveal";
+import { AnimatedCounter } from "./animations/animated-counter";
+import { SparkLink } from "./animations/spark-button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import type { Project } from "@/interface/sanity";
@@ -111,7 +113,7 @@ export function ProjectPage({ project }: ProjectPageProps) {
                   )}
                 </div>
 
-                <h1 className="mb-5 text-4xl font-serif leading-tight sm:text-5xl lg:text-6xl">
+                <h1 className="mb-5 text-4xl font-heading font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
                   {project.title}
                 </h1>
                 <p className="mb-8 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
@@ -122,7 +124,7 @@ export function ProjectPage({ project }: ProjectPageProps) {
                   {isMobile ? (
                     <>
                       {project.iosUrl && (
-                        <a
+                        <SparkLink
                           href={project.iosUrl}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -138,10 +140,10 @@ export function ProjectPage({ project }: ProjectPageProps) {
                             <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
                           </svg>
                           App Store
-                        </a>
+                        </SparkLink>
                       )}
                       {project.androidUrl && (
-                        <a
+                        <SparkLink
                           href={project.androidUrl}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -157,10 +159,10 @@ export function ProjectPage({ project }: ProjectPageProps) {
                             <path d="M3 20.5v-17c0-.83 1-.9 1.4-.5l14.6 8.5-14.6 8.5c-.4.4-1.4.33-1.4-.5zM3.5 4.5l10.4 6.06-10.4 6.06V4.5z" />
                           </svg>
                           Play Store
-                        </a>
+                        </SparkLink>
                       )}
                       {project.liveUrl && (
-                        <a
+                        <SparkLink
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -169,10 +171,10 @@ export function ProjectPage({ project }: ProjectPageProps) {
                         >
                           <ExternalLink className="h-4 w-4" aria-hidden="true" />
                           Website
-                        </a>
+                        </SparkLink>
                       )}
                       {project.githubUrl && (
-                        <a
+                        <SparkLink
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -180,14 +182,39 @@ export function ProjectPage({ project }: ProjectPageProps) {
                           className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors hover:border-foreground"
                         >
                           <Github className="h-4 w-4" aria-hidden="true" />
-                          View Source
-                        </a>
+                          Source
+                        </SparkLink>
                       )}
+                      {project.demoVideoUrl && (
+                        <SparkLink
+                          href={project.demoVideoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${project.title} demo video`}
+                          className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors hover:border-foreground"
+                        >
+                          <Play className="h-4 w-4" aria-hidden="true" />
+                          Watch Demo
+                        </SparkLink>
+                      )}
+                      {project.repoUrls && project.repoUrls.map((repo, i) => (
+                        <SparkLink
+                          key={i}
+                          href={repo.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${repo.label} repository`}
+                          className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors hover:border-foreground"
+                        >
+                          <GitBranch className="h-4 w-4" aria-hidden="true" />
+                          {repo.label}
+                        </SparkLink>
+                      ))}
                     </>
                   ) : (
                     <>
                       {project.liveUrl && (
-                        <a
+                        <SparkLink
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -196,10 +223,34 @@ export function ProjectPage({ project }: ProjectPageProps) {
                         >
                           <ExternalLink className="h-4 w-4" aria-hidden="true" />
                           Live Demo
-                        </a>
+                        </SparkLink>
+                      )}
+                      {project.apiDocsUrl && (
+                        <SparkLink
+                          href={project.apiDocsUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${project.title} API documentation`}
+                          className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-highlight"
+                        >
+                          <FileText className="h-4 w-4" aria-hidden="true" />
+                          API Docs
+                        </SparkLink>
+                      )}
+                      {project.demoVideoUrl && (
+                        <SparkLink
+                          href={project.demoVideoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${project.title} demo video`}
+                          className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-highlight"
+                        >
+                          <Play className="h-4 w-4" aria-hidden="true" />
+                          Watch Demo
+                        </SparkLink>
                       )}
                       {project.githubUrl && (
-                        <a
+                        <SparkLink
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -207,9 +258,22 @@ export function ProjectPage({ project }: ProjectPageProps) {
                           className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors hover:border-foreground"
                         >
                           <Github className="h-4 w-4" aria-hidden="true" />
-                          View Source
-                        </a>
+                          Source
+                        </SparkLink>
                       )}
+                      {project.repoUrls && project.repoUrls.map((repo, i) => (
+                        <SparkLink
+                          key={i}
+                          href={repo.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${repo.label} repository`}
+                          className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors hover:border-foreground"
+                        >
+                          <GitBranch className="h-4 w-4" aria-hidden="true" />
+                          {repo.label}
+                        </SparkLink>
+                      ))}
                     </>
                   )}
                 </div>
@@ -359,6 +423,28 @@ export function ProjectPage({ project }: ProjectPageProps) {
 
           <Separator className="mx-auto max-w-7xl px-5 md:px-8" />
 
+          {project.impactMetric && (
+            <section className="px-5 py-16 md:px-8 bg-muted/30">
+              <div className="mx-auto max-w-7xl">
+                <ScrollReveal>
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-8">
+                    <div className="md:col-span-3">
+                      <p className="mb-2.5 text-xs uppercase tracking-[0.15em] text-muted-foreground font-mono">
+                        The Impact
+                      </p>
+                    </div>
+                    <div className="md:col-span-8 md:col-start-5">
+                      <AnimatedCounter
+                        value={project.impactMetric.value}
+                        label={project.impactMetric.label}
+                      />
+                    </div>
+                  </div>
+                </ScrollReveal>
+              </div>
+            </section>
+          )}
+
           <section className="px-5 py-16 md:px-8">
             <div className="mx-auto max-w-7xl space-y-20">
               {project.challenge && (
@@ -368,7 +454,7 @@ export function ProjectPage({ project }: ProjectPageProps) {
                       <span className="mb-2 block text-xs uppercase tracking-[0.15em] text-muted-foreground/60 font-mono">
                         01
                       </span>
-                      <h2 className="text-2xl font-serif md:text-3xl">
+                      <h2 className="text-2xl font-heading font-bold md:text-3xl tracking-tight">
                         The Challenge
                       </h2>
                     </div>
@@ -381,14 +467,34 @@ export function ProjectPage({ project }: ProjectPageProps) {
                 </ScrollReveal>
               )}
 
-              {project.solution && (
+              {project.architecture && (
                 <ScrollReveal>
                   <div className="grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-8">
                     <div className="md:col-span-3">
                       <span className="mb-2 block text-xs uppercase tracking-[0.15em] text-muted-foreground/60 font-mono">
                         02
                       </span>
-                      <h2 className="text-2xl font-serif md:text-3xl">
+                      <h2 className="text-2xl font-heading font-bold md:text-3xl tracking-tight">
+                        The Architecture
+                      </h2>
+                    </div>
+                    <div className="md:col-span-8 md:col-start-5">
+                      <p className="text-base leading-relaxed text-foreground/90 md:text-lg">
+                        {project.architecture}
+                      </p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              )}
+
+              {project.solution && (
+                <ScrollReveal>
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-8">
+                    <div className="md:col-span-3">
+                      <span className="mb-2 block text-xs uppercase tracking-[0.15em] text-muted-foreground/60 font-mono">
+                        {project.architecture ? "03" : "02"}
+                      </span>
+                      <h2 className="text-2xl font-heading font-bold md:text-3xl tracking-tight">
                         The Solution
                       </h2>
                     </div>
@@ -435,9 +541,9 @@ export function ProjectPage({ project }: ProjectPageProps) {
                   <div className="grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-8">
                     <div className="md:col-span-3">
                       <span className="mb-2 block text-xs uppercase tracking-[0.15em] text-muted-foreground/60 font-mono">
-                        03
+                        {project.architecture ? "04" : "03"}
                       </span>
-                      <h2 className="text-2xl font-serif md:text-3xl">
+                      <h2 className="text-2xl font-heading font-bold md:text-3xl tracking-tight">
                         The Results
                       </h2>
                     </div>

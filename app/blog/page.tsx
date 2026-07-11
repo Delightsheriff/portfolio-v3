@@ -1,12 +1,15 @@
-import { redirect } from "next/navigation";
 import type { Metadata } from "next";
-
-// Blog is temporarily disabled — redirecting visitors to homepage.
-// Schema and content are preserved in Sanity; re-enable by restoring this page.
-export default function BlogPage() {
-  redirect("/");
-}
+import { BlogPage } from "@/components/blog-page";
+import { getAllBlogs } from "@/sanity/sanity";
 
 export const metadata: Metadata = {
-  robots: { index: false, follow: false },
+  title: "Blog: Articles & Insights",
+  description:
+    "Technical articles on React, Node.js, React Native, and building production systems.",
 };
+
+export default async function Page() {
+  const posts = await getAllBlogs();
+
+  return <BlogPage posts={posts} />;
+}

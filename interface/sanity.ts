@@ -31,10 +31,15 @@ export interface Project {
   stack: string[];
   mainImage: SanityImage | null;
   githubUrl?: string;
+  repoUrls?: { label: string; url: string }[];
   liveUrl?: string;
+  apiDocsUrl?: string;
+  demoVideoUrl?: string;
   iosUrl?: string;
   androidUrl?: string;
+  impactMetric?: { value: string; label: string };
   challenge: string;
+  architecture?: string;
   solution: string;
   results: string[];
   images: (SanityImage | null)[];
@@ -70,6 +75,7 @@ export interface Hero {
   ctaLink: string;
   status: string;
   location: string;
+  stackPills?: string[];
 }
 
 export interface Experience {
@@ -117,6 +123,41 @@ export interface VideoPitch {
   duration: string;
   topics: string[];
   enabled: boolean;
+}
+
+export interface ProjectGroupPart {
+  label: string;
+  project: Project;
+}
+
+export interface ProjectGroup {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  description: string;
+  parts: ProjectGroupPart[];
+  year?: string;
+  featured: boolean;
+  visible: boolean;
+  order?: number;
+}
+
+export interface UsesItem {
+  name: string;
+  description?: string;
+  url?: string;
+}
+
+export interface UsesCategory {
+  name: string;
+  items: UsesItem[];
+}
+
+export interface Uses {
+  title: string;
+  description?: string;
+  categories: UsesCategory[];
+  updatedLabel?: string;
 }
 
 // BlogPost interface preserved for when blog is re-enabled.

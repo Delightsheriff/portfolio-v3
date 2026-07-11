@@ -5,9 +5,9 @@ import type { Metadata } from "next";
 import type { Resume } from "@/interface/sanity";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const title = "Resume — Amadi-Sheriff Delight";
+  const title = "Resume: Amadi-Sheriff Delight";
   const description =
-    "Professional resume of Amadi-Sheriff Delight — Software Engineer & Mobile Developer with expertise in React, Next.js, React Native, and Node.js.";
+    "Professional resume of Amadi-Sheriff Delight: Software Engineer & Mobile Developer with expertise in React, Next.js, React Native, and Node.js.";
 
   return {
     title,
