@@ -4,6 +4,7 @@ import type { Hero } from "@/interface/sanity";
 import { motion, type MotionValue } from "framer-motion";
 import { ArrowRight, ArrowDownRight } from "lucide-react";
 import Link from "next/link";
+import { SparkLink } from "./animations/spark-button";
 
 const DEFAULT_STACK = [
   "TypeScript",
@@ -150,7 +151,7 @@ export default function HeroSection({
           transition={{ duration: 0.5, delay: 1.3 }}
           className="flex flex-wrap items-center gap-4 mb-16"
         >
-          <Link
+          <SparkLink
             href={hero?.ctaLink ?? "#work"}
             className="group inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background text-sm font-medium rounded-full hover:bg-highlight hover:text-highlight-foreground transition-all duration-300 animate-glow-pulse"
           >
@@ -159,7 +160,7 @@ export default function HeroSection({
               className="w-4 h-4 transition-transform group-hover:translate-x-1"
               aria-hidden="true"
             />
-          </Link>
+          </SparkLink>
 
           <a
             href="#contact"

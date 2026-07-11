@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Project } from "@/interface/sanity";
 import { Badge } from "@/components/ui/badge";
+import { SparkLink } from "./animations/spark-button";
 
 interface ProjectCardProps {
   project: Project;
@@ -201,7 +202,7 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
 
           {/* Mobile store links */}
           {project.iosUrl && (
-            <a
+            <SparkLink
               href={project.iosUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -210,10 +211,10 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
             >
               <Smartphone className="w-3.5 h-3.5" aria-hidden="true" />
               iOS
-            </a>
+            </SparkLink>
           )}
           {project.androidUrl && (
-            <a
+            <SparkLink
               href={project.androidUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -222,11 +223,11 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
             >
               <Smartphone className="w-3.5 h-3.5" aria-hidden="true" />
               Android
-            </a>
+            </SparkLink>
           )}
           {/* Web / live demo */}
           {project.liveUrl && (
-            <a
+            <SparkLink
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -235,11 +236,11 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
             >
               <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
               Live
-            </a>
+            </SparkLink>
           )}
           {/* API docs — backend projects */}
           {project.apiDocsUrl && (
-            <a
+            <SparkLink
               href={project.apiDocsUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -248,11 +249,11 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
             >
               <FileText className="w-3.5 h-3.5" aria-hidden="true" />
               API Docs
-            </a>
+            </SparkLink>
           )}
           {/* Demo video */}
           {project.demoVideoUrl && (
-            <a
+            <SparkLink
               href={project.demoVideoUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -261,7 +262,7 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
             >
               <Play className="w-3.5 h-3.5" aria-hidden="true" />
               Demo
-            </a>
+            </SparkLink>
           )}
         </div>
       </div>
