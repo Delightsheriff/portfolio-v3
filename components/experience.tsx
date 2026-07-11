@@ -1,6 +1,8 @@
 import { ScrollReveal } from "./animations/scroll-reveal";
 import type { Experience } from "@/interface/sanity";
 import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import { ArrowRight } from "lucide-react";
 
@@ -43,7 +45,10 @@ export default function Experiences({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="View full resume (opens in new tab)"
-                className="hidden md:inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group font-mono shrink-0"
+                className={cn(
+                  buttonVariants({ variant: "link" }),
+                  "hidden md:inline-flex shrink-0",
+                )}
               >
                 Full resume
                 <ArrowRight
@@ -153,7 +158,9 @@ export default function Experiences({
                 href={resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors font-mono"
+                className={cn(
+                  buttonVariants({ variant: "link" }),
+                )}
                 aria-label="View full resume (opens in new tab)"
               >
                 View full resume
