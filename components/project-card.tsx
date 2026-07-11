@@ -2,7 +2,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Github, ExternalLink, Smartphone } from "lucide-react";
+import { ArrowUpRight, Github, ExternalLink, Smartphone, FileText, Play } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Project } from "@/interface/sanity";
@@ -31,7 +31,7 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
   const imageUrl = project.mainImage
     ? urlFor(project.mainImage).url()
     : "/placeholder.svg";
-  const hasLiveLinks = project.liveUrl || project.iosUrl || project.androidUrl;
+  const hasLiveLinks = project.liveUrl || project.iosUrl || project.androidUrl || project.apiDocsUrl || project.demoVideoUrl;
 
   return (
     <motion.article
@@ -198,58 +198,69 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
             </a>
           )}
 
-          {isMobile ? (
-            <>
-              {project.iosUrl && (
-                <a
-                  href={project.iosUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${project.title} on App Store`}
-                  className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <Smartphone className="w-3.5 h-3.5" aria-hidden="true" />
-                  iOS
-                </a>
-              )}
-              {project.androidUrl && (
-                <a
-                  href={project.androidUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${project.title} on Google Play`}
-                  className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <Smartphone className="w-3.5 h-3.5" aria-hidden="true" />
-                  Android
-                </a>
-              )}
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`${project.title} live website`}
-                  className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
-                  Web
-                </a>
-              )}
-            </>
-          ) : (
-            project.liveUrl && (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${project.title} live demo`}
-                className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
-                Live
-              </a>
-            )
+          {/* Mobile store links */}
+          {project.iosUrl && (
+            <a
+              href={project.iosUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${project.title} on App Store`}
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Smartphone className="w-3.5 h-3.5" aria-hidden="true" />
+              iOS
+            </a>
+          )}
+          {project.androidUrl && (
+            <a
+              href={project.androidUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${project.title} on Google Play`}
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Smartphone className="w-3.5 h-3.5" aria-hidden="true" />
+              Android
+            </a>
+          )}
+          {/* Web / live demo */}
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${project.title} live demo`}
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+              Live
+            </a>
+          )}
+          {/* API docs — backend projects */}
+          {project.apiDocsUrl && (
+            <a
+              href={project.apiDocsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${project.title} API documentation`}
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <FileText className="w-3.5 h-3.5" aria-hidden="true" />
+              API Docs
+            </a>
+          )}
+          {/* Demo video */}
+          {project.demoVideoUrl && (
+            <a
+              href={project.demoVideoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${project.title} demo video`}
+              className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Play className="w-3.5 h-3.5" aria-hidden="true" />
+              Demo
+            </a>
           )}
         </div>
       </div>

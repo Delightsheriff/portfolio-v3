@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, ExternalLink, ArrowRight } from "lucide-react";
+import { Github, ExternalLink, ArrowRight, FileText, Play, GitBranch } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import GoBack from "./go-back";
@@ -180,9 +180,34 @@ export function ProjectPage({ project }: ProjectPageProps) {
                           className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors hover:border-foreground"
                         >
                           <Github className="h-4 w-4" aria-hidden="true" />
-                          View Source
+                          Source
                         </a>
                       )}
+                      {project.demoVideoUrl && (
+                        <a
+                          href={project.demoVideoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${project.title} demo video`}
+                          className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors hover:border-foreground"
+                        >
+                          <Play className="h-4 w-4" aria-hidden="true" />
+                          Watch Demo
+                        </a>
+                      )}
+                      {project.repoUrls && project.repoUrls.map((repo, i) => (
+                        <a
+                          key={i}
+                          href={repo.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${repo.label} repository`}
+                          className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors hover:border-foreground"
+                        >
+                          <GitBranch className="h-4 w-4" aria-hidden="true" />
+                          {repo.label}
+                        </a>
+                      ))}
                     </>
                   ) : (
                     <>
@@ -198,6 +223,30 @@ export function ProjectPage({ project }: ProjectPageProps) {
                           Live Demo
                         </a>
                       )}
+                      {project.apiDocsUrl && (
+                        <a
+                          href={project.apiDocsUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${project.title} API documentation`}
+                          className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-highlight"
+                        >
+                          <FileText className="h-4 w-4" aria-hidden="true" />
+                          API Docs
+                        </a>
+                      )}
+                      {project.demoVideoUrl && (
+                        <a
+                          href={project.demoVideoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${project.title} demo video`}
+                          className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-highlight"
+                        >
+                          <Play className="h-4 w-4" aria-hidden="true" />
+                          Watch Demo
+                        </a>
+                      )}
                       {project.githubUrl && (
                         <a
                           href={project.githubUrl}
@@ -207,9 +256,22 @@ export function ProjectPage({ project }: ProjectPageProps) {
                           className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors hover:border-foreground"
                         >
                           <Github className="h-4 w-4" aria-hidden="true" />
-                          View Source
+                          Source
                         </a>
                       )}
+                      {project.repoUrls && project.repoUrls.map((repo, i) => (
+                        <a
+                          key={i}
+                          href={repo.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${repo.label} repository`}
+                          className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors hover:border-foreground"
+                        >
+                          <GitBranch className="h-4 w-4" aria-hidden="true" />
+                          {repo.label}
+                        </a>
+                      ))}
                     </>
                   )}
                 </div>

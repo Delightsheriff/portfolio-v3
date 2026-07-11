@@ -31,7 +31,10 @@ export interface Project {
   stack: string[];
   mainImage: SanityImage | null;
   githubUrl?: string;
+  repoUrls?: { label: string; url: string }[];
   liveUrl?: string;
+  apiDocsUrl?: string;
+  demoVideoUrl?: string;
   iosUrl?: string;
   androidUrl?: string;
   metrics?: string[];

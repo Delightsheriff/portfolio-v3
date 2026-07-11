@@ -180,11 +180,42 @@ const projects = {
       name: "githubUrl",
       title: "GitHub URL",
       type: "url",
+      description: "Primary / monorepo root GitHub URL",
+    }),
+    defineField({
+      name: "repoUrls",
+      title: "Additional Repo URLs",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "label", title: "Label", type: "string", description: 'e.g. "Backend", "Mobile App", "Admin Panel"' },
+            { name: "url", title: "URL", type: "url" },
+          ],
+          preview: {
+            select: { title: "label", subtitle: "url" },
+          },
+        },
+      ],
+      description: "For monorepos or multi-repo projects — add individual service/package repo links",
     }),
     defineField({
       name: "liveUrl",
-      title: "Live Demo URL",
+      title: "Live Demo / Web URL",
       type: "url",
+    }),
+    defineField({
+      name: "apiDocsUrl",
+      title: "API Docs URL",
+      type: "url",
+      description: "Swagger / Postman / Scalar API documentation link — great for backend projects",
+    }),
+    defineField({
+      name: "demoVideoUrl",
+      title: "Demo Video URL",
+      type: "url",
+      description: "YouTube or direct video URL — used for mobile/backend projects where a live link is not available",
     }),
     defineField({
       name: "iosUrl",
@@ -196,8 +227,7 @@ const projects = {
       name: "androidUrl",
       title: "Google Play Store URL",
       type: "url",
-      description:
-        "Link to the Google Play Store listing (mobile projects only)",
+      description: "Link to the Google Play Store listing (mobile projects only)",
     }),
     defineField({
       name: "metrics",
