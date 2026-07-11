@@ -1,11 +1,9 @@
 import { createClient, type ClientConfig } from "@sanity/client";
-
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "dummy-project-id";
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
+import { EnvVariables } from "@/lib/env";
 
 const config: ClientConfig = {
-  projectId,
-  dataset,
+  projectId: EnvVariables.SANITY_PROJECT_ID,
+  dataset: EnvVariables.SANITY_DATASET,
   apiVersion: "2024-12-16",
   useCdn: process.env.NODE_ENV === "production",
 };
