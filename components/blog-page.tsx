@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight, PenTool } from "lucide-react";
 import GoBack from "./go-back";
 import Footer from "./nav/footer";
+import { Button } from "@/components/ui/button";
 
 interface BlogPost {
   _id: string;
@@ -76,13 +77,16 @@ export function BlogPage({ posts }: { posts: BlogPost[] }) {
                 transition={{ delay: 0.4, duration: 0.5 }}
                 className="pt-8"
               >
-                <Link
-                  href="/"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background text-sm font-medium rounded-full hover:bg-highlight hover:text-highlight-foreground transition-all duration-300"
+                <Button
+                  variant="default"
+                  className="rounded-full px-6 py-3 h-auto"
+                  asChild
                 >
-                  Back to Home
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+                  <Link href="/">
+                    Back to Home
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </Button>
               </motion.div>
             </motion.div>
           </div>
