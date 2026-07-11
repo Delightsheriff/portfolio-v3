@@ -63,29 +63,13 @@ export default function Works({
       <div className="max-w-7xl mx-auto">
         {/* Section header */}
         <ScrollReveal>
-          <div className="flex items-end justify-between mb-14 md:mb-20">
-            <div className="max-w-xl">
-              <p className="text-xs font-mono uppercase tracking-[0.25em] text-muted-foreground/60 mb-3">
-                Selected Works
-              </p>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight tracking-tight">
-                Projects that define my craft
-              </h2>
-            </div>
-            <Link
-              href="/projects"
-              aria-label={`View all ${allProjects.length} projects`}
-              className={cn(
-                buttonVariants({ variant: "link" }),
-                "hidden md:inline-flex shrink-0",
-              )}
-            >
-              All projects ({allProjects.length})
-              <ArrowRight
-                className="w-4 h-4 transition-transform group-hover:translate-x-1"
-                aria-hidden="true"
-              />
-            </Link>
+          <div className="mb-14 md:mb-20">
+            <p className="text-xs font-mono uppercase tracking-[0.25em] text-muted-foreground/60 mb-3">
+              Selected Works
+            </p>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight tracking-tight">
+              Projects that define my craft
+            </h2>
           </div>
         </ScrollReveal>
 
@@ -129,9 +113,9 @@ export default function Works({
           </ScrollReveal>
         )}
 
-        {/* Mobile: see all */}
+        {/* CTA row */}
         <ScrollReveal>
-          <div className="mt-10 flex md:hidden justify-center">
+          <div className="mt-14 flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/projects"
               className={cn(
@@ -142,12 +126,6 @@ export default function Works({
               All Projects ({allProjects.length})
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </Link>
-          </div>
-        </ScrollReveal>
-
-        {/* GitHub CTA */}
-        <ScrollReveal>
-          <div className="mt-14 text-center">
             <a
               href="https://github.com/Delightsheriff"
               target="_blank"
