@@ -290,18 +290,17 @@ export function ProjectGroupCard({
                 </div>
               )}
 
-            {/* Active part metrics */}
-            {activePart?.project?.metrics &&
-              activePart.project.metrics.length > 0 && (
-                <div className="flex flex-wrap gap-1.5" aria-label="Key outcomes">
-                  {activePart.project.metrics.map((m, i) => (
-                    <span
-                      key={i}
-                      className="px-2.5 py-1 rounded-md text-xs font-mono border border-highlight/25 text-highlight/80 bg-highlight/5"
-                    >
-                      {m}
+            {/* Active part impact metric */}
+            {activePart?.project?.impactMetric && (
+                <div className="py-2 px-3 rounded-lg border border-highlight/20 bg-highlight/5" aria-label="Impact metric">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-xl font-heading font-bold text-highlight">
+                      {activePart.project.impactMetric.value}
                     </span>
-                  ))}
+                    <span className="text-xs font-mono text-muted-foreground">
+                      {activePart.project.impactMetric.label}
+                    </span>
+                  </div>
                 </div>
               )}
 

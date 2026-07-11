@@ -135,17 +135,18 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
           {project.description}
         </p>
 
-        {/* Metrics callout */}
-        {project.metrics && project.metrics.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 pt-0.5" aria-label="Key outcomes">
-            {project.metrics.map((metric, i) => (
-              <span
-                key={i}
-                className="px-2.5 py-1 rounded-md text-xs font-mono border border-highlight/25 text-highlight/80 bg-highlight/5"
-              >
-                {metric}
+        {/* Impact metric callout */}
+        {project.impactMetric && (
+          <div className="py-3 px-4 rounded-lg border border-highlight/20 bg-highlight/5 backdrop-blur-sm">
+            <div className="text-sm text-muted-foreground mb-1">Impact</div>
+            <div className="flex items-baseline gap-2">
+              <span className="text-2xl md:text-3xl font-heading font-bold text-highlight">
+                {project.impactMetric.value}
               </span>
-            ))}
+              <span className="text-xs md:text-sm font-mono text-muted-foreground">
+                {project.impactMetric.label}
+              </span>
+            </div>
           </div>
         )}
 

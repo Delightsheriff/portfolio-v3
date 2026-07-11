@@ -26,7 +26,7 @@ const PROJECT_FIELDS = `
   demoVideoUrl,
   iosUrl,
   androidUrl,
-  metrics,
+  impactMetric,
   challenge,
   architecture,
   solution,

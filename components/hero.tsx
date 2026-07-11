@@ -152,7 +152,7 @@ export default function HeroSection({
         >
           <Link
             href={hero?.ctaLink ?? "#work"}
-            className="group inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background text-sm font-medium rounded-full hover:bg-highlight hover:text-highlight-foreground transition-all duration-300"
+            className="group inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background text-sm font-medium rounded-full hover:bg-highlight hover:text-highlight-foreground transition-all duration-300 animate-glow-pulse"
           >
             {hero?.ctaText ?? "View My Work"}
             <ArrowRight

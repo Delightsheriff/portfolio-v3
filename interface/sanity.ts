@@ -37,7 +37,7 @@ export interface Project {
   demoVideoUrl?: string;
   iosUrl?: string;
   androidUrl?: string;
-  metrics?: string[];
+  impactMetric?: { value: string; label: string };
   challenge: string;
   architecture?: string;
   solution: string;
