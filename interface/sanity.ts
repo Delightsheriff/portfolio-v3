@@ -125,6 +125,23 @@ export interface VideoPitch {
   enabled: boolean;
 }
 
+export interface ProjectGroupPart {
+  label: string;
+  project: Project;
+}
+
+export interface ProjectGroup {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  description: string;
+  parts: ProjectGroupPart[];
+  year?: string;
+  featured: boolean;
+  visible: boolean;
+  order?: number;
+}
+
 export interface UsesItem {
   name: string;
   description?: string;
