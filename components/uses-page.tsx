@@ -1,48 +1,57 @@
 import { ScrollReveal } from "./animations/scroll-reveal";
-import type { Uses } from "@/interface/sanity";
+import type { Uses, UsesCategory } from "@/interface/sanity";
 import { ArrowUpRight } from "lucide-react";
 import Footer from "./nav/footer";
 import GoBack from "./go-back";
 
-const FALLBACK_CATEGORIES = [
+const FALLBACK_CATEGORIES: UsesCategory[] = [
   {
     name: "Editor & Terminal",
     items: [
-      { name: "VS Code", description: "Primary editor. Clean, fast, great TypeScript support." },
-      { name: "Zsh + Oh My Zsh", description: "Terminal shell with custom aliases and plugins." },
+      { name: "VS Code", description: "Primary editor. Clean, fast, great TypeScript support.", url: "https://code.visualstudio.com" },
+      { name: "Zsh + Oh My Zsh", description: "Terminal shell with custom aliases and plugins.", url: "https://ohmyz.sh" },
+    ],
+  },
+  {
+    name: "AI & Developer Tools",
+    items: [
+      { name: "Claude Code", description: "Agentic coding assistant. My go-to for complex refactors and architecture decisions.", url: "https://claude.ai/code" },
+      { name: "OpenCode", description: "Open-source AI coding agent that runs in the terminal.", url: "https://opencode.ai" },
+      { name: "Antigravity", description: "AI-powered developer assistant for fast iteration.", url: "https://antigravity.dev" },
+      { name: "Codex", description: "OpenAI Codex — useful for boilerplate generation and API exploration.", url: "https://openai.com/codex" },
     ],
   },
   {
     name: "Languages & Runtimes",
     items: [
-      { name: "TypeScript", description: "Everything. Web, backend, mobile — all TypeScript." },
-      { name: "Node.js", description: "Runtime for backend services and APIs." },
+      { name: "TypeScript", description: "Everything. Web, backend, mobile — all TypeScript.", url: "https://www.typescriptlang.org" },
+      { name: "Node.js", description: "Runtime for backend services and APIs.", url: "https://nodejs.org" },
     ],
   },
   {
     name: "Frontend & Mobile",
     items: [
-      { name: "Next.js", description: "Primary framework for web applications." },
-      { name: "React Native", description: "Cross-platform mobile — iOS and Android from one codebase." },
-      { name: "Tailwind CSS", description: "Utility-first CSS. The only way to write styles at speed." },
+      { name: "Next.js", description: "Primary framework for web applications.", url: "https://nextjs.org" },
+      { name: "React Native", description: "Cross-platform mobile — iOS and Android from one codebase.", url: "https://reactnative.dev" },
+      { name: "Tailwind CSS", description: "Utility-first CSS. The only way to write styles at speed.", url: "https://tailwindcss.com" },
     ],
   },
   {
     name: "Backend & Infrastructure",
     items: [
-      { name: "Node.js / Fastify / Express", description: "REST APIs and backend services." },
-      { name: "NestJS", description: "Structured backend architecture for larger projects." },
-      { name: "PostgreSQL", description: "Primary database for relational data." },
-      { name: "MongoDB", description: "Document store for flexible schemas." },
-      { name: "Docker", description: "Containerising services for consistent deployments." },
+      { name: "Node.js / Fastify / Express", description: "REST APIs and backend services.", url: "https://fastify.dev" },
+      { name: "NestJS", description: "Structured backend architecture for larger projects.", url: "https://nestjs.com" },
+      { name: "PostgreSQL", description: "Primary database for relational data.", url: "https://postgresql.org" },
+      { name: "MongoDB", description: "Document store for flexible schemas.", url: "https://mongodb.com" },
+      { name: "Docker", description: "Containerising services for consistent deployments.", url: "https://docker.com" },
     ],
   },
   {
-    name: "Services & Tooling",
+    name: "Services & Platforms",
     items: [
-      { name: "Supabase", description: "Auth + Postgres — removes a lot of backend boilerplate." },
-      { name: "Sanity", description: "Headless CMS. Powers this portfolio." },
-      { name: "GitHub Actions", description: "CI/CD pipelines for automated testing and deployment." },
+      { name: "Supabase", description: "Auth + Postgres — removes a lot of backend boilerplate.", url: "https://supabase.com" },
+      { name: "Sanity", description: "Headless CMS. Powers this portfolio.", url: "https://sanity.io" },
+      { name: "GitHub Actions", description: "CI/CD pipelines for automated testing and deployment.", url: "https://github.com/features/actions" },
     ],
   },
 ];
