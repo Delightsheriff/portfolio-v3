@@ -78,7 +78,7 @@ export function BlogPage({ posts }: { posts: BlogPost[] }) {
               >
                 <Link
                   href="/"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background text-sm font-medium rounded-full hover:bg-highlight hover:text-highlight-foreground transition-all duration-300 animate-glow-pulse"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background text-sm font-medium rounded-full hover:bg-highlight hover:text-highlight-foreground transition-all duration-300"
                 >
                   Back to Home
                   <ArrowRight className="w-4 h-4" />

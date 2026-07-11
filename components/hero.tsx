@@ -58,20 +58,30 @@ export default function HeroSection({
         style={{ y }}
         className="max-w-7xl mx-auto w-full pt-32 pb-20 md:pt-40 md:pb-28"
       >
-        {/* Status badge */}
+        {/* Status + Open to Work badges */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.15 }}
-          className="mb-8 flex items-center gap-2"
+          className="mb-8 flex flex-wrap items-center gap-4"
         >
-          <span
-            className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"
-            aria-hidden="true"
-          />
-          <span className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
-            {hero?.status ?? "Available for work"}
-          </span>
+          <div className="flex items-center gap-2">
+            <span
+              className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"
+              aria-hidden="true"
+            />
+            <span className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
+              {hero?.status ?? "Available for work"}
+            </span>
+          </div>
+          {hero?.openToWork && (
+            <div className="px-3 py-1 rounded-full border border-highlight/30 bg-highlight/5 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-highlight" aria-hidden="true" />
+              <span className="text-xs font-mono uppercase tracking-[0.2em] text-highlight">
+                Open to opportunities
+              </span>
+            </div>
+          )}
         </motion.div>
 
         {/* Name line: small, above headline */}
@@ -153,7 +163,7 @@ export default function HeroSection({
         >
           <SparkLink
             href={hero?.ctaLink ?? "#work"}
-            className="group inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background text-sm font-medium rounded-full hover:bg-highlight hover:text-highlight-foreground transition-all duration-300 animate-glow-pulse"
+            className="group inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background text-sm font-medium rounded-full hover:bg-highlight hover:text-highlight-foreground transition-all duration-300"
           >
             {hero?.ctaText ?? "View My Work"}
             <ArrowRight

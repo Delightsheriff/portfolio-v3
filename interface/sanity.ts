@@ -76,6 +76,8 @@ export interface Hero {
   status: string;
   location: string;
   stackPills?: string[];
+  openToWork?: boolean;
+  visible?: boolean;
 }
 
 export interface Experience {

@@ -86,6 +86,36 @@ export default function Footer() {
           </nav>
         </div>
 
+        {/* CTA section */}
+        <div className="mb-6 space-y-4">
+          <Separator className="opacity-20" />
+          <div className="flex flex-wrap items-center gap-3">
+            <SparkLink
+              href="https://github.com/Delightsheriff"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-mono uppercase tracking-widest text-foreground hover:text-highlight transition-colors"
+            >
+              View GitHub
+            </SparkLink>
+            <span className="text-muted-foreground/30">·</span>
+            <a
+              href="mailto:hello@delightsheriff.dev"
+              className="text-xs font-mono uppercase tracking-widest text-foreground hover:text-highlight transition-colors"
+            >
+              Email Me
+            </a>
+            <span className="text-muted-foreground/30">·</span>
+            <a
+              href="/resume.pdf"
+              download
+              className="text-xs font-mono uppercase tracking-widest text-foreground hover:text-highlight transition-colors"
+            >
+              Download Resume
+            </a>
+          </div>
+        </div>
+
         {/* Bottom bar */}
         <Separator className="mb-6 opacity-10" />
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground/40 font-mono">
