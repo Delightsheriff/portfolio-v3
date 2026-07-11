@@ -13,12 +13,6 @@ const footerLinks = [
   { href: "/uses", label: "Uses" },
 ];
 
-const socialLinks = [
-  { href: "https://github.com/Delightsheriff", label: "GitHub" },
-  { href: "https://www.linkedin.com/in/delightsheriff", label: "LinkedIn" },
-  { href: "https://x.com/delightsheriff", label: "X / Twitter" },
-];
-
 export default function Footer() {
   return (
     <footer className="px-5 md:px-8 pb-10 pt-2" role="contentinfo">
@@ -63,27 +57,30 @@ export default function Footer() {
             </ul>
           </nav>
 
-          {/* Social */}
-          <nav aria-label="Social media links">
-            <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground/50 mb-4">
-              Connect
-            </p>
-            <ul className="space-y-2.5">
-              {socialLinks.map((link) => (
-                <li key={link.href}>
-                  <SparkLink
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`${link.label} profile`}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.label}
-                  </SparkLink>
-                </li>
-              ))}
-            </ul>
-          </nav>
+
+        </div>
+
+        {/* CTA section */}
+        <div className="mb-6 space-y-4">
+          <Separator className="opacity-20" />
+          <div className="flex flex-wrap items-center gap-3">
+            <SparkLink
+              href="https://github.com/Delightsheriff"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-mono uppercase tracking-widest text-foreground hover:text-highlight transition-colors"
+            >
+              View GitHub
+            </SparkLink>
+            <span className="text-muted-foreground/30">·</span>
+            <a
+              href="mailto:delightsheriff@gmail.com"
+              className="text-xs font-mono uppercase tracking-widest text-foreground hover:text-highlight transition-colors"
+            >
+              Email Me
+            </a>
+
+          </div>
         </div>
 
         {/* Bottom bar */}

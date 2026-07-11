@@ -13,7 +13,7 @@ import { ClickSparkProvider } from "@/components/animations/click-spark-provider
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
-const SITE_URL = "https://www.delightsheriff.com";
+const SITE_URL = "https://delightsheriff.com";
 const PERSON_NAME = "Amadi-Sheriff Delight";
 const PERSON_DISPLAY_NAME = "Delight Sheriff";
 const PERSON_NAME_VARIANTS = [

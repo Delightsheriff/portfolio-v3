@@ -37,7 +37,7 @@ export async function generateMetadata({
       title,
       description,
       type: "article",
-      url: `https://www.delightsheriff.com/project/${slug}`,
+      url: `https://delightsheriff.com/project/${slug}`,
       images: [
         {
           url: ogImage,
@@ -67,7 +67,7 @@ export default async function CaseStudy({
   if (!project) notFound();
 
   const isMobile = project.projectType?.category === "mobile";
-  const projectUrl = `https://www.delightsheriff.com/project/${slug}`;
+  const projectUrl = `https://delightsheriff.com/project/${slug}`;
 
   // BreadcrumbList: helps Google show breadcrumbs in SERPs
   const breadcrumbJsonLd = {
@@ -78,13 +78,13 @@ export default async function CaseStudy({
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://www.delightsheriff.com",
+        item: "https://delightsheriff.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Projects",
-        item: "https://www.delightsheriff.com/projects",
+        item: "https://delightsheriff.com/projects",
       },
       {
         "@type": "ListItem",
@@ -111,7 +111,7 @@ export default async function CaseStudy({
         author: {
           "@type": "Person",
           name: "Amadi-Sheriff Delight",
-          url: "https://www.delightsheriff.com",
+          url: "https://delightsheriff.com",
         },
         ...(project.iosUrl && { downloadUrl: project.iosUrl }),
         ...(project.stack && { keywords: project.stack.join(", ") }),
@@ -125,7 +125,7 @@ export default async function CaseStudy({
         author: {
           "@type": "Person",
           name: "Amadi-Sheriff Delight",
-          url: "https://www.delightsheriff.com",
+          url: "https://delightsheriff.com",
         },
         dateCreated: project.year ? `${project.year}-01-01` : undefined,
         ...(project.stack && { keywords: project.stack.join(", ") }),
