@@ -40,7 +40,7 @@ export default function GoBack() {
           <ThemeToggle />
           <Link
             href="/"
-            className="text-lg font-mono font-semibold tracking-wider text-foreground hover:text-primary transition-colors"
+            className="text-sm font-heading font-bold tracking-[0.18em] uppercase hover:text-highlight transition-colors"
           >
             DS.
           </Link>
