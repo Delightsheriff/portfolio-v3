@@ -5,11 +5,10 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Layers } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import type { ProjectGroup } from "@/interface/sanity";
 import type { Project } from "@/interface/sanity";
 import { Badge } from "@/components/ui/badge";
-import { ClickSparkContext } from "./animations/spark-button";
 import { CATEGORY_LABELS } from "@/lib/constants";
 import { ProjectGroupLinks } from "./project-group-links";
 
@@ -25,12 +24,8 @@ export function ProjectGroupCard({
   urlFor,
 }: ProjectGroupCardProps) {
   const [activePartIndex, setActivePartIndex] = useState(0);
-  const sparkContext = useContext(ClickSparkContext);
 
-  const handlePartClick = (e: React.MouseEvent<HTMLButtonElement>, i: number) => {
-    if (sparkContext?.addSpark) {
-      sparkContext.addSpark(e.clientX, e.clientY);
-    }
+  const handlePartClick = (i: number) => {
     setActivePartIndex(i);
   };
 
@@ -147,7 +142,7 @@ export function ProjectGroupCard({
                 key={i}
                 role="tab"
                 aria-selected={activePartIndex === i}
-                onClick={(e) => handlePartClick(e, i)}
+                onClick={() => handlePartClick(i)}
                 className={`px-3 py-1.5 rounded-md text-xs font-mono border transition-all ${
                   activePartIndex === i
                     ? "border-highlight/60 text-highlight bg-highlight/8"

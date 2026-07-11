@@ -2,23 +2,18 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useEffect, useState, useContext } from "react";
-import { ClickSparkContext } from "@/components/animations/spark-button";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
-  const sparkContext = useContext(ClickSparkContext);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const handleThemeToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (sparkContext?.addSpark) {
-      sparkContext.addSpark(e.clientX, e.clientY);
-    }
+  const handleThemeToggle = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
