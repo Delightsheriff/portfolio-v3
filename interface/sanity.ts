@@ -95,28 +95,6 @@ export interface Experience {
   visible: boolean;
 }
 
-export interface Resume {
-  headline: string;
-  resumeFile: SanityImage | null;
-  name: string;
-  email: string;
-  location: string;
-  websiteUrl: string;
-  socialLinks: {
-    platform: string;
-    url: string;
-  }[];
-  professionalProfile: any[]; // Portable Text
-  workExperience: Experience[];
-  technicalSkills: any[];
-  education: {
-    degree: string;
-    institution: string;
-    period: string;
-  }[];
-  certifications: string[];
-}
-
 export interface VideoPitch {
   _id: string;
   title: string;
@@ -162,5 +140,3 @@ export interface Uses {
   updatedLabel?: string;
 }
 
-// BlogPost interface preserved for when blog is re-enabled.
-// export interface BlogPost { ... }

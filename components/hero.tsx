@@ -33,7 +33,7 @@ export default function HeroSection({
 
   return (
     <section
-      className="relative min-h-[100svh] flex flex-col justify-center px-5 md:px-8 overflow-hidden"
+      className="relative min-h-svh flex flex-col justify-center px-5 md:px-8 overflow-hidden"
       aria-label="Introduction"
     >
       {/* Subtle dot-grid background */}

@@ -62,7 +62,7 @@ export function HomePage({
           <StatsStrip />
           {videoPitch?.enabled && <Video {...videoPitch} />}
           <Works projects={projects} allProjects={allProjects} groups={groups} />
-          <Experiences experiences={experiences} resumeUrl={about.resumeUrl} />
+          <Experiences experiences={experiences} />
           <AboutSection about={about} />
           <Contact about={about} />
         </main>

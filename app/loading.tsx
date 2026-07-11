@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Loading() {
   return (
-    <div className="fixed inset-0 z-[9999] bg-background flex items-center justify-center">
+    <div className="fixed inset-0 z-9999 bg-background flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

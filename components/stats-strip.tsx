@@ -4,9 +4,8 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const STATS = [
-  { value: "2+", label: "Years building" },
-  { value: "5+", label: "Apps shipped" },
-  { value: "iOS & Android", label: "Deployed natively" },
+  { value: "3+", label: "Years building" },
+  { value: "IOS & Android", label: "Deployed natively" },
   { value: "Full-Stack", label: "Web & Mobile" },
 ];
 
@@ -21,7 +20,7 @@ export default function StatsStrip() {
       className="border-y border-border/30 bg-card/30"
     >
       <div className="max-w-7xl mx-auto px-5 md:px-8">
-        <dl className="grid grid-cols-2 md:grid-cols-4 divide-x divide-border/30">
+        <dl className="grid grid-cols-1 md:grid-cols-3 divide-x divide-border/30">
           {STATS.map((stat, i) => (
             <motion.div
               key={i}

@@ -91,7 +91,7 @@ export function UsesPage({ uses }: UsesPageProps) {
             </div>
           ) : (
             <p className="text-sm text-muted-foreground">
-              No tools listed yet. Add content in Sanity Studio.
+              No tools listed yet.
             </p>
           )}
 

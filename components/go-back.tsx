@@ -1,7 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
 import { SparkNextLink } from "./animations/spark-next-link";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "./nav/theme-toggle";

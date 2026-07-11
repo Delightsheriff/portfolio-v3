@@ -1,10 +1,7 @@
 import { ScrollReveal } from "./animations/scroll-reveal";
 import type { Experience } from "@/interface/sanity";
 import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
-import { ArrowRight } from "lucide-react";
 
 const TYPE_COLOR: Record<string, string> = {
   "Full-time": "bg-green-500/10 text-green-400 border-green-500/20",
@@ -16,10 +13,8 @@ const TYPE_COLOR: Record<string, string> = {
 
 export default function Experiences({
   experiences,
-  resumeUrl,
 }: {
   experiences: Experience[];
-  resumeUrl?: string;
 }) {
   return (
     <section
@@ -130,29 +125,7 @@ export default function Experiences({
           ))}
         </div>
 
-        {/* Resume CTA */}
-        {resumeUrl && (
-          <ScrollReveal>
-            <div className="mt-12 flex justify-center">
-              <a
-                href={resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(
-                  buttonVariants({ variant: "outline" }),
-                  "rounded-full px-6 py-3",
-                )}
-                aria-label="View full resume (opens in new tab)"
-              >
-                View Full Resume
-                <ArrowRight
-                  className="w-4 h-4 transition-transform group-hover:translate-x-1"
-                  aria-hidden="true"
-                />
-              </a>
-            </div>
-          </ScrollReveal>
-        )}
+
       </div>
     </section>
   );
