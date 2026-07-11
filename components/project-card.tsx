@@ -8,23 +8,13 @@ import Image from "next/image";
 import type { Project } from "@/interface/sanity";
 import { Badge } from "@/components/ui/badge";
 import { SparkLink } from "./animations/spark-button";
+import { CATEGORY_LABELS } from "@/lib/constants";
 
 interface ProjectCardProps {
   project: Project;
   index: number;
   urlFor: (source: any) => any;
 }
-
-const CATEGORY_LABELS: Record<string, string> = {
-  fullstack: "Full-Stack",
-  frontend: "Frontend",
-  mobile: "Mobile App",
-  backend: "Backend API",
-  static: "Static Site",
-  ai: "AI / ML",
-  dataviz: "Data Viz",
-  devtool: "Dev Tool",
-};
 
 export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
   const isEven = index % 2 === 0;

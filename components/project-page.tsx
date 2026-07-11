@@ -15,42 +15,11 @@ import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import type { Project } from "@/interface/sanity";
 import Footer from "./nav/footer";
+import { CATEGORY_LABELS, FEATURE_LABELS } from "@/lib/constants";
 
 interface ProjectPageProps {
   project: Project;
 }
-
-const CATEGORY_LABELS: Record<string, string> = {
-  fullstack: "Full-Stack",
-  frontend: "Frontend",
-  mobile: "Mobile App",
-  backend: "Backend",
-  static: "Static Site",
-  ai: "AI / ML",
-  dataviz: "Data Viz",
-  devtool: "Dev Tool",
-};
-
-const FEATURE_LABELS: Record<string, string> = {
-  auth: "Authentication",
-  payments: "Payments",
-  realtime: "Real-time",
-  search: "Search & Filter",
-  responsive: "Responsive",
-  api: "API Integration",
-  analytics: "Analytics",
-  notifications: "Notifications",
-  "custom-ui": "Custom UI/UX",
-  performance: "Performance",
-  security: "Security",
-  "file-management": "File Management",
-  "ai-integration": "AI/ML",
-  email: "Email",
-  i18n: "i18n",
-  pwa: "PWA",
-  "background-jobs": "Background Jobs",
-  admin: "Admin Dashboard",
-};
 
 function FramedMobileImage({
   src,

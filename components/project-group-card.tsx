@@ -19,23 +19,13 @@ import type { ProjectGroup } from "@/interface/sanity";
 import type { Project } from "@/interface/sanity";
 import { Badge } from "@/components/ui/badge";
 import { ClickSparkContext } from "./animations/spark-button";
+import { CATEGORY_LABELS } from "@/lib/constants";
 
 interface ProjectGroupCardProps {
   group: ProjectGroup;
   index: number;
   urlFor: (source: any) => any;
 }
-
-const CATEGORY_LABELS: Record<string, string> = {
-  fullstack: "Full-Stack",
-  frontend: "Frontend",
-  mobile: "Mobile App",
-  backend: "Backend API",
-  static: "Static Site",
-  ai: "AI / ML",
-  dataviz: "Data Viz",
-  devtool: "Dev Tool",
-};
 
 function PartLinks({ project }: { project: Project }) {
   return (

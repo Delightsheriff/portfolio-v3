@@ -1,0 +1,31 @@
+export const CATEGORY_LABELS: Record<string, string> = {
+  fullstack: "Full-Stack",
+  frontend: "Frontend",
+  mobile: "Mobile App",
+  backend: "Backend API",
+  static: "Static Site",
+  ai: "AI / ML",
+  dataviz: "Data Viz",
+  devtool: "Dev Tool",
+};
+
+export const FEATURE_LABELS: Record<string, string> = {
+  auth: "Authentication",
+  payments: "Payments",
+  realtime: "Real-time",
+  search: "Search & Filter",
+  responsive: "Responsive",
+  api: "API Integration",
+  analytics: "Analytics",
+  notifications: "Notifications",
+  "custom-ui": "Custom UI/UX",
+  performance: "Performance",
+  security: "Security",
+  "file-management": "File Management",
+  "ai-integration": "AI/ML",
+  email: "Email",
+  i18n: "i18n",
+  pwa: "PWA",
+  "background-jobs": "Background Jobs",
+  admin: "Admin Dashboard",
+};

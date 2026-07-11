@@ -15,17 +15,7 @@ import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import Navbar from "./nav/navbar";
 import { ProjectFilter } from "./project-filter";
-
-const CATEGORY_LABELS: Record<string, string> = {
-  fullstack: "Full-Stack",
-  frontend: "Frontend",
-  mobile: "Mobile App",
-  backend: "Backend API",
-  static: "Static Site",
-  ai: "AI / ML",
-  dataviz: "Data Viz",
-  devtool: "Dev Tool",
-};
+import { CATEGORY_LABELS } from "@/lib/constants";
 
 interface ProjectsPageProps {
   projects: Project[];
