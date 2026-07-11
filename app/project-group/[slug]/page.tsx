@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export async function generateStaticParams() {
   if (!client) return [];
   const slugs = await client.fetch(
-    `*[_type == "projectGroup" && visible == true]{"slug": slug.current}`,
+    `*[_type == "projectGroup" && (!defined(visible) || visible == true)]{"slug": slug.current}`,
   );
   return slugs.map((s: { slug: string }) => ({ slug: s.slug }));
 }
