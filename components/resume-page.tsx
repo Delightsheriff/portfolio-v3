@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import type { Resume } from "@/interface/sanity";
 import Footer from "./nav/footer";
+import { ResumeSection } from "./resume-section";
 
 export function ResumePage({ resumeData }: { resumeData: Resume }) {
   const handleDownload = () => {
@@ -284,21 +285,4 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
   );
 }
 
-function ResumeSection({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
-      <div className="md:col-span-3">
-        <span className="text-xs font-mono uppercase tracking-[0.15em] text-muted-foreground">
-          {label}
-        </span>
-      </div>
-      <div className="md:col-span-8 md:col-start-5">{children}</div>
-    </div>
-  );
-}
+
