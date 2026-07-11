@@ -6,6 +6,8 @@ import Link from "next/link";
 import GoBack from "./go-back";
 import { ScrollReveal } from "./animations/scroll-reveal";
 import { Badge } from "@/components/ui/badge";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import type { Resume } from "@/interface/sanity";
 import Footer from "./nav/footer";
@@ -44,17 +46,21 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
 
               {/* Actions */}
               <div className="flex flex-wrap gap-3 pt-1">
-                <button
+                <Button
                   onClick={handleDownload}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-foreground text-background rounded-full text-sm font-medium hover:bg-highlight transition-colors"
+                  variant="default"
+                  className="rounded-full px-5 py-2.5 h-auto"
                   aria-label="Download resume as PDF"
                 >
                   <Download className="w-4 h-4" aria-hidden="true" />
                   Download PDF
-                </button>
+                </Button>
                 <a
                   href={`mailto:${resumeData.email}?subject=Let's work together`}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 border border-border rounded-full text-sm hover:border-foreground transition-colors"
+                  className={cn(
+                    buttonVariants({ variant: "outline" }),
+                    "rounded-full px-5 py-2.5",
+                  )}
                   aria-label="Send email to contact"
                 >
                   <Mail className="w-4 h-4" aria-hidden="true" />
@@ -245,7 +251,10 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <a
                     href={`mailto:${resumeData.email}?subject=Let's work together`}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-foreground text-background rounded-full text-sm font-medium hover:bg-highlight transition-colors"
+                    className={cn(
+                      buttonVariants({ variant: "default" }),
+                      "rounded-full px-6 py-3 h-auto",
+                    )}
                     aria-label="Send an email to start collaboration"
                   >
                     <Mail className="w-4 h-4" aria-hidden="true" />
@@ -253,7 +262,10 @@ export function ResumePage({ resumeData }: { resumeData: Resume }) {
                   </a>
                   <Link
                     href="/"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-border rounded-full text-sm font-medium hover:border-foreground hover:bg-background transition-colors group"
+                    className={cn(
+                      buttonVariants({ variant: "outline" }),
+                      "rounded-full px-6 py-3 h-auto group",
+                    )}
                     aria-label="View portfolio"
                   >
                     View Portfolio
