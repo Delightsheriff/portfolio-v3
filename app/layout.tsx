@@ -1,7 +1,8 @@
 import type React from "react";
 import type { Metadata } from "next";
 import {
-  Space_Grotesk,
+  Inter,
+  Syne,
   Playfair_Display,
   JetBrains_Mono,
 } from "next/font/google";
@@ -56,12 +57,14 @@ const SEO_KEYWORDS = [
   "remote software engineer",
 ];
 
-const spaceGroteskHeading = Space_Grotesk({
+const syne = Syne({
   subsets: ["latin"],
   variable: "--font-heading",
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-const spaceGrotesk = Space_Grotesk({
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
@@ -76,6 +79,7 @@ const playfair = Playfair_Display({
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -251,10 +255,11 @@ export default function RootLayout({
       data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={cn(
-        spaceGrotesk.variable,
+        "bg-background",
+        inter.variable,
+        syne.variable,
         playfair.variable,
         jetbrainsMono.variable,
-        spaceGroteskHeading.variable,
       )}
     >
       <body className="font-sans antialiased">
@@ -278,7 +283,7 @@ export default function RootLayout({
         </a>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >

@@ -31,6 +31,7 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
   const imageUrl = project.mainImage
     ? urlFor(project.mainImage).url()
     : "/placeholder.svg";
+  const hasLiveLinks = project.liveUrl || project.iosUrl || project.androidUrl;
 
   return (
     <motion.article
@@ -38,7 +39,7 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
       viewport={{ once: true, margin: "-80px" }}
-      className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 items-center group"
+      className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center group"
     >
       {/* Image */}
       <div
@@ -54,21 +55,28 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
           className="block"
         >
           {isMobile ? (
-            <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-muted/80 via-muted/60 to-transparent px-6 py-8 md:px-10 md:py-12">
-              <div className="mx-auto max-w-[280px] md:max-w-[360px]">
-                <div className="relative aspect-[9/19.5] overflow-hidden rounded-[2rem] border border-border/40 bg-background shadow-[0_32px_80px_-32px_rgba(0,0,0,0.55)]">
+            <div className="relative overflow-hidden rounded-2xl bg-card/60 border border-border/30 px-8 py-10 md:px-12 md:py-14">
+              <div className="mx-auto max-w-[260px] md:max-w-[320px]">
+                <div className="relative aspect-[9/19.5] overflow-hidden rounded-[2rem] border border-border/30 bg-background shadow-[0_40px_80px_-20px_oklch(0_0_0_/_0.6)]">
                   <Image
                     src={imageUrl}
                     alt={project.title}
                     fill
-                    sizes="(max-width: 768px) 280px, 360px"
+                    sizes="(max-width: 768px) 260px, 320px"
                     className="object-contain transition-transform duration-700 group-hover:scale-[1.02]"
                   />
                 </div>
               </div>
+              {/* Live indicator */}
+              {hasLiveLinks && (
+                <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-background/80 backdrop-blur-sm border border-border/40 rounded-full px-2.5 py-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />
+                  <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">Live</span>
+                </div>
+              )}
             </div>
           ) : (
-            <div className="relative overflow-hidden rounded-lg aspect-[4/3] bg-muted/60">
+            <div className="relative overflow-hidden rounded-2xl aspect-[4/3] bg-card/60 border border-border/30">
               <Image
                 src={imageUrl}
                 alt={project.title}
@@ -76,7 +84,14 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
                 sizes="(max-width: 768px) 100vw, 58vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               />
-              <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/8 transition-colors duration-500" />
+              <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-500" />
+              {/* Live indicator */}
+              {hasLiveLinks && (
+                <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-background/80 backdrop-blur-sm border border-border/40 rounded-full px-2.5 py-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />
+                  <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">Live</span>
+                </div>
+              )}
             </div>
           )}
         </Link>
@@ -99,14 +114,14 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
             </Badge>
           )}
           {project.year && (
-            <span className="text-xs font-mono text-muted-foreground">
+            <span className="text-xs font-mono text-muted-foreground/60">
               {project.year}
             </span>
           )}
         </div>
 
         {/* Title */}
-        <h3 className="text-2xl md:text-3xl font-serif leading-tight">
+        <h3 className="text-2xl md:text-3xl font-heading font-bold leading-tight tracking-tight">
           <Link
             href={`/project/${project.slug.current}`}
             className="hover:text-highlight transition-colors"
@@ -116,28 +131,42 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
         </h3>
 
         {/* Description */}
-        <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+        <p className="text-muted-foreground leading-relaxed text-sm">
           {project.description}
         </p>
+
+        {/* Metrics callout */}
+        {project.metrics && project.metrics.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 pt-0.5" aria-label="Key outcomes">
+            {project.metrics.map((metric, i) => (
+              <span
+                key={i}
+                className="px-2.5 py-1 rounded-md text-xs font-mono border border-highlight/25 text-highlight/80 bg-highlight/5"
+              >
+                {metric}
+              </span>
+            ))}
+          </div>
+        )}
 
         {/* Tech stack badges */}
         {project.stack && project.stack.length > 0 && (
           <div className="flex flex-wrap gap-1.5" aria-label="Tech stack">
-            {project.stack.slice(0, 6).map((tech, i) => (
+            {project.stack.slice(0, 5).map((tech, i) => (
               <Badge
                 key={i}
                 variant="outline"
-                className="text-xs font-mono text-muted-foreground border-border/50 px-2 py-0.5"
+                className="text-xs font-mono text-muted-foreground border-border/40 px-2 py-0.5"
               >
                 {tech}
               </Badge>
             ))}
-            {project.stack.length > 6 && (
+            {project.stack.length > 5 && (
               <Badge
                 variant="outline"
-                className="text-xs font-mono text-muted-foreground border-border/50 px-2 py-0.5"
+                className="text-xs font-mono text-muted-foreground border-border/40 px-2 py-0.5"
               >
-                +{project.stack.length - 6}
+                +{project.stack.length - 5}
               </Badge>
             )}
           </div>

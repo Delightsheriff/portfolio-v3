@@ -5,6 +5,7 @@ import hero from "./hero";
 import projects from "./project";
 import resume from "./resume";
 import videoPitch from "./video-pitch";
+import uses from "./uses";
 
 export const schemaTypes = [
   projects,
@@ -14,4 +15,5 @@ export const schemaTypes = [
   resume,
   videoPitch,
   blog,
+  uses,
 ];
