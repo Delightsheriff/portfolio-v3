@@ -5,6 +5,8 @@ import { motion, type MotionValue } from "framer-motion";
 import { ArrowRight, ArrowDownRight } from "lucide-react";
 import Link from "next/link";
 import { SparkLink } from "./animations/spark-button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const DEFAULT_STACK = [
   "TypeScript",
@@ -163,7 +165,10 @@ export default function HeroSection({
         >
           <SparkLink
             href={hero?.ctaLink ?? "#work"}
-            className="group inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background text-sm font-medium rounded-full hover:bg-highlight hover:text-highlight-foreground transition-all duration-300"
+            className={cn(
+              buttonVariants({ variant: "default", size: "lg" }),
+              "rounded-full px-6 py-3 text-sm",
+            )}
           >
             {hero?.ctaText ?? "View My Work"}
             <ArrowRight
