@@ -30,33 +30,13 @@ export default function Experiences({
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <ScrollReveal>
-          <div className="mb-14 md:mb-20 flex items-end justify-between">
-            <div className="max-w-xl">
-              <p className="text-xs font-mono uppercase tracking-[0.25em] text-muted-foreground/60 mb-3">
-                Experience
-              </p>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight tracking-tight">
-                Where I&apos;ve shipped
-              </h2>
-            </div>
-            {resumeUrl && (
-              <a
-                href={resumeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View full resume (opens in new tab)"
-                className={cn(
-                  buttonVariants({ variant: "link" }),
-                  "hidden md:inline-flex shrink-0",
-                )}
-              >
-                Full resume
-                <ArrowRight
-                  className="w-4 h-4 transition-transform group-hover:translate-x-1"
-                  aria-hidden="true"
-                />
-              </a>
-            )}
+          <div className="mb-14 md:mb-20">
+            <p className="text-xs font-mono uppercase tracking-[0.25em] text-muted-foreground/60 mb-3">
+              Experience
+            </p>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight tracking-tight">
+              Where I&apos;ve shipped
+            </h2>
           </div>
         </ScrollReveal>
 
@@ -150,20 +130,21 @@ export default function Experiences({
           ))}
         </div>
 
-        {/* Mobile resume CTA */}
+        {/* Resume CTA */}
         {resumeUrl && (
           <ScrollReveal>
-            <div className="mt-12 flex md:hidden">
+            <div className="mt-12 flex justify-center">
               <a
                 href={resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  buttonVariants({ variant: "link" }),
+                  buttonVariants({ variant: "outline" }),
+                  "rounded-full px-6 py-3",
                 )}
                 aria-label="View full resume (opens in new tab)"
               >
-                View full resume
+                View Full Resume
                 <ArrowRight
                   className="w-4 h-4 transition-transform group-hover:translate-x-1"
                   aria-hidden="true"
