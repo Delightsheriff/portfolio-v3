@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getProjects } from "@/sanity/sanity";
 
-const BASE_URL = "https://www.delightsheriff.com";
+const BASE_URL = "https://delightsheriff.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const routes: MetadataRoute.Sitemap = [
