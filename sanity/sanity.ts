@@ -348,5 +348,46 @@ export async function getUses() {
   }
 }
 
-// Blog functions removed: blog is disabled (content preserved in Sanity).
-// To re-enable, restore these queries and the app/blog routes.
+// Blog queries: re-enabled for blog page
+export async function getAllBlogs() {
+  try {
+    const blogs = await client.fetch(
+      `*[_type == "blog" && visible == true] | order(publishedAt desc) {
+        _id,
+        title,
+        "slug": slug.current,
+        excerpt,
+        body,
+        publishedAt,
+        featured,
+        author
+      }`
+    );
+    return blogs;
+  } catch (error) {
+    console.log("Error fetching blogs from Sanity:", error);
+    return [];
+  }
+}
+
+export async function getBlogBySlug(slug: string) {
+  try {
+    const blog = await client.fetch(
+      `*[_type == "blog" && slug.current == $slug][0] {
+        _id,
+        title,
+        "slug": slug.current,
+        excerpt,
+        body,
+        publishedAt,
+        featured,
+        author
+      }`,
+      { slug }
+    );
+    return blog;
+  } catch (error) {
+    console.log("Error fetching blog from Sanity:", error);
+    return null;
+  }
+}
