@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/studio/", "/api/", "/blog/"],
       },
     ],
-    sitemap: "https://www.delightsheriff.com/sitemap.xml",
-    host: "https://www.delightsheriff.com",
+    sitemap: "https://delightsheriff.com/sitemap.xml",
+    host: "https://delightsheriff.com",
   };
 }

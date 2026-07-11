@@ -74,7 +74,7 @@ export default function Footer() {
             </SparkLink>
             <span className="text-muted-foreground/30">·</span>
             <a
-              href="mailto:hello@delightsheriff.dev"
+              href="mailto:delightsheriff@gmail.com"
               className="text-xs font-mono uppercase tracking-widest text-foreground hover:text-highlight transition-colors"
             >
               Email Me
