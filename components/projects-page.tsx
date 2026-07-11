@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Github, ExternalLink, ArrowUpRight, ArrowRight, Smartphone } from "lucide-react";
 import Link from "next/link";
@@ -11,6 +12,7 @@ import Footer from "./nav/footer";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import Navbar from "./nav/navbar";
+import { ProjectFilter } from "./project-filter";
 
 const CATEGORY_LABELS: Record<string, string> = {
   fullstack: "Full-Stack",
@@ -29,6 +31,12 @@ interface ProjectsPageProps {
 }
 
 export function ProjectsPage({ projects, about }: ProjectsPageProps) {
+  const [filteredProjects, setFilteredProjects] = useState<Project[]>(projects);
+
+  const handleFilterChange = (filtered: Project[]) => {
+    setFilteredProjects(filtered);
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Navbar />
@@ -76,8 +84,15 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
       {/* Projects grid */}
       <section className="py-16 px-5 md:px-8 pb-24" aria-label="Projects list">
         <div className="max-w-7xl mx-auto">
+          {/* Filter section */}
+          <ProjectFilter
+            projects={projects}
+            groups={[]}
+            onFilterChange={(filtered) => handleFilterChange(filtered)}
+          />
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            {projects.map((project, index) => {
+            {filteredProjects.map((project, index) => {
               const isMobile = project.projectType?.category === "mobile";
               const imageUrl = project.mainImage
                 ? urlFor(project.mainImage).url()
