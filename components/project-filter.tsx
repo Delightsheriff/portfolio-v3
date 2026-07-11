@@ -13,6 +13,7 @@ interface ProjectFilterProps {
 }
 
 type ProjectType = "Web" | "Mobile" | "API";
+type ViewMode = "all" | "single" | "groups";
 
 const TECH_STACK = [
   "React",
@@ -29,6 +30,12 @@ const TECH_STACK = [
 
 const PROJECT_TYPES: ProjectType[] = ["Web", "Mobile", "API"];
 
+const VIEW_MODES: { value: ViewMode; label: string }[] = [
+  { value: "all", label: "All" },
+  { value: "single", label: "Single" },
+  { value: "groups", label: "Groups" },
+];
+
 export function ProjectFilter({
   projects,
   groups,
@@ -36,8 +43,8 @@ export function ProjectFilter({
 }: ProjectFilterProps) {
   const [selectedTechs, setSelectedTechs] = useState<string[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<ProjectType[]>([]);
+  const [viewMode, setViewMode] = useState<ViewMode>("all");
 
-  // Filter projects based on selections
   useEffect(() => {
     let filtered = projects;
 
@@ -66,7 +73,6 @@ export function ProjectFilter({
       });
     }
 
-    // Filter groups based on their projects
     const filteredGroups =
       selectedTechs.length > 0 || selectedTypes.length > 0
         ? groups.filter((group) =>
@@ -74,8 +80,14 @@ export function ProjectFilter({
           )
         : groups;
 
-    onFilterChange(filtered, filteredGroups);
-  }, [selectedTechs, selectedTypes, projects, groups, onFilterChange]);
+    if (viewMode === "single") {
+      onFilterChange(filtered, []);
+    } else if (viewMode === "groups") {
+      onFilterChange([], filteredGroups);
+    } else {
+      onFilterChange(filtered, filteredGroups);
+    }
+  }, [selectedTechs, selectedTypes, viewMode, projects, groups, onFilterChange]);
 
   const toggleTech = (tech: string) => {
     setSelectedTechs((prev) =>
@@ -103,6 +115,31 @@ export function ProjectFilter({
       transition={{ duration: 0.4 }}
       className="flex flex-col gap-6 mb-12"
     >
+      {/* View Mode Filter */}
+      <div>
+        <label className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground/60 mb-4 block">
+          Show
+        </label>
+        <div className="flex flex-wrap gap-2">
+          {VIEW_MODES.map((mode) => (
+            <motion.button
+              key={mode.value}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setViewMode(mode.value)}
+              className={cn(
+                "px-3 py-1.5 rounded-full text-xs font-mono uppercase tracking-widest transition-all border",
+                viewMode === mode.value
+                  ? "bg-highlight text-highlight-foreground border-highlight"
+                  : "border-border/40 text-muted-foreground hover:border-highlight/30 hover:text-foreground",
+              )}
+            >
+              {mode.label}
+            </motion.button>
+          ))}
+        </div>
+      </div>
+
       {/* Tech Stack Filter */}
       <div>
         <div className="flex items-center justify-between mb-4">
