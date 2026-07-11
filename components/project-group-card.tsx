@@ -14,10 +14,11 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import type { ProjectGroup } from "@/interface/sanity";
 import type { Project } from "@/interface/sanity";
 import { Badge } from "@/components/ui/badge";
+import { ClickSparkContext } from "./animations/spark-button";
 
 interface ProjectGroupCardProps {
   group: ProjectGroup;
@@ -134,6 +135,14 @@ export function ProjectGroupCard({
   urlFor,
 }: ProjectGroupCardProps) {
   const [activePartIndex, setActivePartIndex] = useState(0);
+  const sparkContext = useContext(ClickSparkContext);
+
+  const handlePartClick = (e: React.MouseEvent<HTMLButtonElement>, i: number) => {
+    if (sparkContext?.addSpark) {
+      sparkContext.addSpark(e.clientX, e.clientY);
+    }
+    setActivePartIndex(i);
+  };
 
   const leadPart = group.parts[0];
   const activePart = group.parts[activePartIndex];
@@ -248,7 +257,7 @@ export function ProjectGroupCard({
                 key={i}
                 role="tab"
                 aria-selected={activePartIndex === i}
-                onClick={() => setActivePartIndex(i)}
+                onClick={(e) => handlePartClick(e, i)}
                 className={`px-3 py-1.5 rounded-md text-xs font-mono border transition-all ${
                   activePartIndex === i
                     ? "border-highlight/60 text-highlight bg-highlight/8"

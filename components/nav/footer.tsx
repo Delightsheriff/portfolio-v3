@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { SparkNextLink } from "@/components/animations/spark-next-link";
+import { SparkLink } from "@/components/animations/spark-button";
 import { Separator } from "@/components/ui/separator";
 
 const footerLinks = [
@@ -25,13 +27,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
           {/* Brand */}
           <div className="space-y-3">
-            <Link
+            <SparkNextLink
               href="/"
               className="text-sm font-heading font-bold tracking-[0.18em] uppercase hover:text-highlight transition-colors"
               aria-label="Delight Sheriff — home"
             >
               DS.
-            </Link>
+            </SparkNextLink>
             <p className="text-xs text-muted-foreground leading-relaxed max-w-xs">
               Software Engineer building production-grade products across the TypeScript ecosystem — web, backend, and mobile.
             </p>
@@ -49,12 +51,12 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {footerLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
+                  <SparkNextLink
                     href={link.href}
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {link.label}
-                  </Link>
+                  </SparkNextLink>
                 </li>
               ))}
             </ul>
@@ -68,7 +70,7 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {socialLinks.map((link) => (
                 <li key={link.href}>
-                  <a
+                  <SparkLink
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -76,7 +78,7 @@ export default function Footer() {
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {link.label}
-                  </a>
+                  </SparkLink>
                 </li>
               ))}
             </ul>
