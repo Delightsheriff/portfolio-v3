@@ -83,12 +83,6 @@ const projectGroup = {
       initialValue: true,
     }),
     defineField({
-      name: "visible",
-      title: "Visible on Website",
-      type: "boolean",
-      initialValue: true,
-    }),
-    defineField({
       name: "order",
       title: "Display Order",
       type: "number",

@@ -282,13 +282,6 @@ const projects = {
       ],
     }),
     defineField({
-      name: "visible",
-      title: "Visible on Website",
-      type: "boolean",
-      description: "Toggle to show/hide this project on the website",
-      initialValue: true,
-    }),
-    defineField({
       name: "featured",
       title: "Featured Project",
       type: "boolean",

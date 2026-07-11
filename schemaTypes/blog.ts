@@ -144,13 +144,6 @@ export default defineType({
       description: "Pin this post to the top of the blog",
       initialValue: false,
     },
-    {
-      name: "visible",
-      title: "Show on Site",
-      type: "boolean",
-      description: "Toggle to show/hide this blog post",
-      initialValue: true,
-    },
   ],
   preview: {
     select: {

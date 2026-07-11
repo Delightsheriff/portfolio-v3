@@ -36,6 +36,7 @@ export default function HeroSection({
       className="relative min-h-svh flex flex-col justify-center px-5 md:px-8 overflow-hidden"
       aria-label="Introduction"
     >
+      {/* Subtle dot-grid background */}
       <div
         className="absolute inset-0 -z-10 opacity-[0.04]"
         aria-hidden="true"
@@ -45,6 +46,7 @@ export default function HeroSection({
         }}
       />
 
+      {/* Faint vertical lines for editorial feel */}
       <div
         className="absolute inset-0 -z-10 opacity-[0.025]"
         aria-hidden="true"
@@ -58,6 +60,7 @@ export default function HeroSection({
         style={{ y }}
         className="max-w-7xl mx-auto w-full pt-32 pb-20 md:pt-40 md:pb-28"
       >
+        {/* Status + Open to Work badges */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -75,6 +78,7 @@ export default function HeroSection({
           </div>
         </motion.div>
 
+        {/* Name line: small, above headline */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -84,7 +88,8 @@ export default function HeroSection({
           Delight Sheriff (Amadi-Sheriff Delight)
         </motion.p>
 
-        <h1 className="mb-6 leading-[0.92]" aria-label={profile?.headline}>
+        {/* Headline: staggered word reveal in Syne display */}
+          <h1 className="mb-6 leading-[0.92]" aria-label={profile?.headline}>
           {words.map((word, i) => (
             <motion.span
               key={i}
@@ -106,6 +111,7 @@ export default function HeroSection({
           ))}
         </h1>
 
+        {/* Horizontal rule */}
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
@@ -114,6 +120,7 @@ export default function HeroSection({
           aria-hidden="true"
         />
 
+        {/* Subheadline */}
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -123,6 +130,7 @@ export default function HeroSection({
           {profile?.subheadline}
         </motion.p>
 
+        {/* Stack pills */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -140,6 +148,7 @@ export default function HeroSection({
           ))}
         </motion.div>
 
+        {/* CTA row */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -172,6 +181,7 @@ export default function HeroSection({
           </a>
         </motion.div>
 
+        {/* Meta row */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -187,6 +197,7 @@ export default function HeroSection({
         </motion.div>
       </motion.div>
 
+      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

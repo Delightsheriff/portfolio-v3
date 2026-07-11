@@ -32,7 +32,6 @@ const PROJECT_FIELDS = `
   solution,
   results,
   images,
-  visible,
   featured
 `;
 
@@ -78,9 +77,9 @@ export async function getProjects() {
 
   try {
     const projects = await client.fetch(`
-      *[_type == "project" && visible == true] | order(${PROJECT_ORDER}) {
+      *[_type == "project"] | order(${PROJECT_ORDER}) {
         ${PROJECT_FIELDS},
-        "nextProject": *[_type == "project" && visible == true && _id != ^._id && _createdAt < ^._createdAt] | order(${PROJECT_ORDER}) [0] {
+        "nextProject": *[_type == "project" && _id != ^._id && _createdAt < ^._createdAt] | order(${PROJECT_ORDER}) [0] {
           title,
           "slug": slug.current
         }
@@ -104,9 +103,9 @@ export async function getProject(slug: string) {
   try {
     const project = await client.fetch(
       `
-      *[_type == "project" && visible == true && slug.current == $slug][0] {
+      *[_type == "project" && slug.current == $slug][0] {
         ${PROJECT_FIELDS},
-        "nextProject": *[_type == "project" && visible == true && _id != ^._id && _createdAt < ^._createdAt] | order(${PROJECT_ORDER}) [0] {
+        "nextProject": *[_type == "project" && _id != ^._id && _createdAt < ^._createdAt] | order(${PROJECT_ORDER}) [0] {
           title,
           "slug": slug.current
         }
@@ -131,8 +130,9 @@ export async function getExperiences() {
   }
 
   try {
+    // Here you fetch from Sanity when ready
     const experiences = await client.fetch(`
-      *[_type == "experience" && visible == true] | order(order) {
+      *[_type == "experience"] | order(order) {
         _id,
         company,
         role,
@@ -143,8 +143,7 @@ export async function getExperiences() {
         achievements,
         technologies,
         order,
-        current,
-        visible
+        current
       }
     `);
     return experiences;
@@ -171,8 +170,6 @@ export async function getProfile() {
         status,
         location,
         stackPills,
-        openToWork,
-        heroVisible,
         title,
         bio,
         manifesto,
@@ -180,8 +177,7 @@ export async function getProfile() {
         profileImage,
         resumeUrl,
         email,
-        socialLinks,
-        aboutVisible
+        socialLinks
       }
     `);
     return profile;
@@ -194,6 +190,7 @@ export async function getProfile() {
   }
 }
 
+// Add new function for featured projects
 export async function getFeaturedProjects(limit = 3) {
   if (!client) {
     console.log(
@@ -204,7 +201,7 @@ export async function getFeaturedProjects(limit = 3) {
   try {
     const featuredProjects = await client.fetch(
       `
-      *[_type == "project" && visible == true && featured == true] | order(${PROJECT_ORDER}) [0...$limit] {
+      *[_type == "project" && featured == true] | order(${PROJECT_ORDER}) [0...$limit] {
         ${PROJECT_FIELDS}
       }
     `,
@@ -224,7 +221,7 @@ export async function getFeaturedProjectGroups() {
   if (!client) return [];
   try {
     const groups = await client.fetch(`
-      *[_type == "projectGroup" && visible == true && featured == true]
+      *[_type == "projectGroup" && featured == true]
         | order(coalesce(order, 9999) asc, _createdAt desc) {
           _id,
           title,
@@ -232,7 +229,6 @@ export async function getFeaturedProjectGroups() {
           description,
           year,
           featured,
-          visible,
           order,
           parts[] {
             label,
@@ -267,10 +263,11 @@ export async function getUses() {
   }
 }
 
+// Blog queries: re-enabled for blog page
 export async function getAllBlogs() {
   try {
     const blogs = await client.fetch(
-      `*[_type == "blog" && visible == true] | order(publishedAt desc) {
+      `      *[_type == "blog"] | order(publishedAt desc) {
         _id,
         title,
         "slug": slug.current,

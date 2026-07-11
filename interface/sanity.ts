@@ -47,7 +47,6 @@ export interface Project {
     title: string;
     slug: string;
   };
-  visible: boolean;
   featured: boolean;
 }
 
@@ -59,8 +58,6 @@ export interface Profile {
   status: string;
   location: string;
   stackPills?: string[];
-  openToWork?: boolean;
-  heroVisible?: boolean;
   title: string;
   bio: any[];
   manifesto: any[];
@@ -75,7 +72,6 @@ export interface Profile {
     platform: string;
     url: string;
   }[];
-  aboutVisible?: boolean;
 }
 
 export interface Experience {
@@ -90,7 +86,6 @@ export interface Experience {
   technologies: string[];
   order: number;
   current: boolean;
-  visible: boolean;
 }
 
 export interface ProjectGroupPart {
@@ -106,7 +101,6 @@ export interface ProjectGroup {
   parts: ProjectGroupPart[];
   year?: string;
   featured: boolean;
-  visible: boolean;
   order?: number;
 }
 
@@ -127,3 +121,4 @@ export interface Uses {
   categories: UsesCategory[];
   updatedLabel?: string;
 }
+
