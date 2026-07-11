@@ -47,7 +47,7 @@ export function HomePage({
       <CustomCursor />
       <div
         ref={containerRef}
-        className="min-h-screen bg-background text-foreground overflow-hidden"
+        className="min-h-screen bg-background text-foreground overflow-hidden relative"
       >
         <Navbar />
         <main id="main-content">
