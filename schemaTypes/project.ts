@@ -289,6 +289,14 @@ const projects = {
         "Toggle to include this project in the featured section. Featured projects are automatically sorted by newest first.",
       initialValue: false,
     }),
+    defineField({
+      name: "spotlight",
+      title: "Standalone Spotlight",
+      type: "boolean",
+      description:
+        "When this project belongs to a group, show it as a standalone card too on the /projects page.",
+      initialValue: false,
+    }),
   ],
   preview: {
     select: {

@@ -32,7 +32,8 @@ const PROJECT_FIELDS = `
   solution,
   results,
   images,
-  featured
+  featured,
+  spotlight
 `;
 
 function createPlaceholderImageBuilder() {

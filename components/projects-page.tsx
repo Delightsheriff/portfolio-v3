@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import type { Profile, Project } from "@/interface/sanity";
+import type { Profile, Project, ProjectGroup } from "@/interface/sanity";
+import { urlFor } from "@/sanity/sanity";
 import Footer from "./nav/footer";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -11,18 +12,31 @@ import { ProjectFilter } from "./project-filter";
 import { ProjectsHeader } from "./projects-header";
 import { ProjectsCta } from "./projects-cta";
 import { ProjectGridCard } from "./project-grid-card";
+import { ProjectGroupCard } from "./project-group-card";
 
 interface ProjectsPageProps {
   projects: Project[];
   profile: Profile;
+  groups: ProjectGroup[];
 }
 
-export function ProjectsPage({ projects, profile }: ProjectsPageProps) {
+export function ProjectsPage({ projects, profile, groups }: ProjectsPageProps) {
   const [filteredProjects, setFilteredProjects] = useState<Project[]>(projects);
+  const [filteredGroups, setFilteredGroups] = useState<ProjectGroup[]>(groups);
 
-  const handleFilterChange = (filtered: Project[]) => {
+  const handleFilterChange = (filtered: Project[], groups: ProjectGroup[]) => {
     setFilteredProjects(filtered);
+    setFilteredGroups(groups);
   };
+
+  const standalones = useMemo(() => {
+    const groupedIds = new Set(
+      filteredGroups.flatMap((g) => g.parts.map((p) => p.project?._id).filter(Boolean)),
+    );
+    return filteredProjects.filter(
+      (p) => !groupedIds.has(p._id) || p.spotlight,
+    );
+  }, [filteredProjects, filteredGroups]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -37,13 +51,30 @@ export function ProjectsPage({ projects, profile }: ProjectsPageProps) {
           <div className="max-w-7xl mx-auto">
             <ProjectFilter
               projects={projects}
-              groups={[]}
-              onFilterChange={(filtered) => handleFilterChange(filtered)}
+              groups={groups}
+              onFilterChange={(filtered, filteredGroups) => handleFilterChange(filtered, filteredGroups)}
             />
 
-            {filteredProjects.length > 0 ? (
+            {filteredGroups.length > 0 && (
+              <div className="mb-16 space-y-12">
+                <h2 className="text-xs font-mono uppercase tracking-[0.25em] text-muted-foreground/60">
+                  Project Groups
+                </h2>
+                {filteredGroups.map((group, index) => (
+                  <ProjectGroupCard
+                    key={group._id}
+                    group={group}
+                    index={index}
+                    urlFor={urlFor}
+                  />
+                ))}
+                <Separator className="opacity-20" />
+              </div>
+            )}
+
+            {standalones.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-                {filteredProjects.map((project, index) => (
+                {standalones.map((project, index) => (
                   <ProjectGridCard
                     key={project._id}
                     project={project}
@@ -65,7 +96,7 @@ export function ProjectsPage({ projects, profile }: ProjectsPageProps) {
                     Try adjusting your tech stack or project type filters, or check back later for new projects
                   </p>
                   <Button
-                    onClick={() => handleFilterChange(projects)}
+                    onClick={() => handleFilterChange(projects, groups)}
                     variant="ghost"
                     className="mt-6 uppercase tracking-widest font-mono text-sm"
                   >

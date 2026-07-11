@@ -48,6 +48,7 @@ export interface Project {
     slug: string;
   };
   featured: boolean;
+  spotlight?: boolean;
 }
 
 export interface Profile {
