@@ -62,6 +62,13 @@ const uses = {
       type: "string",
       description: 'e.g., "Last updated July 2025"',
     }),
+    defineField({
+      name: "visible",
+      title: "Show on Site",
+      type: "boolean",
+      description: "Toggle to show/hide the uses page",
+      initialValue: true,
+    }),
   ],
 };
 
