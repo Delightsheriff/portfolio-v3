@@ -2,7 +2,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Layers } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Layers } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
@@ -123,7 +123,13 @@ export function ProjectGroupCard({
 
           {/* Group title */}
           <h3 className="text-2xl md:text-3xl font-heading font-bold leading-tight tracking-tight">
-            {group.title}
+            <Link
+              href={group.slug?.current ? `/project-group/${group.slug.current}` : "#"}
+              className="hover:text-highlight transition-colors"
+            >
+              {group.title}
+              <ArrowRight className="inline-block w-5 h-5 ml-2 -translate-y-0.5 opacity-0 group-hover/card:opacity-100 group-hover/card:translate-x-1 transition-all" aria-hidden="true" />
+            </Link>
           </h3>
 
           {/* Group description */}
