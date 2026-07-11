@@ -195,14 +195,12 @@ export default function HeroSection({
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 1.55 }}
           className="flex flex-wrap items-center gap-3 text-xs font-mono text-muted-foreground/50"
-          aria-label="Location and availability"
+          aria-label="Location and expertise"
         >
           {hero?.location && <span>{hero.location}</span>}
           {hero?.location && (
             <span className="w-1 h-1 rounded-full bg-muted-foreground/30" aria-hidden="true" />
           )}
-          <span>Open to remote</span>
-          <span className="w-1 h-1 rounded-full bg-muted-foreground/30" aria-hidden="true" />
           <span>Full-stack &amp; Mobile</span>
         </motion.div>
       </motion.div>
