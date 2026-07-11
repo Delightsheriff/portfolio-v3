@@ -1,19 +1,28 @@
-import Link from "next/link";
+"use client";
+
+import { usePathname } from "next/navigation";
 import { SparkNextLink } from "@/components/animations/spark-next-link";
 import { SparkLink } from "@/components/animations/spark-button";
 import { Separator } from "@/components/ui/separator";
 
 const footerLinks = [
-  { href: "#work", label: "Work" },
-  { href: "#experience", label: "Experience" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
-  { href: "/projects", label: "All Projects" },
-  { href: "/blog", label: "Blog" },
-  { href: "/uses", label: "Uses" },
+  { hash: "#work", label: "Work" },
+  { hash: "#experience", label: "Experience" },
+  { hash: "#about", label: "About" },
+  { hash: "#contact", label: "Contact" },
+  { hash: "/projects", label: "All Projects" },
+  { hash: "/blog", label: "Blog" },
+  { hash: "/uses", label: "Uses" },
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  const href = (hash: string) => {
+    if (hash.startsWith("/")) return hash;
+    return isHome ? hash : `/${hash}`;
+  };
   return (
     <footer className="px-5 md:px-8 pb-10 pt-2" role="contentinfo">
       <div className="max-w-7xl mx-auto">
@@ -32,10 +41,7 @@ export default function Footer() {
             <p className="text-xs text-muted-foreground leading-relaxed max-w-xs">
               Software Engineer building production-grade products across the TypeScript ecosystem: web, backend, and mobile.
             </p>
-            <div className="flex items-center gap-2 pt-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />
-              <span className="text-xs font-mono text-muted-foreground">Open to remote roles</span>
-            </div>
+
           </div>
 
           {/* Nav */}
@@ -45,9 +51,9 @@ export default function Footer() {
             </p>
             <ul className="space-y-2.5">
               {footerLinks.map((link) => (
-                <li key={link.href}>
+                <li key={link.hash}>
                   <SparkNextLink
-                    href={link.href}
+                    href={href(link.hash)}
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {link.label}
