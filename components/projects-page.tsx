@@ -10,6 +10,8 @@ import type { About, Project } from "@/interface/sanity";
 import { urlFor } from "@/sanity/sanity";
 import Footer from "./nav/footer";
 import { Badge } from "@/components/ui/badge";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import Navbar from "./nav/navbar";
 import { ProjectFilter } from "./project-filter";
@@ -67,7 +69,10 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Browse GitHub profile"
-              className="group inline-flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-foreground transition-colors"
+              className={cn(
+                buttonVariants({ variant: "link" }),
+                "text-sm font-mono",
+              )}
             >
               Browse GitHub
               <ArrowRight
@@ -283,12 +288,13 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
                 <p className="text-sm text-muted-foreground/70 max-w-md mx-auto">
                   Try adjusting your tech stack or project type filters, or check back later for new projects
                 </p>
-                <button
+                <Button
                   onClick={() => handleFilterChange(projects)}
-                  className="mt-6 px-4 py-2 text-sm font-mono uppercase tracking-widest text-foreground hover:text-highlight transition-colors"
+                  variant="ghost"
+                  className="mt-6 uppercase tracking-widest font-mono text-sm"
                 >
                   Clear Filters
-                </button>
+                </Button>
               </motion.div>
             </div>
           )}
@@ -307,7 +313,10 @@ export function ProjectsPage({ projects, about }: ProjectsPageProps) {
             </p>
             <a
               href={`mailto:${about.email}?subject=Let's%20work%20together`}
-              className="inline-flex items-center gap-2 px-7 py-3 bg-foreground text-background rounded-full text-sm font-medium hover:bg-highlight transition-all"
+              className={cn(
+                buttonVariants({ variant: "default" }),
+                "rounded-full px-7 py-3 h-auto",
+              )}
               aria-label="Send an email to start a conversation"
             >
               Send a message
