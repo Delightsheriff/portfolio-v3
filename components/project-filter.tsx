@@ -76,7 +76,7 @@ export function ProjectFilter({
     const filteredGroups =
       selectedTechs.length > 0 || selectedTypes.length > 0
         ? groups.filter((group) =>
-            group.parts?.some((part) => filtered.includes(part.project))
+            group.parts?.some((part) => filtered.some((p) => p._id === part.project?._id))
           )
         : groups;
 

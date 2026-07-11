@@ -1,6 +1,6 @@
 import { ProjectsPage } from "@/components/projects-page";
 import { Project } from "@/interface/sanity";
-import { getFeaturedProjectGroups, getProfile, getProjects } from "@/sanity/sanity";
+import { getProjectGroups, getProfile, getProjects } from "@/sanity/sanity";
 import type { Metadata } from "next";
 
 export const revalidate = 60;
@@ -51,7 +51,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Projects() {
   const projects: Project[] = await getProjects();
   const profile = await getProfile();
-  const groups = await getFeaturedProjectGroups();
+  const groups = await getProjectGroups();
 
   // Create the JSON-LD schema for this specific page
   const jsonLd = {

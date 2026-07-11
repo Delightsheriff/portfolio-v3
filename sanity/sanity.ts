@@ -249,6 +249,34 @@ export async function getFeaturedProjectGroups() {
   }
 }
 
+export async function getProjectGroups() {
+  if (!client) return [];
+  try {
+    const groups = await client.fetch(`
+      *[_type == "projectGroup" && visible == true]
+        | order(coalesce(order, 9999) asc, _createdAt desc) {
+          _id,
+          title,
+          slug,
+          description,
+          year,
+          featured,
+          order,
+          parts[] {
+            label,
+            project-> {
+              ${PROJECT_FIELDS}
+            }
+          }
+        }
+    `);
+    return groups ?? [];
+  } catch (error) {
+    console.log("Error fetching project groups:", error);
+    return [];
+  }
+}
+
 export async function getProjectGroup(slug: string) {
   if (!client) return null;
   try {
