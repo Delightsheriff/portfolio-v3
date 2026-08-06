@@ -31,7 +31,7 @@ export function ProjectNextSection({
               href={`/project/${nextProject.slug}`}
               className={cn(
                 buttonVariants({ variant: "outline" }),
-                "rounded-full px-6 py-3 h-auto group",
+                "rounded-full px-6 py-3 h-auto",
               )}
               aria-label={`View next project: ${nextProject.title}`}
             >
