@@ -215,7 +215,7 @@ const projects = {
       name: "demoVideoUrl",
       title: "Demo Video URL",
       type: "url",
-      description: "YouTube or direct video URL for mobile and backend projects where a live link is not available.",
+      description: "YouTube, Vimeo, or a direct video file URL (.mp4/.webm/.mov). Mobile projects: a direct video file plays automatically inside the phone-frame mockup in place of the screenshot. YouTube/Vimeo links (any project) get their own embedded player below the hero image.",
     }),
     defineField({
       name: "iosUrl",

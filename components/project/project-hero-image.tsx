@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { ProjectMobileFrame } from "@/components/project-mobile-frame";
+import { DemoVideo, detectVideoKind } from "@/components/demo-video";
 import { FEATURE_LABELS } from "@/lib/constants";
 import { getImageDimensions } from "@/sanity/sanity";
 import type { Project } from "@/interface/sanity";
@@ -23,6 +24,12 @@ export function ProjectHeroImage({
   const aspectRatio = dimensions
     ? `${dimensions.width} / ${dimensions.height}`
     : "16 / 9";
+  const videoKind = project.demoVideoUrl ? detectVideoKind(project.demoVideoUrl) : null;
+  // A direct video file plays natively inside the phone frame instead of the
+  // still screenshot; a YouTube/Vimeo link gets its own embed block below,
+  // since a hosted player's chrome doesn't fit the device-bezel look.
+  const mobileVideoSrc = isMobile && videoKind?.type === "file" ? videoKind.url : undefined;
+  const showSeparateEmbed = Boolean(videoKind) && !mobileVideoSrc;
 
   return (
     <section className="px-5 pb-14 md:px-8">
@@ -58,6 +65,7 @@ export function ProjectHeroImage({
               <ProjectMobileFrame
                 src={imageUrl}
                 alt={`${project.title} app screenshot`}
+                videoSrc={mobileVideoSrc}
                 priority
               />
             </motion.div>
@@ -81,6 +89,20 @@ export function ProjectHeroImage({
               priority
               className="object-cover"
             />
+          </motion.div>
+        )}
+
+        {showSeparateEmbed && project.demoVideoUrl && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-6"
+          >
+            <p className="mb-2.5 text-xs uppercase tracking-[0.15em] text-muted-foreground font-mono">
+              Demo
+            </p>
+            <DemoVideo url={project.demoVideoUrl} title={project.title} />
           </motion.div>
         )}
 
