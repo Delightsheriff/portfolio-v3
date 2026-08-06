@@ -71,7 +71,7 @@ export default function Works({
             <p className="text-xs font-mono uppercase tracking-[0.25em] text-muted-foreground/60 mb-3">
               Selected Works
             </p>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight tracking-tight">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold leading-tight tracking-tight">
               Projects that define my craft
             </h2>
           </div>

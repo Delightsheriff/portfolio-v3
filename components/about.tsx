@@ -52,7 +52,7 @@ export default function AboutSection({ profile }: { profile: Profile }) {
                 <p className="text-xs font-mono uppercase tracking-[0.25em] text-muted-foreground/60">
                   About
                 </p>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight tracking-tight">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif leading-tight">
                   {profile.title || "Building with purpose."}
                 </h2>
                 <div className="text-muted-foreground leading-relaxed">

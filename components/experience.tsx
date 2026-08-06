@@ -29,7 +29,7 @@ export default function Experiences({
             <p className="text-xs font-mono uppercase tracking-[0.25em] text-muted-foreground/60 mb-3">
               Experience
             </p>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight tracking-tight">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold leading-tight tracking-tight">
               Where I&apos;ve shipped
             </h2>
           </div>
