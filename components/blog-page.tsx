@@ -84,7 +84,7 @@ export function BlogPage({ posts }: { posts: BlogPost[] }) {
                   className={cn(buttonVariants({ variant: "default" }), "rounded-full px-6 py-3 h-auto")}
                 >
                   Back to Home
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </motion.div>
             </motion.div>

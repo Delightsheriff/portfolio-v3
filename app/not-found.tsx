@@ -33,7 +33,10 @@ export default function NotFound() {
             )}
             aria-label="Return to home page"
           >
-            <ArrowLeft className="w-4 h-4" aria-hidden="true" />
+            <ArrowLeft
+              className="w-4 h-4 transition-transform group-hover:-translate-x-1"
+              aria-hidden="true"
+            />
             Return Home
           </Link>
         </motion.div>

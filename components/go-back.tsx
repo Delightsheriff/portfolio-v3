@@ -31,9 +31,9 @@ export default function GoBack() {
     >
       <div className="flex justify-between items-center max-w-7xl mx-auto px-6 md:px-8 py-5">
         <BackButton
-          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
-          <ArrowLeft className="w-4 h-4" />
+          <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
           Back
         </BackButton>
         <div className="flex items-center gap-3">
