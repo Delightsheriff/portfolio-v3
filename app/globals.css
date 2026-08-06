@@ -80,21 +80,23 @@
   --destructive: oklch(0.65 0.22 25);
   --border: oklch(1 0 0 / 9%);
   --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.628 0.221 33.05);
+  --ring: oklch(0.72 0.16 48);
 
-  /* Brand orange — the signature accent */
-  --highlight: oklch(0.628 0.221 33.05);
-  --highlight-foreground: oklch(0.98 0.004 90);
+  /* Brand amber-orange — refined, used sparingly (primary CTAs, one
+     accent per section, link hovers). Dark foreground for legibility
+     when this becomes a background (button/hover states). */
+  --highlight: oklch(0.72 0.16 48);
+  --highlight-foreground: oklch(0.16 0.02 40);
 
   /* Sidebar */
   --sidebar: oklch(0.12 0.008 240);
   --sidebar-foreground: oklch(0.96 0.006 90);
-  --sidebar-primary: oklch(0.628 0.221 33.05);
-  --sidebar-primary-foreground: oklch(0.98 0.004 90);
+  --sidebar-primary: oklch(0.72 0.16 48);
+  --sidebar-primary-foreground: oklch(0.16 0.02 40);
   --sidebar-accent: oklch(0.16 0.007 240);
   --sidebar-accent-foreground: oklch(0.96 0.006 90);
   --sidebar-border: oklch(1 0 0 / 9%);
-  --sidebar-ring: oklch(0.628 0.221 33.05);
+  --sidebar-ring: oklch(0.72 0.16 48);
 }
 
 /* ─── Light mode overrides ─── */
@@ -116,17 +118,17 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.1 0 0 / 10%);
   --input: oklch(0.1 0 0 / 8%);
-  --ring: oklch(0.628 0.221 33.05);
-  --highlight: oklch(0.628 0.221 33.05);
-  --highlight-foreground: oklch(0.98 0.004 90);
+  --ring: oklch(0.68 0.18 46);
+  --highlight: oklch(0.68 0.18 46);
+  --highlight-foreground: oklch(0.16 0.02 40);
   --sidebar: oklch(0.96 0.004 240);
   --sidebar-foreground: oklch(0.1 0.008 240);
-  --sidebar-primary: oklch(0.628 0.221 33.05);
-  --sidebar-primary-foreground: oklch(0.98 0.004 90);
+  --sidebar-primary: oklch(0.68 0.18 46);
+  --sidebar-primary-foreground: oklch(0.16 0.02 40);
   --sidebar-accent: oklch(0.94 0.004 240);
   --sidebar-accent-foreground: oklch(0.1 0.008 240);
   --sidebar-border: oklch(0.1 0 0 / 10%);
-  --sidebar-ring: oklch(0.628 0.221 33.05);
+  --sidebar-ring: oklch(0.68 0.18 46);
 }
 
 @layer base {
@@ -156,15 +158,22 @@
   font-family: var(--font-mono), ui-monospace, "Cascadia Code", monospace;
 }
 
+/* Shared oversized display heading — hero + flagship case study */
+.text-display {
+  font-size: clamp(2.75rem, 8.5vw, 7.25rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Brand orange selection */
+/* Brand amber-orange selection */
 ::selection {
-  background-color: oklch(0.628 0.221 33.05);
-  color: oklch(0.98 0.004 90);
+  background-color: var(--highlight);
+  color: var(--highlight-foreground);
 }
 
 /* Hide scrollbar but keep functionality */

@@ -5,7 +5,7 @@ import { useRef } from "react";
 
 const STATS = [
   { value: "3+", label: "Years building" },
-  { value: "iOS & Android", label: "Deployed natively" },
+  { value: "iOS & Android", label: "Built with React Native" },
   { value: "Full-Stack", label: "Web & Mobile" },
 ];
 
