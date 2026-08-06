@@ -169,7 +169,7 @@ export function ProjectGroupCard({
             {/* Active part stack */}
             {activePart?.project?.stack &&
               activePart.project.stack.length > 0 && (
-                <div className="flex flex-wrap gap-1.5" aria-label="Tech stack">
+                <div className="flex flex-wrap gap-1.5" role="group" aria-label="Tech stack">
                   {activePart.project.stack.slice(0, 5).map((tech, i) => (
                     <Badge
                       key={i}

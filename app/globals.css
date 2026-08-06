@@ -83,9 +83,12 @@
   --ring: oklch(0.628 0.221 33.05);
 
   /* Brand orange — the signature accent, used sparingly (primary
-     CTAs, one accent per section, link hovers). */
+     CTAs, one accent per section, link hovers). Dark foreground:
+     white text on this mid-lightness orange fails WCAG AA contrast
+     (~2.6:1); dark text clears it while keeping the orange itself
+     unchanged. */
   --highlight: oklch(0.628 0.221 33.05);
-  --highlight-foreground: oklch(0.98 0.004 90);
+  --highlight-foreground: oklch(0.16 0.02 40);
 
   /* Sidebar */
   --sidebar: oklch(0.12 0.008 240);
@@ -119,7 +122,7 @@
   --input: oklch(0.1 0 0 / 8%);
   --ring: oklch(0.628 0.221 33.05);
   --highlight: oklch(0.628 0.221 33.05);
-  --highlight-foreground: oklch(0.98 0.004 90);
+  --highlight-foreground: oklch(0.16 0.02 40);
   --sidebar: oklch(0.96 0.004 240);
   --sidebar-foreground: oklch(0.1 0.008 240);
   --sidebar-primary: oklch(0.628 0.221 33.05);

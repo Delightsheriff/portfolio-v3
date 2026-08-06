@@ -82,7 +82,7 @@ export function ProjectGridCard({ project, index }: ProjectGridCardProps) {
           </p>
 
           {project.stack && project.stack.length > 0 && (
-            <div className="flex flex-wrap gap-1" aria-label="Tech stack">
+            <div className="flex flex-wrap gap-1" role="group" aria-label="Tech stack">
               {project.stack.slice(0, 4).map((t, i) => (
                 <Badge
                   key={i}

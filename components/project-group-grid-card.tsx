@@ -82,7 +82,7 @@ export function ProjectGroupGridCard({ group, index }: ProjectGroupGridCardProps
             {group.description}
           </p>
 
-          <div className="flex flex-wrap gap-1.5" aria-label="Project parts">
+          <div className="flex flex-wrap gap-1.5" role="group" aria-label="Project parts">
             {group.parts.map((part, i) => (
               <Link
                 key={i}

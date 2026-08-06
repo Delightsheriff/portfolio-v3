@@ -63,12 +63,11 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-0.5" role="list">
+          <div className="hidden md:flex items-center gap-0.5">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.hash}
                 href={href(link.hash)}
-                role="listitem"
                 className="px-3.5 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors rounded-md"
               >
                 {link.label}

@@ -104,7 +104,7 @@ export default function Experiences({
 
                   {/* Tech badges */}
                   {exp.technologies && exp.technologies.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 pt-1" aria-label="Technologies used">
+                    <div className="flex flex-wrap gap-1.5 pt-1" role="group" aria-label="Technologies used">
                       {exp.technologies.map((t, i) => (
                         <Badge
                           key={i}

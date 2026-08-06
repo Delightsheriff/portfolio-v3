@@ -117,7 +117,7 @@ export function ProjectFilter({
     >
       {/* View Mode Filter */}
       <div>
-        <label className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground/60 mb-4 block">
+        <label className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground/80 mb-4 block">
           Show
         </label>
         <div className="flex flex-wrap gap-2">
@@ -143,7 +143,7 @@ export function ProjectFilter({
       {/* Tech Stack Filter */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <label className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground/60">
+          <label className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground/80">
             Filter by tech
           </label>
           {isActive && (
@@ -178,7 +178,7 @@ export function ProjectFilter({
 
       {/* Project Type Filter */}
       <div>
-        <label className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground/60 mb-4 block">
+        <label className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground/80 mb-4 block">
           Filter by type
         </label>
         <div className="flex flex-wrap gap-2">

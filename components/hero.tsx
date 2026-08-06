@@ -108,6 +108,7 @@ export default function HeroSection({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.15 }}
           className="flex flex-wrap gap-2 mb-10"
+          role="group"
           aria-label="Tech stack"
         >
           {pills.map((pill, i) => (
@@ -158,7 +159,6 @@ export default function HeroSection({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 1.55 }}
-          aria-label="Availability"
         >
           <Badge variant="outline" className="font-mono text-[10px] uppercase tracking-widest border-highlight/30 text-highlight px-2.5 py-0.5">
             {profile?.status ?? "Open to opportunities"}

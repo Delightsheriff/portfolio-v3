@@ -63,7 +63,7 @@ export default function Contact({ profile }: { profile: Profile }) {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
               {/* Social links */}
               {profile.socialLinks && profile.socialLinks.length > 0 && (
-                <div className="flex items-center gap-2" aria-label="Social media profiles">
+                <div className="flex items-center gap-2" role="group" aria-label="Social media profiles">
                   {profile.socialLinks.map((link, i) => {
                     const Icon = PLATFORM_ICONS[link.platform] ?? Linkedin;
                     const labels: Record<string, string> = {

@@ -70,7 +70,7 @@ export default function AboutSection({ profile }: { profile: Profile }) {
                         <p className="text-sm font-heading font-semibold text-foreground/90">
                           {group.category}
                         </p>
-                        <div className="flex flex-wrap gap-1.5" aria-label={`${group.category} skills`}>
+                        <div className="flex flex-wrap gap-1.5" role="group" aria-label={`${group.category} skills`}>
                           {group.items.map((skill, j) => (
                             <Badge
                               key={j}

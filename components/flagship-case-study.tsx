@@ -105,7 +105,7 @@ export function FlagshipCaseStudy({ groups, urlFor }: FlagshipCaseStudyProps) {
         <ScrollReveal>
           <div className="flex flex-wrap items-center justify-between gap-6">
             {stack.length > 0 && (
-              <div className="flex flex-wrap gap-1.5" aria-label="Tech stack">
+              <div className="flex flex-wrap gap-1.5" role="group" aria-label="Tech stack">
                 {stack.slice(0, 8).map((tech, i) => (
                   <Badge
                     key={i}
