@@ -240,6 +240,7 @@ export async function getFeaturedProjectGroups() {
       *[_type == "projectGroup" && featured == true && (!defined(visible) || visible == true)]
         | order(coalesce(order, 9999) asc, _createdAt desc) {
           _id,
+          _updatedAt,
           title,
           slug,
           description,
@@ -269,6 +270,7 @@ export async function getProjectGroups() {
       *[_type == "projectGroup" && (!defined(visible) || visible == true)]
         | order(coalesce(order, 9999) asc, _createdAt desc) {
           _id,
+          _updatedAt,
           title,
           slug,
           description,
@@ -297,6 +299,7 @@ export async function getProjectGroup(slug: string) {
     const group = await client.fetch(
       `      *[_type == "projectGroup" && slug.current == $slug && (!defined(visible) || visible == true)][0] {
         _id,
+        _updatedAt,
         title,
         slug,
         description,

@@ -99,6 +99,7 @@ export interface ProjectGroupPart {
 
 export interface ProjectGroup {
   _id: string;
+  _updatedAt?: string;
   title: string;
   slug: { current: string };
   description: string;
