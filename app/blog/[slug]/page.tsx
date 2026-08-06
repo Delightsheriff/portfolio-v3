@@ -5,8 +5,7 @@ import GoBack from "@/components/go-back";
 import Footer from "@/components/nav/footer";
 import { BlogPostHeader, BlogPostBody } from "@/components/blog-post-layout";
 import { BlogContent } from "@/components/blog-content";
-
-const SITE_URL = "https://delightsheriff.com";
+import { SITE_URL } from "@/lib/constants";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;

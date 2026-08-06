@@ -11,8 +11,8 @@ import { ThemeProvider } from "@/components/animations/theme-provider";
 import { PageTransition } from "@/components/animations/page-transition";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { SITE_URL } from "@/lib/constants";
 
-const SITE_URL = "https://delightsheriff.com";
 const PERSON_NAME = "Amadi-Sheriff Delight";
 const PERSON_NAME_VARIANTS = [
   "Amadi-Sheriff Delight",

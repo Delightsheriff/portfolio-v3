@@ -8,10 +8,11 @@ import {
 } from "@/sanity/sanity";
 import Loading from "./loading";
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
-  openGraph: { url: "https://delightsheriff.com" },
+  openGraph: { url: SITE_URL },
 };
 
 export default async function Home() {

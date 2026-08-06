@@ -5,8 +5,7 @@ import { ProjectGroupDetail } from "@/components/project-group-detail";
 import Navbar from "@/components/nav/navbar";
 import Footer from "@/components/nav/footer";
 import type { ProjectGroupPart } from "@/interface/sanity";
-
-const SITE_URL = "https://delightsheriff.com";
+import { SITE_URL } from "@/lib/constants";
 
 interface Props {
   params: Promise<{ slug: string }>;

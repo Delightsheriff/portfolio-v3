@@ -2,6 +2,7 @@ import { ProjectsPage } from "@/components/projects-page";
 import { Project } from "@/interface/sanity";
 import { getProjectGroups, getProfile, getProjects } from "@/sanity/sanity";
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/constants";
 
 export const revalidate = 60;
 
@@ -26,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       type: "website",
-      url: "https://delightsheriff.com/projects",
+      url: `${SITE_URL}/projects`,
       // IMPORTANT: Create a specific image for your projects page (1200x630px)
       images: [
         {
@@ -60,11 +61,11 @@ export default async function Projects() {
     name: "Software Engineering Projects by Amadi-Sheriff Delight",
     description:
       "A curated collection of my software engineering projects. Explore detailed case studies on building user-centric and scalable web applications.",
-    url: "https://delightsheriff.com/projects",
+    url: `${SITE_URL}/projects`,
     author: {
       "@type": "Person",
       name: "Amadi-Sheriff Delight",
-      url: "https://delightsheriff.com",
+      url: SITE_URL,
     },
     mainEntity: {
       "@type": "ItemList",
@@ -74,7 +75,7 @@ export default async function Projects() {
         item: {
           "@type": "CreativeWork", // Each project is a "CreativeWork"
           name: project.title,
-          url: `https://delightsheriff.com/project/${project.slug.current}`,
+          url: `${SITE_URL}/project/${project.slug.current}`,
           description: project.description,
         },
       })),

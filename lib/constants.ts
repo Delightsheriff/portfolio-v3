@@ -1,3 +1,5 @@
+export const SITE_URL = "https://delightsheriff.com";
+
 export const CATEGORY_LABELS: Record<string, string> = {
   fullstack: "Full-Stack",
   frontend: "Frontend",

@@ -3,6 +3,7 @@ import { getProject, getProjects } from "@/sanity/sanity";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { urlFor } from "@/sanity/sanity";
+import { SITE_URL } from "@/lib/constants";
 
 export const revalidate = 60;
 
@@ -64,7 +65,7 @@ export default async function CaseStudy({
   if (!project) notFound();
 
   const isMobile = project.projectType?.category === "mobile";
-  const projectUrl = `https://delightsheriff.com/project/${slug}`;
+  const projectUrl = `${SITE_URL}/project/${slug}`;
 
   // BreadcrumbList: helps Google show breadcrumbs in SERPs
   const breadcrumbJsonLd = {
@@ -75,13 +76,13 @@ export default async function CaseStudy({
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://delightsheriff.com",
+        item: SITE_URL,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Projects",
-        item: "https://delightsheriff.com/projects",
+        item: `${SITE_URL}/projects`,
       },
       {
         "@type": "ListItem",
@@ -108,7 +109,7 @@ export default async function CaseStudy({
         author: {
           "@type": "Person",
           name: "Amadi-Sheriff Delight",
-          url: "https://delightsheriff.com",
+          url: SITE_URL,
         },
         ...(project.iosUrl && { downloadUrl: project.iosUrl }),
         ...(project.stack && { keywords: project.stack.join(", ") }),
@@ -122,7 +123,7 @@ export default async function CaseStudy({
         author: {
           "@type": "Person",
           name: "Amadi-Sheriff Delight",
-          url: "https://delightsheriff.com",
+          url: SITE_URL,
         },
         dateCreated: project.year ? `${project.year}-01-01` : undefined,
         ...(project.stack && { keywords: project.stack.join(", ") }),
