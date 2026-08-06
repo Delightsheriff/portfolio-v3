@@ -8,7 +8,6 @@ import type {
   Project,
   ProjectGroup,
 } from "@/interface/sanity";
-import { CustomCursor } from "./animations/custom-cursor";
 import Navbar from "./nav/navbar";
 import HeroSection from "./hero";
 import Works from "./works";
@@ -45,24 +44,21 @@ export function HomePage({
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
 
   return (
-    <>
-      <CustomCursor />
-      <div
-        ref={containerRef}
-        className="min-h-screen bg-background text-foreground overflow-hidden relative"
-      >
-        <Navbar />
-        <main id="main-content">
-          <HeroSection profile={profile} y={y} />
-          <Capabilities profile={profile} />
-          <FlagshipCaseStudy groups={groups} urlFor={urlFor} />
-          <Works projects={projects} allProjects={allProjects} groups={groups} />
-          <Experiences experiences={experiences} />
-          <AboutSection profile={profile} />
-          <Contact profile={profile} />
-        </main>
-        <Footer />
-      </div>
-    </>
+    <div
+      ref={containerRef}
+      className="min-h-screen bg-background text-foreground overflow-hidden relative"
+    >
+      <Navbar />
+      <main id="main-content">
+        <HeroSection profile={profile} y={y} />
+        <Capabilities profile={profile} />
+        <FlagshipCaseStudy groups={groups} urlFor={urlFor} />
+        <Works projects={projects} allProjects={allProjects} groups={groups} />
+        <Experiences experiences={experiences} />
+        <AboutSection profile={profile} />
+        <Contact profile={profile} />
+      </main>
+      <Footer />
+    </div>
   );
 }

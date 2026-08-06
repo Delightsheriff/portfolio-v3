@@ -9,7 +9,6 @@ import {
 import "./globals.css";
 import { ThemeProvider } from "@/components/animations/theme-provider";
 import { PageTransition } from "@/components/animations/page-transition";
-import { ClickSparkProvider } from "@/components/animations/click-spark-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
@@ -288,11 +287,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ClickSparkProvider>
-            <TooltipProvider delayDuration={300}>
-              <PageTransition>{children}</PageTransition>
-            </TooltipProvider>
-          </ClickSparkProvider>
+          <TooltipProvider delayDuration={300}>
+            <PageTransition>{children}</PageTransition>
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>
