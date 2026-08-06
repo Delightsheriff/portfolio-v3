@@ -22,12 +22,9 @@ export async function generateMetadata({
     project.overview?.slice(0, 160) ?? project.description ?? "";
 
   // Use project's main image for OG if available, otherwise fallback
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const _ogBuilder: any = project.mainImage ? urlFor(project.mainImage) : null;
-  const ogImage: string =
-    _ogBuilder && typeof _ogBuilder.width === "function"
-      ? _ogBuilder.width(1200).height(630).fit("crop").url()
-      : "/og-image.png";
+  const ogImage = project.mainImage
+    ? urlFor(project.mainImage).width(1200).height(630).fit("crop").url()
+    : "/og-image.png";
 
   return {
     title,

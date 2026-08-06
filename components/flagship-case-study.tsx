@@ -1,16 +1,16 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { ArrowUpRight, Layers } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import type { ProjectGroup } from "@/interface/sanity";
+import type { ProjectGroup, SanityImage } from "@/interface/sanity";
+import type { ImageBuilder } from "@/sanity/sanity";
 import { Badge } from "@/components/ui/badge";
 import { ScrollReveal } from "./animations/scroll-reveal";
 
 interface FlagshipCaseStudyProps {
   groups: ProjectGroup[];
-  urlFor: (source: any) => any;
+  urlFor: (source: SanityImage | string | null | undefined) => ImageBuilder;
 }
 
 export function FlagshipCaseStudy({ groups, urlFor }: FlagshipCaseStudyProps) {

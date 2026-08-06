@@ -16,23 +16,17 @@ export function AnimatedCounter({
 }: AnimatedCounterProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [displayValue, setDisplayValue] = useState("0");
+  // Extract just the number from value (e.g., "40%" -> "40")
+  const numericValue = parseInt(value.replace(/\D/g, ""), 10);
+  const isNumeric = !isNaN(numericValue);
+  // Extract suffix (e.g., "%", "K", "M")
+  const suffix = value.replace(/[0-9]/g, "");
+  const [displayValue, setDisplayValue] = useState(isNumeric ? "0" : value);
 
   useEffect(() => {
-    if (!isInView) return;
-
-    // Extract just the number from value (e.g., "40%" -> "40")
-    const numericValue = parseInt(value.replace(/\D/g, ""), 10);
-    if (isNaN(numericValue)) {
-      setDisplayValue(value);
-      return;
-    }
-
-    // Extract suffix (e.g., "%", "K", "M")
-    const suffix = value.replace(/[0-9]/g, "");
+    if (!isInView || !isNumeric) return;
 
     let current = 0;
-    const increment = Math.ceil(numericValue / 50);
     const duration = 1000; // ms
     const steps = duration / 16; // ~60fps
     const stepIncrement = numericValue / steps;
@@ -48,7 +42,7 @@ export function AnimatedCounter({
     }, 16);
 
     return () => clearInterval(interval);
-  }, [isInView, value]);
+  }, [isInView, isNumeric, numericValue, suffix]);
 
   return (
     <div ref={ref} className={`space-y-1 ${className}`}>

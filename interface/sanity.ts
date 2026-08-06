@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { PortableTextBlock } from "@portabletext/react";
 export interface SanityImage {
   _type: "image";
@@ -127,5 +126,19 @@ export interface Uses {
   description?: string;
   categories: UsesCategory[];
   updatedLabel?: string;
+}
+
+export interface Blog {
+  _id: string;
+  _updatedAt?: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: PortableTextBlock[];
+  featuredImage?: SanityImage | null;
+  publishedAt: string;
+  featured?: boolean;
+  author?: string;
+  visible?: boolean;
 }
 

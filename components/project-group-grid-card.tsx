@@ -6,7 +6,6 @@ import Image from "next/image";
 import { ScrollReveal } from "./animations/scroll-reveal";
 import type { ProjectGroup } from "@/interface/sanity";
 import { urlFor } from "@/sanity/sanity";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 interface ProjectGroupGridCardProps {

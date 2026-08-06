@@ -24,12 +24,9 @@ export async function generateMetadata({
 
   const title = `${post.title}: Blog Post`;
   const description = post.excerpt || "Read this technical article";
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const ogBuilder: any = post.featuredImage ? urlFor(post.featuredImage) : null;
-  const ogImage: string =
-    ogBuilder && typeof ogBuilder.width === "function"
-      ? ogBuilder.width(1200).height(630).fit("crop").url()
-      : "/og-image.png";
+  const ogImage = post.featuredImage
+    ? urlFor(post.featuredImage).width(1200).height(630).fit("crop").url()
+    : "/og-image.png";
 
   return {
     title,
@@ -62,8 +59,7 @@ export async function generateMetadata({
 
 export async function generateStaticParams() {
   const posts = await getAllBlogs();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return posts.map((post: any) => ({
+  return posts.map((post) => ({
     slug: post.slug,
   }));
 }

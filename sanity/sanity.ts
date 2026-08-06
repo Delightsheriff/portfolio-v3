@@ -1,5 +1,13 @@
 import client from "./sanity.client";
-import { createImageUrlBuilder } from "@sanity/image-url";
+import { createImageUrlBuilder, type SanityImageSource } from "@sanity/image-url";
+import type { SanityImage, Blog } from "@/interface/sanity";
+
+export interface ImageBuilder {
+  width(width: number): ImageBuilder;
+  height(height: number): ImageBuilder;
+  fit(mode: string): ImageBuilder;
+  url(): string;
+}
 
 const builder = client ? createImageUrlBuilder(client) : null;
 const PROJECT_ORDER = "_createdAt desc";
@@ -39,7 +47,7 @@ const PROJECT_FIELDS = `
 
 export { client };
 
-function createPlaceholderImageBuilder() {
+function createPlaceholderImageBuilder(): ImageBuilder {
   return {
     width: () => createPlaceholderImageBuilder(),
     height: () => createPlaceholderImageBuilder(),
@@ -49,9 +57,8 @@ function createPlaceholderImageBuilder() {
 }
 
 // Sanity asset refs encode real dimensions: image-{hash}-{width}x{height}-{format}
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getImageDimensions(
-  source: any,
+  source: { asset?: { _ref?: string } } | null | undefined,
 ): { width: number; height: number } | null {
   const ref = source?.asset?._ref;
   if (typeof ref !== "string") return null;
@@ -60,8 +67,9 @@ export function getImageDimensions(
   return { width: parseInt(match[1], 10), height: parseInt(match[2], 10) };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function urlFor(source: any) {
+export function urlFor(
+  source: SanityImage | string | null | undefined,
+): ImageBuilder {
   if (!source) {
     return createPlaceholderImageBuilder();
   }
@@ -79,9 +87,9 @@ export function urlFor(source: any) {
   }
 
   try {
-    return builder.image(source);
+    return builder.image(source as SanityImageSource);
   } catch (error) {
-    console.log("Error building image URL, using placeholder:", error);
+    console.error("Error building image URL, using placeholder:", error);
     return createPlaceholderImageBuilder();
   }
 }
@@ -103,7 +111,7 @@ export async function getProjects() {
     `);
     return projects;
   } catch (error) {
-    console.log(
+    console.error(
       "Error fetching from Sanity, using fallback projects data:",
       error,
     );
@@ -131,7 +139,7 @@ export async function getProject(slug: string) {
     );
     return project;
   } catch (error) {
-    console.log(
+    console.error(
       "Error fetching project from Sanity, using fallback data:",
       error,
     );
@@ -164,7 +172,7 @@ export async function getExperiences() {
     `);
     return experiences;
   } catch (error) {
-    console.log(
+    console.error(
       "Error fetching experiences from Sanity, using fallback data:",
       error,
     );
@@ -198,7 +206,7 @@ export async function getProfile() {
     `);
     return profile;
   } catch (error) {
-    console.log(
+    console.error(
       "Error fetching profile from Sanity, using fallback data:",
       error,
     );
@@ -225,7 +233,7 @@ export async function getFeaturedProjects(limit = 3) {
     );
     return featuredProjects;
   } catch (error) {
-    console.log(
+    console.error(
       "Error fetching featured projects from Sanity, using fallback data:",
       error,
     );
@@ -258,7 +266,7 @@ export async function getFeaturedProjectGroups() {
     `);
     return groups ?? [];
   } catch (error) {
-    console.log("Error fetching project groups:", error);
+    console.error("Error fetching project groups:", error);
     return [];
   }
 }
@@ -288,7 +296,7 @@ export async function getProjectGroups() {
     `);
     return groups ?? [];
   } catch (error) {
-    console.log("Error fetching project groups:", error);
+    console.error("Error fetching project groups:", error);
     return [];
   }
 }
@@ -318,7 +326,7 @@ export async function getProjectGroup(slug: string) {
     );
     return group;
   } catch (error) {
-    console.log("Error fetching project group:", error);
+    console.error("Error fetching project group:", error);
     return null;
   }
 }
@@ -336,13 +344,13 @@ export async function getUses() {
     `);
     return uses;
   } catch (error) {
-    console.log("Error fetching uses from Sanity:", error);
+    console.error("Error fetching uses from Sanity:", error);
     return null;
   }
 }
 
 // Blog queries: re-enabled for blog page
-export async function getAllBlogs() {
+export async function getAllBlogs(): Promise<Blog[]> {
   try {
     const blogs = await client.fetch(
       `      *[_type == "blog" && (!defined(visible) || visible == true)] | order(publishedAt desc) {
@@ -361,12 +369,12 @@ export async function getAllBlogs() {
     );
     return blogs;
   } catch (error) {
-    console.log("Error fetching blogs from Sanity:", error);
+    console.error("Error fetching blogs from Sanity:", error);
     return [];
   }
 }
 
-export async function getBlogBySlug(slug: string) {
+export async function getBlogBySlug(slug: string): Promise<Blog | null> {
   try {
     const blog = await client.fetch(
       `      *[_type == "blog" && slug.current == $slug && (!defined(visible) || visible == true)][0] {
@@ -385,7 +393,7 @@ export async function getBlogBySlug(slug: string) {
     );
     return blog;
   } catch (error) {
-    console.log("Error fetching blog from Sanity:", error);
+    console.error("Error fetching blog from Sanity:", error);
     return null;
   }
 }

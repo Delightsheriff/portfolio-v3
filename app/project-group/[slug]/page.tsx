@@ -20,12 +20,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title = `${group.title}: Case Study`;
   const description = group.description?.slice(0, 160) ?? "";
   const leadImage = group.parts[0]?.project?.mainImage;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const ogBuilder: any = leadImage ? urlFor(leadImage) : null;
-  const ogImage: string =
-    ogBuilder && typeof ogBuilder.width === "function"
-      ? ogBuilder.width(1200).height(630).fit("crop").url()
-      : "/og-image.png";
+  const ogImage = leadImage
+    ? urlFor(leadImage).width(1200).height(630).fit("crop").url()
+    : "/og-image.png";
 
   return {
     title,

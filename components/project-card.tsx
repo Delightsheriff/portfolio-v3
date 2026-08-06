@@ -1,18 +1,18 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { motion } from "framer-motion";
 import { ArrowUpRight, Github, ExternalLink, Smartphone, FileText, Play } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import type { Project } from "@/interface/sanity";
+import type { Project, SanityImage } from "@/interface/sanity";
+import type { ImageBuilder } from "@/sanity/sanity";
 import { Badge } from "@/components/ui/badge";
 import { CATEGORY_LABELS } from "@/lib/constants";
 
 interface ProjectCardProps {
   project: Project;
   index: number;
-  urlFor: (source: any) => any;
+  urlFor: (source: SanityImage | string | null | undefined) => ImageBuilder;
 }
 
 export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {

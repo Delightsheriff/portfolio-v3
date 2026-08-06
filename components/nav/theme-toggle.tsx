@@ -3,16 +3,20 @@
 import { Moon, Sun } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { Button } from "@/components/ui/button";
 
-export function ThemeToggle() {
-  const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+const emptySubscribe = () => () => {};
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+export function ThemeToggle() {
+  // Purpose-built for "has hydration happened yet" — avoids the extra
+  // render pass a useState+useEffect mount-flag would trigger.
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
+  const { theme, setTheme } = useTheme();
 
   const handleThemeToggle = () => {
     setTheme(theme === "dark" ? "light" : "dark");

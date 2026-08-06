@@ -1,6 +1,6 @@
-import { defineField } from "sanity";
+import { defineField, defineArrayMember, defineType } from "sanity";
 
-const projectGroup = {
+const projectGroup = defineType({
   name: "projectGroup",
   title: "Project Group",
   type: "document",
@@ -35,38 +35,38 @@ const projectGroup = {
       description:
         "Add each project that belongs to this group. The first entry is the visual lead on the works card.",
       of: [
-        {
+        defineArrayMember({
           type: "object",
           fields: [
-            {
+            defineField({
               name: "label",
               title: "Label",
               type: "string",
               description:
                 'Short role label shown as a tab/badge, e.g. "Mobile App", "Backend API", "Admin Panel"',
-              validation: (Rule: any) => Rule.required(),
-            },
-            {
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
               name: "project",
               title: "Project",
               type: "reference",
               to: [{ type: "project" }],
-              validation: (Rule: any) => Rule.required(),
-            },
+              validation: (Rule) => Rule.required(),
+            }),
           ],
           preview: {
             select: {
               label: "label",
               projectTitle: "project.title",
             },
-            prepare(sel: any) {
+            prepare(sel) {
               return {
                 title: sel.label ?? "Unlabelled",
                 subtitle: sel.projectTitle,
               };
             },
           },
-        },
+        }),
       ],
       validation: (Rule) => Rule.required().min(2),
     }),
@@ -109,13 +109,13 @@ const projectGroup = {
       title: "title",
       subtitle: "description",
     },
-    prepare(sel: any) {
+    prepare(sel) {
       return {
         title: sel.title ?? "Untitled Group",
         subtitle: sel.subtitle,
       };
     },
   },
-};
+});
 
 export default projectGroup;

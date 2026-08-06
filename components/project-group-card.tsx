@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { motion } from "framer-motion";
@@ -6,8 +5,8 @@ import { ArrowRight, ArrowUpRight, Layers } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import type { ProjectGroup } from "@/interface/sanity";
-import type { Project } from "@/interface/sanity";
+import type { ProjectGroup, SanityImage } from "@/interface/sanity";
+import type { ImageBuilder } from "@/sanity/sanity";
 import { Badge } from "@/components/ui/badge";
 import { CATEGORY_LABELS } from "@/lib/constants";
 import { ProjectGroupLinks } from "./project-group-links";
@@ -15,7 +14,7 @@ import { ProjectGroupLinks } from "./project-group-links";
 interface ProjectGroupCardProps {
   group: ProjectGroup;
   index: number;
-  urlFor: (source: any) => any;
+  urlFor: (source: SanityImage | string | null | undefined) => ImageBuilder;
 }
 
 export function ProjectGroupCard({

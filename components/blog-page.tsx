@@ -7,19 +7,9 @@ import GoBack from "./go-back";
 import Footer from "./nav/footer";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import type { Blog } from "@/interface/sanity";
 
-interface BlogPost {
-  _id: string;
-  title: string;
-  slug: string;
-  excerpt: string;
-  publishedAt: string;
-  featured: boolean;
-  author?: string;
-  visible?: boolean;
-}
-
-export function BlogPage({ posts }: { posts: BlogPost[] }) {
+export function BlogPage({ posts }: { posts: Blog[] }) {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

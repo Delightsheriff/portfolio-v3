@@ -14,7 +14,6 @@ import { cn } from "@/lib/utils";
 
 const SITE_URL = "https://delightsheriff.com";
 const PERSON_NAME = "Amadi-Sheriff Delight";
-const PERSON_DISPLAY_NAME = "Delight Sheriff";
 const PERSON_NAME_VARIANTS = [
   "Amadi-Sheriff Delight",
   "Delight Sheriff",
