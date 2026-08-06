@@ -74,7 +74,7 @@ export default async function Projects() {
         item: {
           "@type": "CreativeWork", // Each project is a "CreativeWork"
           name: project.title,
-          url: project.liveUrl,
+          url: `https://delightsheriff.com/project/${project.slug.current}`,
           description: project.description,
         },
       })),
