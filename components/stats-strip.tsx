@@ -2,16 +2,34 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import type { Experience } from "@/interface/sanity";
 
-const STATS = [
-  { value: "3+", label: "Years building" },
-  { value: "iOS & Android", label: "Built with React Native" },
-  { value: "Full-Stack", label: "Web & Mobile" },
-];
+function getYearsBuilding(experiences: Experience[]): number {
+  const years = experiences
+    .map((exp) => exp.period?.match(/\d{4}/)?.[0])
+    .filter((year): year is string => Boolean(year))
+    .map(Number);
 
-export default function StatsStrip() {
+  if (years.length === 0) return 3;
+  return Math.max(1, new Date().getFullYear() - Math.min(...years));
+}
+
+export default function StatsStrip({
+  projectCount,
+  experiences,
+}: {
+  projectCount: number;
+  experiences: Experience[];
+}) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const yearsBuilding = getYearsBuilding(experiences ?? []);
+
+  const STATS = [
+    { value: `${yearsBuilding}+`, label: "Years building" },
+    { value: `${projectCount}`, label: "Shipped projects" },
+    { value: "iOS & Android", label: "Built with React Native" },
+  ];
 
   return (
     <section

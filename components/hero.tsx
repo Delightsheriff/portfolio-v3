@@ -1,6 +1,6 @@
 "use client";
 
-import type { Profile } from "@/interface/sanity";
+import type { Experience, Profile } from "@/interface/sanity";
 import { motion, type MotionValue } from "framer-motion";
 import { ArrowRight, ArrowDownRight } from "lucide-react";
 import Link from "next/link";
@@ -20,15 +20,18 @@ const STAGGER = 0.06;
 
 export default function HeroSection({
   profile,
+  experiences,
   y,
 }: {
   profile: Profile;
+  experiences: Experience[];
   y: MotionValue<string>;
 }) {
   const words = profile?.headline?.split(" ") ?? ["Software", "Developer"];
   const pills = profile?.stackPills && profile.stackPills.length > 0
     ? profile.stackPills
     : DEFAULT_STACK;
+  const currentRole = experiences?.find((exp) => exp.current);
 
   return (
     <section
@@ -59,12 +62,12 @@ export default function HeroSection({
         style={{ y }}
         className="max-w-7xl mx-auto w-full pt-32 pb-20 md:pt-40 md:pb-28"
       >
-        {/* Status + Open to Work badges */}
+        {/* Status + current role */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.15 }}
-          className="mb-8 flex flex-wrap items-center gap-4"
+          className="mb-8 flex flex-wrap items-center gap-x-5 gap-y-2"
         >
           <div className="flex items-center gap-2">
             <span
@@ -75,6 +78,14 @@ export default function HeroSection({
               {profile?.status ?? "Available for work"}
             </span>
           </div>
+          {currentRole && (
+            <div className="flex items-center gap-2">
+              <span className="w-1 h-1 rounded-full bg-muted-foreground/30" aria-hidden="true" />
+              <span className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
+                Currently: {currentRole.role} @ {currentRole.company}
+              </span>
+            </div>
+          )}
         </motion.div>
 
         {/* Name line: small, above headline */}
@@ -99,7 +110,7 @@ export default function HeroSection({
                 delay: 0.3 + i * STAGGER,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="inline-block font-heading font-bold text-[clamp(2.6rem,7.5vw,6rem)] mr-3 md:mr-4 tracking-tight"
+              className="inline-block font-heading font-bold text-display mr-3 md:mr-4"
             >
               {word === words[words.length - 1] ? (
                 <span className="text-highlight">{word}</span>

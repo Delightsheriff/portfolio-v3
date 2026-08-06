@@ -51,8 +51,8 @@ export function HomePage({
       >
         <Navbar />
         <main id="main-content">
-          <HeroSection profile={profile} y={y} />
-          <StatsStrip />
+          <HeroSection profile={profile} experiences={experiences} y={y} />
+          <StatsStrip projectCount={allProjects.length} experiences={experiences} />
           <Works projects={projects} allProjects={allProjects} groups={groups} />
           <Experiences experiences={experiences} />
           <AboutSection profile={profile} />
