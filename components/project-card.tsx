@@ -59,8 +59,7 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
               </div>
               {/* Live indicator */}
               {hasLiveLinks && (
-                <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-background/80 backdrop-blur-sm border border-border/40 rounded-full px-2.5 py-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />
+                <div className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm border border-border/40 rounded-full px-2.5 py-1">
                   <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">Live</span>
                 </div>
               )}
@@ -77,8 +76,7 @@ export function ProjectCard({ project, index, urlFor }: ProjectCardProps) {
               <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-500" />
               {/* Live indicator */}
               {hasLiveLinks && (
-                <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-background/80 backdrop-blur-sm border border-border/40 rounded-full px-2.5 py-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />
+                <div className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm border border-border/40 rounded-full px-2.5 py-1">
                   <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">Live</span>
                 </div>
               )}

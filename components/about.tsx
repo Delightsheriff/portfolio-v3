@@ -35,14 +35,10 @@ export default function AboutSection({ profile }: { profile: Profile }) {
               </div>
 
               {/* Quick-facts below photo on desktop */}
-              <div className="mt-5 space-y-2.5 hidden md:block">
-                <div className="flex items-center gap-2.5 text-sm text-muted-foreground">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shrink-0" aria-hidden="true" />
+              <div className="mt-5 hidden md:block">
+                <Badge variant="outline" className="font-mono text-[10px] uppercase tracking-widest border-highlight/30 text-highlight px-2.5 py-0.5">
                   Open to remote roles
-                </div>
-                <div className="text-sm text-muted-foreground font-mono">
-                  Nigeria (Port Harcourt)
-                </div>
+                </Badge>
               </div>
             </div>
 
@@ -114,10 +110,9 @@ export default function AboutSection({ profile }: { profile: Profile }) {
                 )}
 
                 {/* Mobile availability */}
-                <div className="flex items-center gap-2 md:hidden text-sm text-muted-foreground">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shrink-0" aria-hidden="true" />
+                <Badge variant="outline" className="md:hidden font-mono text-[10px] uppercase tracking-widest border-highlight/30 text-highlight px-2.5 py-0.5">
                   Open to remote roles
-                </div>
+                </Badge>
               </div>
             </div>
           </div>

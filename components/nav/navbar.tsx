@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import { Button, buttonVariants } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -151,12 +152,11 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.3 }}
-              className="mt-12 flex items-center gap-2"
+              className="mt-12"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />
-              <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
+              <Badge variant="outline" className="font-mono text-[10px] uppercase tracking-widest border-highlight/30 text-highlight px-2.5 py-0.5">
                 Open to remote roles
-              </p>
+              </Badge>
             </motion.div>
           </motion.div>
         )}

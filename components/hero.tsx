@@ -5,6 +5,7 @@ import { motion, type MotionValue } from "framer-motion";
 import { ArrowRight, ArrowDownRight } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 const DEFAULT_STACK = [
@@ -152,27 +153,16 @@ export default function HeroSection({
           </a>
         </motion.div>
 
-        {/* Meta row: availability + location, kept small and quiet */}
+        {/* Meta row: availability, kept small and quiet */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 1.55 }}
-          className="flex flex-wrap items-center gap-3 text-xs font-mono text-muted-foreground/50"
-          aria-label="Availability and location"
+          aria-label="Availability"
         >
-          <span className="flex items-center gap-2">
-            <span
-              className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"
-              aria-hidden="true"
-            />
+          <Badge variant="outline" className="font-mono text-[10px] uppercase tracking-widest border-highlight/30 text-highlight px-2.5 py-0.5">
             {profile?.status ?? "Open to opportunities"}
-          </span>
-          {profile?.location && (
-            <>
-              <span className="w-1 h-1 rounded-full bg-muted-foreground/30" aria-hidden="true" />
-              <span>{profile.location}</span>
-            </>
-          )}
+          </Badge>
         </motion.div>
       </motion.div>
 

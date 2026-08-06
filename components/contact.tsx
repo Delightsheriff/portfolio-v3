@@ -4,6 +4,7 @@ import { Linkedin, Github, Mail, ArrowUpRight } from "lucide-react";
 import { RiTwitterXFill } from "react-icons/ri";
 import { Separator } from "@/components/ui/separator";
 import { buttonVariants } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 const PLATFORM_ICONS: Record<string, React.FC<{ className?: string; "aria-hidden"?: boolean | "true" | "false" }>> = {
@@ -98,9 +99,10 @@ export default function Contact({ profile }: { profile: Profile }) {
                   <dt className="text-xs font-mono uppercase tracking-widest text-muted-foreground/50 mb-0.5">
                     Availability
                   </dt>
-                  <dd className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />
-                    Open to roles
+                  <dd>
+                    <Badge variant="outline" className="font-mono text-[10px] uppercase tracking-widest border-highlight/30 text-highlight px-2.5 py-0.5">
+                      Open to roles
+                    </Badge>
                   </dd>
                 </div>
               </dl>
