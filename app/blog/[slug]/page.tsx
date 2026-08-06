@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getBlogBySlug, getAllBlogs } from "@/sanity/sanity";
+import { getBlogBySlug, getAllBlogs, urlFor } from "@/sanity/sanity";
 import GoBack from "@/components/go-back";
 import Footer from "@/components/nav/footer";
 import { BlogPostHeader, BlogPostBody } from "@/components/blog-post-layout";
 import { BlogContent } from "@/components/blog-content";
+
+const SITE_URL = "https://delightsheriff.com";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -20,14 +22,47 @@ export async function generateMetadata({
     return { title: "Post Not Found" };
   }
 
+  const title = `${post.title}: Blog Post`;
+  const description = post.excerpt || "Read this technical article";
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const ogBuilder: any = post.featuredImage ? urlFor(post.featuredImage) : null;
+  const ogImage: string =
+    ogBuilder && typeof ogBuilder.width === "function"
+      ? ogBuilder.width(1200).height(630).fit("crop").url()
+      : "/og-image.png";
+
   return {
-    title: `${post.title}: Blog Post`,
-    description: post.excerpt || "Read this technical article",
+    title,
+    description,
+    alternates: { canonical: `/blog/${slug}` },
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      url: `${SITE_URL}/blog/${slug}`,
+      publishedTime: post.publishedAt,
+      authors: post.author ? [post.author] : undefined,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
+    },
   };
 }
 
 export async function generateStaticParams() {
   const posts = await getAllBlogs();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return posts.map((post: any) => ({
     slug: post.slug,
   }));
@@ -47,8 +82,31 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     day: "numeric",
   });
 
+  const postUrl = `${SITE_URL}/blog/${slug}`;
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    url: postUrl,
+    datePublished: post.publishedAt,
+    dateModified: post._updatedAt ?? post.publishedAt,
+    author: {
+      "@type": "Person",
+      name: post.author ?? "Delight Sheriff",
+      url: SITE_URL,
+    },
+    ...(post.featuredImage && {
+      image: urlFor(post.featuredImage).width(1200).height(630).fit("crop").url(),
+    }),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <GoBack />
       <main className="min-h-screen bg-background">
         <article className="max-w-3xl mx-auto px-6 md:px-8 py-20 md:py-24">

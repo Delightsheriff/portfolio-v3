@@ -347,10 +347,12 @@ export async function getAllBlogs() {
     const blogs = await client.fetch(
       `      *[_type == "blog" && (!defined(visible) || visible == true)] | order(publishedAt desc) {
         _id,
+        _updatedAt,
         title,
         "slug": slug.current,
         excerpt,
         content,
+        featuredImage,
         publishedAt,
         featured,
         author,
@@ -369,10 +371,12 @@ export async function getBlogBySlug(slug: string) {
     const blog = await client.fetch(
       `      *[_type == "blog" && slug.current == $slug && (!defined(visible) || visible == true)][0] {
         _id,
+        _updatedAt,
         title,
         "slug": slug.current,
         excerpt,
         content,
+        featuredImage,
         publishedAt,
         featured,
         author
