@@ -53,8 +53,15 @@ const SEO_KEYWORDS = [
   "API developer",
   "portfolio website",
   "Nigeria software engineer",
-  "Port Harcourt software engineer",
   "remote software engineer",
+  "freelance software engineer",
+  "Expo developer",
+  "cross-platform mobile developer",
+  "Sanity CMS developer",
+  "MongoDB developer",
+  "PostgreSQL developer",
+  "AI-assisted software engineer",
+  "software engineer using AI coding tools",
 ];
 
 const syne = Syne({
@@ -84,12 +91,11 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default:
-      "Delight Sheriff (Amadi-Sheriff Delight) | Software Engineer, Mobile Developer, Web Developer",
+    default: "Delight Sheriff | Software Engineer & Mobile Developer",
     template: "%s | Delight Sheriff",
   },
   description:
-    "Amadi-Sheriff Delight, also known as Delight Sheriff, is a software engineer, mobile developer, web developer, frontend developer, backend developer, and full-stack developer building high-performance digital products with React, Next.js, React Native, Node.js, TypeScript, and the MERN stack.",
+    "Delight Sheriff builds fast, reliable products across web and mobile with React, Next.js, Node.js, TypeScript, and React Native — real shipped work, not just a resume.",
   keywords: SEO_KEYWORDS,
   authors: [{ name: PERSON_NAME, url: SITE_URL }],
   creator: PERSON_NAME,
@@ -101,27 +107,25 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: SITE_URL,
-    title:
-      "Delight Sheriff (Amadi-Sheriff Delight) | Software Engineer, Mobile Developer, Web Developer",
+    title: "Delight Sheriff | Software Engineer & Mobile Developer",
     description:
-      "Portfolio of Amadi-Sheriff Delight, also known as Delight Sheriff: software engineer, mobile developer, web developer, frontend developer, backend developer, and full-stack product builder.",
+      "Portfolio and case studies from Delight Sheriff, a full-stack software engineer building production systems with React, Next.js, Node.js, and React Native.",
     siteName: "Delight Sheriff Portfolio",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Delight Sheriff (Amadi-Sheriff Delight) - Software Engineer, Mobile Developer, Web Developer",
+        alt: "Delight Sheriff — Software Engineer & Mobile Developer",
       },
     ],
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Delight Sheriff (Amadi-Sheriff Delight) | Software Engineer, Mobile Developer, Web Developer",
+    title: "Delight Sheriff | Software Engineer & Mobile Developer",
     description:
-      "Software engineer, mobile developer, web developer, frontend developer, backend developer, and full-stack builder creating high-performance digital products.",
+      "Full-stack software engineer building production systems with React, Next.js, Node.js, and React Native.",
     creator: "@delightsheriff",
     images: ["/og-image.png"],
   },
@@ -154,7 +158,7 @@ export default function RootLayout({
     alternateName: PERSON_NAME_VARIANTS,
     url: SITE_URL,
     description:
-      "Portfolio of Amadi-Sheriff Delight, also known as Delight Sheriff, a software engineer, mobile developer, web developer, frontend developer, backend developer, and full-stack developer.",
+      "Portfolio and case studies from Delight Sheriff, a full-stack software engineer and mobile developer.",
     keywords: SEO_KEYWORDS.join(", "),
     author: {
       "@type": "Person",
@@ -195,18 +199,13 @@ export default function RootLayout({
       "Backend Developer",
       "Full-Stack Developer",
     ],
+    gender: "Male",
     description:
-      "Amadi-Sheriff Delight, also known as Delight Sheriff, is a software engineer, mobile developer, web developer, frontend developer, backend developer, and full-stack developer specializing in React, Next.js, React Native, Node.js, TypeScript, and scalable digital products.",
+      "Delight Sheriff is a full-stack software engineer and mobile developer specializing in React, Next.js, React Native, Node.js, and TypeScript, with a workflow built around AI-assisted coding tools.",
     knowsLanguage: ["English"],
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Port Harcourt",
       addressCountry: "Nigeria",
-    },
-    worksFor: {
-      "@type": "Organization",
-      name: PERSON_DISPLAY_NAME,
-      url: SITE_URL,
     },
     alumniOf: {
       "@type": "CollegeOrUniversity",
@@ -229,6 +228,7 @@ export default function RootLayout({
       "MongoDB",
       "PostgreSQL",
       "Sanity CMS",
+      "AI-Assisted Software Development",
     ],
   };
 
