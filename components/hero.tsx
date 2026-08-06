@@ -59,34 +59,6 @@ export default function HeroSection({
         style={{ y }}
         className="max-w-7xl mx-auto w-full pt-32 pb-20 md:pt-40 md:pb-28"
       >
-        {/* Status */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, delay: 0.15 }}
-          className="mb-8 flex flex-wrap items-center gap-4"
-        >
-          <div className="flex items-center gap-2">
-            <span
-              className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"
-              aria-hidden="true"
-            />
-            <span className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
-              {profile?.status ?? "Available for work"}
-            </span>
-          </div>
-        </motion.div>
-
-        {/* Name line: small, above headline */}
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, delay: 0.25 }}
-          className="text-sm md:text-base font-mono text-muted-foreground mb-4 tracking-wide"
-        >
-          Delight Sheriff (Amadi-Sheriff Delight)
-        </motion.p>
-
         {/* Headline: staggered word reveal in Syne display */}
           <h1 className="mb-6 leading-[0.92]" aria-label={profile?.headline}>
           {words.map((word, i) => (
@@ -124,7 +96,7 @@ export default function HeroSection({
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.0 }}
-          className="text-base md:text-lg max-w-2xl text-muted-foreground leading-relaxed mb-10"
+          className="text-sm max-w-2xl text-muted-foreground leading-relaxed mb-10"
         >
           {profile?.subheadline}
         </motion.p>
@@ -180,19 +152,27 @@ export default function HeroSection({
           </a>
         </motion.div>
 
-        {/* Meta row */}
+        {/* Meta row: availability + location, kept small and quiet */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 1.55 }}
           className="flex flex-wrap items-center gap-3 text-xs font-mono text-muted-foreground/50"
-          aria-label="Location and expertise"
+          aria-label="Availability and location"
         >
-          {profile?.location && <span>{profile.location}</span>}
+          <span className="flex items-center gap-2">
+            <span
+              className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"
+              aria-hidden="true"
+            />
+            {profile?.status ?? "Open to opportunities"}
+          </span>
           {profile?.location && (
-            <span className="w-1 h-1 rounded-full bg-muted-foreground/30" aria-hidden="true" />
+            <>
+              <span className="w-1 h-1 rounded-full bg-muted-foreground/30" aria-hidden="true" />
+              <span>{profile.location}</span>
+            </>
           )}
-          <span>Full-stack &amp; Mobile</span>
         </motion.div>
       </motion.div>
 
