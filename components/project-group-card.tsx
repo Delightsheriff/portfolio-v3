@@ -77,9 +77,9 @@ export function ProjectGroupCard({
                 </div>
               </div>
               {/* Group badge */}
-              <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-highlight/90 backdrop-blur-sm rounded-full px-2.5 py-1">
-                <Layers className="w-3 h-3 text-highlight-foreground" aria-hidden="true" />
-                <span className="text-[10px] font-mono text-highlight-foreground uppercase tracking-wider">
+              <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-background/85 backdrop-blur-sm border border-highlight/30 rounded-full px-2.5 py-1">
+                <Layers className="w-3 h-3 text-highlight" aria-hidden="true" />
+                <span className="text-[10px] font-mono text-highlight uppercase tracking-wider">
                   {group.parts.length} parts
                 </span>
               </div>
@@ -96,9 +96,9 @@ export function ProjectGroupCard({
               />
               <div className="absolute inset-0 bg-foreground/0 group-hover/card:bg-foreground/5 transition-colors duration-500" />
               {/* Group badge */}
-              <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-highlight/90 backdrop-blur-sm rounded-full px-2.5 py-1">
-                <Layers className="w-3 h-3 text-highlight-foreground" aria-hidden="true" />
-                <span className="text-[10px] font-mono text-highlight-foreground uppercase tracking-wider">
+              <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-background/85 backdrop-blur-sm border border-highlight/30 rounded-full px-2.5 py-1">
+                <Layers className="w-3 h-3 text-highlight" aria-hidden="true" />
+                <span className="text-[10px] font-mono text-highlight uppercase tracking-wider">
                   {group.parts.length} parts
                 </span>
               </div>

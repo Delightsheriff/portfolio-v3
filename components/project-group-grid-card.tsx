@@ -57,9 +57,9 @@ export function ProjectGroupGridCard({ group, index }: ProjectGroupGridCardProps
             </div>
           )}
 
-          <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-highlight/90 backdrop-blur-sm rounded-full px-2.5 py-1 shadow-sm">
-            <Layers className="w-3 h-3 text-highlight-foreground" aria-hidden="true" />
-            <span className="text-[10px] font-mono text-highlight-foreground uppercase tracking-wider font-semibold">
+          <div className="absolute top-3 left-3 flex items-center gap-1.5 bg-background/85 backdrop-blur-sm border border-highlight/30 rounded-full px-2.5 py-1">
+            <Layers className="w-3 h-3 text-highlight" aria-hidden="true" />
+            <span className="text-[10px] font-mono text-highlight uppercase tracking-wider">
               Group · {group.parts.length} {group.parts.length === 1 ? "part" : "parts"}
             </span>
           </div>
