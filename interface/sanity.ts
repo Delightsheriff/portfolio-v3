@@ -66,6 +66,7 @@ export interface Profile {
   manifesto: PortableTextBlock[];
   skills: {
     category: string;
+    blurb?: string;
     items: string[];
   }[];
   profileImage: SanityImage | null;

@@ -89,6 +89,12 @@ const profile = {
           fields: [
             { name: "category", title: "Category", type: "string" },
             {
+              name: "blurb",
+              title: "Blurb",
+              type: "string",
+              description: "One short sentence on how this category shows up in real, shipped work. Shown on the homepage Capabilities section.",
+            },
+            {
               name: "items",
               title: "Items",
               type: "array",
