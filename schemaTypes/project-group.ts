@@ -83,6 +83,14 @@ const projectGroup = {
       initialValue: true,
     }),
     defineField({
+      name: "flagship",
+      title: "Flagship Case Study",
+      type: "boolean",
+      description:
+        "Show this group as the large dedicated spotlight module on the homepage, above the regular Works grid. Turn on for at most one group at a time — turn off (or leave every group unchecked) to hide the flagship module entirely.",
+      initialValue: false,
+    }),
+    defineField({
       name: "order",
       title: "Display Order",
       type: "number",

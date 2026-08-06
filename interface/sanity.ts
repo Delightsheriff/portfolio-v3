@@ -105,6 +105,7 @@ export interface ProjectGroup {
   parts: ProjectGroupPart[];
   year?: string;
   featured: boolean;
+  flagship?: boolean;
   order?: number;
   visible?: boolean;
 }

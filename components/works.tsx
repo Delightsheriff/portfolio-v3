@@ -52,7 +52,11 @@ export default function Works({
   allProjects: Project[];
   groups?: ProjectGroup[];
 }) {
-  const featured = buildWorksList(projects, groups).slice(0, 3);
+  // The flagship group already gets its own dedicated homepage module
+  // above this section — don't show it again here.
+  const featured = buildWorksList(projects, groups)
+    .filter((item) => !(item.kind === "group" && item.data.flagship))
+    .slice(0, 3);
 
   return (
     <section

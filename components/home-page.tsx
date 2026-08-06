@@ -16,7 +16,9 @@ import Experiences from "./experience";
 import AboutSection from "./about";
 import Contact from "./contact";
 import Capabilities from "./capabilities";
+import { FlagshipCaseStudy } from "./flagship-case-study";
 import Footer from "./nav/footer";
+import { urlFor } from "@/sanity/sanity";
 
 interface HomePageProps {
   projects: Project[];
@@ -53,6 +55,7 @@ export function HomePage({
         <main id="main-content">
           <HeroSection profile={profile} y={y} />
           <Capabilities profile={profile} />
+          <FlagshipCaseStudy groups={groups} urlFor={urlFor} />
           <Works projects={projects} allProjects={allProjects} groups={groups} />
           <Experiences experiences={experiences} />
           <AboutSection profile={profile} />

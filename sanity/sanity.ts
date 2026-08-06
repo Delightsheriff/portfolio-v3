@@ -233,6 +233,7 @@ export async function getFeaturedProjectGroups() {
           description,
           year,
           featured,
+          flagship,
           order,
           parts[] {
             label,
@@ -261,6 +262,7 @@ export async function getProjectGroups() {
           description,
           year,
           featured,
+          flagship,
           order,
           parts[] {
             label,
@@ -288,6 +290,7 @@ export async function getProjectGroup(slug: string) {
         description,
         year,
         featured,
+        flagship,
         order,
         parts[] {
           label,
