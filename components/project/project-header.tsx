@@ -43,7 +43,7 @@ export function ProjectHeader({ project }: ProjectHeaderProps) {
             )}
           </div>
 
-          <h1 className="mb-5 text-4xl font-heading font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="mb-5 text-4xl font-serif leading-tight sm:text-5xl lg:text-6xl">
             {project.title}
           </h1>
           <p className="mb-8 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
