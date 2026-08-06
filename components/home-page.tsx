@@ -15,7 +15,7 @@ import Works from "./works";
 import Experiences from "./experience";
 import AboutSection from "./about";
 import Contact from "./contact";
-import StatsStrip from "./stats-strip";
+import Capabilities from "./capabilities";
 import Footer from "./nav/footer";
 
 interface HomePageProps {
@@ -52,7 +52,7 @@ export function HomePage({
         <Navbar />
         <main id="main-content">
           <HeroSection profile={profile} y={y} />
-          <StatsStrip projectCount={allProjects.length} experiences={experiences} />
+          <Capabilities profile={profile} />
           <Works projects={projects} allProjects={allProjects} groups={groups} />
           <Experiences experiences={experiences} />
           <AboutSection profile={profile} />
