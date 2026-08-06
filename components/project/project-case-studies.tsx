@@ -3,8 +3,13 @@
 import Image from "next/image";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { ProjectMobileFrame } from "@/components/project-mobile-frame";
-import { urlFor } from "@/sanity/sanity";
+import { urlFor, getImageDimensions } from "@/sanity/sanity";
 import type { Project } from "@/interface/sanity";
+
+function imageAspectRatio(image: Project["images"][number]): string {
+  const dimensions = getImageDimensions(image);
+  return dimensions ? `${dimensions.width} / ${dimensions.height}` : "16 / 9";
+}
 
 interface ProjectCaseStudiesProps {
   project: Project;
@@ -87,7 +92,8 @@ export function ProjectCaseStudies({
                   {galleryImages.slice(0, 2).map((image, i) => (
                     <div
                       key={i}
-                      className="relative aspect-[16/9] overflow-hidden rounded-xl bg-muted"
+                      className="relative overflow-hidden rounded-xl bg-muted"
+                      style={{ aspectRatio: imageAspectRatio(image) }}
                     >
                       <Image
                         src={urlFor(image).url()}
@@ -128,7 +134,10 @@ export function ProjectCaseStudies({
                   alt={`${project.title} - Final Result`}
                 />
               ) : (
-                <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-muted">
+                <div
+                  className="relative overflow-hidden rounded-xl bg-muted"
+                  style={{ aspectRatio: imageAspectRatio(galleryImages[2]) }}
+                >
                   <Image
                     src={urlFor(galleryImages[2]).url()}
                     alt={`${project.title} - Final Result`}

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { ProjectMobileFrame } from "@/components/project-mobile-frame";
 import { FEATURE_LABELS } from "@/lib/constants";
+import { getImageDimensions } from "@/sanity/sanity";
 import type { Project } from "@/interface/sanity";
 
 interface ProjectHeroImageProps {
@@ -18,6 +19,11 @@ export function ProjectHeroImage({
   imageUrl,
   isMobile,
 }: ProjectHeroImageProps) {
+  const dimensions = getImageDimensions(project.mainImage);
+  const aspectRatio = dimensions
+    ? `${dimensions.width} / ${dimensions.height}`
+    : "16 / 9";
+
   return (
     <section className="px-5 pb-14 md:px-8">
       <div className="mx-auto max-w-7xl">
@@ -65,7 +71,8 @@ export function ProjectHeroImage({
               delay: 0.35,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="relative aspect-[16/9] overflow-hidden rounded-2xl bg-muted sm:aspect-[16/10]"
+            className="relative overflow-hidden rounded-2xl bg-muted"
+            style={{ aspectRatio }}
           >
             <Image
               src={imageUrl}

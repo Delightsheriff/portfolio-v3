@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import type { ProjectGroup } from "@/interface/sanity";
-import { urlFor } from "@/sanity/sanity";
+import { urlFor, getImageDimensions } from "@/sanity/sanity";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ProjectGroupLinks } from "./project-group-links";
@@ -22,6 +22,10 @@ export function ProjectGroupDetail({ group }: { group: ProjectGroup }) {
   const imageUrl = activeProject?.mainImage
     ? urlFor(activeProject.mainImage).url()
     : "/placeholder.svg";
+  const imageDimensions = getImageDimensions(activeProject?.mainImage);
+  const imageAspectRatio = imageDimensions
+    ? `${imageDimensions.width} / ${imageDimensions.height}`
+    : "4 / 3";
 
   return (
     <motion.div
@@ -100,7 +104,10 @@ export function ProjectGroupDetail({ group }: { group: ProjectGroup }) {
               </div>
             </div>
           ) : (
-            <div className="relative overflow-hidden rounded-2xl aspect-[4/3] bg-card/60 border border-border/30">
+            <div
+              className="relative overflow-hidden rounded-2xl bg-card/60 border border-border/30"
+              style={{ aspectRatio: imageAspectRatio }}
+            >
               <Image
                 key={activePartIndex}
                 src={imageUrl}

@@ -48,6 +48,18 @@ function createPlaceholderImageBuilder() {
   };
 }
 
+// Sanity asset refs encode real dimensions: image-{hash}-{width}x{height}-{format}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function getImageDimensions(
+  source: any,
+): { width: number; height: number } | null {
+  const ref = source?.asset?._ref;
+  if (typeof ref !== "string") return null;
+  const match = ref.match(/-(\d+)x(\d+)-/);
+  if (!match) return null;
+  return { width: parseInt(match[1], 10), height: parseInt(match[2], 10) };
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function urlFor(source: any) {
   if (!source) {
