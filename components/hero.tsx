@@ -1,6 +1,6 @@
 "use client";
 
-import type { Experience, Profile } from "@/interface/sanity";
+import type { Profile } from "@/interface/sanity";
 import { motion, type MotionValue } from "framer-motion";
 import { ArrowRight, ArrowDownRight } from "lucide-react";
 import Link from "next/link";
@@ -20,18 +20,15 @@ const STAGGER = 0.06;
 
 export default function HeroSection({
   profile,
-  experiences,
   y,
 }: {
   profile: Profile;
-  experiences: Experience[];
   y: MotionValue<string>;
 }) {
   const words = profile?.headline?.split(" ") ?? ["Software", "Developer"];
   const pills = profile?.stackPills && profile.stackPills.length > 0
     ? profile.stackPills
     : DEFAULT_STACK;
-  const currentRole = experiences?.find((exp) => exp.current);
 
   return (
     <section
@@ -62,12 +59,12 @@ export default function HeroSection({
         style={{ y }}
         className="max-w-7xl mx-auto w-full pt-32 pb-20 md:pt-40 md:pb-28"
       >
-        {/* Status + current role */}
+        {/* Status */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.15 }}
-          className="mb-8 flex flex-wrap items-center gap-x-5 gap-y-2"
+          className="mb-8 flex flex-wrap items-center gap-4"
         >
           <div className="flex items-center gap-2">
             <span
@@ -78,14 +75,6 @@ export default function HeroSection({
               {profile?.status ?? "Available for work"}
             </span>
           </div>
-          {currentRole && (
-            <div className="flex items-center gap-2">
-              <span className="w-1 h-1 rounded-full bg-muted-foreground/30" aria-hidden="true" />
-              <span className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
-                Currently: {currentRole.role} @ {currentRole.company}
-              </span>
-            </div>
-          )}
         </motion.div>
 
         {/* Name line: small, above headline */}

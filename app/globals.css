@@ -80,23 +80,22 @@
   --destructive: oklch(0.65 0.22 25);
   --border: oklch(1 0 0 / 9%);
   --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.72 0.16 48);
+  --ring: oklch(0.628 0.221 33.05);
 
-  /* Brand amber-orange — refined, used sparingly (primary CTAs, one
-     accent per section, link hovers). Dark foreground for legibility
-     when this becomes a background (button/hover states). */
-  --highlight: oklch(0.72 0.16 48);
-  --highlight-foreground: oklch(0.16 0.02 40);
+  /* Brand orange — the signature accent, used sparingly (primary
+     CTAs, one accent per section, link hovers). */
+  --highlight: oklch(0.628 0.221 33.05);
+  --highlight-foreground: oklch(0.98 0.004 90);
 
   /* Sidebar */
   --sidebar: oklch(0.12 0.008 240);
   --sidebar-foreground: oklch(0.96 0.006 90);
-  --sidebar-primary: oklch(0.72 0.16 48);
-  --sidebar-primary-foreground: oklch(0.16 0.02 40);
+  --sidebar-primary: oklch(0.628 0.221 33.05);
+  --sidebar-primary-foreground: oklch(0.98 0.004 90);
   --sidebar-accent: oklch(0.16 0.007 240);
   --sidebar-accent-foreground: oklch(0.96 0.006 90);
   --sidebar-border: oklch(1 0 0 / 9%);
-  --sidebar-ring: oklch(0.72 0.16 48);
+  --sidebar-ring: oklch(0.628 0.221 33.05);
 }
 
 /* ─── Light mode overrides ─── */
@@ -118,17 +117,17 @@
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.1 0 0 / 10%);
   --input: oklch(0.1 0 0 / 8%);
-  --ring: oklch(0.68 0.18 46);
-  --highlight: oklch(0.68 0.18 46);
-  --highlight-foreground: oklch(0.16 0.02 40);
+  --ring: oklch(0.628 0.221 33.05);
+  --highlight: oklch(0.628 0.221 33.05);
+  --highlight-foreground: oklch(0.98 0.004 90);
   --sidebar: oklch(0.96 0.004 240);
   --sidebar-foreground: oklch(0.1 0.008 240);
-  --sidebar-primary: oklch(0.68 0.18 46);
-  --sidebar-primary-foreground: oklch(0.16 0.02 40);
+  --sidebar-primary: oklch(0.628 0.221 33.05);
+  --sidebar-primary-foreground: oklch(0.98 0.004 90);
   --sidebar-accent: oklch(0.94 0.004 240);
   --sidebar-accent-foreground: oklch(0.1 0.008 240);
   --sidebar-border: oklch(0.1 0 0 / 10%);
-  --sidebar-ring: oklch(0.68 0.18 46);
+  --sidebar-ring: oklch(0.628 0.221 33.05);
 }
 
 @layer base {
